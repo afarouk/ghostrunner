@@ -6,10 +6,10 @@ var path = require('path'),
 
 module.exports = {
 	entry: {
-		'bundle': './app/app_pree/main.js'
+		'bundle': './app/app_ghostrunner/main.js'
 	},
 	output: {
-		path: './app/app_pree/build/',
+		path: './app/app_ghostrunner/build/',
 		filename: '[name].js'
 	},
 	devtool: 'cheap-module-eval-source-map',

@@ -20,10 +20,10 @@ module.exports = function (grunt) {
   var webpack = require('webpack');
 
   var yeomanConfig = {
-    app: 'app/app_pree',
+    app: 'app/app_ghostrunner',
     dist: 'dist',
     indexFile: 'prod-index.html',
-    project: 'pree'
+    project: 'ghostrunner'
   };
 
   grunt.initConfig({
@@ -33,9 +33,6 @@ module.exports = function (grunt) {
         options: webpackConfig,
         'prod': {
             devtool: null // production
-        },
-        'build-dev': {
-            devtool: 'cheap-module-eval-source-map', // development
         }
     },
     clean: [
@@ -147,19 +144,8 @@ module.exports = function (grunt) {
         }
     }
   });
-  grunt.registerTask('default', function() {
-    grunt.task.run([
-      'clean',
-      'webpack:build-dev',
-      'copy',
-      'uglify',
-      'cssmin',
-      'compress',
-      'cacheBust'
-    ]);
-  });
 
-  grunt.registerTask('prod', function() {
+  grunt.registerTask('default', function() {
       grunt.task.run([
         'clean',
         'webpack:prod',
