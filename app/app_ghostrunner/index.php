@@ -23,12 +23,7 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
     
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/font-awesome.min.css">
-    <link rel="stylesheet" href="css/slick.css">
-    <link rel="stylesheet" href="css/slick-theme.css">
-    <link rel="stylesheet" href="css/jquery.fancybox.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="./styles.css">
     
     <!-- Custom Colors -->
     <!--<link rel="stylesheet" href="css/colors/blue/color.css">-->
@@ -261,22 +256,8 @@
 	<![endif]-->
     
     <!-- JavaScripts -->
-	<script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
-    <script type="text/javascript" src="js/jquery-migrate-1.2.1.min.js"></script>
-    <script type="text/javascript" src="js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="js/jquery.easing.min.js"></script>
-    <script type="text/javascript" src="js/smoothscroll.js"></script>
-	<script type="text/javascript" src="js/response.min.js"></script>
-	<script type="text/javascript" src="js/jquery.placeholder.min.js"></script>
-    <script type="text/javascript" src="js/jquery.fitvids.js"></script>
-    <script type="text/javascript" src="js/jquery.imgpreload.min.js"></script>
-    <script type="text/javascript" src="js/waypoints.min.js"></script>
-	<script type="text/javascript" src="js/slick.min.js"></script>
-	<script type="text/javascript" src="js/jquery.mousewheel-3.0.6.pack.js"></script>
-    <script type="text/javascript" src="js/jquery.fancybox.pack.js"></script>
-    <script type="text/javascript" src="js/jquery.fancybox-media.js"></script>
-    <script type="text/javascript" src="js/parallax.min.js"></script>
-	<script type="text/javascript" src="js/script.js"></script>
+	
+	<script type="text/javascript" src="./bundle.js"></script>
     
 </body>
 </html>

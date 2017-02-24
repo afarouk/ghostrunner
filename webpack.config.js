@@ -2,7 +2,8 @@
 
 var path = require('path'),
 	webpack = require('webpack'),
-	ExtractTextPlugin = require('extract-text-webpack-plugin');
+	ExtractTextPlugin = require('extract-text-webpack-plugin'),
+	CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
 	entry: {
@@ -23,6 +24,10 @@ module.exports = {
 					'file?hash=sha512&digest=hex&name=[hash].[ext]',
 					'image-webpack?bypassOnDebug&optimizationLevel=7&interlaced=false'
 				]
+			},
+			{ 
+				test: /([a-z0-9]+)\/([a-z0-9]+\.png)$/, 
+				loader: "url-loader?name=$1/$2" 
 			},
 			{
 				test: /\.scss$/,
@@ -52,10 +57,14 @@ module.exports = {
                 test: /bootstrap\/js\//,
                 loader: 'imports?jQuery=jquery'
             },
-			{ test: /\.(woff|woff2)$/,  loader: "url-loader?limit=10000&mimetype=application/font-woff" },
-			{ test: /\.ttf$/,    loader: "file-loader" },
-			{ test: /\.eot$/,    loader: "file-loader" },
-			{ test: /\.svg$/,    loader: "file-loader" }
+			{
+			    test: /\.(woff|woff2)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+			    loader: "url-loader?limit=10000&minetype=application/font-woff"
+			},
+			{
+			    test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+			    loader: "file-loader"
+			}
 		]
 	},
 	plugins: [
@@ -69,6 +78,9 @@ module.exports = {
 			'Marionette': 'backbone.marionette',
 			'Mn': 'backbone.marionette'
 		}),
+		new CopyWebpackPlugin([
+		    { from: './app/app_ghostrunner/images', to: 'images' }
+		]),
 	],
 	resolve: {
 		modulesDirectories: ['node_modules'],
