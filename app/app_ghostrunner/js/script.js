@@ -14,17 +14,50 @@
 			Upsite.PlaceHolder();
 			Upsite.Carousel();
 			Upsite.Lightbox();
-			Upsite.CounterUp();
+			//Upsite.CounterUp();
 			Upsite.Parallax();
 			Upsite.ImgHover();
-			Upsite.Isotope();
+			//Upsite.Isotope();
 			Upsite.Form();
 			Upsite.Scrollup();
+			Upsite.listenLogin()
 			
 			$(window).on('load', function() {
 				Upsite.Preload();
 			});
 		},
+
+		// !!! signin part
+		// listen click login button
+		listenLogin: function() {
+			$('#header #login').on('click', function(){
+	    		$('#signin').modal();
+	    	});
+	    	$('#signin .login').on('click', function(){
+	    		var username = $('#signin [name="user"]').val(),
+	    			password = $('#signin [name="pass"]').val();
+	    		$(window).trigger('ghostrunner.signin', {
+	    			username: username,
+	    			password: password,
+	    			callback: this.onLogin.bind(this)
+	    		});
+	    	}.bind(this));
+		},
+
+		onLogin: function(result) {
+			if (result === 'error') {
+				this.showLoginError();
+				//$('#signin').modal('hide');
+			} else {
+				$('#signin').modal('hide');
+			}
+		},
+
+		showLoginError: function() {
+			//TODO show login error
+			console.log('login error');
+		},
+		// end of signin part >>>
 		
 		// Navigation menu affix
 		AffixMenu: function() {

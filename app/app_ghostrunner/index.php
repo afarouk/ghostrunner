@@ -68,7 +68,7 @@
                 <ul class="nav navbar-nav">
                 	<li><a href="#header" class="smooth-scroll">Home</a></li>
                     <li><a href="#contact" class="smooth-scroll">Contact</a></li>
-                    <li class="menu-btn"><a href="#">Login</a></li>
+                    <li class="menu-btn"><a id="login" href="#">Login</a></li>
                 </ul>
                 
             </div>
@@ -242,6 +242,36 @@
     <!-- #footer end -->
     
     <a href="#" class="scrollup" title="Back to Top!">Scroll</a> <!-- Back to Top -->
+
+    <!-- #signin modal -->
+    <div class="modal fade" id="signin" role="dialog">
+        <div class="modal-dialog modal-sm" style="top: 200px;">
+        <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h3 class="modal-title">SIGNIN</h3>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <p>
+                            <input type="text" name="user" placeholder="Username" style="width: 100%;">
+                        </p>
+                        <p>
+                            <input type="password" name="pass" placeholder="Password" style="width: 100%;">
+                        </p>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" name="login" class="login" value="Signin">
+                    <!-- <div class="">
+                        <a href="#">Register</a> - <a href="#">Forgot Password</a>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- #signin end-->
     
     <!--[if lt IE 8]>
     	<div class="browser-notice">
