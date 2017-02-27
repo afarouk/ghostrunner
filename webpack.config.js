@@ -31,12 +31,12 @@ module.exports = {
 			},
 			{
 				test: /\.scss$/,
-				loader: ExtractTextPlugin.extract('style-loader', 'css-loader!sass-loader?sourceMap'),
+				loader: ExtractTextPlugin.extract('style-loader', 'css-loader!sass-loader'),
 				exclude: /node_modules/
 			},
 			{
 				test: /\.css$/,
-				loader: ExtractTextPlugin.extract('style-loader', 'css-loader?sourceMap'),
+				loader: ExtractTextPlugin.extract('style-loader', 'css-loader'),
 				exclude: /node_modules/
 			},
 			{
@@ -79,7 +79,7 @@ module.exports = {
 			'Mn': 'backbone.marionette'
 		}),
 		new CopyWebpackPlugin([
-		    { from: './app/app_ghostrunner/images', to: 'images' }
+		    { from: './app/app_ghostrunner/page/images', to: 'images' }
 		]),
 	],
 	resolve: {

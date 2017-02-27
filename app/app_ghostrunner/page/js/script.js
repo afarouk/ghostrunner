@@ -30,7 +30,7 @@
 		// !!! signin part
 		// listen click login button
 		listenLogin: function() {
-			$('#header #login').on('click', function(){
+			$('.login-btn').on('click', function(){
 	    		$('#signin').modal();
 	    	});
 	    	$('#signin .login').on('click', function(){

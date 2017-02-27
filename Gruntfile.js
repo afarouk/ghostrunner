@@ -1,10 +1,9 @@
-// grunt --gruntfile=Gruntfile-pree.js
 'use strict';
 
 var grunt = require('grunt');
 var argv = require('yargs').argv;
 
-grunt.log.write('compiling Pree');
+grunt.log.write('compiling Ghostrunner');
 
 var webpackConfig = require('./webpack.config.js');
 
@@ -47,14 +46,14 @@ module.exports = function (grunt) {
         sourceMap: false
       },
       target: {
-        src: '<%= yeoman.dist %>/build/bundle.js',
-        dest: '<%= yeoman.dist %>/build/bundle.js'
+        src: '<%= yeoman.dist %>/bundle.js',
+        dest: '<%= yeoman.dist %>/bundle.js'
       }
     },
     cssmin: {
       target: {
         files: {
-          '<%= yeoman.dist %>/build/styles.css': '<%= yeoman.dist %>/build/styles.css'
+          '<%= yeoman.dist %>/styles.css': '<%= yeoman.dist %>/styles.css'
         }
       },
       options: {
@@ -64,58 +63,9 @@ module.exports = function (grunt) {
     copy: {
       dist: {
         files: [
-          {
-            expand: true,
-            cwd: '<%= yeoman.app %>',
-            src: [
-              '*.{ico,txt,png}',
-              '.htaccess',
-            ],
-            dest: '<%= yeoman.dist %>'
-          },
-          // copy the vendor folder
           { expand: true,
-            cwd: '<%= yeoman.app %>',
-            src: ['vendor/**'],
-            dest: '<%= yeoman.dist %>'
-          },
-          // copy pages
-          { expand: true,
-            cwd: '<%= yeoman.app %>',
-            src: ['pages/**'],
-            dest: '<%= yeoman.dist %>'
-          },
-          // copy the img files
-          { expand: true,
-            cwd: '<%= yeoman.app %>',
-            src: ['img/**'],
-            dest: '<%= yeoman.dist %>'
-          },
-          { expand: true,
-            cwd: '<%= yeoman.app %>',
-            src: ['images/**'],
-            dest: '<%= yeoman.dist %>'
-          },
-          // copy the img files
-          { expand: true,
-            cwd: '<%= yeoman.app %>',
-            src: ['styles/**'],
-            dest: '<%= yeoman.dist %>'
-          },
-          // copy the root files
-          { expand: true,
-            cwd: '<%= yeoman.app %>',
-            src: ['*.html','*.php'],
-            dest: '<%= yeoman.dist %>'
-          },  // copy the bootstrap files
-          { expand: true,
-            cwd: '<%= yeoman.app %>',
-            src: ['build/*'],
-            dest: '<%= yeoman.dist %>'
-          },
-          { expand: true,
-            cwd: '<%= yeoman.app %>',
-            src: ['scripts/custom.js', 'scripts/filter.js'],
+            cwd: '<%= yeoman.app %>/build',
+            src: ['**'],
             dest: '<%= yeoman.dist %>'
           }
         ]

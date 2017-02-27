@@ -1,12 +1,7 @@
 'use strict';
 
-//require index page
-require('./index');
+//require main page (index.php)
+require('./page/page');
 
-define([
-	'./scripts/app',
-	'./scripts/globalHelpers'
-	], function(App, h){
-	App.start();
-	h().startLogger();
-});
+//require game application
+require('./game/game');

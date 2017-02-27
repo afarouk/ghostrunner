@@ -11,8 +11,7 @@ define([
     ], function(userController, Vent, appCache, gateway, User){
     var _onLoginSuccess = function (response, loginMethod) {
 
-            var user = appCache.fetch('user', new User());
-            user.initiate(response.uid, response.userName);
+            var user = appCache.fetch('user', new User(response.uid, response.userName));
 
             if (response.localStorage !== false) {
                 localStorage.setItem('cmxUID', response.uid);

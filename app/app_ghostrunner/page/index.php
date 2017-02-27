@@ -68,7 +68,7 @@
                 <ul class="nav navbar-nav">
                 	<li><a href="#header" class="smooth-scroll">Home</a></li>
                     <li><a href="#contact" class="smooth-scroll">Contact</a></li>
-                    <li class="menu-btn"><a id="login" href="#">Login</a></li>
+                    <li class="menu-btn"><a class="login-btn" href="#">Login</a></li>
                 </ul>
                 
             </div>
