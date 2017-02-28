@@ -84,8 +84,7 @@
                     <a href="#" class="header-content-tabs">Game Stats</a>
                     <a href="#" class="header-content-tabs">Partner Status</a>
                 </div>
-            	<div class="game_canvas_wrap"></div>
-               
+            	<div class="game_canvas_wrap" id="game-layout"></div>
             </div>
             
         </div>

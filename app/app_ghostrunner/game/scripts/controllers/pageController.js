@@ -13,8 +13,8 @@ define([
             onSignin: function(e, user) {
                 gameController.start(user);
             },
-            onSignout: function() {
-                debugger;
+            onSignout: function(e, UID) {
+                gameController.stop(UID);
             }
         });
 

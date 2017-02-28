@@ -3,10 +3,16 @@
 
 	var loginManager = {
 		logged: false,
+		//API 
 		apiRoot: 'https://simfel.com/apptsvc/rest',
 		loginRequest: ['POST', '/authentication/login'],
         logoutRequest: ['GET', '/authentication/logout'],
+        loginWithFacebook: ['POST', '/authentication/exchangeFacebookIdForUID'],
+        usernameAvailable:['GET', '/authentication/isUserNameAvailable'],
+        userForgotPassword: ['PUT', '/authentication/sendEmailForResetPassword'],
+        registerNewMember: ['POST', '/authentication/registerNewMemberViaPostBody'],
         getAuthenticationStatus: ['GET', '/authentication/getAuthenticationStatus'],
+		//.....
 		init: function() {
 			this.listenLogin();
 
@@ -76,10 +82,10 @@
 			this.updateLoginButton();
 		},
 
-		onLogoutSuccess: function() {
+		onLogoutSuccess: function(UID) {
 			this.logged = false;
 			localStorage.removeItem('cmxUID');
-			$(window).trigger('ghostrunner.signout');
+			$(window).trigger('ghostrunner.signout', UID);
 			this.updateLoginButton();
 		},
 
@@ -88,7 +94,7 @@
 			if (this.logged) {
 				$('.login-btn').text('LOGOUT');
 			} else {
-				$('.login-btn').text('LOGIN')
+				$('.login-btn').text('LOGIN');
 			}
 		},
 		//...................
@@ -119,7 +125,7 @@
             return this.sendRequest(this.logoutRequest,{
                 UID: UID
             }).then(function(response) {
-                this.onLogoutSuccess();
+                this.onLogoutSuccess(UID);
             }.bind(this));
         }
 	};

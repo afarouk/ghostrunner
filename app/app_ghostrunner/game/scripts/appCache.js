@@ -25,6 +25,10 @@ define([], function(){
                 return item;
             },
 
+            remove: function(key) {
+                return delete cache[key];
+            },
+
             fetch: function(key, value) {
                 var item = _getItem(key);
                 if ( !item ) {
