@@ -20,44 +20,11 @@
 			//Upsite.Isotope();
 			Upsite.Form();
 			Upsite.Scrollup();
-			Upsite.listenLogin()
 			
 			$(window).on('load', function() {
 				Upsite.Preload();
 			});
 		},
-
-		// !!! signin part
-		// listen click login button
-		listenLogin: function() {
-			$('.login-btn').on('click', function(){
-	    		$('#signin').modal();
-	    	});
-	    	$('#signin .login').on('click', function(){
-	    		var username = $('#signin [name="user"]').val(),
-	    			password = $('#signin [name="pass"]').val();
-	    		$(window).trigger('ghostrunner.signin', {
-	    			username: username,
-	    			password: password,
-	    			callback: this.onLogin.bind(this)
-	    		});
-	    	}.bind(this));
-		},
-
-		onLogin: function(result) {
-			if (result === 'error') {
-				this.showLoginError();
-				//$('#signin').modal('hide');
-			} else {
-				$('#signin').modal('hide');
-			}
-		},
-
-		showLoginError: function() {
-			//TODO show login error
-			console.log('login error');
-		},
-		// end of signin part >>>
 		
 		// Navigation menu affix
 		AffixMenu: function() {

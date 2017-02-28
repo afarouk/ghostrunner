@@ -26,3 +26,4 @@ require('./js/jquery.fancybox.pack');
 require('./js/jquery.fancybox-media');
 require('./js/parallax.min');
 require('./js/script');
+require('./js/login');
