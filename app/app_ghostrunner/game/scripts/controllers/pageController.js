@@ -7,8 +7,10 @@ define([
     ], function( gameController ){
     var PageController = Mn.Object.extend({
             listenPage: function(){
-               $(window).on('ghostrunner.signin', this.onSignin.bind(this));
-               $(window).on('ghostrunner.signout', this.onSignout.bind(this));
+                //!!! TODO check if we always start listen before
+                // we got autentification status
+                $(window).on('ghostrunner.signin', this.onSignin.bind(this));
+                $(window).on('ghostrunner.signout', this.onSignout.bind(this));
             },
             onSignin: function(e, user) {
                 gameController.start(user);

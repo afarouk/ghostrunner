@@ -5,8 +5,9 @@
 define([
     '../Vent',
     '../models/user',
-    '../views/gameLayout'
-    ], function(Vent, userModel, GameLayout){
+    '../views/gameLayout',
+    '../APIGateway/socket-connect'
+    ], function(Vent, userModel, GameLayout, SocketConnect){
     var GameController = Mn.Object.extend({
             start: function(user){
                 console.log('game start');
@@ -14,6 +15,14 @@ define([
                     uid: user.uid, 
                     userName: user.userName
                 });
+
+                //TODO maybe when we don't have user we should 
+                // connect as anonymous
+                //in that case we should open connection 
+                // before login ???
+                var connect = new SocketConnect(user.uid);
+                // ..........websockets
+
                 console.log(user);
                 var game = new GameLayout();
                 game.render();

@@ -15,14 +15,13 @@
 		//.....
 		init: function() {
 			this.listenLogin();
-
-			if (localStorage.cmxUID) {
-		        this.getSessionFromLocalStorage();
+			if (Cookie.get('cmxUID')) {
+		        this.getSessionFromCookie();
 		    }
 		},
 
-		getSessionFromLocalStorage: function () {
-            var UID = localStorage.getItem('cmxUID');
+		getSessionFromCookie: function () {
+            var UID = Cookie.get('cmxUID');
             
             this.sendRequest(this.getAuthenticationStatus, {UID: UID})
 	            .then(function (response) {
@@ -32,10 +31,10 @@
 	                        userName: response.userName
 	                    });
 	                } else {
-	                    localStorage.removeItem('cmxUID');
+	                    Cookie.remove('cmxUID');
 	                }
 	            }.bind(this), function onRequestError () {
-	                localStorage.removeItem('cmxUID');
+	                Cookie.remove('cmxUID');
 	            });
         },
 
@@ -76,7 +75,7 @@
 		},
 
 		onLoginSuccess: function(response) {
-			localStorage.setItem('cmxUID', response.uid);
+			Cookie.set('cmxUID', response.uid);
 			this.logged = true;
 			$(window).trigger('ghostrunner.signin', response);
 			this.updateLoginButton();
@@ -84,7 +83,7 @@
 
 		onLogoutSuccess: function(UID) {
 			this.logged = false;
-			localStorage.removeItem('cmxUID');
+			Cookie.remove('cmxUID');
 			$(window).trigger('ghostrunner.signout', UID);
 			this.updateLoginButton();
 		},
@@ -121,7 +120,7 @@
         },
 
         logoutUser: function(UID){
-        	var UID = localStorage.getItem('cmxUID');
+        	var UID = Cookie.get('cmxUID');
             return this.sendRequest(this.logoutRequest,{
                 UID: UID
             }).then(function(response) {
@@ -130,5 +129,7 @@
         }
 	};
 
-	loginManager.init();
+	$(document).ready( function() {
+		loginManager.init();
+	});
 })(window.jQuery)

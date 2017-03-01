@@ -73,6 +73,7 @@ module.exports = {
 			$: 'jquery',
 			jQuery: 'jquery',
 			'window.jQuery': 'jquery',
+			'Cookie': 'js.cookie',
 			'_': 'underscore',
 			'Backbone': 'backbone',
 			'Marionette': 'backbone.marionette',
