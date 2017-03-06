@@ -7,10 +7,9 @@ define([
     ], function(){
     //TEMP
     var socketConnect = Mn.Object.extend({
-        //"ws://simfel.com/apptsvc/broker/user.jjjjjj?asdf=ddd";
-        URL: 'ws://simfel.com/apptsvc/broker/',
+        URL: 'ws://simfel.com/apptsvc/ws/gaming/gamingsecret',
         initialize: function(UID) {
-            var URL = this.URL + UID;
+            var URL = this.URL + '?UID=' + UID;
             this.connect(URL);
         },
 
@@ -103,6 +102,7 @@ define([
 
         updateStatus: function(status) {
             console.log(status);
+            this.trigger('updateStatus', status);
         },
 
         sendMessage: function() {

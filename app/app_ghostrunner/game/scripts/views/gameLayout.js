@@ -5,9 +5,9 @@
 define([
 	'../Vent',
 	'ejs!../templates/gameLayout.ejs',
-	'./gameField',
-	'./gameInterface'
-	], function(Vent, template, GameFieldView, GameInterfaceView){
+	'../controllers/gameFieldController',
+	'../controllers/gameInterfaceController'
+	], function(Vent, template, gameFieldController, gameInterfaceController){
 	var GameLayoutView = Mn.View.extend({
 		template: template,
 		el: '#game-layout',
@@ -19,8 +19,8 @@ define([
 			this.renderGame();
 		},
 		renderGame: function() {
-			this.showChildView('field', new GameFieldView());
-			this.showChildView('interface', new GameInterfaceView());
+			this.publicController.getFieldController().create(this, 'field');
+			this.publicController.getInterfaceController().create(this, 'interface');
 		}
 	});
 	return GameLayoutView;

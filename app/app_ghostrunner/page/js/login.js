@@ -5,7 +5,7 @@
 		logged: false,
 		//API 
 		apiRoot: 'https://simfel.com/apptsvc/rest',
-		loginRequest: ['POST', '/authentication/login'],
+		loginRequest: ['POST', '/gaming/login'],
         logoutRequest: ['GET', '/authentication/logout'],
         loginWithFacebook: ['POST', '/authentication/exchangeFacebookIdForUID'],
         usernameAvailable:['GET', '/authentication/isUserNameAvailable'],

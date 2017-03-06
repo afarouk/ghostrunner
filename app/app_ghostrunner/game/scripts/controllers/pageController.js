@@ -3,8 +3,7 @@
 'use strict';
 
 define([
-    './gameController'
-    ], function( gameController ){
+    ], function( ){
     var PageController = Mn.Object.extend({
             listenPage: function(){
                 //!!! TODO check if we always start listen before
@@ -13,10 +12,10 @@ define([
                 $(window).on('ghostrunner.signout', this.onSignout.bind(this));
             },
             onSignin: function(e, user) {
-                gameController.start(user);
+                this.publicController.getGameController().start(user);
             },
             onSignout: function(e, UID) {
-                gameController.stop(UID);
+                this.publicController.getGameController().stop(UID);
             }
         });
 
