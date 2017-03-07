@@ -9,7 +9,7 @@ define([
     '../APIGateway/gameService'
     ], function(Vent, appCache, GameModel, service){
     var GameStateController = Mn.Object.extend({
-            start: function() {
+            onGameStart: function() {
                 this.refreshStatus();
             },
             getGameStatus: function() {
@@ -37,7 +37,7 @@ define([
                         this.manageState(game.get('gameState'));
                     }.bind(this));
             },
-            
+
             //TODO manage different states and signals
             manageState: function(state) {
                 if (state.moveState === 'MAKE_YOUR_MOVE') {
@@ -58,6 +58,20 @@ define([
 
             onPlayerMove: function() {
                 service.makeMove();
+            },
+
+            onGameStop: function() {
+                var gameModel = this.getGameModel();
+                console.log(gameModel);
+                //Sould we stop game after 
+                //websocket connection was interrupted (disconnected) 
+                // the save way as by user decision ???
+                if (gameModel) {
+                    service.stopGame()
+                        .then(function(){
+                            gameModel.kill();
+                        }.bind(this));
+                }
             }
         });
 

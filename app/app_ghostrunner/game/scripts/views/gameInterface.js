@@ -9,7 +9,8 @@ define([
 	var GameInterfaceView = Mn.View.extend({
 		template: template,
 		events: {
-			'click .move': 'onMove'
+			'click .move': 'onMove',
+			'click .stop': 'onStop'
 		},
 		onRender: function() {
 			console.log('show interface');
@@ -25,6 +26,10 @@ define([
 
 		onMove: function() {
 			this.trigger('onPlayer:move');
+		},
+
+		onStop: function() {
+			this.trigger('onGame:stop');
 		}
 	});
 	return GameInterfaceView;

@@ -16,8 +16,11 @@ define([
             updateStatus: function(status) {
                 switch (status) {
                     case 'Connected':
-                    this.publicController.getStateController().start();
-                    break;
+                        this.publicController.getStateController().onGameStart();
+                        break;
+                    case 'Disconnected':
+                        this.publicController.getStateController().onGameStop();
+                        break;
                 }
             },
             stop: function() {

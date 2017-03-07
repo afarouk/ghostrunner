@@ -5,8 +5,9 @@
 define([
     '../Vent',
     '../models/user',
+    '../appCache',
     '../views/gameLayout'
-    ], function(Vent, userModel, GameLayout){
+    ], function(Vent, userModel, appCache, GameLayout){
     var GameController = Mn.Object.extend({
             start: function(user){
                 console.log('game start');
@@ -27,8 +28,9 @@ define([
             },
             stop: function(uid) {
                 console.log('game stop');
-                // user.kill();
-                // user = null;
+                var user = appCache.get('user');
+                user.kill();
+                this.publicController.getStateController().onGameStop();
             },
             waitingForMove: function() {
                 this.publicController.getInterfaceController().showInterface();

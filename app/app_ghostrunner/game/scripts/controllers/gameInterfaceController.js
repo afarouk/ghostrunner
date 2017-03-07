@@ -12,7 +12,8 @@ define([
     			layout.showChildView( region, this.view );
     			this.view.triggerMethod('showMask');
 
-    			this.listenTo(this.view, 'onPlayer:move', this.onMove, this)
+    			this.listenTo(this.view, 'onPlayer:move', this.onMove, this);
+                this.listenTo(this.view, 'onGame:stop', this.onStop, this)
     		},
     		showInterface: function() {
     			this.view.triggerMethod('hideMask');
@@ -23,7 +24,13 @@ define([
     			//TEMPORARY for test
     			this.publicController.getStateController().onPlayerMove();
     			//..........
-    		}
+    		},
+            onStop: function() {
+                console.log('stop');
+                this.view.triggerMethod('showMask');
+                //TEMPORARY for testing
+                this.publicController.getStateController().onGameStop();
+            }
         });
 
     return new GameInterfaceController();
