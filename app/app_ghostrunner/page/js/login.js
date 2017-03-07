@@ -6,12 +6,12 @@
 		//API 
 		apiRoot: 'https://simfel.com/apptsvc/rest',
 		loginRequest: ['POST', '/gaming/login'],
-        logoutRequest: ['GET', '/authentication/logout'],
+        logoutRequest: ['GET', '/gaming/logout'],
         loginWithFacebook: ['POST', '/authentication/exchangeFacebookIdForUID'],
         usernameAvailable:['GET', '/authentication/isUserNameAvailable'],
         userForgotPassword: ['PUT', '/authentication/sendEmailForResetPassword'],
         registerNewMember: ['POST', '/authentication/registerNewMemberViaPostBody'],
-        getAuthenticationStatus: ['GET', '/authentication/getAuthenticationStatus'],
+        getAuthenticationStatus: ['GET', '/gaming/getAuthenticationStatus'],
 		//.....
 		init: function() {
 			this.listenLogin();

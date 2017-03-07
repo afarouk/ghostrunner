@@ -37,6 +37,8 @@ define([
                         this.manageState(game.get('gameState'));
                     }.bind(this));
             },
+            
+            //TODO manage different states and signals
             manageState: function(state) {
                 if (state.moveState === 'MAKE_YOUR_MOVE') {
                     //TODO wait move
@@ -46,6 +48,14 @@ define([
                     this.publicController.getGameController().waitingForTurn();
                 }
             },
+            onSignal: function(signal) {
+                if (signal === 'YOUR_MOVE') {
+                    //TODO wait move
+                    this.publicController.getGameController().waitingForMove();
+                }
+            },
+            //..............
+
             onPlayerMove: function() {
                 service.makeMove();
             }

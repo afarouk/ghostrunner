@@ -11,6 +11,7 @@ define([
             connect: function(user){
                 var connect = new SocketConnect(user);
                 this.listenTo(connect, 'updateStatus', this.updateStatus, this);
+                this.listenTo(connect, 'onSignal', this.onSignal, this);
             },
             updateStatus: function(status) {
                 switch (status) {
@@ -21,7 +22,13 @@ define([
             },
             stop: function() {
 
+            },
+
+            onSignal: function(message) {
+                console.log(message);
+                this.publicController.getStateController().onSignal(message.signal);
             }
+
         });
 
     return new SocketController();

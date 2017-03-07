@@ -5,7 +5,8 @@ module.exports = {
     getAddressMap: function(){
         return {
         	getGame: ['GET', '/gaming/getGame'],
-        	makeMove: ['POST', '/gaming/makeMove']
+        	makeMove: ['POST', '/gaming/makeMove'],
+        	stopGame: ['GET', '/gaming/stop']
         };
     }
 };

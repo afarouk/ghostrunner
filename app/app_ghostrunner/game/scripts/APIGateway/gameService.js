@@ -18,6 +18,9 @@ define([
             return gateway.sendRequest('makeMove', {
                 UID: user.get('uid')
             })
+        },
+        stopGame: function() {
+            return gateway.sendRequest('stopGame');
         }
     });
 

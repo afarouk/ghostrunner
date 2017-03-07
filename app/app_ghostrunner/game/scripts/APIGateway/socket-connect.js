@@ -35,6 +35,15 @@ define([
 
         onMessage: function(evnt) {
             console.log(evnt.data);
+            var data = evnt.data,
+                signal;
+
+            try {
+                signal = JSON.parse(data);
+                this.trigger('onSignal', signal);
+            } catch (e) {
+                throw e;
+            }
         },
 
         onError: function(evnt) {
