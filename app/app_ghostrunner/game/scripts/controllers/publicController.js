@@ -8,8 +8,12 @@ define([
     './gameStateController',
     './socketController',
     './gameFieldController',
-    './gameInterfaceController'
-    ], function( pageController, gameController, stateController , socketController, fieldController, interfaceController){
+    './gameInterfaceController',
+    './informationTableController',
+    './playerActionsController',
+    './chatController'
+    ], function( pageController, gameController, stateController , socketController, fieldController, 
+        interfaceController, informationTableController, playerActionsController, chatController){
     var PublicController = Mn.Object.extend({
             getPageController: function() {
                 return pageController;
@@ -28,6 +32,15 @@ define([
             },
             getInterfaceController: function() {
                 return interfaceController;
+            },
+            getInformationTableController: function() {
+                return informationTableController;
+            },
+            getPlayerActionsController: function() {
+                return playerActionsController;
+            },
+            getChatController: function() {
+                return chatController;
             }
         });
 

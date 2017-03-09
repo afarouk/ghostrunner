@@ -4,32 +4,31 @@
 
 define([
 	'../Vent',
-	'ejs!../templates/gameInterface.ejs',
+	'ejs!../templates/gameInterface.ejs'
 	], function(Vent, template){
 	var GameInterfaceView = Mn.View.extend({
 		template: template,
-		events: {
-			'click .move': 'onMove',
-			'click .stop': 'onStop'
+		regions: {
+			informationTable: '#informationTable',
+			playerActions: '#playerActions',
+			chat: '#chat'
 		},
 		onRender: function() {
 			console.log('show interface');
+			this.renderInterfaceParts();
 		},
-		onShowMask: function() {
-			console.log('show mask');
-			this.$('.mask').show();
+		renderInterfaceParts: function() {
+			this.publicController.getInformationTableController().create(this, 'informationTable');
+			this.publicController.getPlayerActionsController().create(this, 'playerActions');
+			this.publicController.getChatController().create(this, 'chat');
 		},
-		onHideMask: function() {
-			console.log('hide mask');
-			this.$('.mask').hide();
+		onShowLoader: function() {
+			console.log('show loader');
+			this.$('.loader').show();
 		},
-
-		onMove: function() {
-			this.trigger('onPlayer:move');
-		},
-
-		onStop: function() {
-			this.trigger('onGame:stop');
+		onHideLoader: function() {
+			console.log('hide loader');
+			this.$('.loader').hide();
 		}
 	});
 	return GameInterfaceView;

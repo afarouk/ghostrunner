@@ -33,7 +33,7 @@ define([
                 this.publicController.getStateController().onGameStop();
             },
             waitingForMove: function() {
-                this.publicController.getInterfaceController().showInterface();
+                this.publicController.getInterfaceController().hideLoader();
             },
             waitingForTurn: function() {
                 console.log('waiting for turn');

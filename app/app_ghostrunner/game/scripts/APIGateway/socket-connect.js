@@ -51,7 +51,7 @@ define([
               if(typeof evnt.type !=='undefined'){
                     reason=evnt.type;
                 }
-            alert('ERROR: ' + reason);
+            console.log('websocket ERROR: ' + reason);
         },
 
         onClose: function(event) {
@@ -105,7 +105,7 @@ define([
             }
                 */
 
-            alert(event.code + ":" + event.reason);
+            console.log('websocket disconnected: ', event.code + ":" + event.reason);
             this.updateStatus('Disconnected');
         },
 
@@ -123,10 +123,10 @@ define([
                     this.websocket.send('Test');
                     break;
                 case WebSocket.CLOSING:
-                    alert('closed');
+                    console.log('websocket: closed');
                     break;
                 case WebSocket.CLOSED:
-                    alert('closed');
+                    console.log('websocket: closed');
                     break;
                 default:
                     // this never happens

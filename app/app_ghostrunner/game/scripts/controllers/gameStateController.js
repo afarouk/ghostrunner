@@ -13,7 +13,7 @@ define([
                 this.refreshStatus();
             },
             getGameStatus: function() {
-                //TODO maybe we should use nateve backbone fetch mechanism ???
+                //TODO maybe we should use native backbone fetch mechanism ???
                 var def = $.Deferred();
                 service.getGame()
                     .then(function(game){
@@ -38,26 +38,45 @@ define([
                     }.bind(this));
             },
 
-            //TODO manage different states and signals
             manageState: function(state) {
-                if (state.moveState === 'MAKE_YOUR_MOVE') {
-                    //TODO wait move
-                    this.publicController.getGameController().waitingForMove();
-                } else if (state.moveState === 'WAIT_FOR_TURN'){
-                    //TODO wait turn
-                    this.publicController.getGameController().waitingForTurn();
+                switch (state.moveState) {
+                    case 'MAKE_YOUR_MOVE':
+                        this.publicController.getGameController().waitingForMove();
+                        break;
+                    case 'WAIT_FOR_TURN':
+                        this.publicController.getGameController().waitingForTurn();
+                        break;
+                    default:
+                        break;
                 }
             },
             onSignal: function(signal) {
-                if (signal === 'YOUR_MOVE') {
-                    //TODO wait move
-                    this.publicController.getGameController().waitingForMove();
+                switch (signal) {
+                    case 'YOUR_MOVE':
+                        this.publicController.getGameController().waitingForMove();
+                        break;
+                    case 'REFRESH_STATE':
+                        this.refreshStatus();
+                        break;
+                    case 'SHOW_POLL':
+                        
+                        break;
+                    case 'SHOW_MESSAGE':
+                        
+                        break;
+                    case 'BLOCK_USER':
+                        
+                        break;
+                    default:
+                        break;
                 }
             },
-            //..............
 
             onPlayerMove: function() {
-                service.makeMove();
+                service.makeMove()
+                        .then(function(state){
+                            this.manageState(state);
+                        }.bind(this));
             },
 
             onGameStop: function() {

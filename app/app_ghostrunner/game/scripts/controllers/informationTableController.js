@@ -1,0 +1,21 @@
+/*global define */
+
+'use strict';
+
+define([
+    '../Vent',
+    '../views/informationTable',
+    '../models/informationTable'
+    ], function(Vent, InformationTableView, InformationTableModel){
+    var InformationTableController = Mn.Object.extend({
+    		create: function(layout, region) {
+                this.model = new InformationTableModel;
+    			this.view = new InformationTableView({
+                    model: this.model
+                });
+    			layout.showChildView( region, this.view );
+    		}
+        });
+
+    return new InformationTableController();
+});

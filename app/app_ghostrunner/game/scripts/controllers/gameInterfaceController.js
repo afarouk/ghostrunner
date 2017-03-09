@@ -10,26 +10,13 @@ define([
     		create: function(layout, region) {
     			this.view = new GameInterfaceView();
     			layout.showChildView( region, this.view );
-    			this.view.triggerMethod('showMask');
-
-    			this.listenTo(this.view, 'onPlayer:move', this.onMove, this);
-                this.listenTo(this.view, 'onGame:stop', this.onStop, this)
+    			this.showLoader();
     		},
-    		showInterface: function() {
-    			this.view.triggerMethod('hideMask');
-    		},
-    		onMove: function() {
-    			console.log('move');
-    			this.view.triggerMethod('showMask');
-    			//TEMPORARY for test
-    			this.publicController.getStateController().onPlayerMove();
-    			//..........
-    		},
-            onStop: function() {
-                console.log('stop');
-                this.view.triggerMethod('showMask');
-                //TEMPORARY for testing
-                this.publicController.getStateController().onGameStop();
+            showLoader: function() {
+                this.view.triggerMethod('showLoader');
+            },
+            hideLoader: function() {
+                this.view.triggerMethod('hideLoader');
             }
         });
 
