@@ -8,6 +8,7 @@ define([
     '../models/game',
     '../APIGateway/gameService'
     ], function(Vent, appCache, GameModel, service){
+    //A heart of the game state logic 
     var GameStateController = Mn.Object.extend({
             onGameStart: function() {
                 this.refreshStatus();
@@ -31,15 +32,20 @@ define([
             getGameModel: function() {
                 return appCache.get('game');
             },
+            updateGameModel: function (state) {
+                var gameModel = this.getGameModel();
+                gameModel.set(state);
+                this.manageState(gameModel.get('thisUser'));
+            },
             refreshStatus: function() {
                 this.getGameStatus()
                     .then(function(game){
-                        this.manageState(game.get('gameState'));
+                        this.manageState(game.get('thisUser'));
                     }.bind(this));
             },
 
-            manageState: function(state) {
-                switch (state.moveState) {
+            manageState: function(thisUser) {
+                switch (thisUser.state) {
                     case 'MAKE_YOUR_MOVE':
                         this.publicController.getGameController().waitingForMove();
                         break;
@@ -47,6 +53,7 @@ define([
                         this.publicController.getGameController().waitingForTurn();
                         break;
                     default:
+                        this.publicController.getGameController().waitingForMove();
                         break;
                 }
             },
@@ -67,16 +74,23 @@ define([
                     case 'BLOCK_USER':
                         
                         break;
+                    case 'GOTO_PREVIOUS_STATE':
+                        
+                        break;
                     default:
                         break;
                 }
             },
 
             onPlayerMove: function() {
-                service.makeMove()
-                        .then(function(state){
-                            this.manageState(state);
-                        }.bind(this));
+                service.makeMove({
+                    payload: { 
+                        'actionType':1,
+                        'actionDetail':'some string'
+                    }
+                }).then(function(state){
+                    this.updateGameModel(state);
+                }.bind(this));
             },
 
             onGameStop: function() {
@@ -89,6 +103,23 @@ define([
                     service.stopGame()
                         .then(function(){
                             gameModel.kill();
+                            //TEMPORARY !!!
+                            //TODO show modal dialog
+                            // $('#reconnect-dialog').modal('show');
+                            var choise = confirm('Reconnect websockets?');
+                            if (choise) {
+                                var user = appCache.get('user'),
+                                    params = {
+                                        uid: user.get('uid'), 
+                                        userName: user.get('userName')
+                                    };
+                                user.kill();
+                                this.publicController.getGameController()
+                                    .start(params);
+                            } else {
+                                //What exactly should be?
+                            }
+                            //...................
                         }.bind(this));
                 }
             }

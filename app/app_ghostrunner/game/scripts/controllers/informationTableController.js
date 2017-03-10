@@ -8,6 +8,8 @@ define([
     '../models/informationTable'
     ], function(Vent, InformationTableView, InformationTableModel){
     var InformationTableController = Mn.Object.extend({
+            //TODO show interface
+            //depending on model
     		create: function(layout, region) {
                 this.model = new InformationTableModel;
     			this.view = new InformationTableView({

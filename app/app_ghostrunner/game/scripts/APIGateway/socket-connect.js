@@ -48,8 +48,8 @@ define([
 
         onError: function(evnt) {
               var reason="n/a";
-              if(typeof evnt.type !=='undefined'){
-                    reason=evnt.type;
+              if(typeof evnt.type !== 'undefined'){
+                    reason = evnt.type;
                 }
             console.log('websocket ERROR: ' + reason);
         },

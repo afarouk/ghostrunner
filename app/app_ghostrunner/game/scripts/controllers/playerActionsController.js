@@ -8,6 +8,8 @@ define([
     '../models/playerActions'
     ], function(Vent, PlayerActionsView, PlayerActionsModel){
     var PlayerActionsController = Mn.Object.extend({
+            //TODO show buttons enabled/disabled 
+            //depending on model
     		create: function(layout, region) {
                 this.model = new PlayerActionsModel();
     			this.view = new PlayerActionsView({

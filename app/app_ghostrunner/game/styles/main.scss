@@ -27,4 +27,24 @@
         background: url('images/loader.svg') no-repeat center;
     }
 }
+.information-table {
+    background: rgba(0,0,0, 0.2);
+    height: 200px;
+    padding: 10px;
+    margin: 10px 10px 50px;
+}
+.player-actions {
+    background: rgba(0,255,0, 0.2);
+    position: absolute;
+    bottom: 10px;
+    width: 80%;
+    padding: 10px;
+}
+.chat {
+    background: rgba(0,0,255, 0.2);
+    position: absolute;
+    bottom: 10px;
+    padding: 10px;
+    right: 10px;
+}
 
