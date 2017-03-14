@@ -17,14 +17,18 @@ define([
                 //TODO maybe we should use native backbone fetch mechanism ???
                 var def = $.Deferred();
                 service.getGame()
-                    .then(function(game){
-                        var gameModel = this.getGameModel();
-                        if (!gameModel) {
-                            gameModel = new GameModel(game);
+                    .then(function(game, status){
+                        if (status === 'nocontent') {
+                            def.reject();
                         } else {
-                            gameModel.set(game);
+                            var gameModel = this.getGameModel();
+                            if (!gameModel) {
+                                gameModel = new GameModel(game);
+                            } else {
+                                gameModel.set(game);
+                            }
+                            def.resolve(gameModel);
                         }
-                        def.resolve(gameModel);
 
                     }.bind(this));
                 return def;
@@ -41,6 +45,8 @@ define([
                 this.getGameStatus()
                     .then(function(game){
                         this.manageState(game.get('thisUser'));
+                    }.bind(this), function(){
+                        
                     }.bind(this));
             },
 
@@ -99,6 +105,7 @@ define([
                 //Sould we stop game after 
                 //websocket connection was interrupted (disconnected) 
                 // the save way as by user decision ???
+
                 if (gameModel) {
                     service.stopGame()
                         .then(function(){

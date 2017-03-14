@@ -30,7 +30,7 @@ define([
                 console.log('game stop');
                 var user = appCache.get('user');
                 user.kill();
-                this.publicController.getStateController().onGameStop();
+                // this.publicController.getStateController().onGameStop();
             },
             waitingForMove: function() {
                 this.publicController.getInterfaceController().hideLoader();
