@@ -8,6 +8,9 @@ define([
 	], function(Vent, template){
 	var InformationTableView = Mn.View.extend({
 		template: template,
+		modelEvents: {
+	        'change': 'render'
+	    },
 		onRender: function() {
 			console.log('InformationTableView');
 		}

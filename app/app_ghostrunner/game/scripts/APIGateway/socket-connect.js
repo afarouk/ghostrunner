@@ -36,11 +36,11 @@ define([
         onMessage: function(evnt) {
             console.log(evnt.data);
             var data = evnt.data,
-                signal;
+                message;
 
             try {
-                signal = JSON.parse(data);
-                this.trigger('onSignal', signal);
+                message = JSON.parse(data);
+                this.trigger('onMessage', message);
             } catch (e) {
                 throw e;
             }

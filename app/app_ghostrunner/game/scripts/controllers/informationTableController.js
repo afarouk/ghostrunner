@@ -16,7 +16,10 @@ define([
                     model: this.model
                 });
     			layout.showChildView( region, this.view );
-    		}
+    		},
+            opponentInGame: function(inGame) {
+                this.model.set('opponentInGame', inGame);
+            }
         });
 
     return new InformationTableController();

@@ -41,7 +41,16 @@ define([
                 this.getGameStatus()
                     .then(function(game){
                         this.manageState(game.get('thisUser'));
+                        this.otherUserState(game.get('otherUser'));
                     }.bind(this));
+            },
+
+            otherUserState: function(otherUser) {
+                var inGame = false;
+                if (otherUser.presence === 'ONLINE') {
+                    inGame = true;
+                }
+                this.publicController.getInformationTableController().opponentInGame(inGame);
             },
 
             manageState: function(thisUser) {
@@ -57,7 +66,7 @@ define([
                         break;
                 }
             },
-            onSignal: function(signal) {
+            onMessage: function(signal) {
                 switch (signal) {
                     case 'YOUR_MOVE':
                         this.publicController.getGameController().waitingForMove();
@@ -76,6 +85,12 @@ define([
                         break;
                     case 'GOTO_PREVIOUS_STATE':
                         
+                        break;
+                    case 'OPPONENT_OFFLINE':
+                        this.publicController.getInformationTableController().opponentInGame(false);
+                        break;
+                    case 'OPPONENT_ONLINE':
+                        this.publicController.getInformationTableController().opponentInGame(true);
                         break;
                     default:
                         break;
@@ -99,6 +114,8 @@ define([
                 //Sould we stop game after 
                 //websocket connection was interrupted (disconnected) 
                 // the save way as by user decision ???
+                // debugger;
+                // return;
                 if (gameModel) {
                     service.stopGame()
                         .then(function(){
