@@ -3,14 +3,14 @@
 'use strict';
 
 define([
-    '../APIGateway/addressMap.js'
-    ], function(addressMap){
-    var apiRoot = 'https://simfel.com/apptsvc/rest',
-        _resolveMethod = function(name){
+    '../APIGateway/addressMap.js',
+    '../appConfig'
+    ], function(addressMap, config){
+    var _resolveMethod = function(name){
             return addressMap.getAddressMap()[name][0];
         },
         _resolveAddress = function(name){
-            return apiRoot + addressMap.getAddressMap()[name][1];
+            return config.getAPIRoot() + addressMap.getAddressMap()[name][1];
         },
         Gateway = Mn.Object.extend({
             sendRequest: function(name, options) {

@@ -17,6 +17,9 @@ define([
                 });
     			layout.showChildView( region, this.view );
     		},
+            onBeforeDestroy: function(){
+                this.stopListening();
+            },
             opponentInGame: function(inGame) {
                 this.model.set('opponentInGame', inGame);
             }

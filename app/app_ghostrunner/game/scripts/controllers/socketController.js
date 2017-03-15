@@ -8,10 +8,14 @@ define([
     '../APIGateway/socket-connect'
     ], function(Vent, userModel, SocketConnect){
     var SocketController = Mn.Object.extend({
-            connect: function(user){
-                var connect = new SocketConnect(user);
-                this.listenTo(connect, 'updateStatus', this.updateStatus, this);
-                this.listenTo(connect, 'onMessage', this.onMessage, this);
+            start: function(user){
+                this.connector = new SocketConnect(user);
+                this.listenTo(this.connector, 'updateStatus', this.updateStatus, this);
+                this.listenTo(this.connector, 'onMessage', this.onMessage, this);
+            },
+            onBeforeDestroy: function(){
+                this.stopListening();
+                this.connector.destroy();
             },
             updateStatus: function(status) {
                 switch (status) {

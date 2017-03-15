@@ -108,6 +108,16 @@ define([
                 }.bind(this));
             },
 
+            onPlayerLogout: function() {
+                var gameModel = this.getGameModel();
+                console.log(gameModel);
+                if (gameModel) {
+                    gameModel.kill();
+                }
+                this.publicController.getGameController().destroy();
+                this.App.destroy();
+            },
+
             onGameStop: function() {
                 var gameModel = this.getGameModel();
                 console.log(gameModel);
@@ -117,8 +127,8 @@ define([
                 // debugger;
                 // return;
                 if (gameModel) {
-                    service.stopGame()
-                        .then(function(){
+                    // service.stopGame()
+                    //     .then(function(){
                             gameModel.kill();
                             //TEMPORARY !!!
                             //TODO show modal dialog
@@ -135,9 +145,10 @@ define([
                                     .start(params);
                             } else {
                                 //What exactly should be?
+                                this.publicController.destroyGame(); //???
                             }
                             //...................
-                        }.bind(this));
+                        // }.bind(this));
                 }
             }
         });

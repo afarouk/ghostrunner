@@ -21,6 +21,13 @@ define([
 		renderGame: function() {
 			this.publicController.getFieldController().create(this, 'field');
 			this.publicController.getInterfaceController().create(this, 'interface');
+		},
+		destroyView: function() {
+			this.undelegateEvents();
+            this.$el.removeData().unbind(); 
+            this.$el.html('');
+            this.setElement(null);
+            this.destroy();
 		}
 	});
 	return GameLayoutView;

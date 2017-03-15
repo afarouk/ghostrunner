@@ -109,6 +109,10 @@ define([
             this.updateStatus('Disconnected');
         },
 
+        destroy: function() {
+            this.websocket.close();
+        },
+
         updateStatus: function(status) {
             console.log(status);
             this.trigger('updateStatus', status);

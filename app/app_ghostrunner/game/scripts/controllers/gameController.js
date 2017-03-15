@@ -14,11 +14,12 @@ define([
 
                 var game = new GameLayout();
                 game.render();
+                this.game = game;
                 
                 this.createUser(user);
                 console.log(user);
 
-                this.publicController.getSocketController().connect(user.uid);
+                this.publicController.getSocketController().start(user.uid);
             },
             createUser: function(user) {
                 new userModel({
@@ -30,7 +31,11 @@ define([
                 console.log('game stop');
                 var user = appCache.get('user');
                 user.kill();
-                this.publicController.getStateController().onGameStop();
+                this.publicController.getStateController().onPlayerLogout();
+            },
+            destroy: function() {
+                this.game.destroyView();
+                this.publicController.destroyGame();
             },
             waitingForMove: function() {
                 this.publicController.getInterfaceController().hideLoader();
