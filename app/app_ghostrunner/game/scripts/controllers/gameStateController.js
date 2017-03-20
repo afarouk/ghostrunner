@@ -68,6 +68,9 @@ define([
                     case 'INVITATION_RECEIVED':
                         this.publicController.getGameController().onInvitationReceived();
                         break;
+                    case 'INVITATION_SENT':
+                        //TODO something???
+                        break;
                     default:
                         //TODO default???
                         //this.publicController.getGameController().waitingForMove();
