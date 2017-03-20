@@ -26,6 +26,10 @@ define([
                         }
                         def.resolve(gameModel);
 
+                    }.bind(this), function(err){
+                        //TODO manage User not in game warning or other error
+                        console.log('waiting on get game error...');
+                        this.onGetAvailableUsers();
                     }.bind(this));
                 return def;
             },
@@ -61,8 +65,12 @@ define([
                     case 'WAIT_FOR_TURN':
                         this.publicController.getGameController().waitingForTurn();
                         break;
+                    case 'INVITATION_RECEIVED':
+                        this.publicController.getGameController().onInvitationReceived();
+                        break;
                     default:
-                        this.publicController.getGameController().waitingForMove();
+                        //TODO default???
+                        //this.publicController.getGameController().waitingForMove();
                         break;
                 }
             },
@@ -92,9 +100,72 @@ define([
                     case 'OPPONENT_ONLINE':
                         this.publicController.getInformationTableController().opponentInGame(true);
                         break;
+                    case 'INVITATION_RECEIVED':
+                        this.onRetrieveInvitation();
+                        break;
+                    case 'INVITATION_ACCEPTED':
+                        this.refreshStatus();
+                        break;
                     default:
                         break;
                 }
+            },
+
+            onGetAvailableUsers: function() {
+                var flag = confirm('get available users?');
+                if (flag) {
+                    service.getAvailableUsers()
+                        .then(function(response){
+                            //todo select user
+                            if (response.count > 0) {
+                                var inviteeUID = response.users[0].uid;
+                                this.onSendInvitation(inviteeUID);
+                            }
+                        }.bind(this), function(err){
+                            
+                        }.bind(this));
+                } else {
+                    //todo
+                }
+            },
+
+            onSendInvitation: function(inviteeUID) {
+                service.sendInvitation({
+                    inviteeUID: inviteeUID
+                }).then(function(result){
+                    //TODO what should I do???
+                }.bind(this), function(err){
+                    //on error
+                }.bind(this));
+            },
+
+            onRetrieveInvitation: function() {
+                //That approach doesn't make any sense
+                //if game model changed
+
+                // service.retrieveInvitation()
+                //     .then(function(invitation){
+                //         debugger
+                //     }.bind(this), function(err){
+                //         //on error
+                //     }.bind(this));
+
+                //I think that I need only getgame or update game???
+                this.refreshStatus();
+            },
+
+            onInvitationAccepted: function() {
+                //dateInvited:"2017-03-20T11:38:12.766+0000"
+                //fromUID:"user38.4163954949559135759"
+                //fromUsername:"member18"
+                //gameUUID:"l-w21tg_TiKAAABWNCMi_VI52yuCpc8"
+                //toUID:"user20.781305772384780045"
+                service.acceptInvitation()
+                    .then(function(state){
+                        this.updateGameModel(state);
+                    }.bind(this), function(err){
+                        //on error
+                    }.bind(this));
             },
 
             onPlayerMove: function() {
@@ -127,28 +198,28 @@ define([
                 // debugger;
                 // return;
                 if (gameModel) {
-                    // service.stopGame()
-                    //     .then(function(){
+                    service.resetGame()
+                        .then(function(){
                             gameModel.kill();
                             //TEMPORARY !!!
                             //TODO show modal dialog
                             // $('#reconnect-dialog').modal('show');
-                            var choise = confirm('Reconnect websockets?');
-                            if (choise) {
-                                var user = appCache.get('user'),
-                                    params = {
-                                        uid: user.get('uid'), 
-                                        userName: user.get('userName')
-                                    };
-                                user.kill();
-                                this.publicController.getGameController()
-                                    .start(params);
-                            } else {
-                                //What exactly should be?
-                                this.publicController.destroyGame(); //???
-                            }
+                            // var choise = confirm('Reconnect websockets?');
+                            // if (choise) {
+                            //     var user = appCache.get('user'),
+                            //         params = {
+                            //             uid: user.get('uid'), 
+                            //             userName: user.get('userName')
+                            //         };
+                            //     user.kill();
+                            //     this.publicController.getGameController()
+                            //         .start(params);
+                            // } else {
+                            //     //What exactly should be?
+                            //     this.publicController.destroyGame(); //???
+                            // }
                             //...................
-                        // }.bind(this));
+                        }.bind(this));
                 }
             }
         });

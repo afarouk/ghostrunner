@@ -42,6 +42,15 @@ define([
             },
             waitingForTurn: function() {
                 console.log('waiting for turn');
+            },
+            onInvitationReceived: function() {
+                console.log('invitation received');
+                var accept = confirm('accept invitation?');
+                if (accept) {
+                    this.publicController.getStateController().onInvitationAccepted();
+                } else {
+                    //TODO rejected
+                }
             }
         });
 
