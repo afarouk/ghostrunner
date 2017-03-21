@@ -11,7 +11,20 @@ define([
     //A heart of the game state logic 
     var GameStateController = Mn.Object.extend({
             onGameStart: function() {
-                this.refreshStatus();
+                // this.refreshStatus();
+
+                //Temporary
+                this.getGameUser();
+            },
+            getGameUser: function() {
+                service.getGameUser()
+                    .then(function(status){
+                        if (status.gameUUID) {
+                            this.refreshStatus();
+                        } else {
+                            this.onGetAvailableUsers();
+                        }
+                    }.bind(this));
             },
             getGameStatus: function() {
                 //TODO maybe we should use native backbone fetch mechanism ???
@@ -229,7 +242,7 @@ define([
                         }.bind(this));
                 }
             }
-            
+
         });
 
     return new GameStateController();
