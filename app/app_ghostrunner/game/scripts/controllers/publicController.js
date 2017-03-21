@@ -41,6 +41,13 @@ define([
             },
             getChatController: function() {
                 return chatController;
+            },
+            destroyGame: function() {
+                //destroy all controllers
+                //with listenTo etc...
+                socketController.destroy();
+                playerActionsController.destroy();
+                informationTableController.destroy();
             }
         });
 

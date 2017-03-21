@@ -20,6 +20,9 @@ define([
                 this.listenTo(this.view, 'onPlayer:move', this.onMove, this);
                 this.listenTo(this.view, 'onGame:stop', this.onStop, this)
     		},
+            onBeforeDestroy: function(){
+                this.stopListening();
+            },
             onMove: function() {
                 console.log('move');
                 this.publicController.getInterfaceController().showLoader();
