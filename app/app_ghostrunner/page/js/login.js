@@ -40,7 +40,7 @@
 
 		sendRequest: function(request, options) {
             var payload = options.payload || '',
-            	url = this.apiRoot + request[1], 
+            	url = this.getAPIRoot() + request[1], 
             	method = request[0];
             delete options.payload;
 
@@ -126,6 +126,35 @@
             }).then(function(response) {
                 this.onLogoutSuccess(UID);
             }.bind(this));
+        },
+
+        getAPIRoot: function() {
+        	var search = window.location.search,
+        		params = this.parseQueryString(search),
+        		server;
+        	if (params && params.server) {
+        		server = params.server;
+        	}
+        	return server ? 'https://' + server + '/apptsvc/rest' : this.apiRoot;
+        },
+
+        parseQueryString: function(qs) {
+            if (!qs) return;
+            var result = {};
+            var params = qs.replace('?', '').split('&');
+
+            _(params).each(function (param) {
+                var pair = param.split('=');
+                if (pair[1] === 'true' ) {
+                    pair[1] = true;
+                }
+                else if (pair[1] === 'false') {
+                    pair[1] = false;
+                }
+                result[pair[0]] = pair[1];
+            });
+
+            return result;
         }
 	};
 
