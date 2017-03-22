@@ -11,7 +11,20 @@ define([
     //A heart of the game state logic 
     var GameStateController = Mn.Object.extend({
             onGameStart: function() {
-                this.refreshStatus();
+                // this.refreshStatus();
+
+                //Temporary
+                this.getGameUser();
+            },
+            getGameUser: function() {
+                service.getGameUser()
+                    .then(function(status){
+                        if (status && status.gameUUID) {
+                            this.refreshStatus();
+                        } else {
+                            this.onGetAvailableUsers();
+                        }
+                    }.bind(this));
             },
             getGameStatus: function() {
                 //TODO maybe we should use native backbone fetch mechanism ???
@@ -111,6 +124,10 @@ define([
                         this.onRetrieveInvitation();
                         break;
                     case 'INVITATION_ACCEPTED':
+                        this.refreshStatus();
+                        break;
+                    case 'GAME_OVER':
+                        //TODO I am not sure what to do ???
                         this.refreshStatus();
                         break;
                     default:
@@ -229,7 +246,7 @@ define([
                         }.bind(this));
                 }
             }
-            
+
         });
 
     return new GameStateController();

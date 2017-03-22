@@ -7,6 +7,13 @@ define([
     '../appCache'
     ], function(gateway, appCache){
     var GameService = Mn.Object.extend({
+        getGameUser: function() {
+            var user = appCache.get('user'),
+                params = {
+                    UID: user.get('uid')
+                };
+            return gateway.sendRequest('getGameUser', params);
+        },
         getGame: function() {
             var user = appCache.get('user'),
                 game = appCache.get('game'),
