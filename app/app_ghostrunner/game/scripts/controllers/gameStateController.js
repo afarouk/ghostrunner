@@ -19,7 +19,7 @@ define([
             getGameUser: function() {
                 service.getGameUser()
                     .then(function(status){
-                        if (status.gameUUID) {
+                        if (status && status.gameUUID) {
                             this.refreshStatus();
                         } else {
                             this.onGetAvailableUsers();
@@ -124,6 +124,10 @@ define([
                         this.onRetrieveInvitation();
                         break;
                     case 'INVITATION_ACCEPTED':
+                        this.refreshStatus();
+                        break;
+                    case 'GAME_OVER':
+                        //TODO I am not sure what to do ???
                         this.refreshStatus();
                         break;
                     default:
