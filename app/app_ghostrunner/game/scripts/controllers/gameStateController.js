@@ -56,12 +56,12 @@ define([
             updateGameModel: function (state) {
                 var gameModel = this.getGameModel();
                 gameModel.set(state);
-                this.manageState(gameModel.get('thisUser'));
+                this.manageState(gameModel);
             },
             refreshStatus: function() {
                 this.getGameStatus()
                     .then(function(game){
-                        this.manageState(game.get('thisUser'));
+                        this.manageState(game);
                         this.otherUserState(game.get('otherUser'));
                     }.bind(this));
             },
@@ -74,7 +74,8 @@ define([
                 this.publicController.getInformationTableController().opponentInGame(inGame);
             },
 
-            manageState: function(thisUser) {
+            manageState: function(gameModel) {
+                var thisUser = gameModel.get('thisUser');
                 switch (thisUser.state) {
                     case 'MAKE_YOUR_MOVE':
                         this.publicController.getGameController().waitingForMove();
@@ -87,6 +88,11 @@ define([
                         break;
                     case 'INVITATION_SENT':
                         //TODO something???
+                        break;
+                    case 'AVAILABLE':
+                        if (gameModel.get('state') === 'COMPLETE') {
+                            this.publicController.getGameController().onAvailableForNewGame();
+                        }
                         break;
                     default:
                         //TODO default???
@@ -136,7 +142,7 @@ define([
             },
 
             onGetAvailableUsers: function() {
-                this.publicController.getPlayerChoiceController().showConfirmatio({
+                this.publicController.getPlayerChoiceController().showConfirmation({
                     message: 'get available users?',
                     cancel: 'cancel',
                     confirm: 'ok'
@@ -201,6 +207,10 @@ define([
                     }.bind(this), function(err){
                         //on error
                     }.bind(this));
+            },
+
+            onInvitationRejected: function() {
+                this.onGetAvailableUsers();
             },
 
             onPlayerMove: function() {

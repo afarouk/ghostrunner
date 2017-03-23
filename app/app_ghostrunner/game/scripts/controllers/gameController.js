@@ -44,13 +44,33 @@ define([
                 console.log('waiting for turn');
             },
             onInvitationReceived: function() {
-                console.log('invitation received');
-                var accept = confirm('accept invitation?');
-                if (accept) {
+                var game = appCache.get('game'),
+                    other = game.get('otherUser').userName,
+                    gameName = game.get('gameName');
+                this.publicController.getPlayerChoiceController().showConfirmation({
+                    message: other + ' sent you invitation to '+ gameName + '<br> accept invitation?',
+                    cancel: 'cancel',
+                    confirm: 'ok'
+                }).then(function(){
                     this.publicController.getStateController().onInvitationAccepted();
-                } else {
-                    //TODO rejected
-                }
+                }.bind(this), function() {
+                    //TODO something
+                    this.publicController.getStateController().onInvitationRejected();
+                }.bind(this));
+                console.log('invitation received');
+            },
+
+            onAvailableForNewGame: function() {
+                this.publicController.getPlayerChoiceController().showConfirmation({
+                    message: 'start new game?',
+                    cancel: 'cancel',
+                    confirm: 'ok'
+                }).then(function(){
+                    console.log('start new game');
+                    this.publicController.getStateController().onGetAvailableUsers();
+                }.bind(this), function() {
+                    console.log('......');
+                }.bind(this));
             }
         });
 
