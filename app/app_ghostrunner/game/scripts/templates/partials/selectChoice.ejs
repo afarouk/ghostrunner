@@ -1,0 +1,9 @@
+<div class="form-group">
+  <label for="playerSelectChoice"><%= message %></label>
+  <select class="form-control" id="playerSelectChoice">
+    <% _.each(list, function(user){ %>
+		<option value="<%= user.uid %>"><%= user.userName %></option>
+	<% }) %>
+  </select>
+</div>
+<button type="button"><%= confirm %></button>

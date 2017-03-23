@@ -13,7 +13,8 @@ define([
 		el: '#game-layout',
 		regions: {
 			field: '#game-field',
-			interface: '#game-interface'
+			interface: '#game-interface',
+			choice: '#player-choice'
 		},
 		onRender: function() {
 			this.renderGame();
@@ -21,6 +22,7 @@ define([
 		renderGame: function() {
 			this.publicController.getFieldController().create(this, 'field');
 			this.publicController.getInterfaceController().create(this, 'interface');
+			this.publicController.getPlayerChoiceController().create(this, 'choice');
 		},
 		destroyView: function() {
 			this.undelegateEvents();

@@ -136,21 +136,32 @@ define([
             },
 
             onGetAvailableUsers: function() {
-                var flag = confirm('get available users?');
-                if (flag) {
+                this.publicController.getPlayerChoiceController().showConfirmatio({
+                    message: 'get available users?',
+                    cancel: 'cancel',
+                    confirm: 'ok'
+                }).then(function(){
                     service.getAvailableUsers()
                         .then(function(response){
                             //todo select user
                             if (response.count > 0) {
-                                var inviteeUID = response.users[0].uid;
-                                this.onSendInvitation(inviteeUID);
+                                this.publicController.getPlayerChoiceController()
+                                    .showSelect({
+                                        message: 'Select some user:',
+                                        confirm: 'invite',
+                                        list: response.users
+                                    }).then(function(inviteeUID){
+                                        this.onSendInvitation(inviteeUID);
+                                    }.bind(this));
+                            } else {
+                                //TODO something
                             }
                         }.bind(this), function(err){
                             
                         }.bind(this));
-                } else {
-                    //todo
-                }
+                }.bind(this), function() {
+                    //TODO something
+                }.bind(this));
             },
 
             onSendInvitation: function(inviteeUID) {
