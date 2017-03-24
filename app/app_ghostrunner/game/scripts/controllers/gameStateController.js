@@ -58,11 +58,20 @@ define([
                 gameModel.set(state);
                 this.manageState(gameModel);
             },
-            refreshStatus: function() {
+            refreshStatus: function(update) {
                 this.getGameStatus()
                     .then(function(game){
-                        this.manageState(game);
-                        this.otherUserState(game.get('otherUser'));
+                        //There is tweak
+                        // and I don't like that approach
+                        if (update === 'update') {
+                            var newGameUID = game.get('thisUser').gameUUID;
+                            game.set('gameUUID', newGameUID);
+                            this.refreshStatus();
+                        //.......
+                        } else {
+                            this.manageState(game);
+                            this.otherUserState(game.get('otherUser'));
+                        }
                     }.bind(this));
             },
 
@@ -91,6 +100,9 @@ define([
                         break;
                     case 'AVAILABLE':
                         if (gameModel.get('state') === 'COMPLETE') {
+                            this.publicController.getGameController().onAvailableForNewGame();
+                        }
+                        if (gameModel.get('state') === 'ABANDONED') {
                             this.publicController.getGameController().onAvailableForNewGame();
                         }
                         break;
@@ -130,10 +142,13 @@ define([
                         this.onRetrieveInvitation();
                         break;
                     case 'INVITATION_ACCEPTED':
-                        this.refreshStatus();
+                        this.refreshStatus('update');
                         break;
                     case 'GAME_OVER':
                         //TODO I am not sure what to do ???
+                        this.refreshStatus();
+                        break;
+                    case 'GAME_ABANDONED':
                         this.refreshStatus();
                         break;
                     default:
@@ -203,6 +218,7 @@ define([
                 //toUID:"user20.781305772384780045"
                 service.acceptInvitation()
                     .then(function(state){
+                        debugger;
                         this.updateGameModel(state);
                     }.bind(this), function(err){
                         //on error
@@ -210,7 +226,12 @@ define([
             },
 
             onInvitationRejected: function() {
-                this.onGetAvailableUsers();
+                service.rejectInvitation()
+                    .then(function(response){
+                        this.onGetAvailableUsers();
+                    }.bind(this), function(err){
+                        //on error
+                    }.bind(this));
             },
 
             onPlayerMove: function() {

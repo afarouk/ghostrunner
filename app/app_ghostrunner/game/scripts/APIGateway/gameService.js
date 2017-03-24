@@ -23,6 +23,14 @@ define([
             if (game) params.gameUUID = game.get('gameUUID');
             return gateway.sendRequest('getGame', params);
         },
+        abandonGame: function(params) {
+            var user = appCache.get('user'),
+                game = appCache.get('game');
+            params = params || {};
+            params.UID = user.get('uid');
+            if (game) params.gameUUID = game.get('gameUUID');
+            return gateway.sendRequest('abandonGame', params);
+        },
         makeMove: function(params) {
             var user = appCache.get('user'),
                 game = appCache.get('game');
@@ -42,8 +50,16 @@ define([
                 game = appCache.get('game');
             params = params || {};
             params.UID = user.get('uid');
-            if (game) params.gameUUID = game.get('gameUUID');
+            if (game) params.gameUUID = game.get('otherUser').gameUUID;
             return gateway.sendRequest('acceptInvitation', params);
+        },
+        rejectInvitation: function(params) {
+            var user = appCache.get('user'),
+                game = appCache.get('game');
+            params = params || {};
+            params.UID = user.get('uid');
+            if (game) params.gameUUID = game.get('otherUser').gameUUID;
+            return gateway.sendRequest('rejectInvitation', params);
         },
         sendInvitation: function(params) {
             var user = appCache.get('user');
