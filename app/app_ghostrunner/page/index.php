@@ -6,79 +6,79 @@
 <!--[if (gte IE 10)|!(IE)]><!--><html lang="en"><!--<![endif]-->
 
 <head>
-    
+
     <!-- Your Basic Site Informations -->
     <title>GhostRunner</title>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="" />
     <meta name="keywords" content="" />
-    <meta name="author" content="Affapress" />
-    
+    <meta name="author" content="GhostRunner" />
+
     <!-- Mobile Specific Meta -->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    
+
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Poppins:400,300,600,700" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
-    
+
     <!-- Stylesheets -->
     <link rel="stylesheet" href="./styles.css">
-    
+
     <!-- Custom Colors -->
     <!--<link rel="stylesheet" href="css/colors/blue/color.css">-->
     <!--<link rel="stylesheet" href="css/colors/green/color.css">-->
     <!--<link rel="stylesheet" href="css/colors/pink/color.css">-->
     <!--<link rel="stylesheet" href="css/colors/purple/color.css">-->
     <!--<link rel="stylesheet" href="css/colors/yellow/color.css">-->
-    
+
     <!--[if lt IE 9]>
     	<script src="js/html5.js"></script>
         <script src="js/respond.min.js"></script>
 	<![endif]-->
-    
+
     <!--[if lt IE 8]>
     	<link rel="stylesheet" href="css/ie-older.css">
     <![endif]-->
-    
+
     <noscript><link rel="stylesheet" href="css/no-js.css"></noscript>
-    
+
     <!-- Favicons -->
 	<link rel="shortcut icon" href="images/favicon.ico">
 	<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
 	<link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
 	<link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
-    
+
 </head>
 <body>
-    
+
     <!-- #header -->
     <header id="header">
-        
+
         <!-- #navigation -->
         <nav id="navigation" class="navbar scrollspy">
-            
+
             <!-- .container -->
             <div class="container">
-                
+
                 <div class="navbar-brand">
                 	<a href="index.html"><img src="images/logo.png" alt="Logo" /></a> <!-- site logo -->
                 </div>
-                
+
                 <ul class="nav navbar-nav">
                 	<li><a href="#header" class="smooth-scroll">Home</a></li>
                     <li><a href="#contact" class="smooth-scroll">Contact</a></li>
                     <li class="menu-btn"><a class="login-btn" href="#">Login</a></li>
                 </ul>
-                
+
             </div>
             <!-- .container end -->
-            
+
         </nav>
         <!-- #navigation end -->
-        
+
         <!-- .header-content -->
-        <div class="header-content">            
+        <div class="header-content">
             <div class="header-content-wrapper">
                 <div class="header-content-tab-wrap">
                     <a href="#" class="header-content-tabs">Game Stats</a>
@@ -86,66 +86,66 @@
                 </div>
             	<div class="game_canvas_wrap" id="game-layout"></div>
             </div>
-            
+
         </div>
         <!-- .header-content end -->
-        
+
     </header>
     <!-- #header end -->
-    
+
     <!-- #about -->
     <div id="about" class="wrap-container8060">
-        
+
         <!-- .container -->
         <div class="container">
-            
+
             <div class="post-heading-center">
             	<h2>About Us</h2>
                 <p>Aenean bibendum erat sed dolor vehicula, nec dignissim ligula tincidunt. Nunc ullamcorper in purus pulvinar consequat. Aliquam eu porta enim.</p>
             </div>
-            
+
             <!-- .row -->
             <div class="row">
-                
+
                 <div class="col-md-6 col-lg-5">
                 	<figure class="padding-top30-md margin-bottom20">
                     	<img src="images/content/landing/1.jpg" alt="Image" class="img-style-left" />
                     </figure>
                 </div>
-                
+
                 <div class="col-md-6 col-lg-offset-1">
                 	<div class="margin-bottom20">
-                        <p><a href="http://affapress.com" target="_blank">GhostRunner.com</a> consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id venenatis lacus lacinia sit amet yaborum.</p>
+                        <p><a href="http://sitelette.com" target="_blank">GhostRunner.com</a> consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id venenatis lacus lacinia sit amet yaborum.</p>
                         <p><strong>Sed ut perspiciatis</strong> unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.</p>
                     </div>
                 </div>
-                
+
             </div>
             <!-- .row end -->
-            
+
         </div>
         <!-- .container end -->
-        
+
     </div>
     <!-- #about end -->
-    
+
     <!--  #contact  -->
-    
+
     <div id="contact" class="wrap-container8040">
-        
+
         <!-- .container -->
         <div class="container">
-            
+
             <!-- .row -->
             <div class="row">
-                
+
                 <div class="col-md-6">
                 	<div class="margin-bottom40">
                         <div class="post-heading-left">
                             <h2>Leave Us a Message</h2>
                             <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt quia voluptas.</p>
                         </div>
-                        
+
                         <form method="post" action="#" class="affa-form-contact">
                             <div class="submit-status"></div> <!-- submit status -->
                             <div class="row">
@@ -162,7 +162,7 @@
                         </form>
                     </div>
                 </div>
-                
+
                 <div class="col-md-6">
                 	<div class="margin-bottom40">
                         <div class="post-heading-left">
@@ -173,26 +173,26 @@
                         <p class="map-address"><a href="#" title="Open on Google Maps">1234 South Something Street</a></p>
                     </div>
                 </div>
-                
+
             </div>
             <!-- .row end -->
-            
+
         </div>
         <!-- .container end -->
-        
+
     </div>
-    
+
     <!--  #contact end  -->
-    
+
     <!-- #footer -->
     <footer id="footer">
-        
+
         <!-- .container -->
         <div class="container padding-bottom20">
-            
+
             <!-- .row -->
             <div class="row">
-                
+
                 <div class="col-sm-4 widget"> <!-- 1 -->
                 	<img src="images/logo.png" alt="Logo" class="footer-logo" />
                     <p>Lorem ipsum dolor sit amet elit consectetur adipiscing rhoncus tempus perdiet risus amet eleifend laoreet lectus mauris volutpat.</p>
@@ -205,7 +205,7 @@
                         <a href="#" title="dribbble"><i class="fa fa-dribbble"></i></a>
                     </div>
                 </div>
-                
+
                 <div class="col-sm-4 widget"> <!-- 2 -->
                 	<h4 class="widget-title col-sm-offset-3">Need Helps?</h4>
                     <div class="row">
@@ -219,27 +219,27 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="col-sm-4 widget"> <!-- 3 -->
                     <h4 class="widget-title">Contact Us</h4>
                     <p>123 Main Street Cottage<br>Long Branch City, P.O Box 65148<br>(00) 123-4567890 / (00) 123-4567890<br><a href="#">www.ghostrunner.com</a><br><a href="#">support@ghostrunner.com</a></p>
                 </div>
-                
+
             </div>
             <!-- .row end -->
-            
+
         </div>
         <!-- .container end -->
-        
+
         <div class="footer-copyright">
         	<div class="container">
                 <p>&copy; 2016 Copyrights by <a href="http://affapress.com" target="_blank">GhostRunner</a> - All rights reserved.</p>
             </div>
         </div>
-        
+
     </footer>
     <!-- #footer end -->
-    
+
     <a href="#" class="scrollup" title="Back to Top!">Scroll</a> <!-- Back to Top -->
 
     <!-- #signin modal -->
@@ -271,22 +271,22 @@
         </div>
     </div>
     <!-- #signin end-->
-    
+
     <!--[if lt IE 8]>
     	<div class="browser-notice">
             <div class="container">
             	<div class="text">
-                    <h1>Internet Explorer Out To Date</h1>
+                    <h1>Internet Explorer Out of Date</h1>
                     <p>Please update your Internet Explorer browser with a newer version (Internet Explorer 8 above) now!</p>
                     <span>You can download it <a href="http://windows.microsoft.com/en-us/internet-explorer/download-ie" target="blank">here....</a></span>
                 </div>
             </div>
         </div>
 	<![endif]-->
-    
+
     <!-- JavaScripts -->
-	
+
 	<script type="text/javascript" src="./bundle.js"></script>
-    
+
 </body>
 </html>
