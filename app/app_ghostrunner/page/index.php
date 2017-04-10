@@ -52,7 +52,7 @@
 <body>
 
     <!-- #header -->
-    <header id="header">
+    <header  id="header">
 
         <!-- #navigation -->
         <nav id="navigation" class="navbar scrollspy">
@@ -61,7 +61,7 @@
             <div class="container">
 
                 <div class="navbar-brand">
-                	<a href="index.html"><img src="images/logo.png" alt="Logo" /></a> <!-- site logo -->
+                	<a href="index.php"><img src="images/logo.png" alt="Logo" /></a> <!-- site logo -->
                 </div>
 
                 <ul class="nav navbar-nav">
@@ -79,11 +79,13 @@
         <!-- .header-content -->
         <div class="header-content">
             <div class="header-content-wrapper">
+               <!--
                 <div class="header-content-tab-wrap">
                     <a href="#" class="header-content-tabs">Game Stats</a>
                     <a href="#" class="header-content-tabs">Partner Status</a>
                 </div>
-            	<div class="game_canvas_wrap" id="game-layout"></div>
+                -->
+            	<div id="game-layout" class="game_canvas_wrap" ></div>
             </div>
 
         </div>
