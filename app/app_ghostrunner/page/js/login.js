@@ -3,7 +3,7 @@
 
 	var loginManager = {
 		logged: false,
-		//API 
+		//API
 		apiRoot: 'https://simfel.com/apptsvc/rest',
 		loginRequest: ['POST', '/gaming/login'],
         logoutRequest: ['GET', '/gaming/logout'],
@@ -22,7 +22,7 @@
 
 		getSessionFromCookie: function () {
             var UID = Cookie.get('cmxUID');
-            
+
             this.sendRequest(this.getAuthenticationStatus, {UID: UID})
 	            .then(function (response) {
 	                if (response.action && response.action.enumText === 'NO_ACTION') {
@@ -40,7 +40,7 @@
 
 		sendRequest: function(request, options) {
             var payload = options.payload || '',
-            	url = this.getAPIRoot() + request[1], 
+            	url = this.getAPIRoot() + request[1],
             	method = request[0];
             delete options.payload;
 
@@ -135,7 +135,11 @@
         	if (params && params.server) {
         		server = params.server;
         	}
-        	return server ? 'https://' + server + '/apptsvc/rest' : this.apiRoot;
+		      if(server==='localhost:8080'){
+						return server ? 'http://' + server + '/apptsvc/rest' : this.apiRoot;
+		      }else{
+						return server ? 'https://' + server + '/apptsvc/rest' : this.apiRoot;
+					}
         },
 
         parseQueryString: function(qs) {

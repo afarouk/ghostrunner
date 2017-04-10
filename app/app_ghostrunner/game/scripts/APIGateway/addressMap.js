@@ -4,7 +4,7 @@
 module.exports = {
     getAddressMap: function(){
         return {
-            getGameUser: ['GET', '/gaming/getGameUser'],
+          getGameUser: ['GET', '/gaming/getGameUser'],
         	getGame: ['GET', '/gaming/getGame'],
         	makeMove: ['POST', '/gaming/makeMove'],
         	resetGame: ['GET', '/gaming/reset'],

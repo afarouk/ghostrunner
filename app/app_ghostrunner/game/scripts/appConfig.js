@@ -10,5 +10,9 @@ module.exports = {
     },
     setAPIRoot: function(server) {
     	apiRoot = 'https://' + server + '/apptsvc/rest';
+      if(server==='localhost:8080'){
+        apiRoot='http://'+server+'/apptsvc/rest';
+      }
+
     }
 };
