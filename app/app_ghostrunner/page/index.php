@@ -68,6 +68,7 @@
                 	<li><a href="#header" class="smooth-scroll">Home</a></li>
                     <li><a href="#contact" class="smooth-scroll">Contact</a></li>
                     <li class="menu-btn"><a class="login-btn" href="#">Login</a></li>
+                    <li><span class="show_userName" href="javascript:void(0)"></span></li>
                 </ul>
 
             </div>

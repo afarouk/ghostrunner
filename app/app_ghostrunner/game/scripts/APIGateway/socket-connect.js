@@ -7,11 +7,12 @@ define([
     ], function(){
     //TEMP
     var socketConnect = Mn.Object.extend({
-        URL: 'ws://simfel.com/apptsvc/ws/gaming/gamingsecret',
+        WebSocketRoot: 'ws://simfel.com/apptsvc/ws/gaming/gamingsecret',
         initialize: function(UID) {
-            var URL = this.URL + '?UID=' + UID;
+            var URL = this.getWebSocketRoot() + '?UID=' + UID;
             this.connect(URL);
         },
+
 
         connect: function(URL) {
             this.websocket = new WebSocket(URL);
@@ -28,7 +29,36 @@ define([
                 this.onClose(evnt);
             }.bind(this);
         },
+        
+        getWebSocketRoot: function() {
+        	var search = window.location.search,
+        		params = this.parseQueryString(search),
+        		server;
+        	if (params && params.server) {
+        		server = params.server;
+        	}
+        	return server ? 'wss://' + server + '/apptsvc/ws/gaming/gamingsecret' : this.WebSocketRoot;
+        },
+        
+        parseQueryString: function(qs) {
+            if (!qs) return;
+            var result = {};
+            var params = qs.replace('?', '').split('&');
 
+            _(params).each(function (param) {
+                var pair = param.split('=');
+                if (pair[1] === 'true' ) {
+                    pair[1] = true;
+                }
+                else if (pair[1] === 'false') {
+                    pair[1] = false;
+                }
+                result[pair[0]] = pair[1];
+            });
+
+            return result;
+        },        
+        
         onOpen: function() {
             this.updateStatus("Connected");
         },

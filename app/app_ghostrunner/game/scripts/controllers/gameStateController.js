@@ -161,6 +161,7 @@ define([
                                     }.bind(this));
                             } else {
                                 //TODO something
+                                this.publicController.getInterfaceController().hideLoader();
                             }
                         }.bind(this), function(err){
                             
@@ -177,6 +178,7 @@ define([
                     //TODO what should I do???
                 }.bind(this), function(err){
                     //on error
+                    this.publicController.getInterfaceController().hideLoader();
                 }.bind(this));
             },
 

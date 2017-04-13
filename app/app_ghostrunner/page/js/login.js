@@ -77,6 +77,7 @@
 		onLoginSuccess: function(response) {
 			Cookie.set('cmxUID', response.uid);
 			this.logged = true;
+            $('.show_userName').text('Login as: '+response.userName);
 			$(window).trigger('ghostrunner.signin', response);
 			this.updateLoginButton();
 		},
@@ -84,6 +85,7 @@
 		onLogoutSuccess: function(UID) {
 			this.logged = false;
 			Cookie.remove('cmxUID');
+            $('.show_userName').text('');
 			$(window).trigger('ghostrunner.signout', UID);
 			this.updateLoginButton();
 		},
