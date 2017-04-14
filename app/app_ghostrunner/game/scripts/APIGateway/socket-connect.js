@@ -29,7 +29,7 @@ define([
                 this.onClose(evnt);
             }.bind(this);
         },
-        
+
         getWebSocketRoot: function() {
         	var search = window.location.search,
         		params = this.parseQueryString(search),
@@ -37,9 +37,12 @@ define([
         	if (params && params.server) {
         		server = params.server;
         	}
-        	return server ? 'wss://' + server + '/apptsvc/ws/gaming/gamingsecret' : this.WebSocketRoot;
+          /*
+          TODO: if server is localhost then use ws, otherwise use wss
+          */
+        	return server ? 'ws://' + server + '/apptsvc/ws/gaming/gamingsecret' : this.WebSocketRoot;
         },
-        
+
         parseQueryString: function(qs) {
             if (!qs) return;
             var result = {};
@@ -57,8 +60,8 @@ define([
             });
 
             return result;
-        },        
-        
+        },
+
         onOpen: function() {
             this.updateStatus("Connected");
         },
