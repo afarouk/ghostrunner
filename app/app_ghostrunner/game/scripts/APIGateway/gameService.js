@@ -59,6 +59,16 @@ define([
         },
         resetGame: function() {
             return gateway.sendRequest('resetGame');
+        },
+        abandonGame : function(){
+            var user = appCache.get('user'),
+                game = appCache.get('game'),
+            params = params || {};
+            params.UID = user.get('uid');
+            if(game){
+             params.gameUUID = game.get('gameUUID');   
+            }
+            return gateway.sendRequest('abandonGame',params);
         }
     });
 

@@ -61,9 +61,14 @@
     width: 20px;
     height: 20px;
     border-radius: 50%;
-    background-color: #ff002f;
+    border: 1px solid #888;
+    background-color: #aaa;
     &.online {
         border-color: #7CFC00;
         background-color: #7CFC00;
+    }
+    &.offline {
+        background-color: #ff002f;
+        border-color: #e01c40;
     }
 }

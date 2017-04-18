@@ -63,14 +63,14 @@
                 <div class="navbar-brand">
                 	<a href="index.php"><img src="images/logo.png" alt="Logo" /></a> <!-- site logo -->
                 </div>
-
                 <ul class="nav navbar-nav">
                 	<li><a href="#header" class="smooth-scroll">Home</a></li>
                     <li><a href="#contact" class="smooth-scroll">Contact</a></li>
-                    <li class="menu-btn"><a class="login-btn" href="#">Login</a></li>
+                    <li><span> &nbsp;&nbsp;&nbsp;&nbsp;</span></li>
                     <li><span class="show_userName" href="javascript:void(0)"></span></li>
+                    <li class="menu-btn"><a class="login-btn" href="#">Login</a></li>         
                 </ul>
-
+                
             </div>
             <!-- .container end -->
 

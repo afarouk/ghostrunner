@@ -12,6 +12,7 @@ define([
 		template: template,
 		el: '#game-layout',
 		regions: {
+            btn: '#game-btn',
 			field: '#game-field',
 			interface: '#game-interface',
 			choice: '#player-choice'
@@ -23,6 +24,7 @@ define([
 			this.publicController.getFieldController().create(this, 'field');
 			this.publicController.getInterfaceController().create(this, 'interface');
 			this.publicController.getPlayerChoiceController().create(this, 'choice');
+            this.publicController.getGameBtnController().create(this, 'btn');
 		},
 		destroyView: function() {
 			this.undelegateEvents();

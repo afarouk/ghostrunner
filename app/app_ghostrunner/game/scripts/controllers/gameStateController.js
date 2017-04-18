@@ -35,14 +35,16 @@ define([
                             def.reject();
                         } else {
                             var gameModel = this.getGameModel();
+                            if(game.gameUUID && game.state!='ABANDONED'){
+                             this.publicController.getGameBtnController().showAbandonBtn();   
+                            }
                             if (!gameModel) {
                                 gameModel = new GameModel(game);
                             } else {
-                                gameModel.set(game);
+                                gameModel.set(game);                                
                             }
                             def.resolve(gameModel);
                         }
-
                     }.bind(this), function(err){
                         //TODO manage User not in game warning or other error
                         console.log('waiting on get game error...');
@@ -62,7 +64,7 @@ define([
                 this.getGameStatus()
                     .then(function(game){
                         this.manageState(game);
-                        this.otherUserState(game.get('otherUser'));
+                        this.otherUserState(game.get('otherUser'));                       
                     }.bind(this));
             },
 
@@ -93,6 +95,10 @@ define([
                         if (gameModel.get('state') === 'COMPLETE') {
                             this.publicController.getGameController().onAvailableForNewGame();
                         }
+                        break;
+                    case 'ABANDONED':
+                        this.publicController.getGameBtnController().hideAbandonBtn();
+                        this.publicController.getGameBtnController().removeGameUUID();
                         break;
                     default:
                         //TODO default???
@@ -135,6 +141,10 @@ define([
                     case 'GAME_OVER':
                         //TODO I am not sure what to do ???
                         this.refreshStatus();
+                        break;
+                    case 'GAME_ABANDONED':
+                        this.publicController.getGameBtnController().hideAbandonBtn();
+                        this.publicController.getGameBtnController().removeGameUUID();
                         break;
                     default:
                         break;
@@ -206,6 +216,7 @@ define([
                 service.acceptInvitation()
                     .then(function(state){
                         this.updateGameModel(state);
+                        this.publicController.getInformationTableController().opponentInGame(true);
                     }.bind(this), function(err){
                         //on error
                     }.bind(this));

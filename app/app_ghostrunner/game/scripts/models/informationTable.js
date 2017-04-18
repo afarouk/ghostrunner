@@ -7,7 +7,7 @@ define([
     ], function(appCache){
     var InformationTableModel = Backbone.Model.extend({
     	defaults: {
-    		opponentInGame: false
+    		opponentInGame: ''
     	},
         initialize: function() {
             

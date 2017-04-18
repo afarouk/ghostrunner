@@ -37,10 +37,12 @@ define([
         	if (params && params.server) {
         		server = params.server;
         	}
-          /*
-          TODO: if server is localhost then use ws, otherwise use wss
-          */
-        	return server ? 'ws://' + server + '/apptsvc/ws/gaming/gamingsecret' : this.WebSocketRoot;
+            
+            if(server==='localhost'){
+						return server ? 'ws://' + server + '/apptsvc/ws/gaming/gamingsecret' : this.WebSocketRoot;
+		      }else{
+						return server ? 'wss://' + server + '/apptsvc/ws/gaming/gamingsecret' : this.WebSocketRoot;
+					}
         },
 
         parseQueryString: function(qs) {
