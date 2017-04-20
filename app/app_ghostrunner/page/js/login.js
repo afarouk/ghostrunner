@@ -14,8 +14,11 @@
         getAuthenticationStatus: ['GET', '/gaming/getAuthenticationStatus'],
 		//.....
 		init: function() {
+            var params = this.parseQueryString(window.location.search),UID;
 			this.listenLogin();
-			if (Cookie.get('cmxUID')) {
+            if(params && params.UID){
+                this.autoLoginByUID(params.UID);
+            }else if(Cookie.get('cmxUID')) {
 		        this.getSessionFromCookie();
 		    }
 		},
@@ -35,6 +38,24 @@
 	                }
 	            }.bind(this), function onRequestError () {
 	                Cookie.remove('cmxUID');
+	            });
+        },
+        
+        autoLoginByUID: function (UID) {
+            this.sendRequest(this.getAuthenticationStatus, {UID: UID})
+	            .then(function (response) {
+	                if (response.action && response.action.enumText === 'NO_ACTION') {
+                        Cookie.remove('cmxUID');
+	                    this.onLoginSuccess({
+	                        uid: UID,
+	                        userName: response.userName
+	                    });
+                      
+	                }else{
+                       console.log('not login');   
+                    }
+	            }.bind(this), function onRequestError () {
+	                   console.log('error');
 	            });
         },
 
@@ -142,6 +163,7 @@
 		      }else{
 						return server ? 'https://' + server + '/apptsvc/rest' : this.apiRoot;
 					}
+            
         },
 
         parseQueryString: function(qs) {
