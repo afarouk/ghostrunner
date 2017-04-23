@@ -37,8 +37,8 @@ define([
         	if (params && params.server) {
         		server = params.server;
         	}
-            
-            if(server==='localhost'){
+
+            if(server=='localhost:8080'){
 						return server ? 'ws://' + server + '/apptsvc/ws/gaming/gamingsecret' : this.WebSocketRoot;
 		      }else{
 						return server ? 'wss://' + server + '/apptsvc/ws/gaming/gamingsecret' : this.WebSocketRoot;

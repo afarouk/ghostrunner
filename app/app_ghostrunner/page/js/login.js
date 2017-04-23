@@ -40,7 +40,7 @@
 	                Cookie.remove('cmxUID');
 	            });
         },
-        
+
         autoLoginByUID: function (UID) {
             this.sendRequest(this.getAuthenticationStatus, {UID: UID})
 	            .then(function (response) {
@@ -50,9 +50,9 @@
 	                        uid: UID,
 	                        userName: response.userName
 	                    });
-                      
+
 	                }else{
-                       console.log('not login');   
+                       console.log('not login');
                     }
 	            }.bind(this), function onRequestError () {
 	                   console.log('error');
@@ -158,12 +158,12 @@
         	if (params && params.server) {
         		server = params.server;
         	}
-		      if(server==='localhost:8080'){
+		      if(server=='localhost:8080'){
 						return server ? 'http://' + server + '/apptsvc/rest' : this.apiRoot;
 		      }else{
 						return server ? 'https://' + server + '/apptsvc/rest' : this.apiRoot;
 					}
-            
+
         },
 
         parseQueryString: function(qs) {
@@ -184,7 +184,7 @@
 
             return result;
         }
-        
+
 	};
 
 	$(document).ready( function() {
