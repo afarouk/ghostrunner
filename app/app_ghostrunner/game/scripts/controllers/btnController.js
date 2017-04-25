@@ -34,7 +34,7 @@ define([
                     }
                     .bind(this));
            },
-            removeGameUUID:function(){
+           removeGameUUID:function(){
                 var game= appCache.get('game');
                 game.clear('gameUUID');
             }

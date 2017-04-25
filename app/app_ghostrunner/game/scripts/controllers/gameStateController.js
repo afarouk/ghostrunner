@@ -11,26 +11,64 @@ define([
     //A heart of the game state logic 
     var GameStateController = Mn.Object.extend({
             onGameStart: function() {
-                // this.refreshStatus();
-
+                
                 //Temporary
-                this.getGameUser();
+                var gameUUID=this.publicController.getGameChoiceController().getUrlGameUUID();
+                if(gameUUID){
+                 this.refreshStatus();   
+                }else{
+                 this.onGetMygames();   
+                } 
             },
+        
+            onGetMygames: function() {
+                this.publicController.getInterfaceController().showLoader();
+                service.getMyGames()
+                        .then(function(response){
+                                this.publicController.getInterfaceController().hideLoader();
+                            if(response.games.length ==1){
+                                var gameUUID=response.games[0].gameUUID; this.publicController.getGameChoiceController().setGameUUID(gameUUID);
+                                this.refreshStatus();  
+                            }
+                            else if (response.games.length > 1) {                                
+                                this.publicController.getGameChoiceController()
+                                    .showSelect({
+                                        message: 'Select a game ',
+                                        confirm: 'Start',
+                                        list: response.games
+                                    }).then(function(gameUUID){
+                                        if(gameUUID){
+                                            this.publicController.getGameChoiceController().setGameUUID(gameUUID);
+                                           this.refreshStatus();   
+                                        }                                        
+                                    }.bind(this));
+                            } else {
+                                this.onGetAvailableUsers();
+                            }
+                        }.bind(this), function(err){
+                                this.onGetAvailableUsers();
+                                this.publicController.getInterfaceController().hideLoader();
+                        }.bind(this));
+            },
+        
             getGameUser: function() {
-                service.getGameUser()
+                 service.getGameUser()
                     .then(function(status){
                         if (status && status.gameUUID) {
                             this.refreshStatus();
                         } else {
                             this.onGetAvailableUsers();
                         }
-                    }.bind(this));
+                    }.bind(this)); 
+                
             },
+        
             getGameStatus: function() {
                 //TODO maybe we should use native backbone fetch mechanism ???
                 var def = $.Deferred();
-                service.getGame()
+                var gameUUID=this.publicController.getGameChoiceController().getUrlGameUUID();  service.getGame(gameUUID)
                     .then(function(game, status){
+                        this.publicController.getGameChoiceController().removeUrlGameUUID();
                         if (status === 'nocontent') {
                             def.reject();
                         } else {
@@ -48,18 +86,20 @@ define([
                     }.bind(this), function(err){
                         //TODO manage User not in game warning or other error
                         console.log('waiting on get game error...');
+                        this.publicController.getGameChoiceController().removeUrlGameUUID();
                         this.onGetAvailableUsers();
                     }.bind(this));
                 return def;
             },
+        
             getGameModel: function() {
                 return appCache.get('game');
             },
-            updateGameModel: function (state) {
-                var gameModel = this.getGameModel();
-                gameModel.set(state);
-                this.manageState(gameModel);
+        
+            getUrlGameUUID: function() {
+                return appCache.get('urlGameUUID');
             },
+        
             refreshStatus: function() {
                 this.getGameStatus()
                     .then(function(game){
@@ -106,6 +146,7 @@ define([
                         break;
                 }
             },
+        
             onMessage: function(signal) {
                 switch (signal) {
                     case 'YOUR_MOVE':

@@ -13,9 +13,10 @@ define([
     './playerActionsController',
     './chatController',
     './playerChoiceController',
-    './btnController'
+    './btnController',
+    './gameChoiceController'
     ], function( pageController, gameController, stateController , socketController, fieldController, 
-        interfaceController, informationTableController, playerActionsController, chatController, playerChoiceController,btnController ){
+        interfaceController, informationTableController, playerActionsController, chatController, playerChoiceController,btnController,gameChoiceController){
     var PublicController = Mn.Object.extend({
             getPageController: function() {
                 return pageController;
@@ -31,6 +32,9 @@ define([
             },
             getGameBtnController: function() {
                 return btnController;
+            },
+            getGameChoiceController: function() {
+                return gameChoiceController;
             },
             getFieldController: function() {
                 return fieldController;

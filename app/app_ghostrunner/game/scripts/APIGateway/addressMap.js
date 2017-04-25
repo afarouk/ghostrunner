@@ -12,7 +12,8 @@ module.exports = {
         	acceptInvitation: ['PUT', '/gaming/acceptInvitation'],
         	sendInvitation: ['PUT', '/gaming/sendInvitation'],
         	getAvailableUsers: ['GET', '/gaming/getAvailableUsers'],
-        	abandonGame: ['PUT', '/gaming/abandonGame']
+        	abandonGame: ['PUT', '/gaming/abandonGame'],
+        	getMyGames: ['GET', '/gaming/getMyGames'],
         };
     }
 };

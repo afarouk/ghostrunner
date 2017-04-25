@@ -14,13 +14,14 @@ define([
                 };
             return gateway.sendRequest('getGameUser', params);
         },
-        getGame: function() {
+        getGame: function(gameUUID) {
             var user = appCache.get('user'),
                 game = appCache.get('game'),
                 params = {
                     UID: user.get('uid')
                 };
             if (game) params.gameUUID = game.get('gameUUID');
+            if (gameUUID) params.gameUUID = gameUUID;
             return gateway.sendRequest('getGame', params);
         },
         makeMove: function(params) {
@@ -56,6 +57,12 @@ define([
             params = params || {};
             params.UID = user.get('uid');
             return gateway.sendRequest('getAvailableUsers', params);
+        },
+        getMyGames: function(params) {
+            var user = appCache.get('user');
+            params = params || {};
+            params.UID = user.get('uid');
+            return gateway.sendRequest('getMyGames', params);
         },
         resetGame: function() {
             return gateway.sendRequest('resetGame');

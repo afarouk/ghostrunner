@@ -15,7 +15,8 @@ define([
             btn: '#game-btn',
 			field: '#game-field',
 			interface: '#game-interface',
-			choice: '#player-choice'
+			choice: '#player-choice',
+			choice_game: '#game-choice',
 		},
 		onRender: function() {
 			this.renderGame();
@@ -25,6 +26,7 @@ define([
 			this.publicController.getInterfaceController().create(this, 'interface');
 			this.publicController.getPlayerChoiceController().create(this, 'choice');
             this.publicController.getGameBtnController().create(this, 'btn');
+            this.publicController.getGameChoiceController().create(this, 'choice_game');
 		},
 		destroyView: function() {
 			this.undelegateEvents();

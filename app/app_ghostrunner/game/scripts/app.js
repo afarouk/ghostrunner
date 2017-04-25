@@ -19,6 +19,9 @@ define([
 			if (params && params.server) {
 				config.setAPIRoot(params.server);
 			}
+            if (params && params.gameUUID) {
+			 publicController.getGameChoiceController().setGameUUID(params.gameUUID);	
+			}
 		}
 	});
 
