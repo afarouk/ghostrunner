@@ -87,6 +87,7 @@
                 </div>
                 -->
             	<div id="game-layout" class="game_canvas_wrap" ></div>
+            	<div id="game_right_layout" class="game_right_wrap" ></div>
             </div>
 
         </div>
