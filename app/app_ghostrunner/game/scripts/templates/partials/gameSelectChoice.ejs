@@ -1,9 +1,10 @@
 <div class="form-group">
   <label for="gameSelectChoice"><%= message %></label>
   <select class="form-control" id="gameSelectChoice">
-    <% _.each(list, function(games){ %>
-		<option value="<%= games.gameUUID %>"><%= games.gameName %></option>
-	<% }) %>
+    <% _.each(list, function(games){
+     if(games.state == 'RUNNING' || games.state == 'INVITING'){ %>
+		<option value="<%= games.gameUUID %>">You VS <%= games.opponentUserName %> (<%= games.state %>)</option>
+	<% }}) %>
   </select>
 </div>
 <button type="button"><%= confirm %></button>

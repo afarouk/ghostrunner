@@ -19,6 +19,7 @@ define([
                 }else{
                  this.onGetMygames();   
                 } 
+                
             },
         
             onGetMygames: function() {
@@ -26,7 +27,7 @@ define([
                 service.getMyGames()
                         .then(function(response){
                                 this.publicController.getInterfaceController().hideLoader();
-                            if(response.games.length ==1){
+                            if(response.games.length ==1 && (response.games[0].state == 'RUNNING' || response.games[0].state == 'INVITING')){
                                 var gameUUID=response.games[0].gameUUID; this.publicController.getGameChoiceController().setGameUUID(gameUUID);
                                 this.refreshStatus();  
                             }
@@ -43,10 +44,10 @@ define([
                                         }                                        
                                     }.bind(this));
                             } else {
-                                this.onGetAvailableUsers();
+                                this.getGameUser();
                             }
                         }.bind(this), function(err){
-                                this.onGetAvailableUsers();
+                                this.getGameUser();
                                 this.publicController.getInterfaceController().hideLoader();
                         }.bind(this));
             },
@@ -91,9 +92,15 @@ define([
                     }.bind(this));
                 return def;
             },
-        
+                   
             getGameModel: function() {
                 return appCache.get('game');
+            },
+        
+            updateGameModel: function (state) {
+                var gameModel = this.getGameModel();
+                gameModel.set(state);
+                this.manageState(gameModel);
             },
         
             getUrlGameUUID: function() {
