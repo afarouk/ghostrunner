@@ -44,10 +44,10 @@ define([
                                         }                                        
                                     }.bind(this));
                             } else {
-                                this.getGameUser();
+                                this.onGetAvailableUsers();
                             }
                         }.bind(this), function(err){
-                                this.getGameUser();
+                                this.onGetAvailableUsers();
                                 this.publicController.getInterfaceController().hideLoader();
                         }.bind(this));
             },

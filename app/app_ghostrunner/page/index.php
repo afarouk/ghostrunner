@@ -23,7 +23,7 @@
 
     <!-- Stylesheets -->
     <link rel="stylesheet" href="./styles.css">
-
+    
     <!-- Custom Colors -->
     <!--<link rel="stylesheet" href="css/colors/blue/color.css">-->
     <!--<link rel="stylesheet" href="css/colors/green/color.css">-->
@@ -47,7 +47,21 @@
 	<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
 	<link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
 	<link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
-
+    
+    <!-- js for facebook login-->
+    <script src="https://connect.facebook.net/en_US/sdk.js"></script>
+    <!-- js for facebook login-->
+    <script>
+    window.fbAsyncInit = function() {
+          FB.init({
+            appId      : '163685094028796',
+            cookie     : true,
+            status     : true,
+            xfbml      : true,
+            version    : 'v2.6'
+          });
+        }
+    </script>
 </head>
 <body>
 
@@ -247,25 +261,35 @@
 
     <!-- #signin modal -->
     <div class="modal fade" id="signin" role="dialog">
-        <div class="modal-dialog modal-sm" style="top: 200px;">
+        <div class="modal-dialog modal-sm" style="padding-top:60px">
         <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h3 class="modal-title">SIGNIN</h3>
+                    <h3 class="modal-title" style="font-size: 24px;">Sign In</h3>
                 </div>
                 <div class="modal-body">
                     <form>
+                        
                         <p>
-                            <input type="text" name="user" placeholder="Username" style="width: 100%;">
+                            <label class="small_label" style="">Username / Email</label>
+                            <input type="text" value="" name="user" autocomplete="off" style="width: 100%;" class="transparent_input">
                         </p>
                         <p>
-                            <input type="password" name="pass" placeholder="Password" style="width: 100%;">
+                            <label class="small_label" style="">Password</label>
+                            <input type="password" value="" name="pass" autocomplete="off" style="width: 100%;" class="transparent_input">
+                        </p>
+                        
+                        <p style="width:100%;text-align:right !important;margin-bottom: 0px !important;"><a style="text-decoration:none;font-weight:bold;color: #4493AF;" href="javascript:void(0)">Forgot Password?</a>
                         </p>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <input type="submit" name="login" class="login" value="Signin">
+                    <input type="submit" style="margin-top: 15px !important;" name="login" class="login border-btn" value="Sign in">
+                
+                    <img src="images/facebook-login.png" class="login-facebook">
+                    
+                    <input type="submit" name="register" class="register_btn border-btn" value="CREATE ACCOUNT">
                     <!-- <div class="">
                         <a href="#">Register</a> - <a href="#">Forgot Password</a>
                     </div> -->
@@ -274,7 +298,44 @@
         </div>
     </div>
     <!-- #signin end-->
-
+    <!--signup modal-->
+    <div class="modal fade" id="signup" role="dialog" >
+        <div class="modal-dialog modal-sm" style="padding-top:60px">
+        <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h3 class="modal-title" style="font-size: 24px;">Register</h3>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <p>
+                            <label class="small_label" style="">Username / Email</label>
+                            <input type="text" value="" name="userName" autocomplete="off" style="width: 100%;" class="transparent_input">
+                        </p>
+                        <p>
+                            <label class="small_label" style="">Password</label>
+                            <input type="password" value="" name="userPassword" autocomplete="off" style="width: 100%;" class="transparent_input" >
+                        </p>
+                        <p>
+                            <label class="small_label" style="">Confirm Password</label>
+                            <input type="password" value="" name="userConfirmPassword" autocomplete="off" style="width: 100%;" class="transparent_input">
+                        </p>
+                        <p style="    margin-bottom: 0px !important;">
+                            <input type="checkbox" name="show_pass" id="show_password">
+                            <label class="small_label" style="">Show Password</label>
+                        </p>
+                        <span id="error_dv"></span>
+                        <span id="success_dv"></span>
+                    </form>
+                </div>
+                <div class="modal-footer">                    
+                    <input style="margin-top: 15px !important;" type="submit" name="saveUser" class="register border-btn" value="SAVE">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--signup modal-->
     <!--[if lt IE 8]>
     	<div class="browser-notice">
             <div class="container">

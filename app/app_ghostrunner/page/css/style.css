@@ -2106,6 +2106,52 @@ a.header-content-tabs{
     
 }
 
+.modal-footer{
+    padding-top: 0px !important;
+    padding-bottom: 10px;
+}
+.small_label{
+    font-weight: 400;
+    font-size: 12px;
+    margin: 0;
+    color: #333;
+    font-style: italic;
+}
+.border-btn{
+    padding: 14px !important;
+    width: 100%;
+    text-align: center !important;
+    
+}
+.modal-body{
+    padding: 15px 15px 10px 15px !important;
+}
+.login-facebook{
+    width: 96%;
+    float: left;
+    margin: 5% 2% 5% 2%;
+    cursor: pointer;
+}
+.modal-header {
+    padding: 15px 15px 5px 15px !important;
+}
+.transparent_input{
+    height:40px !important;
+}
+#error_dv{
+    color: red;
+    display: none;
+    -webkit-transition: 1s;
+    transition: 1s;
+    word-break: break-all;
+}
+#success_dv{
+    color: green;
+    display: none;
+    -webkit-transition: 1s;
+    transition: 1s;
+    word-break: break-all;
+}
 @media (max-width: 767px) {
     .header-content-tab-wrap{
         max-width: 100%;
