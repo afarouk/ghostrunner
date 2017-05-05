@@ -270,8 +270,11 @@ define([
                     }.bind(this));
             },
 
-            onInvitationRejected: function() {
-                this.onGetAvailableUsers();
+            onInvitationRejected: function(game) {
+                service.rejectInvitation(game).then(function(){
+                    //TODO now still abandon game button here
+                    this.onGetAvailableUsers();
+                }.bind(this));
             },
 
             onPlayerMove: function() {

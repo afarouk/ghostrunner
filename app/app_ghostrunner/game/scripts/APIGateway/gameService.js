@@ -46,6 +46,14 @@ define([
             if (game) params.gameUUID = game.get('gameUUID');
             return gateway.sendRequest('acceptInvitation', params);
         },
+        rejectInvitation: function(game) {
+            var user = appCache.get('user'),
+                params = {
+                    UID: user.get('uid'),
+                    gameUUID: game.get('gameUUID')
+                };
+            return gateway.sendRequest('rejectInvitation', params);
+        },
         sendInvitation: function(params) {
             var user = appCache.get('user');
             params = params || {};

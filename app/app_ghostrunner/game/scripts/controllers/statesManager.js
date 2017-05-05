@@ -2,15 +2,20 @@
 
 /*
 States of a user: (within a game)
-	INVITATION_SENT
-	INVITATION_RECEIVED
-	INVITING
+	UNDEFINED(0, "Undefined"), //
+	AVAILABLE(1,"Available"),
 
-    INVITER(1,&quot;Inviter&quot;),//
-    INVITEE(2, &quot;Invitee&quot;), //
-    IN_GAME(3,&quot;In game&quot;),
+	INVITATION_SENT(2,"Invitation sent"),
+	INVITATION_RECEIVED(3,"Invitation received"),//
 
-    WAIT_FOR_TURN
+	IN_MOVE(4,"In move"),
+	MAKE_YOUR_MOVE(5, "Your turn"), //
+	WAIT_FOR_TURN(6, "Wait for turn"), //
+
+	ANSWER_POLL(7, "Answer query"), //
+	SEE_MESSAGE(8, "See message"), //
+
+	WAIT_FOR_SYSTEM(9, "Wait "),
 
 Roles of a user within a game
 
@@ -48,7 +53,36 @@ define([
     '../Vent'
     ], function(Vent){
     var StatesManager = Mn.Object.extend({
-    		
+    		manageState: function(gameModel) {
+                var thisUser = gameModel.get('thisUser');
+                switch (thisUser.state) {
+                    case 'MAKE_YOUR_MOVE':
+                        this.publicController.getGameController().waitingForMove();
+                        break;
+                    case 'WAIT_FOR_TURN':
+                        this.publicController.getGameController().waitingForTurn();
+                        break;
+                    case 'INVITATION_RECEIVED':
+                        this.publicController.getGameController().onInvitationReceived();
+                        break;
+                    case 'INVITATION_SENT':
+                        //TODO something???
+                        break;
+                    case 'AVAILABLE':
+                        if (gameModel.get('state') === 'COMPLETE') {
+                            this.publicController.getGameController().onAvailableForNewGame();
+                        }
+                        break;
+                    case 'ABANDONED':
+                        this.publicController.getGameBtnController().hideAbandonBtn();
+                        this.publicController.getGameBtnController().removeGameUUID();
+                        break;
+                    default:
+                        //TODO default???
+                        //this.publicController.getGameController().waitingForMove();
+                        break;
+                }
+            },
         });
 
     return new StatesManager();

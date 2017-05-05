@@ -55,7 +55,7 @@ define([
                     this.publicController.getStateController().onInvitationAccepted();
                 }.bind(this), function() {
                     //TODO something
-                    this.publicController.getStateController().onInvitationRejected();
+                    this.publicController.getStateController().onInvitationRejected(game);
                 }.bind(this));
                 console.log('invitation received');
             },
