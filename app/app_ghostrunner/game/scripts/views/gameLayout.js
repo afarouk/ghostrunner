@@ -4,19 +4,14 @@
 
 define([
 	'../Vent',
-	'ejs!../templates/gameLayout.ejs',
-	'../controllers/gameFieldController',
-	'../controllers/gameInterfaceController'
-	], function(Vent, template, gameFieldController, gameInterfaceController){
+	'ejs!../templates/gameLayout.ejs'
+	], function(Vent, template){
 	var GameLayoutView = Mn.View.extend({
 		template: template,
-		el: '#game-layout',
 		regions: {
             btn: '#game-btn',
 			field: '#game-field',
-			interface: '#game-interface',
-			choice: '#player-choice',
-			choice_game: '#game-choice',
+			interface: '#game-interface'
 		},
 		onRender: function() {
 			this.renderGame();
@@ -24,16 +19,7 @@ define([
 		renderGame: function() {
 			this.publicController.getFieldController().create(this, 'field');
 			this.publicController.getInterfaceController().create(this, 'interface');
-			this.publicController.getPlayerChoiceController().create(this, 'choice');
             this.publicController.getGameBtnController().create(this, 'btn');
-            this.publicController.getGameChoiceController().create(this, 'choice_game');
-		},
-		destroyView: function() {
-			this.undelegateEvents();
-            this.$el.removeData().unbind(); 
-            this.$el.html('');
-            this.setElement(null);
-            this.destroy();
 		}
 	});
 	return GameLayoutView;

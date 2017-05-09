@@ -25,31 +25,45 @@ define([
             onGetMygames: function() {
                 this.publicController.getInterfaceController().showLoader();
                 service.getMyGames()
-                        .then(function(response){
-                                this.publicController.getInterfaceController().hideLoader();
-                            if(response.games.length ==1 && (response.games[0].state == 'RUNNING' || response.games[0].state == 'INVITING')){
-                                var gameUUID=response.games[0].gameUUID; this.publicController.getGameChoiceController().setGameUUID(gameUUID);
-                                this.refreshStatus();  
-                            }
-                            else if (response.games.length > 1) {                                
-                                this.publicController.getGameChoiceController()
-                                    .showSelect({
-                                        message: 'Select a game ',
-                                        confirm: 'Start',
-                                        list: response.games
-                                    }).then(function(gameUUID){
-                                        if(gameUUID){
-                                            this.publicController.getGameChoiceController().setGameUUID(gameUUID);
-                                           this.refreshStatus();   
-                                        }                                        
-                                    }.bind(this));
+                    .then(function(response){
+                            this.publicController.getInterfaceController().hideLoader();
+                        if(response.games.length ==1 && (response.games[0].state == 'RUNNING' || response.games[0].state == 'INVITING' || response.games[0].state == 'ACCEPTED')){
+                            var gameUUID=response.games[0].gameUUID; this.publicController.getGameChoiceController().setGameUUID(gameUUID);
+                            
+                            this.selectGame(response);//temporary
+                        }
+                        else if (response.games.length > 1) {                                
+                            this.selectGame(response);
+                        } else {
+                            this.onGetAvailableUsers();
+                        }
+                    }.bind(this), function(err){
+                            this.onGetAvailableUsers();
+                            this.publicController.getInterfaceController().hideLoader();
+                    }.bind(this));
+            },
+
+            selectGame: function(response) {
+                this.publicController.getGameChoiceController()
+                    .showSelect({
+                        message: 'Select a game ',
+                        confirm: 'Start',
+                        list: response.games
+                    }).then(function(gameUUID){
+                        if(gameUUID){
+                            this.publicController.getGameChoiceController().setGameUUID(gameUUID);
+                            var game = _.find(response.games, {gameUUID: gameUUID});
+                            if (game.state == 'ACCEPTED') {
+                                this.startGame(gameUUID);
                             } else {
-                                this.onGetAvailableUsers();
+                                this.refreshStatus();
                             }
-                        }.bind(this), function(err){
-                                this.onGetAvailableUsers();
-                                this.publicController.getInterfaceController().hideLoader();
-                        }.bind(this));
+                        }                                        
+                    }.bind(this)); 
+            },
+
+            startGame: function(gameUUID) {
+                service.startGame(gameUUID);
             },
         
             getGameUser: function() {
@@ -100,7 +114,7 @@ define([
             updateGameModel: function (state) {
                 var gameModel = this.getGameModel();
                 gameModel.set(state);
-                this.manageState(gameModel);
+                 this.publicController.getStateManager().manageUserState(gameModel);
             },
         
             getUrlGameUUID: function() {
@@ -110,7 +124,7 @@ define([
             refreshStatus: function() {
                 this.getGameStatus()
                     .then(function(game){
-                        this.manageState(game);
+                        this.publicController.getStateManager().manageUserState(game);
                         this.otherUserState(game.get('otherUser'));                       
                     }.bind(this));
             },
@@ -123,81 +137,81 @@ define([
                 this.publicController.getInformationTableController().opponentInGame(inGame);
             },
 
-            manageState: function(gameModel) {
-                var thisUser = gameModel.get('thisUser');
-                switch (thisUser.state) {
-                    case 'MAKE_YOUR_MOVE':
-                        this.publicController.getGameController().waitingForMove();
-                        break;
-                    case 'WAIT_FOR_TURN':
-                        this.publicController.getGameController().waitingForTurn();
-                        break;
-                    case 'INVITATION_RECEIVED':
-                        this.publicController.getGameController().onInvitationReceived();
-                        break;
-                    case 'INVITATION_SENT':
-                        //TODO something???
-                        break;
-                    case 'AVAILABLE':
-                        if (gameModel.get('state') === 'COMPLETE') {
-                            this.publicController.getGameController().onAvailableForNewGame();
-                        }
-                        break;
-                    case 'ABANDONED':
-                        this.publicController.getGameBtnController().hideAbandonBtn();
-                        this.publicController.getGameBtnController().removeGameUUID();
-                        break;
-                    default:
-                        //TODO default???
-                        //this.publicController.getGameController().waitingForMove();
-                        break;
-                }
-            },
+            // manageState: function(gameModel) {
+            //     var thisUser = gameModel.get('thisUser');
+            //     switch (thisUser.state) {
+            //         case 'MAKE_YOUR_MOVE':
+            //             this.publicController.getGameController().waitingForMove();
+            //             break;
+            //         case 'WAIT_FOR_TURN':
+            //             this.publicController.getGameController().waitingForTurn();
+            //             break;
+            //         case 'INVITATION_RECEIVED':
+            //             this.publicController.getGameController().onInvitationReceived();
+            //             break;
+            //         case 'INVITATION_SENT':
+            //             //TODO something???
+            //             break;
+            //         case 'AVAILABLE':
+            //             if (gameModel.get('state') === 'COMPLETE') {
+            //                 this.publicController.getGameController().onAvailableForNewGame();
+            //             }
+            //             break;
+            //         case 'ABANDONED':
+            //             this.publicController.getGameBtnController().hideAbandonBtn();
+            //             this.publicController.getGameBtnController().removeGameUUID();
+            //             break;
+            //         default:
+            //             //TODO default???
+            //             //this.publicController.getGameController().waitingForMove();
+            //             break;
+            //     }
+            // },
         
-            onMessage: function(signal) {
-                switch (signal) {
-                    case 'YOUR_MOVE':
-                        this.publicController.getGameController().waitingForMove();
-                        break;
-                    case 'REFRESH_STATE':
-                        this.refreshStatus();
-                        break;
-                    case 'SHOW_POLL':
+            // onMessage: function(signal) {
+            //     switch (signal) {
+            //         case 'YOUR_MOVE':
+            //             this.publicController.getGameController().waitingForMove();
+            //             break;
+            //         case 'REFRESH_STATE':
+            //             this.refreshStatus();
+            //             break;
+            //         case 'SHOW_POLL':
                         
-                        break;
-                    case 'SHOW_MESSAGE':
+            //             break;
+            //         case 'SHOW_MESSAGE':
                         
-                        break;
-                    case 'BLOCK_USER':
+            //             break;
+            //         case 'BLOCK_USER':
                         
-                        break;
-                    case 'GOTO_PREVIOUS_STATE':
+            //             break;
+            //         case 'GOTO_PREVIOUS_STATE':
                         
-                        break;
-                    case 'OPPONENT_OFFLINE':
-                        this.publicController.getInformationTableController().opponentInGame(false);
-                        break;
-                    case 'OPPONENT_ONLINE':
-                        this.publicController.getInformationTableController().opponentInGame(true);
-                        break;
-                    case 'INVITATION_RECEIVED':
-                        this.onRetrieveInvitation();
-                        break;
-                    case 'INVITATION_ACCEPTED':
-                        this.refreshStatus();
-                        break;
-                    case 'GAME_OVER':
-                        //TODO I am not sure what to do ???
-                        this.refreshStatus();
-                        break;
-                    case 'GAME_ABANDONED':
-                        this.publicController.getGameBtnController().hideAbandonBtn();
-                        this.publicController.getGameBtnController().removeGameUUID();
-                        break;
-                    default:
-                        break;
-                }
-            },
+            //             break;
+            //         case 'OPPONENT_OFFLINE':
+            //             this.publicController.getInformationTableController().opponentInGame(false);
+            //             break;
+            //         case 'OPPONENT_ONLINE':
+            //             this.publicController.getInformationTableController().opponentInGame(true);
+            //             break;
+            //         case 'INVITATION_RECEIVED':
+            //             this.onRetrieveInvitation();
+            //             break;
+            //         case 'INVITATION_ACCEPTED':
+            //             this.refreshStatus();
+            //             break;
+            //         case 'GAME_OVER':
+            //             //TODO I am not sure what to do ???
+            //             this.refreshStatus();
+            //             break;
+            //         case 'GAME_ABANDONED':
+            //             this.publicController.getGameBtnController().hideAbandonBtn();
+            //             this.publicController.getGameBtnController().removeGameUUID();
+            //             break;
+            //         default:
+            //             break;
+            //     }
+            // },
 
             onGetAvailableUsers: function() {
                 this.publicController.getPlayerChoiceController().showConfirmation({

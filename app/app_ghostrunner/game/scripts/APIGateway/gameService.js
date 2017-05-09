@@ -24,6 +24,14 @@ define([
             if (gameUUID) params.gameUUID = gameUUID;
             return gateway.sendRequest('getGame', params);
         },
+        startGame: function(gameUUID) {
+            var user = appCache.get('user'),
+                params = {
+                    UID: user.get('uid'),
+                    gameUUID: gameUUID
+                };
+            return gateway.sendRequest('startGame', params);
+        },
         makeMove: function(params) {
             var user = appCache.get('user'),
                 game = appCache.get('game');

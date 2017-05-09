@@ -33,7 +33,7 @@ define([
 
             onMessage: function(message) {
                 console.log(message);
-                this.publicController.getStateController().onMessage(message.signal);
+                this.publicController.getSignalManager().onMessage(message.signal);
             }
 
         });

@@ -9,12 +9,7 @@ define([
 		className: 'game-btn',
 		template: template,		
 		events: {
-			'click .expand-btn': 'onExpandBtn',
             'click #abandon_btn' :'onClickAbandonBtn'
-		},
-		onExpandBtn: function() {
-		$('#game-layout').toggleClass('full_screen_game');
-		$('.fa-expand').toggleClass('fa-compress');            
 		},
         onShowAbandonBtn: function(){
         $('#abandon_btn').show();

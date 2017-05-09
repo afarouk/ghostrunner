@@ -6,20 +6,32 @@ define([
     '../Vent',
     '../models/user',
     '../appCache',
-    '../views/gameLayout'
-    ], function(Vent, userModel, appCache, GameLayout){
+    '../views/appLayout'
+    ], function(Vent, userModel, appCache, AppLayout){
     var GameController = Mn.Object.extend({
             start: function(user){
                 console.log('game start');
 
-                var game = new GameLayout();
-                game.render();
-                this.game = game;
+                var appLayout = new AppLayout();
+                appLayout.render();
+                this.appLayout = appLayout;
                 
                 this.createUser(user);
                 console.log(user);
 
                 this.publicController.getSocketController().start(user.uid);
+            },
+            showGame: function() {
+                this.appLayout.getRegion('game').$el.show();
+            },
+            hideGame: function() {
+                this.appLayout.getRegion('game').$el.hide();
+            },
+            showBroker: function() {
+                this.appLayout.getRegion('broker').$el.show();
+            },
+            hideBroker: function() {
+                this.appLayout.getRegion('broker').$el.show();
             },
             createUser: function(user) {
                 new userModel({
@@ -34,7 +46,7 @@ define([
                 this.publicController.getStateController().onPlayerLogout();
             },
             destroy: function() {
-                this.game.destroyView();
+                this.appLayout.destroyView();
                 this.publicController.destroyGame();
             },
             waitingForMove: function() {
