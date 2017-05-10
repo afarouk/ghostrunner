@@ -10,13 +10,15 @@ define([
             manage: function(gameModel) {
                 this._manageGameState(gameModel);
                 this._manageUserState(gameModel);
+                this._manageUserRole(gameModel);
                 this._manageOtherUserState(gameModel);
             },
 
-            _manageUserRole: function(role) {
+            _manageUserRole: function(gameModel) {
                 //Roles of a user within a game
-
-                switch (role) {
+                var thisUser = gameModel.get('thisUser');
+                console.log('user role: ', thisUser.role);
+                switch (thisUser.role) {
                     case 'DUAL':
 
                         break;
@@ -79,7 +81,7 @@ define([
                         break;
 
                     case 'ABANDONED':
-                        this.publicController.getGameBtnController().hideAbandonBtn();
+                        this.publicController.getGameBtnController().hideGameBtns();
                         this.publicController.getGameBtnController().removeGameUUID();
                         break;
                     default:
@@ -122,30 +124,32 @@ define([
                         break;
 
                     case 'INVITING':
-                        
+                        this.publicController.getGameBtnController().hideGameBtns();
                         break;
 
                     case 'ACCEPTED':
+                        this.publicController.getGameBtnController().hideGameBtns();
                         this.publicController.getStateController().startGame(gameModel.get('gameUUID'));
                         break;
 
                     case 'STARTING':
-                        
+                        this.publicController.getGameBtnController().showGameBtns();
                         break;
 
                     case 'RUNNING':
-
+                        this.publicController.getGameBtnController().showGameBtns();
                         break;
 
                     case 'PAUSED':
-
+                        this.publicController.getGameBtnController().showGameBtns();
                         break;
 
                     case 'ABANDONED':
-
+                        this.publicController.getGameBtnController().hideGameBtns();
                         break;
 
                     case 'COMPLETED':
+                        this.publicController.getGameBtnController().hideGameBtns();
                         this.publicController.getGameController().onAvailableForNewGame();
                         break;
 

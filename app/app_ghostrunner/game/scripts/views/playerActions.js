@@ -10,8 +10,7 @@ define([
 	var PlayerActionsView = Mn.View.extend({
 		template: template,
 		events: {
-			'click .move': 'onMove',
-			'click .stop': 'onStop'
+			'click .move': 'onMove'
 		},
 		behaviors: [maskBehavior],
 		onRender: function() {
@@ -19,10 +18,6 @@ define([
 		},
 		onMove: function() {
 			this.trigger('onPlayer:move');
-		},
-
-		onStop: function() {
-			this.trigger('onGame:stop');
 		}
 	});
 	return PlayerActionsView;

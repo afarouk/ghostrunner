@@ -39,7 +39,7 @@ define([
                         break;
 
                     case 'GAME_ABANDONED':
-                        this.publicController.getGameBtnController().hideAbandonBtn();
+                        this.publicController.getGameBtnController().hideGameBtns();
                         this.publicController.getGameBtnController().removeGameUUID();
                         this.publicController.getStateController().refreshStatus();
                         break;

@@ -26,14 +26,16 @@ define([
                 this.publicController.getInterfaceController().showLoader();
                 service.getMyGames()
                     .then(function(response){
-                            this.publicController.getInterfaceController().hideLoader();
-                        if(response.games.length ==1 && (response.games[0].state == 'RUNNING' || response.games[0].state == 'INVITING' || response.games[0].state == 'ACCEPTED')){
-                            var gameUUID=response.games[0].gameUUID; this.publicController.getGameChoiceController().setGameUUID(gameUUID);
+                        this.publicController.getInterfaceController().hideLoader();
+                        if(response.games.length > 0 ){
+                        // if(response.games.length ==1 && (response.games[0].state == 'RUNNING' || response.games[0].state == 'INVITING' || response.games[0].state == 'ACCEPTED')){
+                            // var gameUUID=response.games[0].gameUUID; this.publicController.getGameChoiceController().setGameUUID(gameUUID);
                             
-                            this.selectGame(response);//temporary
-                        }
-                        else if (response.games.length > 1) {                                
+                            // this.selectGame(response);//temporary
                             this.selectGame(response);
+                        // }
+                        // else if (response.games.length > 1) {                                
+                        //     this.selectGame(response);
                         } else {
                             this.onGetAvailableUsers();
                         }
@@ -92,14 +94,14 @@ define([
                             def.reject();
                         } else {
                             var gameModel = this.getGameModel();
-                            if(game.gameUUID && game.state!='ABANDONED'){
-                             this.publicController.getGameBtnController().showAbandonBtn();   
-                            }
                             if (!gameModel) {
                                 gameModel = new GameModel(game);
                             } else {
                                 gameModel.set(game);                                
                             }
+                            // if(game.gameUUID && game.state!='ABANDONED'){
+                            //  this.publicController.getGameBtnController().showGameBtns();   
+                            // }
                             def.resolve(gameModel);
                         }
                     }.bind(this), function(err){
@@ -235,40 +237,6 @@ define([
                 }
                 this.publicController.getGameController().destroy();
                 this.App.destroy();
-            },
-
-            onGameStop: function() {
-                var gameModel = this.getGameModel();
-                console.log(gameModel);
-                //Sould we stop game after 
-                //websocket connection was interrupted (disconnected) 
-                // the save way as by user decision ???
-                // debugger;
-                // return;
-                if (gameModel) {
-                    service.resetGame()
-                        .then(function(){
-                            gameModel.kill();
-                            //TEMPORARY !!!
-                            //TODO show modal dialog
-                            // $('#reconnect-dialog').modal('show');
-                            // var choise = confirm('Reconnect websockets?');
-                            // if (choise) {
-                            //     var user = appCache.get('user'),
-                            //         params = {
-                            //             uid: user.get('uid'), 
-                            //             userName: user.get('userName')
-                            //         };
-                            //     user.kill();
-                            //     this.publicController.getGameController()
-                            //         .start(params);
-                            // } else {
-                            //     //What exactly should be?
-                            //     this.publicController.destroyGame(); //???
-                            // }
-                            //...................
-                        }.bind(this));
-                }
             }
 
         });

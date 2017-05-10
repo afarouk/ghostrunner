@@ -18,7 +18,6 @@ define([
     			layout.showChildView( region, this.view );
 
                 this.listenTo(this.view, 'onPlayer:move', this.onMove, this);
-                this.listenTo(this.view, 'onGame:stop', this.onStop, this)
     		},
             onBeforeDestroy: function(){
                 this.stopListening();
@@ -29,12 +28,6 @@ define([
                 //TEMPORARY for test
                 this.publicController.getStateController().onPlayerMove();
                 //..........
-            },
-            onStop: function() {
-                console.log('stop');
-                this.publicController.getInterfaceController().showLoader();
-                //TEMPORARY for testing
-                this.publicController.getStateController().onGameStop();
             }
         });
 

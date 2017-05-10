@@ -32,6 +32,22 @@ define([
                 };
             return gateway.sendRequest('startGame', params);
         },
+        pauseGame: function() {
+            var user = appCache.get('user'),
+                game = appCache.get('game'),
+                params = {};
+            params.UID = user.get('uid');
+            if (game) params.gameUUID = game.get('gameUUID');
+            return gateway.sendRequest('pauseGame', params);
+        },
+        unPauseGame: function() {
+            var user = appCache.get('user'),
+                game = appCache.get('game'),
+                params = {};
+            params.UID = user.get('uid');
+            if (game) params.gameUUID = game.get('gameUUID');
+            return gateway.sendRequest('unPauseGame', params);
+        },
         makeMove: function(params) {
             var user = appCache.get('user'),
                 game = appCache.get('game');
@@ -79,9 +95,6 @@ define([
             params = params || {};
             params.UID = user.get('uid');
             return gateway.sendRequest('getMyGames', params);
-        },
-        resetGame: function() {
-            return gateway.sendRequest('resetGame');
         },
         abandonGame : function(){
             var user = appCache.get('user'),

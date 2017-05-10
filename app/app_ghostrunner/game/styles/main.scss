@@ -73,3 +73,27 @@
         border-color: #e01c40;
     }
 }
+.game-btn {
+    position: absolute;
+    top: 5px;
+    right: 40px;
+    float: right;
+
+    .menu-btn.abandon_btn,
+    .menu-btn.pause_btn {
+        z-index: 999;
+        position: relative;
+        color: #FFF !important;
+        font-size: 12px;
+        background-color: #fc603b !important;
+        border-radius: 2px;
+        padding: 8px 6px 5px 6px;
+        font-weight: 500;
+        display: none;
+    }
+
+    &.visible .menu-btn.abandon_btn,
+    &.visible .menu-btn.pause_btn {
+        display: inline-block;
+    }
+}
