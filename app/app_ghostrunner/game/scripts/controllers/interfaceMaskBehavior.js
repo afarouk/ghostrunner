@@ -15,7 +15,7 @@ define([
             this.model = this.view.model;
         },
         updateMask: function() {
-            debugger;
+            
         }
     });
 });

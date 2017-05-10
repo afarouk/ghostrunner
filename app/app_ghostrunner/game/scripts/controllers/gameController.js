@@ -54,6 +54,7 @@ define([
             },
             waitingForTurn: function() {
                 console.log('waiting for turn');
+                this.publicController.getInterfaceController().showLoader();
             },
             onInvitationReceived: function() {
                 var game = appCache.get('game'),

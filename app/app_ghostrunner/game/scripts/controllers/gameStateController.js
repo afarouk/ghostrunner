@@ -63,7 +63,10 @@ define([
             },
 
             startGame: function(gameUUID) {
-                service.startGame(gameUUID);
+                service.startGame(gameUUID)
+                    .then(function(state){
+                        this.updateGameModel(state);
+                    }.bind(this));
             },
         
             getGameUser: function() {
@@ -81,7 +84,8 @@ define([
             getGameStatus: function() {
                 //TODO maybe we should use native backbone fetch mechanism ???
                 var def = $.Deferred();
-                var gameUUID=this.publicController.getGameChoiceController().getUrlGameUUID();  service.getGame(gameUUID)
+                var gameUUID=this.publicController.getGameChoiceController().getUrlGameUUID();  
+                service.getGame(gameUUID)
                     .then(function(game, status){
                         this.publicController.getGameChoiceController().removeUrlGameUUID();
                         if (status === 'nocontent') {
@@ -137,82 +141,6 @@ define([
                 this.publicController.getInformationTableController().opponentInGame(inGame);
             },
 
-            // manageState: function(gameModel) {
-            //     var thisUser = gameModel.get('thisUser');
-            //     switch (thisUser.state) {
-            //         case 'MAKE_YOUR_MOVE':
-            //             this.publicController.getGameController().waitingForMove();
-            //             break;
-            //         case 'WAIT_FOR_TURN':
-            //             this.publicController.getGameController().waitingForTurn();
-            //             break;
-            //         case 'INVITATION_RECEIVED':
-            //             this.publicController.getGameController().onInvitationReceived();
-            //             break;
-            //         case 'INVITATION_SENT':
-            //             //TODO something???
-            //             break;
-            //         case 'AVAILABLE':
-            //             if (gameModel.get('state') === 'COMPLETE') {
-            //                 this.publicController.getGameController().onAvailableForNewGame();
-            //             }
-            //             break;
-            //         case 'ABANDONED':
-            //             this.publicController.getGameBtnController().hideAbandonBtn();
-            //             this.publicController.getGameBtnController().removeGameUUID();
-            //             break;
-            //         default:
-            //             //TODO default???
-            //             //this.publicController.getGameController().waitingForMove();
-            //             break;
-            //     }
-            // },
-        
-            // onMessage: function(signal) {
-            //     switch (signal) {
-            //         case 'YOUR_MOVE':
-            //             this.publicController.getGameController().waitingForMove();
-            //             break;
-            //         case 'REFRESH_STATE':
-            //             this.refreshStatus();
-            //             break;
-            //         case 'SHOW_POLL':
-                        
-            //             break;
-            //         case 'SHOW_MESSAGE':
-                        
-            //             break;
-            //         case 'BLOCK_USER':
-                        
-            //             break;
-            //         case 'GOTO_PREVIOUS_STATE':
-                        
-            //             break;
-            //         case 'OPPONENT_OFFLINE':
-            //             this.publicController.getInformationTableController().opponentInGame(false);
-            //             break;
-            //         case 'OPPONENT_ONLINE':
-            //             this.publicController.getInformationTableController().opponentInGame(true);
-            //             break;
-            //         case 'INVITATION_RECEIVED':
-            //             this.onRetrieveInvitation();
-            //             break;
-            //         case 'INVITATION_ACCEPTED':
-            //             this.refreshStatus();
-            //             break;
-            //         case 'GAME_OVER':
-            //             //TODO I am not sure what to do ???
-            //             this.refreshStatus();
-            //             break;
-            //         case 'GAME_ABANDONED':
-            //             this.publicController.getGameBtnController().hideAbandonBtn();
-            //             this.publicController.getGameBtnController().removeGameUUID();
-            //             break;
-            //         default:
-            //             break;
-            //     }
-            // },
-
             onGetAvailableUsers: function() {
                 this.publicController.getPlayerChoiceController().showConfirmation({
                     message: 'get available users?',
@@ -247,7 +175,13 @@ define([
                 service.sendInvitation({
                     inviteeUID: inviteeUID
                 }).then(function(result){
-                    //TODO what should I do???
+                    var gameModel = this.getGameModel();
+                    if (!gameModel) {
+                        gameModel = new GameModel(result);
+                    } else {
+                        gameModel.set('gameUUID', result.gameUUID);                               
+                    }
+                    this.publicController.getGameController().waitingForTurn();
                 }.bind(this), function(err){
                     //on error
                     this.publicController.getInterfaceController().hideLoader();

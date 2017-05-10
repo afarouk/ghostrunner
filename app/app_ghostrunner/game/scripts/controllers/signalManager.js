@@ -32,6 +32,7 @@ define([
 
                     case 'INVITATION_ACCEPTED':
                         this.publicController.getStateController().refreshStatus();
+                        // this.publicController.getStateController().onGetMygames();
                         break;
 
                     case 'GAME_STARTED':
@@ -41,6 +42,7 @@ define([
                     case 'GAME_ABANDONED':
                         this.publicController.getGameBtnController().hideAbandonBtn();
                         this.publicController.getGameBtnController().removeGameUUID();
+                        this.publicController.getStateController().refreshStatus();
                         break;
 
                     case 'GAME_PAUSED':

@@ -23,6 +23,7 @@ define([
     ], function(Vent){
     var StatesManager = Mn.Object.extend({
     		manageUserState: function(gameModel) {
+                this.manageGameState(gameModel); //todo make that part smarter
                 //States of a user
                 var thisUser = gameModel.get('thisUser');
                 switch (thisUser.state) {
@@ -31,13 +32,15 @@ define([
                         break;
 
                     case 'AVAILABLE':
-                        if (gameModel.get('state') === 'COMPLETE') {
-                            this.publicController.getGameController().onAvailableForNewGame();
-                        }
+                        // if (gameModel.get('state') === 'COMPLETED') {
+                        //     this.publicController.getGameController().onAvailableForNewGame();
+                        // }
+                        this.manageGameState(gameModel);
                         break;
 
                     case 'INVITATION_SENT':
                         //TODO something???
+                        this.publicController.getGameController().waitingForTurn();
                         break;
 
                     case 'INVITATION_RECEIVED':
@@ -80,7 +83,7 @@ define([
 
             manageGameState: function(gameModel) {
                 //States of a game
-                switch (gameModel.state) {
+                switch (gameModel.get('state')) {
                     case 'UNDEFINED':
 
                         break;
@@ -90,7 +93,7 @@ define([
                         break;
 
                     case 'ACCEPTED':
-                        
+                        this.publicController.getStateController().startGame(gameModel.get('gameUUID'));
                         break;
 
                     case 'STARTING':
@@ -110,7 +113,7 @@ define([
                         break;
 
                     case 'COMPLETED':
-
+                        this.publicController.getGameController().onAvailableForNewGame();
                         break;
 
                     case 'REJECTED':
