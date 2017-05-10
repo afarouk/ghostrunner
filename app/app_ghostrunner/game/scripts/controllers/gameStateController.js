@@ -118,7 +118,7 @@ define([
             updateGameModel: function (state) {
                 var gameModel = this.getGameModel();
                 gameModel.set(state);
-                 this.publicController.getStateManager().manageUserState(gameModel);
+                 this.publicController.getStateManager().manage(gameModel);
             },
         
             getUrlGameUUID: function() {
@@ -128,7 +128,7 @@ define([
             refreshStatus: function() {
                 this.getGameStatus()
                     .then(function(game){
-                        this.publicController.getStateManager().manageUserState(game);                     
+                        this.publicController.getStateManager().manage(game);                     
                     }.bind(this));
             },
 

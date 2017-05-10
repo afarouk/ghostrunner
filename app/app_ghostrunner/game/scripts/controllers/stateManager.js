@@ -1,29 +1,41 @@
 /*global define */
 
-/*
-Roles of a user within a game
-
-    DUAL(1, &quot;Dual&quot;), //
-    OFFENSE(2, &quot;Offense&quot;), //
-    DEFENSE(3, &quot;Defense&quot;), //
-
-Presence of a user (general)
-    ONLINE(1,&quot;Online&quot;),
-    ACTIVE(2, &quot;Active&quot;), //
-    INACTIVE(3, &quot;InActive&quot;), //
-    OFFLINE(4, &quot;OffLine&quot;), //
-*/
-
-
-
 'use strict';
 
 define([
     '../Vent'
     ], function(Vent){
     var StatesManager = Mn.Object.extend({
-    		manageUserState: function(gameModel) {
-                this.manageGameState(gameModel); //todo make that part smarter
+
+            manage: function(gameModel) {
+                this._manageGameState(gameModel);
+                this._manageUserState(gameModel);
+                this._manageOtherUserState(gameModel);
+            },
+
+            _manageUserRole: function(role) {
+                //Roles of a user within a game
+
+                switch (role) {
+                    case 'DUAL':
+
+                        break;
+
+                    case 'OFFENSE':
+
+                        break;
+
+                    case 'DEFENSE':
+
+                        break;
+
+                    default:
+
+                        break;
+                }
+            },
+
+    		_manageUserState: function(gameModel) {
                 //States of a user
                 var thisUser = gameModel.get('thisUser');
                 switch (thisUser.state) {
@@ -74,11 +86,10 @@ define([
                         
                         break;
                 }
-
-                this.manageOtherUserState(gameModel); //todo make that part smarter
             },
 
-            manageOtherUserState: function(gameModel) {
+            _manageOtherUserState: function(gameModel) {
+                //Presence of a other user
                 var otherUser = gameModel.get('otherUser');
                 switch (otherUser.user.presence) {
                     case 'ONLINE':
@@ -103,7 +114,7 @@ define([
                 }
             },
 
-            manageGameState: function(gameModel) {
+            _manageGameState: function(gameModel) {
                 //States of a game
                 switch (gameModel.get('state')) {
                     case 'UNDEFINED':
