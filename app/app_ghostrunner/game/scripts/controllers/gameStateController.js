@@ -181,19 +181,9 @@ define([
                 }.bind(this));
             },
 
-            onRetrieveInvitation: function() {
-                //That approach doesn't make any sense
-                //if game model changed
-
-                // service.retrieveInvitation()
-                //     .then(function(invitation){
-                //         debugger
-                //     }.bind(this), function(err){
-                //         //on error
-                //     }.bind(this));
-
-                //I think that I need only getgame or update game???
-                this.refreshStatus();
+            onRetrieveInvitation: function(message) {
+                var gameUUID = message.gameUUID;
+                this.onGetMygames(); //temporary tweak
             },
 
             onInvitationAccepted: function() {

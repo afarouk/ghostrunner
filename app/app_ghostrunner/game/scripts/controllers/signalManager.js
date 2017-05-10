@@ -6,8 +6,8 @@ define([
     '../Vent'
     ], function(Vent){
     var SignalsManager = Mn.Object.extend({
-    		onMessage: function(signal) {
-                switch (signal) {
+    		onMessage: function(message) {
+                switch (message.signal) {
                     case 'Undefined':
                         break;
 
@@ -27,7 +27,7 @@ define([
                         break;
 
                     case 'INVITATION_RECEIVED':
-                        this.publicController.getStateController().onRetrieveInvitation();
+                        this.publicController.getStateController().onRetrieveInvitation(message);
                         break;
 
                     case 'INVITATION_ACCEPTED':
