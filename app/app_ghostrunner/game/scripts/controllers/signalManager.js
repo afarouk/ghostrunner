@@ -32,7 +32,6 @@ define([
 
                     case 'INVITATION_ACCEPTED':
                         this.publicController.getStateController().refreshStatus();
-                        // this.publicController.getStateController().onGetMygames();
                         break;
 
                     case 'GAME_STARTED':
@@ -54,7 +53,6 @@ define([
                         break;
 
                     case 'GAME_OVER':
-                        //TODO I am not sure what to do here ???
                         this.publicController.getStateController().refreshStatus();
                         break;
 

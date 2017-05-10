@@ -32,14 +32,10 @@ define([
                         break;
 
                     case 'AVAILABLE':
-                        // if (gameModel.get('state') === 'COMPLETED') {
-                        //     this.publicController.getGameController().onAvailableForNewGame();
-                        // }
-                        this.manageGameState(gameModel);
+                        
                         break;
 
                     case 'INVITATION_SENT':
-                        //TODO something???
                         this.publicController.getGameController().waitingForTurn();
                         break;
 
@@ -75,8 +71,34 @@ define([
                         this.publicController.getGameBtnController().removeGameUUID();
                         break;
                     default:
-                        //TODO default???
-                        //this.publicController.getGameController().waitingForMove();
+                        
+                        break;
+                }
+
+                this.manageOtherUserState(gameModel); //todo make that part smarter
+            },
+
+            manageOtherUserState: function(gameModel) {
+                var otherUser = gameModel.get('otherUser');
+                switch (otherUser.user.presence) {
+                    case 'ONLINE':
+                        this.publicController.getInformationTableController().opponentInGame(true);
+                        break;
+
+                    case 'ACTIVE':
+                        
+                        break;
+
+                    case 'INACTIVE':
+                        
+                        break;
+
+                    case 'OFFLINE':
+                        this.publicController.getInformationTableController().opponentInGame(false);
+                        break;
+
+                    default:
+                        
                         break;
                 }
             },

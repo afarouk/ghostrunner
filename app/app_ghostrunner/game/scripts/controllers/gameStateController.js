@@ -128,17 +128,8 @@ define([
             refreshStatus: function() {
                 this.getGameStatus()
                     .then(function(game){
-                        this.publicController.getStateManager().manageUserState(game);
-                        this.otherUserState(game.get('otherUser'));                       
+                        this.publicController.getStateManager().manageUserState(game);                     
                     }.bind(this));
-            },
-
-            otherUserState: function(otherUser) {
-                var inGame = false;
-                if (otherUser.presence === 'ONLINE') {
-                    inGame = true;
-                }
-                this.publicController.getInformationTableController().opponentInGame(inGame);
             },
 
             onGetAvailableUsers: function() {
