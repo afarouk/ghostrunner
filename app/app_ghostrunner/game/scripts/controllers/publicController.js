@@ -4,72 +4,74 @@
 
 define([
     './pageController',
-    './gameController',
-    './gameStateController',
-    './stateManager',
-    './signalManager',
-    './socketController',
-    './gameFieldController',
-    './gameInterfaceController',
-    './informationTableController',
-    './playerActionsController',
     './chatController',
-    './playerChoiceController',
-    './btnController',
-    './gameChoiceController'
-    ], function( pageController, gameController, stateController , stateManager, signalManager, socketController, fieldController, 
-        interfaceController, informationTableController, playerActionsController, chatController, playerChoiceController,btnController,gameChoiceController){
+    './broker/playerChoiceController',
+    './broker/gameChoiceController',
+    './broker/modalsController',
+    './game/gameController',
+    './game/gameStateController',
+    './game/stateManager',
+    './game/signalManager',
+    './game/socketController',
+    './game/gameFieldController',
+    './game/gameInterfaceController',
+    './game/informationTableController',
+    './game/playerActionsController',
+    './game/btnController'
+    ], function( pageController, chatController, playerChoiceController, gameChoiceController, modalsController, 
+        gameController, stateController , stateManager, signalManager, socketController, fieldController,
+        interfaceController, informationTableController, playerActionsController, btnController ) {
     var PublicController = Mn.Object.extend({
-            getPageController: function() {
-                return pageController;
-            },
-            getGameController: function() {
-                return gameController;
-            },
-            getStateController: function() {
-                return stateController;
-            },
-            getStateManager: function() {
-                return stateManager;
-            },
-            getSignalManager: function() {
-                return signalManager;
-            },
-            getSocketController: function() {
-                return socketController;
-            },
-            getGameBtnController: function() {
-                return btnController;
-            },
-            getGameChoiceController: function() {
-                return gameChoiceController;
-            },
-            getFieldController: function() {
-                return fieldController;
-            },
-            getInterfaceController: function() {
-                return interfaceController;
-            },
-            getInformationTableController: function() {
-                return informationTableController;
-            },
-            getPlayerActionsController: function() {
-                return playerActionsController;
-            },
-            getChatController: function() {
-                return chatController;
-            },
-            getPlayerChoiceController: function() {
-                return playerChoiceController;
-            },
-            destroyGame: function() {
-                //destroy all controllers
-                //with listenTo etc...
-                socketController.destroy();
-                playerActionsController.destroy();
-                informationTableController.destroy();
-            }
-        });
+        getPageController: function() {
+            return pageController;
+        },
+        getGameController: function() {
+            return gameController;
+        },
+        getStateController: function() {
+            return stateController;
+        },
+        getStateManager: function() {
+            return stateManager;
+        },
+        getSignalManager: function() {
+            return signalManager;
+        },
+        getSocketController: function() {
+            return socketController;
+        },
+        getGameBtnController: function() {
+            return btnController;
+        },
+        getGameChoiceController: function() {
+            return gameChoiceController;
+        },
+        getFieldController: function() {
+            return fieldController;
+        },
+        getInterfaceController: function() {
+            return interfaceController;
+        },
+        getInformationTableController: function() {
+            return informationTableController;
+        },
+        getPlayerActionsController: function() {
+            return playerActionsController;
+        },
+        getChatController: function() {
+            return chatController;
+        },
+        getPlayerChoiceController: function() {
+            return playerChoiceController;
+        },
+        destroyGame: function() {
+            //destroy all controllers
+            //with listenTo etc...
+            socketController.destroy();
+            playerActionsController.destroy();
+            informationTableController.destroy();
+        }
+    });
 
     return new PublicController();
 });

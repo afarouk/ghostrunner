@@ -3,10 +3,10 @@
 'use strict';
 
 define([
-    '../Vent',
-    '../views/partials/gameBtn',
-    '../APIGateway/gameService',
-    '../appCache'
+    '../../Vent',
+    '../../views/partials/gameBtn',
+    '../../APIGateway/gameService',
+    '../../appCache'
     ], function(Vent, GameBtnView,service,appCache){
     var GameBtnController = Mn.Object.extend({
         create: function(layout, region) {

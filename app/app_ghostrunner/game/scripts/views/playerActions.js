@@ -5,7 +5,7 @@
 define([
 	'../Vent',
 	'ejs!../templates/playerActions.ejs',
-	'../controllers/interfaceMaskBehavior'
+	'../controllers/game/interfaceMaskBehavior'
 	], function(Vent, template, maskBehavior){
 	var PlayerActionsView = Mn.View.extend({
 		template: template,

@@ -3,10 +3,10 @@
 'use strict';
 
 define([
-    '../Vent',
-    '../appCache',
-    '../views/partials/gameChoice',
-    '../views/partials/gameSelectChoice',
+    '../../Vent',
+    '../../appCache',
+    '../../views/partials/gameChoice',
+    '../../views/partials/gameSelectChoice',
     ], function(Vent,appCache, GameChoiceView,GameSelectChoice){
     var GameChoiceController = Mn.Object.extend({
             create: function(layout, region) {

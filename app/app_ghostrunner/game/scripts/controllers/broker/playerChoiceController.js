@@ -3,10 +3,10 @@
 'use strict';
 
 define([
-    '../Vent',
-    '../views/partials/playerChoice',
-    '../views/partials/confirmChoice',
-    '../views/partials/selectChoice'
+    '../../Vent',
+    '../../views/partials/playerChoice',
+    '../../views/partials/confirmChoice',
+    '../../views/partials/selectChoice'
     ], function(Vent, PlayerChoiceView, ConfirmChoiceView, SelectChoiceView){
     var PlayerChoiceController = Mn.Object.extend({
             create: function(layout, region) {

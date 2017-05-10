@@ -3,7 +3,7 @@
 'use strict';
 
 define([
-    '../Vent'
+    '../../Vent'
     ], function(Vent){
     //We need it for show modal dialogs
     var ModalsController = Mn.Object.extend({
