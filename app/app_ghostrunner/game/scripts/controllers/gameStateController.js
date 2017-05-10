@@ -11,15 +11,13 @@ define([
     //A heart of the game state logic 
     var GameStateController = Mn.Object.extend({
             onGameStart: function() {
-                
                 //Temporary
                 var gameUUID=this.publicController.getGameChoiceController().getUrlGameUUID();
                 if(gameUUID){
-                 this.refreshStatus();   
+                    this.refreshStatus();   
                 }else{
-                 this.onGetMygames();   
-                } 
-                
+                    this.onGetMygames();   
+                }
             },
         
             onGetMygames: function() {
@@ -83,10 +81,9 @@ define([
                 
             },
         
-            getGameStatus: function() {
-                //TODO maybe we should use native backbone fetch mechanism ???
+            getGameStatus: function(gameUUID) {
                 var def = $.Deferred();
-                var gameUUID=this.publicController.getGameChoiceController().getUrlGameUUID();  
+                var gameUUID = gameUUID || this.publicController.getGameChoiceController().getUrlGameUUID();  
                 service.getGame(gameUUID)
                     .then(function(game, status){
                         this.publicController.getGameChoiceController().removeUrlGameUUID();
@@ -99,9 +96,6 @@ define([
                             } else {
                                 gameModel.set(game);                                
                             }
-                            // if(game.gameUUID && game.state!='ABANDONED'){
-                            //  this.publicController.getGameBtnController().showGameBtns();   
-                            // }
                             def.resolve(gameModel);
                         }
                     }.bind(this), function(err){
@@ -127,8 +121,8 @@ define([
                 return appCache.get('urlGameUUID');
             },
         
-            refreshStatus: function() {
-                this.getGameStatus()
+            refreshStatus: function(gameUUID) {
+                this.getGameStatus(gameUUID)
                     .then(function(game){
                         this.publicController.getStateManager().manage(game);                     
                     }.bind(this));
@@ -183,15 +177,11 @@ define([
 
             onRetrieveInvitation: function(message) {
                 var gameUUID = message.gameUUID;
-                this.onGetMygames(); //temporary tweak
+                this.refreshStatus(gameUUID);
+                // this.onGetMygames(); //temporary tweak
             },
 
             onInvitationAccepted: function() {
-                //dateInvited:"2017-03-20T11:38:12.766+0000"
-                //fromUID:"user38.4163954949559135759"
-                //fromUsername:"member18"
-                //gameUUID:"l-w21tg_TiKAAABWNCMi_VI52yuCpc8"
-                //toUID:"user20.781305772384780045"
                 service.acceptInvitation()
                     .then(function(state){
                         this.updateGameModel(state);
