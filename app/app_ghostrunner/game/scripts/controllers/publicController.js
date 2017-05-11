@@ -5,9 +5,12 @@
 define([
     './pageController',
     './chatController',
+
+    './broker/brokerController',
     './broker/choiceController',
     './broker/selectController',
     './broker/modalsController',
+
     './game/gameController',
     './game/gameStateController',
     './game/stateManager',
@@ -18,13 +21,33 @@ define([
     './game/informationTableController',
     './game/playerActionsController',
     './game/btnController'
-    ], function( pageController, chatController, choiceController, selectController, modalsController, 
+    ], function( pageController, chatController, brokerController, choiceController, selectController, modalsController, 
         gameController, stateController , stateManager, signalManager, socketController, fieldController,
         interfaceController, informationTableController, playerActionsController, btnController ) {
     var PublicController = Mn.Object.extend({
+        //misc
         getPageController: function() {
             return pageController;
         },
+        getChatController: function() {
+            return chatController;
+        },
+
+        //broker
+        getBrokerController: function() {
+            return brokerController;
+        },
+        getChoiceController: function() {
+            return choiceController;
+        },
+        getSelectController: function() {
+            return selectController;
+        },
+        getModalsController: function() {
+            return modalsController;
+        },
+
+        //game
         getGameController: function() {
             return gameController;
         },
@@ -43,9 +66,6 @@ define([
         getGameBtnController: function() {
             return btnController;
         },
-        getSelectController: function() {
-            return selectController;
-        },
         getFieldController: function() {
             return fieldController;
         },
@@ -57,12 +77,6 @@ define([
         },
         getPlayerActionsController: function() {
             return playerActionsController;
-        },
-        getChatController: function() {
-            return chatController;
-        },
-        getChoiceController: function() {
-            return choiceController;
         },
         destroyGame: function() {
             //destroy all controllers
