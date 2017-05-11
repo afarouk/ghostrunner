@@ -63,12 +63,17 @@ define([
             this.publicController.getChoiceController().showConfirmation({
                 message: other + ' sent you invitation to '+ gameName + '<br> accept invitation?',
                 cancel: 'cancel',
-                confirm: 'ok'
+                reject: 'no',
+                confirm: 'yes'
             }).then(function(){
                 this.publicController.getStateController().onInvitationAccepted();
-            }.bind(this), function() {
+            }.bind(this), function(type) {
                 //TODO something
-                this.publicController.getStateController().onInvitationRejected(game);
+                if (type === 'reject') {
+                    this.publicController.getStateController().onInvitationRejected(game);
+                } else {
+                    this.publicController.getStateController().onGetMygames();
+                }
             }.bind(this));
             console.log('invitation received');
         },
@@ -77,14 +82,24 @@ define([
             this.publicController.getChoiceController().showConfirmation({
                 message: 'start new game?',
                 cancel: 'cancel',
-                confirm: 'ok'
+                confirm: 'yes'
             }).then(function(){
                 console.log('start new game');
                 this.publicController.getStateController().onGetAvailableUsers();
             }.bind(this), function() {
                 console.log('......');
             }.bind(this));
-        }
+        },
+
+        onPausedByOponnent: function() {
+            this.publicController.getChoiceController().showConfirmation({
+                message: 'Game paused by oponnent.',
+                confirm: 'ok'
+            }).then(function() {
+                this.publicController.getStateController().onGetMygames();
+            }.bind(this));
+            console.log('invitation received');
+        },
     });
 
     return new GameController();

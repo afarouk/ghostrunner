@@ -25,7 +25,7 @@ define([
             service.getMyGames()
                 .then(function(response){
                     this.publicController.getInterfaceController().hideLoader();
-                    if(response.games.length > 0 ){
+                    if( response.games.length > 0 ){
                     // if(response.games.length ==1 && (response.games[0].state == 'RUNNING' || response.games[0].state == 'INVITING' || response.games[0].state == 'ACCEPTED')){
                         // var gameUUID=response.games[0].gameUUID; this.publicController.getGameChoiceController().setGameUUID(gameUUID);
                         
@@ -132,7 +132,7 @@ define([
             this.publicController.getChoiceController().showConfirmation({
                 message: 'get available users?',
                 cancel: 'cancel',
-                confirm: 'ok'
+                confirm: 'yes'
             }).then(function(){
                 service.getAvailableUsers()
                     .then(function(response){

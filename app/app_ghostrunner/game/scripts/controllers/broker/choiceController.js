@@ -28,6 +28,8 @@ define([
             getConfirmModel: function(def, options) {
                 var options = options || {};
                 options.confirm = options.confirm || 'ok';
+                options.reject = options.reject || false;
+                options.cancel = options.cancel || false;
                 options.message = options.message || '?';
                 options.callback = function (action) {
                     this.onClose();
@@ -35,8 +37,10 @@ define([
                     this.confirmView = null;
                     if (action === 'confirm') {
                         def.resolve();
+                    } else if (action === 'reject') {
+                        def.reject('reject');
                     } else {
-                        def.reject();
+                        def.reject('cancel');
                     }
                 }.bind(this);
                 return new Backbone.Model(options);

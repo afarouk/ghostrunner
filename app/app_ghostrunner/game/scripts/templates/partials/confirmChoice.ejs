@@ -2,4 +2,7 @@
 <% if(cancel) { %>
 	<button type="button" data-action="cancel">cancel</button>
 <% } %>
-<button type="button" data-action="confirm">confirm</button>
+<% if(reject) { %>
+	<button type="button" data-action="reject">no</button>
+<% } %>
+<button type="button" data-action="confirm"><%= confirm %></button>

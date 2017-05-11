@@ -45,7 +45,7 @@ define([
                     break;
 
                 case 'GAME_PAUSED':
-                    
+                    this.publicController.getGameController().onPausedByOponnent();
                     break;
 
                 case 'GAME_RESTARTED':
