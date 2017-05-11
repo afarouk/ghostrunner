@@ -19,7 +19,7 @@ define([
 		renderGame: function() {
 			this.publicController.getChoiceController().create(this, 'choice');
             this.publicController.getSelectController().create(this, 'choice_game');
-            // this.publicController.getBrokerController().create(this, 'main_broker');
+            this.publicController.getBrokerController().create(this, 'main_broker');
 		}
 	});
 	return BrokerLayoutView;

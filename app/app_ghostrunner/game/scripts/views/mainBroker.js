@@ -8,6 +8,9 @@ define([
 	var MainBrokerView = Mn.View.extend({
 		className: 'main-broker',
 		template: template,
+		regions: {
+			playersList: '#playersList'
+		},
 		ui: {
 			teams: '[name="teams"]',
 			empty: '[name="empty"]',
@@ -17,8 +20,8 @@ define([
 		events: {
 			'click @ui.teams': 'onGetTeams',
 			// 'click @ui.empty': 'onEmpty',
-			'click @ui.teams': 'onGetPlayers',
-			'click @ui.teams': 'onGetGames'
+			'click @ui.invite': 'onGetPlayers',
+			'click @ui.games': 'onGetGames'
 		},
 		initialize: function (options) {
 
@@ -32,7 +35,7 @@ define([
 		},
 
 		onGetPlayers: function() {
-
+			this.trigger('getPlayers');
 		},
 
 		onGetGames: function() {
