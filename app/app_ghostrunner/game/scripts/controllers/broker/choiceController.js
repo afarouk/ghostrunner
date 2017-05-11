@@ -8,7 +8,7 @@ define([
     '../../views/partials/confirmChoice',
     '../../views/partials/selectChoice'
     ], function(Vent, PlayerChoiceView, ConfirmChoiceView, SelectChoiceView){
-    var PlayerChoiceController = Mn.Object.extend({
+    var ChoiceController = Mn.Object.extend({
             create: function(layout, region) {
                 this.view = new PlayerChoiceView();
                 layout.showChildView( region, this.view );
@@ -85,5 +85,5 @@ define([
             }
         });
 
-    return new PlayerChoiceController();
+    return new ChoiceController();
 });

@@ -58,9 +58,9 @@ define([
         },
         onInvitationReceived: function() {
             var game = appCache.get('game'),
-                other = game.get('otherUser').userName,
-                gameName = game.get('gameName');
-            this.publicController.getPlayerChoiceController().showConfirmation({
+                other = game.get('otherUser').user.userName,
+                gameName = game.get('displayText');
+            this.publicController.getChoiceController().showConfirmation({
                 message: other + ' sent you invitation to '+ gameName + '<br> accept invitation?',
                 cancel: 'cancel',
                 confirm: 'ok'
@@ -74,7 +74,7 @@ define([
         },
 
         onAvailableForNewGame: function() {
-            this.publicController.getPlayerChoiceController().showConfirmation({
+            this.publicController.getChoiceController().showConfirmation({
                 message: 'start new game?',
                 cancel: 'cancel',
                 confirm: 'ok'

@@ -16,8 +16,8 @@ define([
 			this.renderGame();
 		},
 		renderGame: function() {
-			this.publicController.getPlayerChoiceController().create(this, 'choice');
-            this.publicController.getGameChoiceController().create(this, 'choice_game');
+			this.publicController.getChoiceController().create(this, 'choice');
+            this.publicController.getSelectController().create(this, 'choice_game');
 		}
 	});
 	return BrokerLayoutView;

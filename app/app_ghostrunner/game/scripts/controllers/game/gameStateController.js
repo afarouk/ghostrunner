@@ -12,7 +12,7 @@ define([
     var GameStateController = Mn.Object.extend({
         onGameStart: function() {
             //Temporary
-            var gameUUID=this.publicController.getGameChoiceController().getUrlGameUUID();
+            var gameUUID=this.publicController.getSelectController().getUrlGameUUID();
             if(gameUUID){
                 this.refreshStatus();   
             }else{
@@ -44,14 +44,14 @@ define([
         },
 
         selectGame: function(response) {
-            this.publicController.getGameChoiceController()
+            this.publicController.getSelectController()
                 .showSelect({
                     message: 'Select a game ',
                     confirm: 'Start',
                     list: response.games
                 }).then(function(gameUUID){
                     if(gameUUID){
-                        this.publicController.getGameChoiceController().setGameUUID(gameUUID);
+                        this.publicController.getSelectController().setGameUUID(gameUUID);
                         var game = _.find(response.games, {gameUUID: gameUUID});
                         if (game.state == 'ACCEPTED') {
                             this.startGame(gameUUID);
@@ -83,10 +83,10 @@ define([
     
         getGameStatus: function(gameUUID) {
             var def = $.Deferred();
-            var gameUUID = gameUUID || this.publicController.getGameChoiceController().getUrlGameUUID();  
+            var gameUUID = gameUUID || this.publicController.getSelectController().getUrlGameUUID();  
             service.getGame(gameUUID)
                 .then(function(game, status){
-                    this.publicController.getGameChoiceController().removeUrlGameUUID();
+                    this.publicController.getSelectController().removeUrlGameUUID();
                     if (status === 'nocontent') {
                         def.reject();
                     } else {
@@ -101,7 +101,7 @@ define([
                 }.bind(this), function(err){
                     //TODO manage User not in game warning or other error
                     console.log('waiting on get game error...');
-                    this.publicController.getGameChoiceController().removeUrlGameUUID();
+                    this.publicController.getSelectController().removeUrlGameUUID();
                     this.onGetAvailableUsers();
                 }.bind(this));
             return def;
@@ -129,7 +129,7 @@ define([
         },
 
         onGetAvailableUsers: function() {
-            this.publicController.getPlayerChoiceController().showConfirmation({
+            this.publicController.getChoiceController().showConfirmation({
                 message: 'get available users?',
                 cancel: 'cancel',
                 confirm: 'ok'
@@ -138,7 +138,7 @@ define([
                     .then(function(response){
                         //todo select user
                         if (response.count > 0) {
-                            this.publicController.getPlayerChoiceController()
+                            this.publicController.getChoiceController()
                                 .showSelect({
                                     message: 'Select some user:',
                                     confirm: 'invite',

@@ -5,8 +5,8 @@
 define([
     './pageController',
     './chatController',
-    './broker/playerChoiceController',
-    './broker/gameChoiceController',
+    './broker/choiceController',
+    './broker/selectController',
     './broker/modalsController',
     './game/gameController',
     './game/gameStateController',
@@ -18,7 +18,7 @@ define([
     './game/informationTableController',
     './game/playerActionsController',
     './game/btnController'
-    ], function( pageController, chatController, playerChoiceController, gameChoiceController, modalsController, 
+    ], function( pageController, chatController, choiceController, selectController, modalsController, 
         gameController, stateController , stateManager, signalManager, socketController, fieldController,
         interfaceController, informationTableController, playerActionsController, btnController ) {
     var PublicController = Mn.Object.extend({
@@ -43,8 +43,8 @@ define([
         getGameBtnController: function() {
             return btnController;
         },
-        getGameChoiceController: function() {
-            return gameChoiceController;
+        getSelectController: function() {
+            return selectController;
         },
         getFieldController: function() {
             return fieldController;
@@ -61,8 +61,8 @@ define([
         getChatController: function() {
             return chatController;
         },
-        getPlayerChoiceController: function() {
-            return playerChoiceController;
+        getChoiceController: function() {
+            return choiceController;
         },
         destroyGame: function() {
             //destroy all controllers
