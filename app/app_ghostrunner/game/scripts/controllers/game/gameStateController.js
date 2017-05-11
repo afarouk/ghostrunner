@@ -13,6 +13,8 @@ define([
         onGameStart: function() {
             //Temporary
             var gameUUID=this.publicController.getSelectController().getUrlGameUUID();
+            this.publicController.getInterfaceController().hideLoader();
+            return;
             if(gameUUID){
                 this.refreshStatus();   
             }else{
@@ -114,7 +116,7 @@ define([
         updateGameModel: function (state) {
             var gameModel = this.getGameModel();
             gameModel.set(state);
-             this.publicController.getStateManager().manage(gameModel);
+            this.publicController.getStateManager().manage(gameModel);
         },
     
         getUrlGameUUID: function() {

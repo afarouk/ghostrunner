@@ -22,16 +22,17 @@ define([
             this.publicController.getSocketController().start(user.uid);
         },
         showGame: function() {
-            this.appLayout.getRegion('game').$el.show();
+            this.appLayout.getRegion('game').$el.addClass('active');
         },
         hideGame: function() {
-            this.appLayout.getRegion('game').$el.hide();
+            this.appLayout.getRegion('game').$el.removeClass('active');
         },
         showBroker: function() {
-            this.appLayout.getRegion('broker').$el.show();
+            this.appLayout.getRegion('broker').$el.addClass('active');
+            this.publicController.getBrokerController().view.render();
         },
         hideBroker: function() {
-            this.appLayout.getRegion('broker').$el.show();
+            this.appLayout.getRegion('broker').$el.removeClass('active');
         },
         createUser: function(user) {
             new userModel({

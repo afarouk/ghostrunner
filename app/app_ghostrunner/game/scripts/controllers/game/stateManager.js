@@ -125,6 +125,8 @@ define([
 
                 case 'INVITING':
                     this.publicController.getGameBtnController().hideGameBtns();
+                    this.publicController.getGameController().hideBroker();
+                    this.publicController.getGameController().showGame();
                     break;
 
                 case 'ACCEPTED':
@@ -134,23 +136,33 @@ define([
 
                 case 'STARTING':
                     this.publicController.getGameBtnController().showGameBtns();
+                    this.publicController.getGameController().hideBroker();
+                    this.publicController.getGameController().showGame();
                     break;
 
                 case 'RUNNING':
                     this.publicController.getGameBtnController().showGameBtns();
+                    this.publicController.getGameController().hideBroker();
+                    this.publicController.getGameController().showGame();
                     break;
 
                 case 'PAUSED':
                     this.publicController.getGameBtnController().showGameBtns();
+                    this.publicController.getGameController().showBroker();
+                    this.publicController.getGameController().hideGame();
                     break;
 
                 case 'ABANDONED':
                     this.publicController.getGameBtnController().hideGameBtns();
+                    this.publicController.getGameController().showBroker();
+                    this.publicController.getGameController().hideGame();
                     break;
 
                 case 'COMPLETED':
                     this.publicController.getGameBtnController().hideGameBtns();
-                    this.publicController.getGameController().onAvailableForNewGame();
+                    this.publicController.getGameController().hideGame();
+                    this.publicController.getGameController().showBroker();
+                    // this.publicController.getGameController().onAvailableForNewGame();
                     break;
 
                 case 'REJECTED':

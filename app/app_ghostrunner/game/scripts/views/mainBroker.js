@@ -9,19 +9,21 @@ define([
 		className: 'main-broker',
 		template: template,
 		regions: {
-			playersList: '#playersList'
+			rightList: '#right-list'
 		},
 		ui: {
 			teams: '[name="teams"]',
 			empty: '[name="empty"]',
 			invite: '[name="invite"]',
-			games: '[name="games"]'
+			games: '[name="games"]',
+			confirm: '[name="confirm"]'
 		},
 		events: {
 			'click @ui.teams': 'onGetTeams',
 			// 'click @ui.empty': 'onEmpty',
 			'click @ui.invite': 'onGetPlayers',
-			'click @ui.games': 'onGetGames'
+			'click @ui.games': 'onGetGames',
+			'click @ui.confirm': 'onConfirm'
 		},
 		initialize: function (options) {
 
@@ -39,7 +41,11 @@ define([
 		},
 
 		onGetGames: function() {
+			this.trigger('getGames');
+		},
 
+		onConfirm: function() {
+			this.trigger('confirm');;
 		}
 
 	});

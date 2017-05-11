@@ -3,11 +3,11 @@
 'use strict';
 
 define([
-	'ejs!../../templates/partials/availablePlayer.ejs'
+	'ejs!../../templates/partials/myGame.ejs'
 	], function(template){
-	var PlayerView = Mn.View.extend({
+	var GameView = Mn.View.extend({
 		tagName: 'li',
-		className: 'available-player',
+		className: 'my-game',
 		template: template,
 		triggers: {
 			'click': 'player:selected'
@@ -17,14 +17,12 @@ define([
 		}
 	});
 
-	var PlayersListView = Mn.CollectionView.extend({
-		className: 'players-list',
+	var GamesListView = Mn.CollectionView.extend({
+		className: 'games-list',
 		tagName: 'ul',
 		initialize: function (options) {
 		},
-		childView: PlayerView,
-		onRender: function() {
-		},
+		childView: GameView,
 		onChildviewPlayerSelected: function(view) {
 			this.children.each(function(childView) {
 				if (childView === view) {
@@ -33,8 +31,8 @@ define([
 					childView.$el.removeClass('selected');
 				}
 			}.bind(this));
-			this.trigger('player:selected', view.model);
+			this.trigger('game:selected', view.model);
 		}
 	});
-	return PlayersListView;
+	return GamesListView;
 });
