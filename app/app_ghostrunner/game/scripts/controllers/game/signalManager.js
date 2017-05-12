@@ -31,7 +31,7 @@ define([
                     break;
 
                 case 'INVITATION_ACCEPTED':
-                    this.publicController.getStateController().refreshStatus();
+                    this.publicController.getStateController().refreshStatus(message.gameUUID);
                     break;
 
                 case 'GAME_STARTED':
@@ -41,8 +41,7 @@ define([
                 case 'GAME_ABANDONED':
                     this.publicController.getGameBtnController().hideGameBtns();
                     this.publicController.getGameBtnController().removeGameUUID();
-                    this.publicController.getGameController().showBroker();
-                    this.publicController.getGameController().hideGame();
+                    this.publicController.getGameController().onAbandonedByOponnent();
                     break;
 
                 case 'GAME_PAUSED':
@@ -56,7 +55,7 @@ define([
 
                 case 'GAME_OVER':
                     //TODO show game over modal
-                    this.publicController.getStateController().refreshStatus();
+                    this.publicController.getGameController().onGameOver();
                     break;
 
                 case 'YOU_WON':

@@ -39,8 +39,6 @@ define([
         confirmPlayer: function() {
             var inviteeUID = this.selectedPlayer.get('uid');
             this.publicController.getStateController().onSendInvitation(inviteeUID);
-            this.publicController.getGameController().hideBroker();
-            this.publicController.getGameController().showGame();
         },
         showPlayersList: function(response) {
             var playersList = new PlayersList({

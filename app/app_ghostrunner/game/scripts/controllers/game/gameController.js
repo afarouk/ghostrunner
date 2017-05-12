@@ -6,8 +6,9 @@ define([
     '../../Vent',
     '../../models/user',
     '../../appCache',
+    '../../APIGateway/gameService',
     '../../views/appLayout'
-    ], function(Vent, userModel, appCache, AppLayout){
+    ], function(Vent, userModel, appCache, service, AppLayout){
     var GameController = Mn.Object.extend({
         start: function(user){
             console.log('game start');
@@ -84,7 +85,58 @@ define([
                 message: 'Game paused by oponnent.',
                 confirm: 'ok'
             }).then(function() {
-                this.publicController.getStateController().onGetMygames();
+                this.publicController.getGameController().showBroker();
+                this.publicController.getGameController().hideGame();
+                this.publicController.getStateController().refreshStatus();
+            }.bind(this));
+            console.log('invitation received');
+        },
+
+        onAbandoneGame: function() {
+            // var game = appCache.get('game'),
+            //     other = game.get('otherUser').user.userName,
+            //     gameName = game.get('displayText');
+            this.publicController.getChoiceController().showConfirmation({
+                message: 'Abandon the game (final)?',
+                cancel: 'cancel',
+                confirm: 'confirm'
+            }).then(function(){
+                this.publicController.getInterfaceController().showLoader();
+                service.abandonGame()
+                .then(function(status){
+                    this.publicController.getInterfaceController().hideLoader();
+                    this.publicController.getGameController().showBroker();
+                    this.publicController.getGameController().hideGame();
+                    this.publicController.getStateController().refreshStatus();
+                }
+                .bind(this), function(err){
+                    this.publicController.getInterfaceController().hideLoader();
+                }.bind(this));
+            }.bind(this), function() {
+                //todo
+            }.bind(this));
+        },
+
+        onAbandonedByOponnent: function() {
+            this.publicController.getChoiceController().showConfirmation({
+                message: 'Game abandoned by oponnent.',
+                confirm: 'ok'
+            }).then(function() {
+                this.publicController.getGameController().showBroker();
+                this.publicController.getGameController().hideGame();
+                this.publicController.getStateController().refreshStatus();
+            }.bind(this));
+            console.log('invitation received');
+        },
+
+        onGameOver: function() {
+            this.publicController.getChoiceController().showConfirmation({
+                message: 'Game over.',
+                confirm: 'ok'
+            }).then(function() {
+                this.publicController.getGameController().showBroker();
+                this.publicController.getGameController().hideGame();
+                this.publicController.getStateController().refreshStatus();
             }.bind(this));
             console.log('invitation received');
         },

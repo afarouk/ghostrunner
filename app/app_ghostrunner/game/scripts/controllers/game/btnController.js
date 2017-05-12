@@ -29,20 +29,7 @@ define([
         },
 
         clickAbandonBtn : function(){
-            this.publicController.getInterfaceController().showLoader();
-            //TODO show confirmation
-            service.abandonGame()
-                .then(function(status){
-                    this.publicController.getInterfaceController().hideLoader();
-                    this.removeGameUUID();
-                    this.publicController.getGameController().showBroker();
-                    this.publicController.getGameController().hideGame();
-                    this.hideGameBtns();
-                }
-                .bind(this), function(err){
-                    this.publicController.getInterfaceController().hideLoader();
-                    this.removeGameUUID();
-                }.bind(this));
+            this.publicController.getGameController().onAbandoneGame();
         },
 
         clickPauseBtn: function() {
@@ -53,7 +40,7 @@ define([
                 service.pauseGame()
                     .then(function(status){
                         this.publicController.getInterfaceController().hideLoader();
-                        this.publicController.getStateController().refreshStatus();
+                        this.publicController.getStateController().refreshStatus(game.get('gameUUID'));
                     }
                     .bind(this), function(err){
                         this.publicController.getInterfaceController().hideLoader();

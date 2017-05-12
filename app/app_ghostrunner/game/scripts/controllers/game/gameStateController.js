@@ -20,23 +20,11 @@ define([
                     this.updateGameModel(state);
                 }.bind(this));
         },
-    
-        getGameUser: function() {
-            debugger;
-             service.getGameUser()
-                .then(function(status){
-                    if (status && status.gameUUID) {
-                        this.refreshStatus();
-                    } else {
-                        // this.onGetAvailableUsers();
-                    }
-                }.bind(this)); 
-            
-        },
-    
+
         getGameStatus: function(gameUUID) {
             var def = $.Deferred();
-            var gameUUID = gameUUID || this.publicController.getSelectController().getUrlGameUUID();  
+            var gameUUID = gameUUID || this.publicController.getSelectController().getUrlGameUUID(); 
+            if (!gameUUID) return def; 
             service.getGame(gameUUID)
                 .then(function(game, status){
                     this.publicController.getSelectController().removeUrlGameUUID();
@@ -90,7 +78,8 @@ define([
                 } else {
                     gameModel.set('gameUUID', result.gameUUID);                               
                 }
-                this.publicController.getGameController().waitingForTurn();
+
+                this.publicController.getStateController().refreshStatus(result.gameUUID);
             }.bind(this), function(err){
                 //on error
                 this.publicController.getInterfaceController().hideLoader();
@@ -130,11 +119,7 @@ define([
         },
 
         onPlayerLogout: function() {
-            var gameModel = this.getGameModel();
-            console.log(gameModel);
-            if (gameModel) {
-                gameModel.kill();
-            }
+            this.killGame();
             this.publicController.getGameController().destroy();
             this.App.destroy();
         },
@@ -148,6 +133,14 @@ define([
                 .bind(this), function(err){
                     this.publicController.getInterfaceController().hideLoader();
                 }.bind(this));
+        },
+
+        killGame: function() {
+            var gameModel = this.getGameModel();
+            console.log(gameModel);
+            if (gameModel) {
+                gameModel.kill();
+            }
         }
 
     });

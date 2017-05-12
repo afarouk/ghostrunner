@@ -153,16 +153,21 @@ define([
                     this.publicController.getGameBtnController().hideGameBtns();
                     this.publicController.getGameController().showBroker();
                     this.publicController.getGameController().hideGame();
+                    this.publicController.getStateController().killGame();
                     break;
 
                 case 'COMPLETED':
                     this.publicController.getGameBtnController().hideGameBtns();
                     this.publicController.getGameController().hideGame();
                     this.publicController.getGameController().showBroker();
+                    this.publicController.getStateController().killGame();
                     break;
 
                 case 'REJECTED':
-
+                    this.publicController.getGameBtnController().hideGameBtns();
+                    this.publicController.getGameController().hideGame();
+                    this.publicController.getGameController().showBroker();
+                    this.publicController.getStateController().killGame();
                     break;
 
                 default:
