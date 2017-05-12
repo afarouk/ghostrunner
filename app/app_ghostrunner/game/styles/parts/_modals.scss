@@ -26,6 +26,10 @@
                 .buttons-block {
                     justify-content: center;
                     display: flex;
+
+                    button {
+                        margin-right: 10px;
+                    }
                 }
             }
         }
