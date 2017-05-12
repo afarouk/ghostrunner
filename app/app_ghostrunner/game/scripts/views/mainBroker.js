@@ -21,7 +21,7 @@ define([
 		events: {
 			'click @ui.teams': 'onGetTeams',
 			// 'click @ui.empty': 'onEmpty',
-			'click @ui.invite': 'onGetPlayers',
+			'click @ui.invite': 'onGetUsers',
 			'click @ui.games': 'onGetGames',
 			'click @ui.confirm': 'onConfirm'
 		},
@@ -36,8 +36,8 @@ define([
 
 		},
 
-		onGetPlayers: function() {
-			this.trigger('getPlayers');
+		onGetUsers: function() {
+			this.trigger('getUsers');
 		},
 
 		onGetGames: function() {

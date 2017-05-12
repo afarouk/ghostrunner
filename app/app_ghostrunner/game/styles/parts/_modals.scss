@@ -1,0 +1,33 @@
+.modals {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: none;
+
+    .modals-layout {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        background-color: $modals-back;
+
+        .modals-container {
+            background: rgb(206, 136, 120);
+            padding: 15px;
+            box-shadow: 5px 4px 10px 5px $modals-shadow;
+
+            .confirm-choice {
+                h4 {
+                    color: $text;
+                }
+
+                .buttons-block {
+                    justify-content: center;
+                    display: flex;
+                }
+            }
+        }
+    }
+}

@@ -1,8 +1,10 @@
 <h4><%= message %></h4>
-<% if(cancel) { %>
-	<button type="button" data-action="cancel">cancel</button>
-<% } %>
-<% if(reject) { %>
-	<button type="button" data-action="reject">no</button>
-<% } %>
-<button type="button" data-action="confirm"><%= confirm %></button>
+<div class="buttons-block">
+	<% if(cancel) { %>
+		<button type="button" data-action="cancel">cancel</button>
+	<% } %>
+	<% if(reject) { %>
+		<button type="button" data-action="reject">no</button>
+	<% } %>
+	<button type="button" data-action="confirm"><%= confirm %></button>
+</div>

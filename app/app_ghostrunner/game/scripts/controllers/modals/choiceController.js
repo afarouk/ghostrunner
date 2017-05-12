@@ -4,14 +4,11 @@
 
 define([
     '../../Vent',
-    '../../views/partials/playerChoice',
-    '../../views/partials/confirmChoice',
-    '../../views/partials/selectChoice'
-    ], function(Vent, PlayerChoiceView, ConfirmChoiceView, SelectChoiceView){
+    '../../views/partials/confirmChoice'
+    ], function(Vent, ConfirmChoiceView){
     var ChoiceController = Mn.Object.extend({
         create: function(layout, region) {
-            this.view = new PlayerChoiceView();
-            layout.showChildView( region, this.view );
+            
         },
         showConfirmation: function(options) {
             var def = $.Deferred(),
