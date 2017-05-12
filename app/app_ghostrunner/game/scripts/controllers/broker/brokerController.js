@@ -25,6 +25,7 @@ define([
         },
         //url uuid precense
         checkGameUrlUUID: function() {
+            //TODO maybe show url game status
             if (this.getUrlGameUUID()) {
                 this.publicController.getStateController().refreshStatus();
             }
@@ -48,6 +49,7 @@ define([
             this.view.showChildView('rightList', emptyList);
         },
         //players
+        //TODO change players to users (naming)
         onGetPlayers: function() {
             this.publicController.getInterfaceController().showLoader();
             service.getAvailableUsers()

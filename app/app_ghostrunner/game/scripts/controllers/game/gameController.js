@@ -22,18 +22,17 @@ define([
 
             this.publicController.getSocketController().start(user.uid);
         },
-        showGame: function() {
+        switchToGame: function() {
             this.appLayout.getRegion('game').$el.addClass('active');
+            this.appLayout.getRegion('broker').$el.removeClass('active');
+            this.publicController.getGameBtnController().showGameBtns();
         },
-        hideGame: function() {
+        switchToBroker: function() {
             this.appLayout.getRegion('game').$el.removeClass('active');
-        },
-        showBroker: function() {
             this.appLayout.getRegion('broker').$el.addClass('active');
             this.publicController.getBrokerController().reRender();
-        },
-        hideBroker: function() {
-            this.appLayout.getRegion('broker').$el.removeClass('active');
+            this.publicController.getGameBtnController().hideGameBtns();
+            this.publicController.getStateController().killGame();
         },
         createUser: function(user) {
             new userModel({
@@ -85,17 +84,13 @@ define([
                 message: 'Game paused by oponnent.',
                 confirm: 'ok'
             }).then(function() {
-                this.publicController.getGameController().showBroker();
-                this.publicController.getGameController().hideGame();
+                this.publicController.getGameController().switchToBroker();
                 this.publicController.getStateController().refreshStatus();
             }.bind(this));
             console.log('invitation received');
         },
 
         onAbandoneGame: function() {
-            // var game = appCache.get('game'),
-            //     other = game.get('otherUser').user.userName,
-            //     gameName = game.get('displayText');
             this.publicController.getChoiceController().showConfirmation({
                 message: 'Abandon the game (final)?',
                 cancel: 'cancel',
@@ -105,8 +100,7 @@ define([
                 service.abandonGame()
                 .then(function(status){
                     this.publicController.getInterfaceController().hideLoader();
-                    this.publicController.getGameController().showBroker();
-                    this.publicController.getGameController().hideGame();
+                    this.publicController.getGameController().switchToBroker();
                     this.publicController.getStateController().refreshStatus();
                 }
                 .bind(this), function(err){
@@ -122,8 +116,7 @@ define([
                 message: 'Game abandoned by oponnent.',
                 confirm: 'ok'
             }).then(function() {
-                this.publicController.getGameController().showBroker();
-                this.publicController.getGameController().hideGame();
+                this.publicController.getGameController().switchToBroker();
                 this.publicController.getStateController().refreshStatus();
             }.bind(this));
             console.log('invitation received');
@@ -134,8 +127,7 @@ define([
                 message: 'Game over.',
                 confirm: 'ok'
             }).then(function() {
-                this.publicController.getGameController().showBroker();
-                this.publicController.getGameController().hideGame();
+                this.publicController.getGameController().switchToBroker();
                 this.publicController.getStateController().refreshStatus();
             }.bind(this));
             console.log('invitation received');
@@ -154,8 +146,7 @@ define([
                 service.abandonGame()
                 .then(function(status){
                     this.publicController.getInterfaceController().hideLoader();
-                    this.publicController.getGameController().showBroker();
-                    this.publicController.getGameController().hideGame();
+                    this.publicController.getGameController().switchToBroker();
                     this.publicController.getStateController().refreshStatus();
                 }
                 .bind(this), function(err){
@@ -174,8 +165,7 @@ define([
             }).then(function(){
                 this.publicController.getStateController().unPauseGame(gameUUID);
             }.bind(this), function() {
-                this.publicController.getGameController().showBroker();
-                this.publicController.getGameController().hideGame();
+                this.publicController.getGameController().switchToBroker();
             }.bind(this));
         }
     });

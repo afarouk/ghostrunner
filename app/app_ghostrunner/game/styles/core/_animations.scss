@@ -1,0 +1,22 @@
+@keyframes inactive-animation {
+  0% {
+    opacity: 1;
+    pointer-events: none;
+  }
+  100% {
+    opacity: 0;
+    display: none;
+    visibility: hidden;
+  }
+}
+@keyframes active-animation {
+  0% {
+    opacity: 0;
+    display: block;
+    visibility: visible;
+  }
+  100% {
+    opacity: 1;
+    pointer-events: all;
+  }
+}

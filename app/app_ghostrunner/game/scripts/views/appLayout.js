@@ -5,9 +5,8 @@
 define([
 	'../Vent',
 	'ejs!../templates/appLayout.ejs',
-	'./gameLayout',
-	'./brokerLayout'
-	], function(Vent, template, GameLayout, BrokerLayout ){
+	'./gameLayout'
+	], function(Vent, template, GameLayout ){
 	var AppLayoutView = Mn.View.extend({
 		template: template,
 		el: '#game-layout',
@@ -24,10 +23,9 @@ define([
 		},
 		renderGame: function() {
 			var gameLayout = new GameLayout();
-			var brokerLayout = new BrokerLayout();
 			this.showChildView( 'game',  gameLayout);
-			this.showChildView( 'broker',  brokerLayout);
 
+			this.publicController.getBrokerController().create(this, 'broker');
 			this.publicController.getModalsController().create(this, 'modals');
 		},
 		destroyView: function() {

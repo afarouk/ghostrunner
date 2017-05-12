@@ -81,8 +81,7 @@ define([
                     break;
 
                 case 'ABANDONED':
-                    this.publicController.getGameBtnController().hideGameBtns();
-                    this.publicController.getGameBtnController().removeGameUUID();
+                    this.publicController.getGameController().switchToBroker();
                     break;
                 default:
                     
@@ -123,24 +122,19 @@ define([
                     break;
 
                 case 'INVITING':
-                    this.publicController.getGameBtnController().hideGameBtns();
+                    
                     break;
 
                 case 'ACCEPTED':
-                    this.publicController.getGameBtnController().hideGameBtns();
                     this.publicController.getStateController().startGame(gameModel.get('gameUUID'));
                     break;
 
                 case 'STARTING':
-                    this.publicController.getGameBtnController().showGameBtns();
-                    this.publicController.getGameController().hideBroker();
-                    this.publicController.getGameController().showGame();
+                    this.publicController.getGameController().switchToGame();
                     break;
 
                 case 'RUNNING':
-                    this.publicController.getGameBtnController().showGameBtns();
-                    this.publicController.getGameController().hideBroker();
-                    this.publicController.getGameController().showGame();
+                    this.publicController.getGameController().switchToGame();
                     break;
 
                 case 'PAUSED':
@@ -148,24 +142,15 @@ define([
                     break;
 
                 case 'ABANDONED':
-                    this.publicController.getGameBtnController().hideGameBtns();
-                    this.publicController.getGameController().showBroker();
-                    this.publicController.getGameController().hideGame();
-                    this.publicController.getStateController().killGame();
+                    this.publicController.getGameController().switchToBroker();
                     break;
 
                 case 'COMPLETED':
-                    this.publicController.getGameBtnController().hideGameBtns();
-                    this.publicController.getGameController().hideGame();
-                    this.publicController.getGameController().showBroker();
-                    this.publicController.getStateController().killGame();
+                    this.publicController.getGameController().switchToBroker();
                     break;
 
                 case 'REJECTED':
-                    this.publicController.getGameBtnController().hideGameBtns();
-                    this.publicController.getGameController().hideGame();
-                    this.publicController.getGameController().showBroker();
-                    this.publicController.getStateController().killGame();
+                    this.publicController.getGameController().switchToBroker();
                     break;
 
                 default:

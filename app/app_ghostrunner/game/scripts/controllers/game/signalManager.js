@@ -39,8 +39,6 @@ define([
                     break;
 
                 case 'GAME_ABANDONED':
-                    this.publicController.getGameBtnController().hideGameBtns();
-                    this.publicController.getGameBtnController().removeGameUUID();
                     this.publicController.getGameController().onAbandonedByOponnent();
                     break;
 
@@ -49,8 +47,7 @@ define([
                     break;
 
                 case 'GAME_RESTARTED':
-                    this.publicController.getGameController().showBroker();
-                    this.publicController.getGameController().hideGame();
+                    this.publicController.getGameController().switchToBroker();
                     break;
 
                 case 'GAME_OVER':
