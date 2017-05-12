@@ -120,13 +120,10 @@ define([
             //States of a game
             switch (gameModel.get('state')) {
                 case 'UNDEFINED':
-
                     break;
 
                 case 'INVITING':
                     this.publicController.getGameBtnController().hideGameBtns();
-                    this.publicController.getGameController().showBroker();
-                    this.publicController.getGameController().hideGame();
                     break;
 
                 case 'ACCEPTED':
@@ -162,7 +159,6 @@ define([
                     this.publicController.getGameBtnController().hideGameBtns();
                     this.publicController.getGameController().hideGame();
                     this.publicController.getGameController().showBroker();
-                    // this.publicController.getGameController().onAvailableForNewGame();
                     break;
 
                 case 'REJECTED':

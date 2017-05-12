@@ -30,11 +30,13 @@ define([
 
         clickAbandonBtn : function(){
             this.publicController.getInterfaceController().showLoader();
+            //TODO show confirmation
             service.abandonGame()
                 .then(function(status){
                     this.publicController.getInterfaceController().hideLoader();
                     this.removeGameUUID();
-                    this.publicController.getStateController().refreshStatus();
+                    this.publicController.getGameController().showBroker();
+                    this.publicController.getGameController().hideGame();
                     this.hideGameBtns();
                 }
                 .bind(this), function(err){

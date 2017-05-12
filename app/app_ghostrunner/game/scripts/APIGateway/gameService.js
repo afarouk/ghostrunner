@@ -40,11 +40,13 @@ define([
             if (game) params.gameUUID = game.get('gameUUID');
             return gateway.sendRequest('pauseGame', params);
         },
-        unPauseGame: function() {
+        unPauseGame: function(gameUUID) {
             var user = appCache.get('user'),
                 game = appCache.get('game'),
-                params = {};
-            params.UID = user.get('uid');
+                params = {
+                    gameUUID: gameUUID,
+                    UID: user.get('uid')
+                };
             if (game) params.gameUUID = game.get('gameUUID');
             return gateway.sendRequest('unPauseGame', params);
         },

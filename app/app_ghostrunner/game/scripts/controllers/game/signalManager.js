@@ -41,7 +41,8 @@ define([
                 case 'GAME_ABANDONED':
                     this.publicController.getGameBtnController().hideGameBtns();
                     this.publicController.getGameBtnController().removeGameUUID();
-                    this.publicController.getStateController().refreshStatus();
+                    this.publicController.getGameController().showBroker();
+                    this.publicController.getGameController().hideGame();
                     break;
 
                 case 'GAME_PAUSED':
@@ -49,10 +50,12 @@ define([
                     break;
 
                 case 'GAME_RESTARTED':
-                    
+                    this.publicController.getGameController().showBroker();
+                    this.publicController.getGameController().hideGame();
                     break;
 
                 case 'GAME_OVER':
+                    //TODO show game over modal
                     this.publicController.getStateController().refreshStatus();
                     break;
 

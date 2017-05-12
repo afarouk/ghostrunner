@@ -29,7 +29,7 @@ define([
         },
         showBroker: function() {
             this.appLayout.getRegion('broker').$el.addClass('active');
-            this.publicController.getBrokerController().view.render();
+            this.publicController.getBrokerController().reRender();
         },
         hideBroker: function() {
             this.appLayout.getRegion('broker').$el.removeClass('active');
@@ -77,19 +77,6 @@ define([
                 }
             }.bind(this));
             console.log('invitation received');
-        },
-
-        onAvailableForNewGame: function() {
-            this.publicController.getChoiceController().showConfirmation({
-                message: 'start new game?',
-                cancel: 'cancel',
-                confirm: 'yes'
-            }).then(function(){
-                console.log('start new game');
-                this.publicController.getStateController().onGetAvailableUsers();
-            }.bind(this), function() {
-                console.log('......');
-            }.bind(this));
         },
 
         onPausedByOponnent: function() {

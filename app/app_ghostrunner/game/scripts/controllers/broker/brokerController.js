@@ -18,6 +18,9 @@ define([
             this.listenTo(this.view, 'getGames', this.onGetGames.bind(this));
             this.listenTo(this.view, 'confirm', this.onConfirm.bind(this));
         },
+        reRender: function () {
+            this.view.render();
+        },
         //players
         onGetPlayers: function() {
             this.publicController.getInterfaceController().showLoader();
@@ -68,18 +71,15 @@ define([
         },
         confirmGame: function() {
             var gameUUID = this.selectedGame.get('gameUUID'),
-                game = appCache.get('game');
-            //TODO use state manager for that purpose
-            if (game && game.status === "ACCEPTED") {
+                state = this.selectedGame.get('state');
+
+            if ( state === "ACCEPTED") {
                 this.publicController.getStateController().startGame(gameUUID);
-            } else if (this.selectedGame.get('state') === "INVITING") {
-                //TODO make changes in layout for confirmation etc...
-                this.publicController.getStateController().refreshStatus(gameUUID);
+            } else if (state === "PAUSED") {
+                this.publicController.getStateController().unPauseGame(gameUUID);
             } else {
                 this.publicController.getStateController().refreshStatus(gameUUID);
             }
-            // this.publicController.getGameController().hideBroker();
-            // this.publicController.getGameController().showGame();
         },
         showGamesList: function(response) {
             var gamesList = new GamesList({
