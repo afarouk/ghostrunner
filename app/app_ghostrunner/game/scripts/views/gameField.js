@@ -8,6 +8,7 @@ define([
 	], function(Vent, template){
 	var GameFieldView = Mn.View.extend({
 		template: template,
+		className: 'canvas-container',
 		onRender: function() {
 			console.log('show field');
 		}

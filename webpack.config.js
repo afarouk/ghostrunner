@@ -80,7 +80,8 @@ module.exports = {
 			'Mn': 'backbone.marionette'
 		}),
 		new CopyWebpackPlugin([
-		    { from: './app/app_ghostrunner/page/images', to: 'images' }
+		    { from: './app/app_ghostrunner/page/images', to: 'images' },
+		    { from: './app/app_ghostrunner/game/styles/images', to: 'images' }
 		]),
 	],
 	resolve: {

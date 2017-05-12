@@ -77,7 +77,7 @@ define([
                     if (status && status.gameUUID) {
                         this.refreshStatus();
                     } else {
-                        this.onGetAvailableUsers();
+                        // this.onGetAvailableUsers();
                     }
                 }.bind(this)); 
             
@@ -104,7 +104,7 @@ define([
                     //TODO manage User not in game warning or other error
                     console.log('waiting on get game error...');
                     this.publicController.getSelectController().removeUrlGameUUID();
-                    this.onGetAvailableUsers();
+                    // this.onGetAvailableUsers();
                 }.bind(this));
             return def;
         },
@@ -196,7 +196,7 @@ define([
         onInvitationRejected: function(game) {
             service.rejectInvitation(game).then(function(){
                 //TODO now still abandon game button here
-                this.onGetAvailableUsers();
+                // this.onGetAvailableUsers();
             }.bind(this));
         },
 

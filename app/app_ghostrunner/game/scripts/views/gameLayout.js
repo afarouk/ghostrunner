@@ -8,6 +8,7 @@ define([
 	], function(Vent, template){
 	var GameLayoutView = Mn.View.extend({
 		template: template,
+		className: 'game-container',
 		regions: {
             btn: '#game-btn',
 			field: '#game-field',

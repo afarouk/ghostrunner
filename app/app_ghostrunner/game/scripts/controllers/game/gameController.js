@@ -73,7 +73,7 @@ define([
                 if (type === 'reject') {
                     this.publicController.getStateController().onInvitationRejected(game);
                 } else {
-                    this.publicController.getStateController().onGetMygames();
+                    // this.publicController.getStateController().onGetMygames();
                 }
             }.bind(this));
             console.log('invitation received');

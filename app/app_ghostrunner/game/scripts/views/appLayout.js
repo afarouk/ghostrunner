@@ -13,7 +13,8 @@ define([
 		el: '#game-layout',
 		regions: {
             game: '#game',
-			broker: '#broker'
+			broker: '#broker',
+			modals: '#modals'
 		},
 		events: {
 			'click .expand-btn': 'onExpand'
@@ -26,6 +27,8 @@ define([
 			var brokerLayout = new BrokerLayout();
 			this.showChildView( 'game',  gameLayout);
 			this.showChildView( 'broker',  brokerLayout);
+
+			this.publicController.getModalsController().create(this, 'modals');
 		},
 		destroyView: function() {
 			this.undelegateEvents();

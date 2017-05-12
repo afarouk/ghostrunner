@@ -17,11 +17,12 @@ define([
             var def = $.Deferred(),
                 model = this.getConfirmModel(def, options);
                 
-            this.onShow();
+            // this.onShow();
             this.confirmView = new ConfirmChoiceView({
                 model: model
             });
-            this.view.showChildView('confirm', this.confirmView);
+            // this.view.showChildView('confirm', this.confirmView);
+            this.onClose = this.publicController.getModalsController().show(this.confirmView);
             return def;
         },
 
@@ -46,47 +47,47 @@ define([
             return new Backbone.Model(options);
         },
 
-        showSelect: function(options) {
-            var def = $.Deferred(),
-                model = this.getSelectModel(def, options);
+        // showSelect: function(options) {
+        //     var def = $.Deferred(),
+        //         model = this.getSelectModel(def, options);
 
-            this.onShow();
-            this.selectView = new SelectChoiceView({
-                model: model
-            });
+        //     this.onShow();
+        //     this.selectView = new SelectChoiceView({
+        //         model: model
+        //     });
 
-            this.view.showChildView('select', this.selectView);
-            return def;
-        },
+        //     this.view.showChildView('select', this.selectView);
+        //     return def;
+        // },
 
-        getSelectModel: function(def, options) {
-            options = options || {};
-            options.message = options.message || '...';
-            options.confirm = options.confirm || 'ok';
-            options.list = options.list || [];
-            options.callback = function(uid) {
-                this.selectView.destroy();
-                this.selectView = null;
-                this.onClose();
-                def.resolve(uid);
-            }.bind(this);
-            var model = new Backbone.Model(options);
-            return model;
-        },
+        // getSelectModel: function(def, options) {
+        //     options = options || {};
+        //     options.message = options.message || '...';
+        //     options.confirm = options.confirm || 'ok';
+        //     options.list = options.list || [];
+        //     options.callback = function(uid) {
+        //         this.selectView.destroy();
+        //         this.selectView = null;
+        //         this.onClose();
+        //         def.resolve(uid);
+        //     }.bind(this);
+        //     var model = new Backbone.Model(options);
+        //     return model;
+        // },
 
-        onShow: function() {
-            if (this.selectView) {
-                this.selectView.destroy();
-            }
-            if (this.confirmView) {
-                this.confirmView.destroy();
-            }
-            this.view.$el.parent().show();
-        },
+        // onShow: function() {
+        //     if (this.selectView) {
+        //         this.selectView.destroy();
+        //     }
+        //     if (this.confirmView) {
+        //         this.confirmView.destroy();
+        //     }
+        //     this.view.$el.parent().show();
+        // },
 
-        onClose: function() {
-            this.view.$el.parent().hide();
-        }
+        // onClose: function() {
+        //     this.view.$el.parent().hide();
+        // }
     });
 
     return new ChoiceController();

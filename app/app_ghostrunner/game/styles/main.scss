@@ -1,11 +1,41 @@
 #game {
-    background-image: url('./images/baseballPark-min.png');
+    // background-image: url('./images/baseballPark-min.png');
     height: 100%;
-    div {
-        display: none;
+    
+    .game-container {
+        height: 100%;
+
+        .game-field {
+            height: 100%;
+
+            .canvas-container {
+                height: 100%;
+
+                .game-field-class {
+                    width: 100%;
+                }
+                .field-background {
+                    /*temporary*/
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+        }
+
+        .game-interraction {
+            display: none;
+        }
     }
-    &.active div {
-        display: block;
+
+    &.active {
+        .game-container {
+            .game-interraction {
+                display: block;
+            }
+        }
     }
 }
 #game-interface {
@@ -26,6 +56,12 @@
     background: rgba(0, 0, 0, 0.3);
     display: none;
 
+    h4 {
+        color: white;
+    }
+}
+
+.confirm-choice {
     h4 {
         color: white;
     }
@@ -57,7 +93,7 @@
     margin: 30px 10px 50px;
 }
 .player-actions {
-    background: rgba(0,255,0, 0.2);
+    background: rgba(0,255,0, 0.4);
     position: absolute;
     bottom: 10px;
     width: 80%;
@@ -69,6 +105,8 @@
     bottom: 10px;
     padding: 10px;
     right: 10px;
+    font-weight: bold;
+    color: white;
 }
 .opponent-in-game {
     width: 20px;
@@ -222,5 +260,28 @@ a.expand-btn{
     &:focus,
     &:visited {
         color: white;
+    }
+}
+
+.modals {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: none;
+
+    .modals-layout {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        background-color: rgba(255, 255, 255, 0.3);
+
+        .modals-container {
+            background: #707898;
+            padding: 15px;
+            box-shadow: 5px 4px 10px 5px #524861;
+        }
     }
 }

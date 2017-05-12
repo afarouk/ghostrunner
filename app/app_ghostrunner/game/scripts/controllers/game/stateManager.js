@@ -125,8 +125,8 @@ define([
 
                 case 'INVITING':
                     this.publicController.getGameBtnController().hideGameBtns();
-                    this.publicController.getGameController().hideBroker();
-                    this.publicController.getGameController().showGame();
+                    this.publicController.getGameController().showBroker();
+                    this.publicController.getGameController().hideGame();
                     break;
 
                 case 'ACCEPTED':

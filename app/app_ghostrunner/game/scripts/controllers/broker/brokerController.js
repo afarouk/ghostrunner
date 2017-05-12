@@ -74,11 +74,12 @@ define([
                 this.publicController.getStateController().startGame(gameUUID);
             } else if (this.selectedGame.get('state') === "INVITING") {
                 //TODO make changes in layout for confirmation etc...
+                this.publicController.getStateController().refreshStatus(gameUUID);
             } else {
                 this.publicController.getStateController().refreshStatus(gameUUID);
             }
-            this.publicController.getGameController().hideBroker();
-            this.publicController.getGameController().showGame();
+            // this.publicController.getGameController().hideBroker();
+            // this.publicController.getGameController().showGame();
         },
         showGamesList: function(response) {
             var gamesList = new GamesList({
@@ -86,6 +87,7 @@ define([
             });
             this.view.showChildView('rightList', gamesList);
             this.listenTo(gamesList, 'game:selected', this.onSelectGame.bind(this));
+            this.view.$el.find('.broker-list').addClass('shown');
         },
         onSelectGame: function(game) {
             this.selectedGame = game;
