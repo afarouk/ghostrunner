@@ -8,8 +8,9 @@ define([
     '../../views/mainBroker',
     '../../views/partials/playersList',
     '../../views/partials/gamesList',
+    '../../views/partials/emptyList',
     '../../APIGateway/gameService'
-    ], function(Vent, appCache, MainBrokerView, PlayersList, GamesList, service){
+    ], function(Vent, appCache, MainBrokerView, PlayersList, GamesList, EmptyListView, service){
     var BrokerController = Mn.Object.extend({
         create: function(layout, region) {
             this.view = new MainBrokerView();
@@ -21,6 +22,13 @@ define([
         reRender: function () {
             this.view.render();
         },
+        //empty list
+        showEmptyList: function(message) {
+            var emptyList = new EmptyListView({
+                model: new Backbone.Model({message: message})
+            });
+            this.view.showChildView('rightList', emptyList);
+        },
         //players
         onGetPlayers: function() {
             this.publicController.getInterfaceController().showLoader();
@@ -29,6 +37,10 @@ define([
                     this.publicController.getInterfaceController().hideLoader();
                     if (response.count > 0) {
                         this.showPlayersList(response);
+                    } else {
+                        this.view.$el.find('.broker-list.right-list')
+                            .removeClass('presented').removeClass('games-active');
+                        this.showEmptyList('No users are presented.');
                     }
                 }.bind(this), function(err){
                     //TODO error
@@ -39,6 +51,7 @@ define([
         confirmPlayer: function() {
             var inviteeUID = this.selectedPlayer.get('uid');
             this.publicController.getStateController().onSendInvitation(inviteeUID);
+            this.reRender();
         },
         showPlayersList: function(response) {
             var playersList = new PlayersList({
@@ -46,7 +59,7 @@ define([
             });
             this.view.showChildView('rightList', playersList);
             this.listenTo(playersList, 'player:selected', this.onSelectPlayer.bind(this));
-            this.view.$el.find('.broker-list.right-list').addClass('shown').removeClass('games-active');
+            this.view.$el.find('.broker-list.right-list').addClass('shown presented').removeClass('games-active');
         },
         onSelectPlayer: function(player) {
             this.selectedPlayer = player;
@@ -60,6 +73,10 @@ define([
                     this.publicController.getInterfaceController().hideLoader();
                     if( response.games.length > 0 ){
                         this.showGamesList(response);
+                    } else {
+                        this.view.$el.find('.broker-list.right-list')
+                            .removeClass('presented').addClass('games-active');
+                        this.showEmptyList('No games are presented.');
                     }
                 }.bind(this), function(err){
                     //TODO error
@@ -85,7 +102,7 @@ define([
             });
             this.view.showChildView('rightList', gamesList);
             this.listenTo(gamesList, 'game:selected', this.onSelectGame.bind(this));
-            this.view.$el.find('.broker-list.right-list').addClass('shown').addClass('games-active');
+            this.view.$el.find('.broker-list.right-list').addClass('shown presented').addClass('games-active');
         },
         onSelectGame: function(game) {
             this.selectedGame = game;
