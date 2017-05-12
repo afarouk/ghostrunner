@@ -230,6 +230,19 @@
                         display: block;
                     }
                 }
+
+                &.shown .list-container:before {
+                    content: "";
+                            border-style: solid;
+                            border-width: 20px 20px 20px 20px;
+                            border-color: transparent transparent #fc603b transparent;
+                            position: absolute;
+                            top: 50px;
+                }
+
+                &.shown.games-active .list-container:before {
+                    margin-left: 210px;
+                }
             }
         }
     }

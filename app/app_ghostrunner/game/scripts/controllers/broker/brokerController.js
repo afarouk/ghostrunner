@@ -48,7 +48,7 @@ define([
             });
             this.view.showChildView('rightList', playersList);
             this.listenTo(playersList, 'player:selected', this.onSelectPlayer.bind(this));
-            this.view.$el.find('.broker-list').addClass('shown');
+            this.view.$el.find('.broker-list.right-list').addClass('shown').removeClass('games-active');
         },
         onSelectPlayer: function(player) {
             this.selectedPlayer = player;
@@ -87,7 +87,7 @@ define([
             });
             this.view.showChildView('rightList', gamesList);
             this.listenTo(gamesList, 'game:selected', this.onSelectGame.bind(this));
-            this.view.$el.find('.broker-list').addClass('shown');
+            this.view.$el.find('.broker-list.right-list').addClass('shown').addClass('games-active');
         },
         onSelectGame: function(game) {
             this.selectedGame = game;
