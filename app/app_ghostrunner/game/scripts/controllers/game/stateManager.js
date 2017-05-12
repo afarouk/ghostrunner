@@ -144,9 +144,7 @@ define([
                     break;
 
                 case 'PAUSED':
-                    this.publicController.getGameBtnController().showGameBtns();
-                    this.publicController.getGameController().showBroker();
-                    this.publicController.getGameController().hideGame();
+                    this.publicController.getGameController().onUnpauseGame(gameModel.get('gameUUID'));
                     break;
 
                 case 'ABANDONED':

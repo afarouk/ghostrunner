@@ -3,8 +3,8 @@
 'use strict';
 
 define([
-    '../Vent',
-    '../views/modalsLayout'
+    '../../Vent',
+    '../../views/modalsLayout'
     ], function(Vent, ModalsLayoutView){
     //We need it for show modal dialogs
     var ModalsController = Mn.Object.extend({

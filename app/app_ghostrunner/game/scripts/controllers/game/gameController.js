@@ -13,12 +13,12 @@ define([
         start: function(user){
             console.log('game start');
 
+            this.createUser(user);
+            console.log(user);
+
             var appLayout = new AppLayout();
             appLayout.render();
             this.appLayout = appLayout;
-            
-            this.createUser(user);
-            console.log(user);
 
             this.publicController.getSocketController().start(user.uid);
         },
@@ -140,6 +140,44 @@ define([
             }.bind(this));
             console.log('invitation received');
         },
+
+        onAbandoneGame: function() {
+            // var game = appCache.get('game'),
+            //     other = game.get('otherUser').user.userName,
+            //     gameName = game.get('displayText');
+            this.publicController.getChoiceController().showConfirmation({
+                message: 'Abandon the game (final)?',
+                cancel: 'cancel',
+                confirm: 'confirm'
+            }).then(function(){
+                this.publicController.getInterfaceController().showLoader();
+                service.abandonGame()
+                .then(function(status){
+                    this.publicController.getInterfaceController().hideLoader();
+                    this.publicController.getGameController().showBroker();
+                    this.publicController.getGameController().hideGame();
+                    this.publicController.getStateController().refreshStatus();
+                }
+                .bind(this), function(err){
+                    this.publicController.getInterfaceController().hideLoader();
+                }.bind(this));
+            }.bind(this), function() {
+                //todo
+            }.bind(this));
+        },
+
+        onUnpauseGame: function (gameUUID) {
+            this.publicController.getChoiceController().showConfirmation({
+                message: 'Unpause this game?',
+                cancel: 'cancel',
+                confirm: 'confirm'
+            }).then(function(){
+                this.publicController.getStateController().unPauseGame(gameUUID);
+            }.bind(this), function() {
+                this.publicController.getGameController().showBroker();
+                this.publicController.getGameController().hideGame();
+            }.bind(this));
+        }
     });
 
     return new GameController();

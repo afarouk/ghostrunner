@@ -5,11 +5,11 @@
 define([
     './pageController',
     './chatController',
-    './modalsController',
+
+    './modals/modalsController',
+    './modals/choiceController',
 
     './broker/brokerController',
-    './broker/choiceController',
-    './broker/selectController',
 
     './game/gameController',
     './game/gameStateController',
@@ -21,9 +21,11 @@ define([
     './game/informationTableController',
     './game/playerActionsController',
     './game/btnController'
-    ], function( pageController, chatController, modalsController, brokerController, choiceController, selectController, 
-        gameController, stateController , stateManager, signalManager, socketController, fieldController,
-        interfaceController, informationTableController, playerActionsController, btnController ) {
+    ], function( pageController, chatController, 
+        modalsController, choiceController, brokerController, 
+        gameController, stateController , stateManager, signalManager, socketController, 
+        fieldController,interfaceController, informationTableController, 
+        playerActionsController, btnController ) {
     var PublicController = Mn.Object.extend({
         //misc
         getPageController: function() {
@@ -33,18 +35,17 @@ define([
             return chatController;
         },
 
-        //broker
-        getBrokerController: function() {
-            return brokerController;
+        //modals
+        getModalsController: function() {
+            return modalsController;
         },
         getChoiceController: function() {
             return choiceController;
         },
-        getSelectController: function() {
-            return selectController;
-        },
-        getModalsController: function() {
-            return modalsController;
+
+        //broker
+        getBrokerController: function() {
+            return brokerController;
         },
 
         //game

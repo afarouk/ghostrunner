@@ -18,9 +18,27 @@ define([
             this.listenTo(this.view, 'getPlayers', this.onGetPlayers.bind(this));
             this.listenTo(this.view, 'getGames', this.onGetGames.bind(this));
             this.listenTo(this.view, 'confirm', this.onConfirm.bind(this));
+            this.checkGameUrlUUID();
         },
         reRender: function () {
             this.view.render();
+        },
+        //url uuid precense
+        checkGameUrlUUID: function() {
+            if (this.getUrlGameUUID()) {
+                this.publicController.getStateController().refreshStatus();
+            }
+        },
+        setGameUUID: function(gameUUID){
+            appCache.set('urlGameUUID',gameUUID); //for temporary save gameUUID that passed through url params
+        },
+    
+        getUrlGameUUID: function() {
+            return appCache.get('urlGameUUID');
+        },
+    
+        removeUrlGameUUID: function() {
+            appCache.remove('urlGameUUID');
         },
         //empty list
         showEmptyList: function(message) {
@@ -90,8 +108,6 @@ define([
 
             if ( state === "ACCEPTED") {
                 this.publicController.getStateController().startGame(gameUUID);
-            } else if (state === "PAUSED") {
-                this.publicController.getStateController().unPauseGame(gameUUID);
             } else {
                 this.publicController.getStateController().refreshStatus(gameUUID);
             }

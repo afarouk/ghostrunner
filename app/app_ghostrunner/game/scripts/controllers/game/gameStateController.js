@@ -23,11 +23,11 @@ define([
 
         getGameStatus: function(gameUUID) {
             var def = $.Deferred();
-            var gameUUID = gameUUID || this.publicController.getSelectController().getUrlGameUUID(); 
+            var gameUUID = gameUUID || this.publicController.getBrokerController().getUrlGameUUID(); 
             if (!gameUUID) return def; 
             service.getGame(gameUUID)
                 .then(function(game, status){
-                    this.publicController.getSelectController().removeUrlGameUUID();
+                    this.publicController.getBrokerController().removeUrlGameUUID();
                     if (status === 'nocontent') {
                         def.reject();
                     } else {
@@ -42,7 +42,7 @@ define([
                 }.bind(this), function(err){
                     //TODO manage User not in game warning or other error
                     console.log('waiting on get game error...');
-                    this.publicController.getSelectController().removeUrlGameUUID();
+                    this.publicController.getBrokerController().removeUrlGameUUID();
                 }.bind(this));
             return def;
         },
@@ -141,6 +141,10 @@ define([
             if (gameModel) {
                 gameModel.kill();
             }
+        },
+
+        onGameStop: function() {
+            this.killGame();
         }
 
     });

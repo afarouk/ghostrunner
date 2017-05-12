@@ -20,7 +20,7 @@ define([
 				config.setAPIRoot(params.server);
 			}
             if (params && params.gameUUID) {
-			 publicController.getSelectController().setGameUUID(params.gameUUID);	
+			 publicController.getBrokerController().setGameUUID(params.gameUUID);	
 			}
 		}
 	});
