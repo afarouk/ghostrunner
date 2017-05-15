@@ -34,8 +34,13 @@ define([
                     this.publicController.getStateController().refreshStatus(message.gameUUID);
                     break;
 
+                case 'INVITATION_REJECTED':
+                    /* TODO  Show informational popup only */
+                    console.log(" Received invitation rejected signal ");
+                    break;
+
                 case 'GAME_STARTED':
-                    
+
                     break;
 
                 case 'GAME_ABANDONED':
@@ -56,23 +61,23 @@ define([
                     break;
 
                 case 'YOU_WON':
-                    
+
                     break;
 
                 case 'YOU_LOST':
-                    
+
                     break;
 
                 case 'BLOCK_USER':
-                    
+
                     break;
 
                 case 'SHOW_POLL':
-                    
+
                     break;
 
                 case 'SHOW_MESSAGE':
-                    
+
                     break;
 
                 case 'REFRESH_STATE':
