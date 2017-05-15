@@ -119,7 +119,15 @@ define([
                 this.publicController.getGameController().switchToBroker();
                 this.publicController.getStateController().refreshStatus();
             }.bind(this));
-            console.log('invitation received');
+        },
+
+        onRejectedByOponnent: function() {
+            this.publicController.getChoiceController().showConfirmation({
+                message: 'Invitation rejected by oponnent.',
+                confirm: 'ok'
+            }).then(function() {
+                this.publicController.getStateController().refreshStatus();
+            }.bind(this));
         },
 
         onGameOver: function() {

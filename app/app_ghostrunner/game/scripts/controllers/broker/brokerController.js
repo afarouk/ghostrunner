@@ -31,7 +31,7 @@ define([
             }
         },
         setGameUUID: function(gameUUID){
-            appCache.set('urlGameUUID',gameUUID); //for temporary save gameUUID that passed through url params
+            appCache.set('urlGameUUID', gameUUID); //for temporary save gameUUID that passed through url params
         },
     
         getUrlGameUUID: function() {
@@ -50,22 +50,28 @@ define([
         },
         //users
         onGetUsers: function() {
-            this.publicController.getInterfaceController().showLoader();
-            service.getAvailableUsers()
-                .then(function(response){
-                    this.publicController.getInterfaceController().hideLoader();
-                    if (response.count > 0) {
-                        this.showUsersList(response);
-                    } else {
-                        this.view.$el.find('.broker-list.right-list')
-                            .removeClass('presented').removeClass('games-active');
-                        this.showEmptyList('No users are presented.');
-                    }
-                }.bind(this), function(err){
-                    //TODO error
-                }.bind(this));
-            this.confirm = 'users';
-            this.view.ui.confirm.attr('disabled', true);
+            if (this.confirm === 'users') {
+                this.confirm = undefined;
+                this.view.$el.find('.broker-list.right-list').removeClass('shown presented');
+                this.view.getRegion('rightList').currentView.destroy();
+            } else {
+                this.publicController.getInterfaceController().showLoader();
+                service.getAvailableUsers()
+                    .then(function(response){
+                        this.publicController.getInterfaceController().hideLoader();
+                        if (response.count > 0) {
+                            this.showUsersList(response);
+                        } else {
+                            this.view.$el.find('.broker-list.right-list')
+                                .removeClass('presented').removeClass('games-active');
+                            this.showEmptyList('No users are presented.');
+                        }
+                    }.bind(this), function(err){
+                        //TODO error
+                    }.bind(this));
+                this.confirm = 'users';
+                this.view.ui.confirm.attr('disabled', true);
+            }
         },
         confirmUser: function() {
             var inviteeUID = this.selectedUser.get('uid');
@@ -78,7 +84,8 @@ define([
             });
             this.view.showChildView('rightList', usersList);
             this.listenTo(usersList, 'user:selected', this.onSelectUser.bind(this));
-            this.view.$el.find('.broker-list.right-list').addClass('shown presented').removeClass('games-active');
+            this.view.$el.find('.broker-list.right-list')
+                .addClass('shown presented').removeClass('games-active');
         },
         onSelectUser: function(user) {
             this.selectedUser = user;
@@ -86,22 +93,29 @@ define([
         },
         //games
         onGetGames: function() {
-            this.publicController.getInterfaceController().showLoader();
-            service.getMyGames()
-                .then(function(response){
-                    this.publicController.getInterfaceController().hideLoader();
-                    if( response.games.length > 0 ){
-                        this.showGamesList(response);
-                    } else {
-                        this.view.$el.find('.broker-list.right-list')
-                            .removeClass('presented').addClass('games-active');
-                        this.showEmptyList('No games are presented.');
-                    }
-                }.bind(this), function(err){
-                    //TODO error
-                }.bind(this));
-            this.confirm = 'games';
-            this.view.ui.confirm.attr('disabled', true);
+            if (this.confirm === 'games') {
+                this.confirm = undefined;
+                this.view.$el.find('.broker-list.right-list')
+                    .removeClass('shown presented').removeClass('games-active');
+                this.view.getRegion('rightList').currentView.destroy();
+            } else {
+                this.publicController.getInterfaceController().showLoader();
+                service.getMyGames()
+                    .then(function(response){
+                        this.publicController.getInterfaceController().hideLoader();
+                        if( response.games.length > 0 ){
+                            this.showGamesList(response);
+                        } else {
+                            this.view.$el.find('.broker-list.right-list')
+                                .removeClass('presented').addClass('games-active');
+                            this.showEmptyList('No games are presented.');
+                        }
+                    }.bind(this), function(err){
+                        //TODO error
+                    }.bind(this));
+                this.confirm = 'games';
+                this.view.ui.confirm.attr('disabled', true);
+            }
         },
         confirmGame: function() {
             var gameUUID = this.selectedGame.get('gameUUID'),
@@ -119,7 +133,8 @@ define([
             });
             this.view.showChildView('rightList', gamesList);
             this.listenTo(gamesList, 'game:selected', this.onSelectGame.bind(this));
-            this.view.$el.find('.broker-list.right-list').addClass('shown presented').addClass('games-active');
+            this.view.$el.find('.broker-list.right-list')
+                .addClass('shown presented').addClass('games-active');
         },
         onSelectGame: function(game) {
             this.selectedGame = game;
