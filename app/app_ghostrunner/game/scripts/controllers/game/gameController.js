@@ -121,9 +121,9 @@ define([
             }.bind(this));
         },
 
-        onRejectedByOponnent: function() {
+        onRejectedByOponnent: function(message) {
             this.publicController.getChoiceController().showConfirmation({
-                message: 'Invitation rejected by oponnent.',
+                message: message.payload,
                 confirm: 'ok'
             }).then(function() {
                 this.publicController.getStateController().refreshStatus();

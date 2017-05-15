@@ -21,6 +21,7 @@ define([
             this.checkGameUrlUUID();
         },
         reRender: function () {
+            this.confirm = undefined;
             this.view.render();
         },
         //url uuid precense
@@ -48,12 +49,16 @@ define([
             });
             this.view.showChildView('rightList', emptyList);
         },
+        destroyCurrentView: function() {
+            var currentView = this.view.getRegion('rightList').currentView;
+            if (currentView) currentView.destroy();
+        },
         //users
         onGetUsers: function() {
             if (this.confirm === 'users') {
                 this.confirm = undefined;
                 this.view.$el.find('.broker-list.right-list').removeClass('shown presented');
-                this.view.getRegion('rightList').currentView.destroy();
+                this.destroyCurrentView();
             } else {
                 this.publicController.getInterfaceController().showLoader();
                 service.getAvailableUsers()
@@ -97,7 +102,7 @@ define([
                 this.confirm = undefined;
                 this.view.$el.find('.broker-list.right-list')
                     .removeClass('shown presented').removeClass('games-active');
-                this.view.getRegion('rightList').currentView.destroy();
+                this.destroyCurrentView();
             } else {
                 this.publicController.getInterfaceController().showLoader();
                 service.getMyGames()

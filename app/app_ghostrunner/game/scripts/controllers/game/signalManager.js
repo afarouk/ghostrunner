@@ -37,7 +37,7 @@ define([
                 case 'INVITATION_REJECTED':
                     /* TODO  Show informational popup only */
                     console.log(" Received invitation rejected signal ");
-                    this.publicController.getGameController().onRejectedByOponnent();
+                    this.publicController.getGameController().onRejectedByOponnent(message);
                     break;
 
                 case 'GAME_STARTED':
