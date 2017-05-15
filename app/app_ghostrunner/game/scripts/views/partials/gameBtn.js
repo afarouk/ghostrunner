@@ -8,6 +8,9 @@ define([
 	var GameBtnView = Mn.View.extend({
 		className: 'game-btn',
 		template: template,
+        modelEvents: {
+            'change': 'render'
+        },
         ui: {
             pause: '#pause_btn'
         },

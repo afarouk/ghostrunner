@@ -95,7 +95,7 @@ define([
             service.acceptInvitation()
                 .then(function(state){
                     this.updateGameModel(state);
-                    this.publicController.getInformationTableController().opponentInGame(true);
+                    this.publicController.getGameBtnController().opponentInGame(true);
                 }.bind(this), function(err){
                     //on error
                 }.bind(this));

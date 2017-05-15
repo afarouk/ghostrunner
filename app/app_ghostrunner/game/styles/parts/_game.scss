@@ -101,26 +101,48 @@
     font-weight: bold;
     color: $text;
 }
-.opponent-in-game {
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    border: 1px solid #888;
-    background-color: #aaa;
-    &.online {
-        border-color: $online-border;
-        background-color: $online-back;
-    }
-    &.offline {
-        border-color: $offline-border;
-        background-color: $offline-back;
-    }
-}
+
 .game-btn {
     position: absolute;
     top: 5px;
-    right: 40px;
     float: right;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    padding-right: 50px;
+    padding-left: 10px;
+
+    .opponent-status {
+        padding-right: 8px;
+        padding-top: 1px;
+        background: rgba(255,255,255, 0.2);
+        line-height: 24px;
+
+        .opponent-in-game {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            border: 1px solid #888;
+            background-color: #aaa;
+            float: left;
+            margin: 2px 8px;
+
+            &.online {
+                border-color: $online-border;
+                background-color: $online-back;
+            }
+            &.offline {
+                border-color: $offline-border;
+                background-color: $offline-back;
+            }
+        }
+
+        .status-text {
+            font-weight: normal;
+            color: $text;
+            font-size: 12px;
+        }
+    }
 
     .menu-btn.abandon_btn,
     .menu-btn.pause_btn {

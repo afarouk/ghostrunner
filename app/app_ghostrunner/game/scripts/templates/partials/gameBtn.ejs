@@ -1,2 +1,8 @@
-<button id="pause_btn" class="menu-btn pause_btn">Pause</button>
-<button id="abandon_btn" class="menu-btn abandon_btn">Abandon</button>
+<section class="opponent-status">
+	<span class="opponent-in-game <% if(opponentInGame===true) { %>online<% }else if(opponentInGame===false){%>offline<%} %>"></span>
+	<span class="status-text">OPPONENT STATUS</span>
+</section>
+<section class="game-buttons">
+	<button id="pause_btn" class="menu-btn pause_btn">Pause</button>
+	<button id="abandon_btn" class="menu-btn abandon_btn">Abandon</button>
+</section>

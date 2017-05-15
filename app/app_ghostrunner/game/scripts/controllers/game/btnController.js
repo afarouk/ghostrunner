@@ -6,12 +6,20 @@ define([
     '../../Vent',
     '../../views/partials/gameBtn',
     '../../APIGateway/gameService',
-    '../../appCache'
-    ], function(Vent, GameBtnView,service,appCache){
+    '../../appCache',
+    '../../models/topButtons'
+    ], function(Vent, GameBtnView, service, appCache, TopButtonsModel){
     var GameBtnController = Mn.Object.extend({
         create: function(layout, region) {
-            this.view = new GameBtnView();
+            this.model = new TopButtonsModel();
+            this.view = new GameBtnView({
+                model: this.model
+            });
             layout.showChildView( region, this.view );
+        },
+
+        opponentInGame: function(inGame) {
+            this.model.set('opponentInGame', inGame);
         },
 
         showGameBtns: function() {
