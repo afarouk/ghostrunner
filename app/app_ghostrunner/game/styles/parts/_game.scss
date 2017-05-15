@@ -86,20 +86,37 @@
     margin: 30px 10px 50px;
 }
 .player-actions {
-    background: rgba(0,255,0, 0.4);
+    background: rgba(0, 0, 0, 0.5);
     position: absolute;
     bottom: 10px;
-    width: 80%;
+    display: flex;
     padding: 10px;
+    margin-right: 50px;
+
+    .team-status {
+        color: $online-back;
+        font-weight: 500;
+    }
+
+    .actions-buttons {
+        button {
+            font-size: 12px;
+        }
+    }
 }
 .chat {
-    background: rgba(0,0,255, 0.5);
+    background: transparent;
     position: absolute;
     bottom: 10px;
-    padding: 10px;
     right: 10px;
     font-weight: bold;
+    padding: 2px;
     color: $text;
+
+    .fa-commenting {
+        font-size: 30px;
+        cursor: pointer;
+    }
 }
 
 .game-btn {

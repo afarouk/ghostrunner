@@ -20,15 +20,15 @@ define([
             console.log('user role: ', thisUser.role);
             switch (thisUser.role) {
                 case 'DUAL':
-
+                    this.publicController.getPlayerActionsController().updateRole('dual');
                     break;
 
                 case 'OFFENSE':
-
+                    this.publicController.getPlayerActionsController().updateRole('offence');
                     break;
 
                 case 'DEFENSE':
-
+                    this.publicController.getPlayerActionsController().updateRole('defence');
                     break;
 
                 default:
