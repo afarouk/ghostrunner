@@ -5,14 +5,13 @@
 define([
 
     ], function(){
-    //TEMP
+    //TODO simulate socket errors and disconnect
     var socketConnect = Mn.Object.extend({
         WebSocketRoot: 'ws://simfel.com/apptsvc/ws/gaming/gamingsecret',
         initialize: function(UID) {
             var URL = this.getWebSocketRoot() + '?UID=' + UID;
             this.connect(URL);
         },
-
 
         connect: function(URL) {
             this.websocket = new WebSocket(URL);

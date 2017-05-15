@@ -44,25 +44,16 @@ define([
             this.publicController.getInterfaceController().showLoader();
             var game = appCache.get('game');
 
-            if (game.get('state') != 'PAUSED') {
-                service.pauseGame()
-                    .then(function(status){
-                        this.publicController.getInterfaceController().hideLoader();
-                        this.publicController.getStateController().refreshStatus(game.get('gameUUID'));
-                    }
-                    .bind(this), function(err){
-                        this.publicController.getInterfaceController().hideLoader();
-                    }.bind(this));
-            } else {
-                service.unPauseGame()
-                    .then(function(status){
-                        this.publicController.getInterfaceController().hideLoader();
-                        this.publicController.getStateController().refreshStatus();
-                    }
-                    .bind(this), function(err){
-                        this.publicController.getInterfaceController().hideLoader();
-                    }.bind(this));
-            }
+            service.pauseGame()
+                .then(function(status){
+                    this.publicController.getInterfaceController().hideLoader();
+                    this.publicController.getGameController().switchToBroker();
+                    this.publicController.getStateController().onGameStop();
+                    this.publicController.getStateController().refreshStatus();
+                }
+                .bind(this), function(err){
+                    this.publicController.getInterfaceController().hideLoader();
+                }.bind(this));
         },
         removeGameUUID:function(){
             var game= appCache.get('game');

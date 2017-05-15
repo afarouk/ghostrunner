@@ -24,13 +24,6 @@ define([
         onHideGameBtns: function(){
             this.$el.removeClass('visible');
         },
-        onUpdateState: function(state) {
-            if (state == "PAUSED") {
-                this.ui.pause.text('Unpause');
-            } else {
-                this.ui.pause.text('Pause');
-            }
-        },
         onClickPauseBtn: function() {
             this.publicController.getGameBtnController().clickPauseBtn();
         },
