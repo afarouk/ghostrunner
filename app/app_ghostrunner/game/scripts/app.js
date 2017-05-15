@@ -10,18 +10,6 @@ define([
 			Backbone.history.start({pushState: true});
 
 	    	publicController.getPageController().listenPage();
-	    	
-	    	this.options.checkOptions();
-		},
-		checkOptions: function() {
-			var search = Backbone.history.getSearch().replace('?', ''),
-				params = h().parseQueryString(search);
-			if (params && params.server) {
-				config.setAPIRoot(params.server);
-			}
-            if (params && params.gameUUID) {
-			 publicController.getBrokerController().setGameUUID(params.gameUUID);	
-			}
 		}
 	});
 

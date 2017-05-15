@@ -11,7 +11,7 @@ define([
 
     var GameStateController = Mn.Object.extend({
         onGameStart: function() {
-            this.publicController.getInterfaceController().hideLoader();
+            // this.publicController.getInterfaceController().hideLoader();
         },
 
         startGame: function(gameUUID) {

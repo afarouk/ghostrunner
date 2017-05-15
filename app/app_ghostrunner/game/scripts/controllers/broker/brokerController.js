@@ -27,8 +27,9 @@ define([
         //url uuid precense
         checkGameUrlUUID: function() {
             //TODO maybe show url game status
-            if (this.getUrlGameUUID()) {
-                this.publicController.getStateController().refreshStatus();
+            var gameUUID = this.getUrlGameUUID();
+            if (gameUUID) {
+                this.publicController.getStateController().refreshStatus(gameUUID);
             }
         },
         setGameUUID: function(gameUUID){

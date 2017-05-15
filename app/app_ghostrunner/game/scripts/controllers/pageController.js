@@ -3,7 +3,8 @@
 'use strict';
 
 define([
-    ], function( ){
+    '../globalHelpers',
+    ], function( h ){
     var PageController = Mn.Object.extend({
         listenPage: function(){
             //!!! TODO check if we always start listen before
@@ -12,10 +13,22 @@ define([
             $(window).on('ghostrunner.signout', this.onSignout.bind(this));
         },
         onSignin: function(e, user) {
+            this.checkOptions();
             this.publicController.getGameController().start(user);
         },
         onSignout: function(e, UID) {
             this.publicController.getGameController().stop(UID);
+        },
+
+        checkOptions: function() {
+            var search = Backbone.history.getSearch().replace('?', ''),
+                params = h().parseQueryString(search);
+            if (params && params.server) {
+                config.setAPIRoot(params.server);
+            }
+            if (params && params.gameUUID) {
+                this.publicController.getBrokerController().setGameUUID(params.gameUUID);   
+            }
         }
     });
 
