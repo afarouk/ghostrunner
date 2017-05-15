@@ -17,7 +17,7 @@ define([
             });
 			layout.showChildView( region, this.view );
 
-            this.listenTo(this.view, 'onPlayer:move', this.onMove, this);
+            this.listenTo(this.view, 'onPlayer:action', this.onAction, this);
 		},
         onBeforeDestroy: function(){
             this.stopListening();
@@ -25,12 +25,11 @@ define([
         updateRole: function(role) {
             this.model.updateRole(role);
         },
-        onMove: function() {
-            console.log('move');
+        onAction: function(action) {
+            console.log('action: ', action);
             this.publicController.getInterfaceController().showLoader();
-            //TEMPORARY for test
-            this.publicController.getStateController().onPlayerMove();
-            //..........
+
+            this.publicController.getActionsManager().onAction(action);
         }
     });
 

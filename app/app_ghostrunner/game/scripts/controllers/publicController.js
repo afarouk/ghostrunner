@@ -20,12 +20,13 @@ define([
     './game/gameInterfaceController',
     './game/informationTableController',
     './game/playerActionsController',
+    './game/actionsManager',
     './game/btnController'
     ], function( pageController, chatController, 
         modalsController, choiceController, brokerController, 
         gameController, stateController , stateManager, signalManager, socketController, 
         fieldController,interfaceController, informationTableController, 
-        playerActionsController, btnController ) {
+        playerActionsController, actionsManager, btnController ) {
     var PublicController = Mn.Object.extend({
         //misc
         getPageController: function() {
@@ -78,6 +79,9 @@ define([
         },
         getPlayerActionsController: function() {
             return playerActionsController;
+        },
+        getActionsManager: function() {
+            return actionsManager;
         },
         destroyGame: function() {
             //destroy all controllers

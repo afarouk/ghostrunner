@@ -13,15 +13,18 @@ define([
             'change': 'render'
         },
 		events: {
-			'click .move': 'onMove'
+			'click button': 'onAction'
 		},
 		behaviors: [maskBehavior],
 		onRender: function() {
 			console.log('PlayerActionsView');
 			console.log(this.model.toJSON());
 		},
-		onMove: function() {
-			this.trigger('onPlayer:move');
+		onAction: function(e) {
+			var $target = $(e.currentTarget),
+				action = $target.data('action');
+
+			this.trigger('onPlayer:action', action);
 		}
 	});
 	return PlayerActionsView;
