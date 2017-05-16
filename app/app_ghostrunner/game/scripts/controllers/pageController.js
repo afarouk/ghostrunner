@@ -26,8 +26,20 @@ define([
             if (params && params.server) {
                 config.setAPIRoot(params.server);
             }
-            if (params && params.gameUUID) {
-                this.publicController.getBrokerController().setGameUUID(params.gameUUID);   
+            if (params && params.t) {
+                this.manageByQueryParams(params);
+            }
+        },
+
+        manageByQueryParams: function(params) {
+            switch (params.t) {
+                case 'j':
+                    if (params.gameUUID) {
+                        this.publicController.getBrokerController().setGameUUID(params.gameUUID);   
+                    }
+                    break;
+                default:
+                    break;
             }
         }
     });
