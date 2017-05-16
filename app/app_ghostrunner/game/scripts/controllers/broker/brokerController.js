@@ -22,6 +22,7 @@ define([
             this.listenTo(this.view, 'inviteByEmail', this.onInviteByEmail.bind(this));
             this.listenTo(this.view, 'getGames', this.onGetGames.bind(this));
             this.listenTo(this.view, 'confirm', this.onConfirm.bind(this));
+            this.listenTo(this.view, 'team:confirm', this.onTeamConfirm.bind(this));
             this.checkGameUrlUUID();
         },
         reRender: function () {
@@ -131,8 +132,9 @@ define([
             }
         },
         confirmUser: function() {
-            var inviteeUID = this.selectedUser.get('uid');
-            this.publicController.getStateController().onSendInvitation(inviteeUID);
+            var inviteeUID = this.selectedUser.get('uid'),
+                teamId = this.selectedTeam.get('teamId');
+            this.publicController.getStateController().onSendInvitation(inviteeUID, teamId);
             this.reRender();
         },
         showUsersList: function(response) {
@@ -179,7 +181,8 @@ define([
             });
         },
         confirmInvitationByEmail: function() {
-            this.publicController.getStateController().onSendInvitationByEmail(this.credentials);
+            var teamId = this.selectedTeam.get('teamId');
+            this.publicController.getStateController().onSendInvitationByEmail(this.credentials, teamId);
         },
         onInvitationByEmailSent: function(view, success, result) {
             if (success) {
@@ -258,6 +261,11 @@ define([
                 default:
                     break;
             }
+        },
+
+        onTeamConfirm: function() {
+            this.view.ui.invite.attr('disabled', false);
+            this.view.ui.byemail.attr('disabled', false);
         }
     });
 

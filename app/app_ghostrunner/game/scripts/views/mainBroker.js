@@ -27,6 +27,7 @@ define([
 			'click @ui.invite': 'onGetUsers',
 			'click @ui.byemail': 'onInviteByEmail',
 			'click @ui.games': 'onGetGames',
+			'click @ui.teamConfirm': 'onTeamConfirm',
 			'click @ui.confirm': 'onConfirm'
 		},
 		initialize: function (options) {
@@ -53,7 +54,12 @@ define([
 		},
 
 		onConfirm: function() {
-			this.trigger('confirm');;
+			//TODO make difference between left and right parts
+			this.trigger('confirm');
+		},
+
+		onTeamConfirm: function() {
+			this.trigger('team:confirm');
 		}
 
 	});

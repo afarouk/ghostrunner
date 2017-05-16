@@ -68,7 +68,7 @@ define([
                 }.bind(this));
         },
 
-        onSendInvitation: function(inviteeUID) {
+        onSendInvitation: function(inviteeUID, teamId) {
             service.sendInvitation({
                 inviteeUID: inviteeUID
             }).then(function(result){
@@ -86,9 +86,10 @@ define([
             }.bind(this));
         },
 
-        onSendInvitationByEmail: function(credentials) {
+        onSendInvitationByEmail: function(credentials, teamId) {
             var onInvitationSent = credentials.callback;
             delete credentials.callback;
+            console.log('teamId: ', teamId);
             service.sendInvitationAndRegister({
                 payload: credentials
             }).then(function(result){
