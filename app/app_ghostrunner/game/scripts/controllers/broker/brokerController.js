@@ -9,13 +9,15 @@ define([
     '../../views/partials/usersList',
     '../../views/partials/gamesList',
     '../../views/partials/emptyList',
+    '../../views/partials/invitationForm',
     '../../APIGateway/gameService'
-    ], function(Vent, appCache, MainBrokerView, UsersList, GamesList, EmptyListView, service){
+    ], function(Vent, appCache, MainBrokerView, UsersList, GamesList, EmptyListView, InvitationFormView, service){
     var BrokerController = Mn.Object.extend({
         create: function(layout, region) {
             this.view = new MainBrokerView();
             layout.showChildView( region, this.view );
             this.listenTo(this.view, 'getUsers', this.onGetUsers.bind(this));
+            this.listenTo(this.view, 'inviteByEmail', this.onInviteByEmail.bind(this));
             this.listenTo(this.view, 'getGames', this.onGetGames.bind(this));
             this.listenTo(this.view, 'confirm', this.onConfirm.bind(this));
             this.checkGameUrlUUID();
@@ -69,7 +71,7 @@ define([
                             this.showUsersList(response);
                         } else {
                             this.view.$el.find('.broker-list.right-list')
-                                .removeClass('presented').removeClass('games-active');
+                                .removeClass('presented games-active byemail-active');
                             this.showEmptyList('No users are presented.');
                         }
                     }.bind(this), function(err){
@@ -91,10 +93,33 @@ define([
             this.view.showChildView('rightList', usersList);
             this.listenTo(usersList, 'user:selected', this.onSelectUser.bind(this));
             this.view.$el.find('.broker-list.right-list')
-                .addClass('shown presented').removeClass('games-active');
+                .addClass('shown presented').removeClass('games-active byemail-active');
         },
         onSelectUser: function(user) {
             this.selectedUser = user;
+            this.view.ui.confirm.attr('disabled', false);
+        },
+        //invite by email
+        onInviteByEmail: function() {
+            if (this.confirm === 'byemail') {
+                this.confirm = undefined;
+                this.view.$el.find('.broker-list.right-list').removeClass('shown presented byemail-active');
+                this.destroyCurrentView();
+            } else {
+                this.publicController.getInterfaceController().showLoader();
+                this.showByEmailForm();
+                this.confirm = 'byemail';
+                this.view.ui.confirm.attr('disabled', true);
+            }
+        },
+        showByEmailForm: function() {
+            var invitationForm = new InvitationFormView();
+            this.view.showChildView('rightList', invitationForm);
+            this.listenTo(invitationForm, 'credentials:filled', this.onInvitationFilled.bind(this));
+            this.view.$el.find('.broker-list.right-list')
+                .addClass('shown presented byemail-active').removeClass('game-active');
+        },
+        onInvitationFilled: function() {
             this.view.ui.confirm.attr('disabled', false);
         },
         //games
@@ -102,7 +127,7 @@ define([
             if (this.confirm === 'games') {
                 this.confirm = undefined;
                 this.view.$el.find('.broker-list.right-list')
-                    .removeClass('shown presented').removeClass('games-active');
+                    .removeClass('shown presented games-active');
                 this.destroyCurrentView();
             } else {
                 this.publicController.getInterfaceController().showLoader();
@@ -140,7 +165,7 @@ define([
             this.view.showChildView('rightList', gamesList);
             this.listenTo(gamesList, 'game:selected', this.onSelectGame.bind(this));
             this.view.$el.find('.broker-list.right-list')
-                .addClass('shown presented').addClass('games-active');
+                .addClass('shown presented games-active').removeClass('byemail-active');
         },
         onSelectGame: function(game) {
             this.selectedGame = game;

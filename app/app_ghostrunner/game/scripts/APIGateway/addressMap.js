@@ -15,6 +15,7 @@ module.exports = {
             rejectInvitation: ['PUT', '/gaming/rejectInvitation'],
         	acceptInvitation: ['PUT', '/gaming/acceptInvitation'],
         	sendInvitation: ['PUT', '/gaming/sendInvitation'],
+            sendInvitationAndRegister: ['PUT', '/gaming/sendInvitationAndRegister'],
         	getAvailableUsers: ['GET', '/gaming/getAvailableUsers'],
         	abandonGame: ['PUT', '/gaming/abandonGame'],
         	getMyGames: ['GET', '/gaming/getMyGames'],

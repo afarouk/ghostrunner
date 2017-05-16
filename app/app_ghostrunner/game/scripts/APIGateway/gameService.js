@@ -86,6 +86,11 @@ define([
             params.UID = user.get('uid');
             return gateway.sendRequest('sendInvitation', params);
         },
+        sendInvitationAndRegister: function(params) {
+            var user = appCache.get('user');
+            params.UID = user.get('uid');
+            return gateway.sendRequest('sendInvitationAndRegister', params);
+        },
         getAvailableUsers: function(params) {
             var user = appCache.get('user');
             params = params || {};

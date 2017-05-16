@@ -15,6 +15,7 @@ define([
 			teams: '[name="teams"]',
 			empty: '[name="empty"]',
 			invite: '[name="invite"]',
+			byemail: '[name="byemail"]',
 			games: '[name="games"]',
 			confirm: '[name="confirm"]'
 		},
@@ -22,6 +23,7 @@ define([
 			'click @ui.teams': 'onGetTeams',
 			// 'click @ui.empty': 'onEmpty',
 			'click @ui.invite': 'onGetUsers',
+			'click @ui.byemail': 'onInviteByEmail',
 			'click @ui.games': 'onGetGames',
 			'click @ui.confirm': 'onConfirm'
 		},
@@ -38,6 +40,10 @@ define([
 
 		onGetUsers: function() {
 			this.trigger('getUsers');
+		},
+
+		onInviteByEmail: function() {
+			this.trigger('inviteByEmail');
 		},
 
 		onGetGames: function() {
