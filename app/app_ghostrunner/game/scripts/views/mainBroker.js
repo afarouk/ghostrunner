@@ -9,6 +9,7 @@ define([
 		className: 'main-broker',
 		template: template,
 		regions: {
+			leftList: '#left-list',
 			rightList: '#right-list'
 		},
 		ui: {
@@ -17,6 +18,7 @@ define([
 			invite: '[name="invite"]',
 			byemail: '[name="byemail"]',
 			games: '[name="games"]',
+			teamConfirm: '[name="team-confirm"]',
 			confirm: '[name="confirm"]'
 		},
 		events: {
@@ -35,7 +37,7 @@ define([
 		},
 
 		onGetTeams: function() {
-
+			this.trigger('getTeams');
 		},
 
 		onGetUsers: function() {

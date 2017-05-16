@@ -6,16 +6,18 @@ define([
     '../../Vent',
     '../../appCache',
     '../../views/mainBroker',
+    '../../views/partials/teamsList',
     '../../views/partials/usersList',
     '../../views/partials/gamesList',
     '../../views/partials/emptyList',
     '../../views/partials/invitationForm',
     '../../APIGateway/gameService'
-    ], function(Vent, appCache, MainBrokerView, UsersList, GamesList, EmptyListView, InvitationFormView, service){
+    ], function(Vent, appCache, MainBrokerView, TeamsList, UsersList, GamesList, EmptyListView, InvitationFormView, service){
     var BrokerController = Mn.Object.extend({
         create: function(layout, region) {
             this.view = new MainBrokerView();
             layout.showChildView( region, this.view );
+            this.listenTo(this.view, 'getTeams', this.onGetTeams.bind(this));
             this.listenTo(this.view, 'getUsers', this.onGetUsers.bind(this));
             this.listenTo(this.view, 'inviteByEmail', this.onInviteByEmail.bind(this));
             this.listenTo(this.view, 'getGames', this.onGetGames.bind(this));
@@ -55,6 +57,53 @@ define([
         destroyCurrentView: function() {
             var currentView = this.view.getRegion('rightList').currentView;
             if (currentView) currentView.destroy();
+        },
+        //teams
+        onGetTeams: function() {
+            service.getTeams()
+                .then(function(response){
+                   //TODO teams list
+                    if (response.length === 0) {
+                        response = [
+                            {
+                                teamName: 'team1',
+                                teamId: 0
+                            },
+                            {
+                                teamName: 'team2',
+                                teamId: 1
+                            },
+                            {
+                                teamName: 'team3',
+                                teamId: 2
+                            },
+                            {
+                                teamName: 'team4',
+                                teamId: 3
+                            },
+                            {
+                                teamName: 'team5',
+                                teamId: 4
+                            }
+                        ];
+                    }
+                    this.showTeamsList(response);
+                }.bind(this), function(err){
+                    
+                }.bind(this));
+        },
+        showTeamsList: function(response) {
+            var teamsList = new TeamsList({
+                collection: new Backbone.Collection(response)
+            });
+            this.view.showChildView('leftList', teamsList);
+            this.listenTo(teamsList, 'team:selected', this.onSelectTeam.bind(this));
+            this.view.$el.find('.broker-list.left-list')
+                .addClass('shown presented');
+        },
+        onSelectTeam: function(team) {
+            this.selectedTeam = team;
+            this.view.ui.teamConfirm.attr('disabled', false);
         },
         //users
         onGetUsers: function() {

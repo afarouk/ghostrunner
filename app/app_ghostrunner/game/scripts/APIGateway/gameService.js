@@ -103,6 +103,13 @@ define([
             params.UID = user.get('uid');
             return gateway.sendRequest('getMyGames', params);
         },
+        getTeams: function() {
+            var user = appCache.get('user'),
+                params = {
+                    UID: user.get('uid')
+                };
+            return gateway.sendRequest('getTeams', params);
+        },
         abandonGame : function(){
             var user = appCache.get('user'),
                 game = appCache.get('game'),
