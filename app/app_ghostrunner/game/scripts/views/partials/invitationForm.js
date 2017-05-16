@@ -11,25 +11,50 @@ define([
 		template: template,
 		ui: {
 			email: '[name="email"]',
-			phone: '[name="phone"]'
+			phone: '[name="phone"]',
+			error: '[name="error"]'
 		},
 		events: {
-			'change @ui.email': 'onEmailChange',
-			'change @ui.phone': 'onPhoneChange',
+			'keyup input': 'validateCredentials',
+			'paste input': 'validateCredentials',
+			'change input': 'validateCredentials',
+			'input input': 'validateCredentials'
 		},
-		onEmailChange: function() {
-			var email = this.ui.email.val();
-			console.log(email);
+
+		validateCredentials: function() {
+			setTimeout(function(){
+				var email = this.ui.email.val(),
+				phone = this.ui.phone.val(),
+				credentials = {
+					email: this.validateEmail(email),
+					mobile: this.validatePhone(phone)
+				};
+
+				if (credentials.email || credentials.mobile) {
+					this.trigger('credentials:filled', credentials);
+				} else {
+					//TODO show sign like one fiels should be filled correct
+					this.trigger('credentials:filled', null);
+				}
+			}.bind(this), 1);
+		},
+
+		validateEmail: function(email) {
 			if (h().validateEmail(email)) {
-				this.trigger('credentials:filled', email);
-			} else {
-				//TODO show validation error
+				this.ui.error.html('');
+				return email;
 			}
+			return '';
 		},
-		onPhoneChange: function() {
-			var phone = this.ui.phone.val();
-			console.log(phone);
-			//TODO validate phone etc...
+
+		validatePhone: function(phone) {
+			if (phone.length < 4 || phone.length > 12) return '';
+			return phone;
+		},
+
+		onError: function(error) {
+			var message = error.responseJSON.error.message;
+			this.ui.error.html('&#9888; ' + message);
 		}
 	});
 	return InvitationForm;

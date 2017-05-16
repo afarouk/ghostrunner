@@ -86,6 +86,26 @@ define([
             }.bind(this));
         },
 
+        onSendInvitationByEmail: function(credentials) {
+            var onInvitationSent = credentials.callback;
+            delete credentials.callback;
+            service.sendInvitationAndRegister({
+                payload: credentials
+            }).then(function(result){
+                var gameModel = this.getGameModel();
+                if (!gameModel) {
+                    gameModel = new GameModel(result);
+                } else {
+                    gameModel.set('gameUUID', result.gameUUID);                               
+                }
+
+                onInvitationSent(true, result);
+                this.publicController.getStateController().refreshStatus(result.gameUUID);
+            }.bind(this), function(err){
+                onInvitationSent(false, err);
+            }.bind(this));
+        },
+
         onRetrieveInvitation: function(message) {
             var gameUUID = message.gameUUID;
             this.refreshStatus(gameUUID);

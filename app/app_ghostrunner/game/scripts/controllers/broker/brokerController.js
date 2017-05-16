@@ -115,12 +115,35 @@ define([
         showByEmailForm: function() {
             var invitationForm = new InvitationFormView();
             this.view.showChildView('rightList', invitationForm);
-            this.listenTo(invitationForm, 'credentials:filled', this.onInvitationFilled.bind(this));
+            this.listenTo(invitationForm, 'credentials:filled', this.onInvitationFilled.bind(this, invitationForm));
             this.view.$el.find('.broker-list.right-list')
                 .addClass('shown presented byemail-active').removeClass('game-active');
         },
-        onInvitationFilled: function() {
-            this.view.ui.confirm.attr('disabled', false);
+        onInvitationFilled: function(view, credentials) {
+            if (credentials) {
+                this.view.ui.confirm.attr('disabled', false);
+            } else {
+                this.view.ui.confirm.attr('disabled', true);
+            }
+            this.credentials = _.extend(credentials, {
+                callback: this.onInvitationByEmailSent.bind(this, view)
+            });
+        },
+        confirmInvitationByEmail: function() {
+            this.publicController.getStateController().onSendInvitationByEmail(this.credentials);
+        },
+        onInvitationByEmailSent: function(view, success, result) {
+            if (success) {
+                var userName = 'to ' + result.otherUser.user.userName;
+                this.publicController.getChoiceController().showConfirmation({
+                    message: 'Your invitation ' + userName + ' successfully sent.',
+                    confirm: 'ok'
+                }).then(function() {
+                    this.reRender();
+                }.bind(this));
+            } else {
+                view.triggerMethod('error', result);
+            }
         },
         //games
         onGetGames: function() {
@@ -173,10 +196,18 @@ define([
         },
         //confirm
         onConfirm: function() {
-            if (this.confirm === 'users') {
-                this.confirmUser();
-            } else if (this.confirm === 'games') {
-                this.confirmGame();
+            switch (this.confirm) {
+                case 'users':
+                    this.confirmUser();
+                    break;
+                case 'byemail':
+                    this.confirmInvitationByEmail();
+                    break;
+                case 'games':
+                    this.confirmGame();
+                    break;
+                default:
+                    break;
             }
         }
     });
