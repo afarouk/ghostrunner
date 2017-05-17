@@ -17,6 +17,9 @@ define([
         },
         hideLoader: function() {
             this.view.triggerMethod('hideLoader');
+        },
+        showTossAnimation: function() {
+            this.view.triggerMethod('showTossAnimation');
         }
     });
 

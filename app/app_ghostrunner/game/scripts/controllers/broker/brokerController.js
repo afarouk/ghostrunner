@@ -227,11 +227,8 @@ define([
             var gameUUID = this.selectedGame.get('gameUUID'),
                 state = this.selectedGame.get('state');
 
-            if ( state === "ACCEPTED") {
-                this.publicController.getStateController().startGame(gameUUID);
-            } else {
-                this.publicController.getStateController().refreshStatus(gameUUID);
-            }
+            this.publicController.getStateController().refreshStatus(gameUUID);
+            this.reRender();
         },
         showGamesList: function(response) {
             var gamesList = new GamesList({

@@ -37,19 +37,19 @@ define([
                 case 'INVITATION_REJECTED':
                     /* TODO  Show informational popup only */
                     console.log(" Received invitation rejected signal ");
-                    this.publicController.getGameController().onRejectedByOponnent(message);
+                    this.publicController.getModalsController().onRejectedByOponnent(message);
                     break;
 
                 case 'GAME_STARTED':
-
+                    this.publicController.getStateController().refreshStatus(message.gameUUID);
                     break;
 
                 case 'GAME_ABANDONED':
-                    this.publicController.getGameController().onAbandonedByOponnent();
+                    this.publicController.getModalsController().onAbandonedByOponnent();
                     break;
 
                 case 'GAME_PAUSED':
-                    this.publicController.getGameController().onPausedByOponnent();
+                    this.publicController.getModalsController().onPausedByOponnent();
                     break;
 
                 case 'GAME_RESTARTED':
@@ -57,8 +57,7 @@ define([
                     break;
 
                 case 'GAME_OVER':
-                    //TODO show game over modal
-                    this.publicController.getGameController().onGameOver();
+                    this.publicController.getModalsController().onGameOver();
                     break;
 
                 case 'YOU_WON':

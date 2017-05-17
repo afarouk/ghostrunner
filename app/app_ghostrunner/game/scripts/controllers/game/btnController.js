@@ -37,7 +37,7 @@ define([
         },
 
         clickAbandonBtn : function(){
-            this.publicController.getGameController().onAbandoneGame();
+            this.publicController.getModalsController().onAbandoneGame();
         },
 
         clickPauseBtn: function() {

@@ -54,7 +54,7 @@ define([
                     break;
 
                 case 'INVITATION_RECEIVED':
-                    this.publicController.getGameController().onInvitationReceived();
+                    this.publicController.getModalsController().onInvitationReceived();
                     break;
 
                 case 'IN_MOVE':
@@ -126,7 +126,7 @@ define([
                     break;
 
                 case 'ACCEPTED':
-                    this.publicController.getStateController().startGame(gameModel.get('gameUUID'));
+                    this.publicController.getStateController().afterGameWasAccepted(gameModel);
                     break;
 
                 case 'STARTING':
@@ -138,7 +138,7 @@ define([
                     break;
 
                 case 'PAUSED':
-                    this.publicController.getGameController().onUnpauseGame(gameModel.get('gameUUID'));
+                    this.publicController.getModalsController().onUnpauseGame(gameModel.get('gameUUID'));
                     break;
 
                 case 'ABANDONED':

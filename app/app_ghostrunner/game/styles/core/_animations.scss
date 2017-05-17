@@ -20,3 +20,19 @@
     pointer-events: all;
   }
 }
+
+@keyframes toss-animation {
+  0% {
+    opacity: 0;
+    display: block;
+    visibility: visible;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    display: none;
+    visibility: hidden;
+  }
+}

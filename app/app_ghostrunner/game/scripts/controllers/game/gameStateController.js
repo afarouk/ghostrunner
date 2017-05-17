@@ -14,8 +14,8 @@ define([
             // this.publicController.getInterfaceController().hideLoader();
         },
 
-        startGame: function(gameUUID) {
-            service.startGame(gameUUID)
+        startGame: function(gameUUID, role) {
+            service.startGame(gameUUID, role)
                 .then(function(state){
                     this.updateGameModel(state);
                 }.bind(this));
@@ -54,6 +54,9 @@ define([
         updateGameModel: function (state) {
             var gameModel = this.getGameModel();
             gameModel.set(state);
+            if (state.get('showTossAnimation')) {
+                this.publicController.getInterfaceController().showTossAnimation();
+            }
             this.publicController.getStateManager().manage(gameModel);
         },
     
@@ -64,6 +67,7 @@ define([
         refreshStatus: function(gameUUID) {
             this.getGameStatus(gameUUID)
                 .then(function(game){
+                    this.updateGameModel(game);
                     this.publicController.getStateManager().manage(game);                     
                 }.bind(this));
         },
@@ -112,14 +116,33 @@ define([
             this.refreshStatus(gameUUID);
         },
 
-        onInvitationAccepted: function() {
-            service.acceptInvitation()
-                .then(function(state){
-                    this.updateGameModel(state);
-                    this.publicController.getGameBtnController().opponentInGame(true);
-                }.bind(this), function(err){
-                    //on error
+        onInvitationAccepted: function(role) {
+            service.acceptInvitation({
+                preferredRole: role
+            }).then(function(state){
+                this.updateGameModel(state);
+                this.publicController.getGameBtnController().opponentInGame(true);
+            }.bind(this), function(err){
+                //on error
+            }.bind(this));
+        },
+
+        afterGameWasAccepted: function(gameModel) {
+            var gameUUID = gameModel.get('gameUUID'),
+                otherUser = gameModel.get('otherUser'),
+                initiator = gameModel.get('thisUser').initiator;
+
+            if (initiator) {
+                this.publicController.getChoiceController().showConfirmation({
+                    message: 'Your invitation to ' + otherUser.user.userName + ' was accepted.',
+                    confirm: 'ok'
+                }).then(function() {
+                    this.publicController.getModalsController().onSelectRole()
+                        .then(function(role) {
+                            this.startGame(gameUUID, role);
+                        }.bind(this));
                 }.bind(this));
+            }
         },
 
         onInvitationRejected: function(game) {

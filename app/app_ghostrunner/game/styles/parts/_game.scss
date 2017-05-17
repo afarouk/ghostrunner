@@ -78,6 +78,29 @@
         background: url('images/loader.svg') no-repeat center;
     }
 }
+.toss {
+    background: rgba(0,0,0,0.3);
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    top: 0;
+    bottom: 0;
+    position: absolute;
+    display: none;
+
+    .toss-message {
+        color: #80ff80;
+        font-size: 24px;
+        font-weight: 600;
+        background: black;
+        padding: 5px;
+    }
+
+    &.begin {
+        display: flex;
+        animation: toss-animation 4.0s forwards;
+    }
+}
 .information-table {
     background: rgba(0,0,0, 0.2);
     height: 200px;

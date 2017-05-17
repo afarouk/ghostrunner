@@ -29,6 +29,10 @@ define([
 		onHideLoader: function() {
 			console.log('hide loader');
 			this.$('.loader').hide();
+		},
+		onShowTossAnimation: function() {
+			console.log('show toss animation');
+			this.$('.toss').addClass('begin');
 		}
 	});
 	return GameInterfaceView;

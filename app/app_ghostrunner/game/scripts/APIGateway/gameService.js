@@ -24,11 +24,12 @@ define([
             if (gameUUID) params.gameUUID = gameUUID;
             return gateway.sendRequest('getGame', params);
         },
-        startGame: function(gameUUID) {
+        startGame: function(gameUUID, role) {
             var user = appCache.get('user'),
                 params = {
                     UID: user.get('uid'),
-                    gameUUID: gameUUID
+                    gameUUID: gameUUID,
+                    preferredRole: role
                 };
             return gateway.sendRequest('startGame', params);
         },
