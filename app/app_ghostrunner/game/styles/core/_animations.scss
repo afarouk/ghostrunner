@@ -22,9 +22,10 @@
 }
 
 /*TODO change to good looking toss animation here*/
+/* and replace image with css gradients*/
 @keyframes toss-animation {
   0% {
-    opacity: 0;
+    opacity: 0.25;
     display: block;
     visibility: visible;
   }
@@ -32,8 +33,16 @@
     opacity: 1;
   }
   100% {
-    opacity: 0;
+    opacity: 0.25;
     display: none;
     visibility: hidden;
+  }
+}
+@keyframes rollTheDice {
+  0% {
+    transform: rotateZ(0deg);
+  }
+  100% {
+    transform: rotateZ(360deg);
   }
 }
