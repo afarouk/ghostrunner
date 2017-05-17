@@ -4,6 +4,7 @@
 
 define([
     './pageController',
+    './urlController',
     './chatController',
 
     './modals/modalsController',
@@ -22,15 +23,18 @@ define([
     './game/playerActionsController',
     './game/actionsManager',
     './game/btnController'
-    ], function( pageController, chatController, 
+    ], function( pageController, urlController, chatController, 
         modalsController, choiceController, brokerController, 
         gameController, stateController , stateManager, signalManager, socketController, 
         fieldController,interfaceController, informationTableController, 
         playerActionsController, actionsManager, btnController ) {
     var PublicController = Mn.Object.extend({
-        //misc
+        //base
         getPageController: function() {
             return pageController;
+        },
+        getUrlController: function() {
+            return urlController;
         },
         getChatController: function() {
             return chatController;

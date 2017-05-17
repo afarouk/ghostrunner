@@ -1,10 +1,8 @@
 'use strict';
 
 define([
-	'./controllers/publicController',
-	'./globalHelpers',
-	'./appConfig'
-	], function(publicController, h, config){
+	'./controllers/publicController'
+	], function(publicController){
 	var App = new Mn.Application({
 		onStart: function() {
 			Backbone.history.start({pushState: true});
