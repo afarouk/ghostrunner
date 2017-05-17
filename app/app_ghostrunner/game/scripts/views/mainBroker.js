@@ -18,6 +18,7 @@ define([
 			invite: '[name="invite"]',
 			byemail: '[name="byemail"]',
 			games: '[name="games"]',
+			createTeam: '[name="create-team"]',
 			teamConfirm: '[name="team-confirm"]',
 			confirm: '[name="confirm"]'
 		},
@@ -27,6 +28,7 @@ define([
 			'click @ui.invite': 'onGetUsers',
 			'click @ui.byemail': 'onInviteByEmail',
 			'click @ui.games': 'onGetGames',
+			'click @ui.createTeam': 'onCreateTeam',
 			'click @ui.teamConfirm': 'onTeamConfirm',
 			'click @ui.confirm': 'onConfirm'
 		},
@@ -60,6 +62,10 @@ define([
 
 		onTeamConfirm: function() {
 			this.trigger('team:confirm');
+		},
+
+		onCreateTeam: function() {
+			this.trigger('team:create');
 		}
 
 	});

@@ -40,6 +40,7 @@ define([
             }).then(function(){
                 this.onSelectRole()
                     .then(function(role){
+                        //TODO select players for game (team)
                         this.publicController.getStateController().onInvitationAccepted(role);
                     }.bind(this));
             }.bind(this), function(type) {

@@ -11,6 +11,7 @@ define([
     './modals/choiceController',
 
     './broker/brokerController',
+    './broker/createTeamController',
 
     './game/gameController',
     './game/gameStateController',
@@ -24,7 +25,7 @@ define([
     './game/actionsManager',
     './game/btnController'
     ], function( pageController, urlController, chatController, 
-        modalsController, choiceController, brokerController, 
+        modalsController, choiceController, brokerController, createTeamController,
         gameController, stateController , stateManager, signalManager, socketController, 
         fieldController,interfaceController, informationTableController, 
         playerActionsController, actionsManager, btnController ) {
@@ -51,6 +52,9 @@ define([
         //broker
         getBrokerController: function() {
             return brokerController;
+        },
+        getCreateTeamController: function() {
+            return createTeamController;
         },
 
         //game

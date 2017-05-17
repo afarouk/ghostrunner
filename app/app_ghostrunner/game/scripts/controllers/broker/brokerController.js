@@ -23,6 +23,7 @@ define([
             this.listenTo(this.view, 'getGames', this.onGetGames.bind(this));
             this.listenTo(this.view, 'confirm', this.onConfirm.bind(this));
             this.listenTo(this.view, 'team:confirm', this.onTeamConfirm.bind(this));
+            this.listenTo(this.view, 'team:create', this.onTeamCreate.bind(this));
             this.checkGameUrlUUID();
         },
         reRender: function () {
@@ -105,6 +106,9 @@ define([
         onSelectTeam: function(team) {
             this.selectedTeam = team;
             this.view.ui.teamConfirm.attr('disabled', false);
+        },
+        onTeamCreate: function() {
+            this.publicController.getCreateTeamController().create();
         },
         //users
         onGetUsers: function() {

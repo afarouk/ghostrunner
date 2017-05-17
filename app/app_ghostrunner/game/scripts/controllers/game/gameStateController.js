@@ -139,6 +139,7 @@ define([
                 }).then(function() {
                     this.publicController.getModalsController().onSelectRole()
                         .then(function(role) {
+                            //TODO select players for game (team)
                             this.startGame(gameUUID, role);
                         }.bind(this));
                 }.bind(this));

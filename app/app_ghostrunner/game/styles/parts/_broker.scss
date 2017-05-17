@@ -102,6 +102,11 @@
                     }
                 }
 
+                .broker-left-buttons {
+                    display: flex;
+                    flex-direction: row;
+                }
+
                 button {
                     top: 10px;
                     left: 0;
