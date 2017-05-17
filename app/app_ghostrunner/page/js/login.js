@@ -62,7 +62,7 @@
         },
 
 		sendRequest: function(request, options) {
-            var payload = options.payload || '',
+            var payload = options.payload ? JSON.stringify(options.payload) : '',
             	url = this.getAPIRoot() + request[1],
             	method = request[0];
             delete options.payload;
@@ -70,7 +70,7 @@
             return $.ajax({
                 type: method,
                 url: (options ? url + '?' + $.param(options) : url),
-                data: JSON.stringify(payload),
+                data: payload,
                 contentType: 'application/json',
                 processData: false,
                 timeout: 10000
