@@ -22,7 +22,6 @@ define([
             this.listenTo(this.view, 'confirm', this.onConfirm.bind(this));
             this.listenTo(this.view, 'cancel', this.onCancel.bind(this));
             this.listenTo(this.view, 'team:confirm', this.onTeamConfirm.bind(this));
-            this.listenTo(this.view, 'team:create', this.onTeamCreate.bind(this));
             this.checkGameUrlUUID();
         },
         reRender: function () {
@@ -84,7 +83,7 @@ define([
 
         onSelectTeam: function(team) {
             if (team.get('newTeam')) {
-                this.publicController.getCreateTeamController().teamCreate();
+                this.publicController.getCreateTeamController().teamCreate(this.view);
             } else {
                 this.selectedTeam = team;
                 this.selectedTeam.unset('lineUpId', {silent: true});
@@ -94,7 +93,7 @@ define([
 
         onSelectLineUp: function(lineUpId) {
             if (lineUpId === 'new') {
-                this.publicController.getCreateTeamController().lineUpCreate(this.selectedTeam.get('teamId'));
+                this.publicController.getCreateTeamController().lineUpCreate(this.view, this.selectedTeam.get('teamId'));
             } else {
                 this.selectedTeam.set('lineUpId', lineUpId, {silent: true});
                 this.view.ui.teamConfirm.attr('disabled', false);
@@ -269,6 +268,7 @@ define([
 
         onCancel: function() {
             this.reRender();
+            this.view.$el.removeClass('creation-state');
         },
 
         onTeamConfirm: function() {

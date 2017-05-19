@@ -1,0 +1,38 @@
+<section class="creation-header">
+	<button type="button" name="cancel">cancel</button>
+	<div class="team-info">
+		<div class="block">
+			<label>LineUp name:</label>
+			<input type="text" name="team-name" placeholder="[...]">
+		</div>
+		<div class="block">
+			<label>Count:</label>
+			<span>[?]</span>
+		</div>
+		<div class="block">
+			<label>Team name</label>
+		</div>
+	</div>
+	<button type="button" name="save" disabled>save</button>
+</section>
+<section class="players-list-container">
+	<table>
+		<tbody>
+			<% _.each(players, function(player){ %>
+				<tr>
+					<td class="with-name"><%= player.displayText %></td>
+					<td class="with-checkbox">
+						<input type="checkbox"></input>
+					</td>
+					<td class="with-select">
+						<select name="position">
+							<% _.each(positions, function(position){ %>
+								<option value="position1"><%= position.displayText %></option>
+							<% }) %>
+						</select>
+					</td>
+				</tr>
+			<% }) %>
+		</tbody>
+	</table>
+</section>

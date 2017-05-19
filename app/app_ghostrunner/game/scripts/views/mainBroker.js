@@ -10,7 +10,8 @@ define([
 		template: template,
 		regions: {
 			leftList: '#left-list',
-			rightList: '#right-list'
+			rightList: '#right-list',
+			creation: '#creation-region'
 		},
 		ui: {
 			leftBroker: '.left-broker',

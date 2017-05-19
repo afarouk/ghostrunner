@@ -125,7 +125,7 @@ define([
                 params = {
                     UID: user.get('uid')
                 };
-            return gateway.sendRequest('getTeams', params);
+            return gateway.sendRequest('getBaseballFieldPositions', params);
         },
 
         getTeams: function() {
@@ -136,12 +136,12 @@ define([
             return gateway.sendRequest('getTeams', params);
         },
 
-        retreiveAvailablePlayers: function() {
+        retrieveAvailablePlayers: function() {
             var user = appCache.get('user'),
                 params = {
                     UID: user.get('uid')
                 };
-            return gateway.sendRequest('retreiveAvailablePlayers', params);
+            return gateway.sendRequest('retrieveAvailablePlayers', params);
         },
 
         retrieveTeamPlayers: function(teamId) {

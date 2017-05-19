@@ -19,6 +19,105 @@
         background-color: $broker-back;
         height: 100%;
 
+        .creation-region {
+            display: none;
+        }
+
+        &.creation-state {
+            .broker-part {
+                display: none;
+            }
+            .creation-region {
+                display: flex;
+                width: 100%;
+            }
+        }
+
+        .creation-region {
+            .create-team,
+            .create-lineUp {
+                width: 100%;
+                h3 {
+                    color: $text;
+                }
+
+                .creation-header {
+                    width: 100%;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    background-color: rgba(255, 255, 255, 0.3);
+
+                    .team-info {
+                        display: flex;
+                        color: white;
+                        padding: 0 20px;
+                        justify-content: space-around;
+                        align-items: baseline;
+                        font-size: 16px;
+
+                        .block {
+                            padding: 0 10px;
+
+                            label {
+                                padding-right: 10px;
+                            }
+                            input {
+                                height: 30px;
+                            }
+                        }
+                    }
+                }
+
+                .players-list-container {
+                    margin-top: 20px;
+                    overflow-y: auto;
+                    border: 1px solid white;
+                    max-height: calc(100% - 100px);
+                    border-collapse: collapse;
+
+                    table {
+                        width: 100%;
+                        display: flex;
+                        border-collapse: collapse;
+
+                        tbody {
+                            width: 100%;
+                            display: flex;
+                            flex-direction: column;
+                            color: white;
+                            font-size: 16px;
+                            font-weight: 600;
+
+                            tr {
+                                width: 100%;
+                                display: flex;
+                                justify-content: space-between;
+
+                                td {
+                                    padding: 5px 10px;
+                                    height: 40px;
+
+                                    &.with-name {
+                                        width: 300px;
+                                    }
+
+                                    &.with-cost {
+                                        width: 80px;
+                                    }
+
+                                    select {
+                                        border: 0;
+                                        width: 100%;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
         .broker-part {
             flex-direction: column;
 
@@ -40,7 +139,7 @@
                         display: flex;
                         color: $text;
                         padding: 6px 12px;
-                        background-color: rgba(255,255,255,0.3);
+                        background-color: rgba(255, 255, 255, 0.3);
                         i {
                             font-size: 24px;
                             margin: 8px 8px 0 0;
