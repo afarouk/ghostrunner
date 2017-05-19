@@ -10,16 +10,14 @@ define([
     '../../views/partials/usersList',
     '../../views/partials/gamesList',
     '../../views/partials/emptyList',
-    '../../views/partials/invitationForm',
     '../../APIGateway/gameService'
-    ], function(Vent, appCache, MainBrokerView, TeamsList, UsersList, GamesList, EmptyListView, InvitationFormView, service){
+    ], function(Vent, appCache, MainBrokerView, TeamsList, UsersList, GamesList, EmptyListView, service){
     var BrokerController = Mn.Object.extend({
         create: function(layout, region) {
             this.view = new MainBrokerView();
             layout.showChildView( region, this.view );
             this.listenTo(this.view, 'getTeams', this.onGetTeams.bind(this));
             this.listenTo(this.view, 'getUsers', this.onGetUsers.bind(this));
-            this.listenTo(this.view, 'inviteByEmail', this.onInviteByEmail.bind(this));
             this.listenTo(this.view, 'getGames', this.onGetGames.bind(this));
             this.listenTo(this.view, 'confirm', this.onConfirm.bind(this));
             this.listenTo(this.view, 'team:confirm', this.onTeamConfirm.bind(this));
@@ -125,7 +123,7 @@ define([
                             this.showUsersList(response);
                         } else {
                             this.view.$el.find('.broker-list.right-list')
-                                .removeClass('presented games-active byemail-active');
+                                .removeClass('presented games-active');
                             this.showEmptyList('No users are presented.');
                         }
                     }.bind(this), function(err){
@@ -136,57 +134,46 @@ define([
             }
         },
         confirmUser: function() {
-            var inviteeUID = this.selectedUser.get('uid'),
+            if (this.selectedUser.get('byEmail')) {
+                this.confirmInvitationByEmail();
+            } else {
+                var inviteeUID = this.selectedUser.get('uid'),
                 teamId = this.selectedTeam.get('teamId');
-            this.publicController.getStateController().onSendInvitation(inviteeUID, teamId);
-            this.reRender();
+                this.publicController.getStateController().onSendInvitation(inviteeUID, teamId);
+                this.reRender();
+            }
         },
         showUsersList: function(response) {
-            var usersList = new UsersList({
-                collection: new Backbone.Collection(response.users)
-            });
+            var collection = new Backbone.Collection(response.users),
+                usersList;
+
+            collection.add({byEmail: true}, {at:0});
+            usersList = new UsersList({
+                    collection: collection
+                });
             this.view.showChildView('rightList', usersList);
             this.listenTo(usersList, 'user:selected', this.onSelectUser.bind(this));
             this.view.$el.find('.broker-list.right-list')
-                .addClass('shown presented').removeClass('games-active byemail-active');
+                .addClass('shown presented').removeClass('games-active');
         },
-        onSelectUser: function(user) {
+        onSelectUser: function(user, creds, view) {
+            if (user.get('byEmail')) {
+                if (creds) {
+                    this.credentials = _.extend(creds, {
+                        callback: this.onInvitationByEmailSent.bind(this, view)
+                    });
+                    this.view.ui.confirm.attr('disabled', false);
+                } else {
+                    this.view.ui.confirm.attr('disabled', true);
+                }
+            } else {
+                this.view.ui.confirm.attr('disabled', false);
+            }
             this.selectedUser = user;
-            this.view.ui.confirm.attr('disabled', false);
         },
         //invite by email
-        onInviteByEmail: function() {
-            if (this.confirm === 'byemail') {
-                this.confirm = undefined;
-                this.view.$el.find('.broker-list.right-list').removeClass('shown presented byemail-active');
-                this.destroyCurrentView();
-            } else {
-                this.publicController.getInterfaceController().showLoader();
-                this.showByEmailForm();
-                this.confirm = 'byemail';
-                this.view.ui.confirm.attr('disabled', true);
-            }
-        },
-        showByEmailForm: function() {
-            var invitationForm = new InvitationFormView();
-            this.view.showChildView('rightList', invitationForm);
-            this.listenTo(invitationForm, 'credentials:filled', this.onInvitationFilled.bind(this, invitationForm));
-            this.view.$el.find('.broker-list.right-list')
-                .addClass('shown presented byemail-active').removeClass('game-active');
-        },
-        onInvitationFilled: function(view, credentials) {
-            if (credentials) {
-                this.view.ui.confirm.attr('disabled', false);
-            } else {
-                this.view.ui.confirm.attr('disabled', true);
-            }
-            this.credentials = _.extend(credentials, {
-                callback: this.onInvitationByEmailSent.bind(this, view)
-            });
-        },
         confirmInvitationByEmail: function() {
-            var teamId = this.selectedTeam.get('teamId');
-            this.publicController.getStateController().onSendInvitationByEmail(this.credentials, teamId);
+            this.publicController.getStateController().onSendInvitationByEmail(this.credentials);
         },
         onInvitationByEmailSent: function(view, success, result) {
             if (success) {
@@ -241,7 +228,7 @@ define([
             this.view.showChildView('rightList', gamesList);
             this.listenTo(gamesList, 'game:selected', this.onSelectGame.bind(this));
             this.view.$el.find('.broker-list.right-list')
-                .addClass('shown presented games-active').removeClass('byemail-active');
+                .addClass('shown presented games-active');
         },
         onSelectGame: function(game) {
             this.selectedGame = game;
@@ -253,9 +240,6 @@ define([
                 case 'users':
                     this.confirmUser();
                     break;
-                case 'byemail':
-                    this.confirmInvitationByEmail();
-                    break;
                 case 'games':
                     this.confirmGame();
                     break;
@@ -266,7 +250,6 @@ define([
 
         onTeamConfirm: function() {
             this.view.ui.invite.attr('disabled', false);
-            this.view.ui.byemail.attr('disabled', false);
         }
     });
 

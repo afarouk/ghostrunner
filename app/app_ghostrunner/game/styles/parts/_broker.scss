@@ -57,49 +57,46 @@
                             }
                             &.team.selected,
                             &.available-user.selected,
+                            &.invitation-by-email.selected,
                             &.my-game.selected {
                                 background-color: green;
                             }
                         }
-                    }
 
-                    .invitation-by-email {
-                        padding: 10px 20px;
-                        background-color: rgba(250, 96, 50, 0.5);
+                        .invitation-by-email {
+                            padding: 10px 20px;
+                            background-color: rgba(250, 96, 50, 0.5);
 
-                        .invitation-inputs-box {
-                            display: flex;
-                            flex-direction: column;
+                            .invitation-inputs-box {
+                                display: flex;
+                                flex-direction: column;
 
-                            .form-group {
-                                margin: 0;
-
-                                label {
+                                .form-group {
                                     margin: 0;
-                                    color: $text;
-                                }
 
-                                .form-control {
-                                    margin: 0;
-                                    height: 40px;
-                                    background-color: rgba(255, 255, 255, 0.8);
+                                    .form-control {
+                                        margin: 0;
+                                        height: 30px;
+                                        background-color: rgba(255, 255, 255, 0.8);
 
-                                    &[type=number]::-webkit-inner-spin-button, 
-                                    &[type=number]::-webkit-outer-spin-button { 
-                                        -webkit-appearance: none;
-                                        -moz-appearance: none;
-                                        appearance: none;
-                                        margin: 0; 
+                                        &[type=number]::-webkit-inner-spin-button, 
+                                        &[type=number]::-webkit-outer-spin-button { 
+                                            -webkit-appearance: none;
+                                            -moz-appearance: none;
+                                            appearance: none;
+                                            margin: 0; 
+                                        }
                                     }
-                                }
 
-                                .invitation-error-message {
-                                    color: yellow;
-                                    font-size: 12px;
+                                    .invitation-error-message {
+                                        color: yellow;
+                                        font-size: 12px;
+                                    }
                                 }
                             }
                         }
                     }
+
                 }
 
                 .broker-left-buttons {
@@ -132,10 +129,7 @@
                 }
 
                 &.shown.games-active .list-container:before {
-                    margin-left: 340px;
-                }
-                &.shown.byemail-active .list-container:before {
-                    margin-left: 160px;
+                    margin-left: 210px;
                 }
             }
         }
