@@ -20,6 +20,7 @@ define([
             this.listenTo(this.view, 'getUsers', this.onGetUsers.bind(this));
             this.listenTo(this.view, 'getGames', this.onGetGames.bind(this));
             this.listenTo(this.view, 'confirm', this.onConfirm.bind(this));
+            this.listenTo(this.view, 'cancel', this.onCancel.bind(this));
             this.listenTo(this.view, 'team:confirm', this.onTeamConfirm.bind(this));
             this.listenTo(this.view, 'team:create', this.onTeamCreate.bind(this));
             this.checkGameUrlUUID();
@@ -82,14 +83,22 @@ define([
         },
 
         onSelectTeam: function(team) {
-            this.selectedTeam = team;
-            this.selectedTeam.unset('lineUpId', {silent: true});
-            this.view.ui.teamConfirm.attr('disabled', true);
+            if (team.get('newTeam')) {
+                this.publicController.getCreateTeamController().teamCreate();
+            } else {
+                this.selectedTeam = team;
+                this.selectedTeam.unset('lineUpId', {silent: true});
+                this.view.ui.teamConfirm.attr('disabled', true);
+            }
         },
 
         onSelectLineUp: function(lineUpId) {
-            this.selectedTeam.set('lineUpId', lineUpId, {silent: true});
-            this.view.ui.teamConfirm.attr('disabled', false);
+            if (lineUpId === 'new') {
+                this.publicController.getCreateTeamController().lineUpCreate(this.selectedTeam.get('teamId'));
+            } else {
+                this.selectedTeam.set('lineUpId', lineUpId, {silent: true});
+                this.view.ui.teamConfirm.attr('disabled', false);
+            }
         },
 
         afterLineUpSelected: function() {
@@ -115,9 +124,6 @@ define([
             }
         },
 
-        onTeamCreate: function() {
-            this.publicController.getCreateTeamController().create();
-        },
         //users
         onGetUsers: function() {
             if (this.confirm === 'users') {
@@ -261,6 +267,10 @@ define([
             }
         },
 
+        onCancel: function() {
+            this.reRender();
+        },
+
         onTeamConfirm: function() {
             this.view.ui.invite.attr('disabled', true);
             this.afterLineUpSelected();
@@ -268,6 +278,7 @@ define([
 
         switchToTeamState: function() {
             this.view.ui.rightBroker.addClass('team-state');
+            this.view.ui.cancel.attr('disabled', false);
         }
     });
 

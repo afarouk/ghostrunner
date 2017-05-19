@@ -135,6 +135,24 @@ define([
                 };
             return gateway.sendRequest('getTeams', params);
         },
+
+        retreiveAvailablePlayers: function() {
+            var user = appCache.get('user'),
+                params = {
+                    UID: user.get('uid')
+                };
+            return gateway.sendRequest('retreiveAvailablePlayers', params);
+        },
+
+        retrieveTeamPlayers: function(teamId) {
+            var user = appCache.get('user'),
+                params = {
+                    UID: user.get('uid'),
+                    teamId: teamId
+                };
+            return gateway.sendRequest('retrieveTeamPlayers', params);
+        },
+
         createTeam: function() {
             var user = appCache.get('user'),
                 params = {

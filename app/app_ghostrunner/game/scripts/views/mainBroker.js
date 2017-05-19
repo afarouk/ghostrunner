@@ -16,7 +16,7 @@ define([
 			leftBroker: '.left-broker',
 			rightBroker: '.right-broker',
 			teams: '[name="teams"]',
-			empty: '[name="empty"]',
+			cancel: '[name="cancel"]',
 			invite: '[name="invite"]',
 			byemail: '[name="byemail"]',
 			games: '[name="games"]',
@@ -26,7 +26,7 @@ define([
 		},
 		events: {
 			'click @ui.teams': 'onGetTeams',
-			// 'click @ui.empty': 'onEmpty',
+			'click @ui.cancel': 'onCancel',
 			'click @ui.invite': 'onGetUsers',
 			'click @ui.byemail': 'onInviteByEmail',
 			'click @ui.games': 'onGetGames',
@@ -68,6 +68,9 @@ define([
 
 		onCreateTeam: function() {
 			this.trigger('team:create');
+		}, 
+		onCancel: function() {
+			this.trigger('cancel');
 		}
 
 	});

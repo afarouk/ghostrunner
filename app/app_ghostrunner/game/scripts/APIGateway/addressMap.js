@@ -20,6 +20,8 @@ module.exports = {
         	abandonGame: ['PUT', '/gaming/abandonGame'],
         	getMyGames: ['GET', '/gaming/getMyGames'],
             getTeams: ['GET', '/gaming/getMyTeams'],
+            retreiveAvailablePlayers: ['GET', '/gaming/retreiveAvailablePlayers'],
+            retrieveTeamPlayers: ['GET', '/gaming/retrieveTeamPlayers'],
             createTeam: ['POST', '/gaming/createTeam'],
             createLineup: ['POST', '/gaming/createLineup'],
             getBaseballFieldPositions: ['GET', '/gaming/getBaseballFieldPositions'],
