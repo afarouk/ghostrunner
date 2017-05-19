@@ -13,6 +13,8 @@ define([
 			rightList: '#right-list'
 		},
 		ui: {
+			leftBroker: '.left-broker',
+			rightBroker: '.right-broker',
 			teams: '[name="teams"]',
 			empty: '[name="empty"]',
 			invite: '[name="invite"]',
@@ -20,7 +22,7 @@ define([
 			games: '[name="games"]',
 			createTeam: '[name="create-team"]',
 			teamConfirm: '[name="team-confirm"]',
-			confirm: '[name="confirm"]'
+			confirm: '[name="confirm"]',
 		},
 		events: {
 			'click @ui.teams': 'onGetTeams',

@@ -21,6 +21,39 @@
 
         .broker-part {
             flex-direction: column;
+
+            .team-choose-head {
+                display: none;
+            }
+
+            &.right-broker.team-state {
+                .broker-buttons {
+                    display: none;
+                }
+                .broker-list {
+                    display: none;
+                }
+                .team-choose-head {
+                    display: flex;
+
+                    .tip {
+                        display: flex;
+                        color: $text;
+                        padding: 6px 12px;
+                        background-color: rgba(255,255,255,0.3);
+                        i {
+                            font-size: 24px;
+                            margin: 8px 8px 0 0;
+                        }
+                        span {
+                            font-size: 18px;
+                            margin-top: 8px;
+                            font-weight: 600;
+                        }
+                    }
+                }
+            }
+
             .broker-buttons {
                 flex-direction: row;
             }
@@ -55,11 +88,64 @@
                             &:hover {
                                 background-color: rgba(255,0,255,0.4);
                             }
+
+                            .lineups-container {
+                                display: none;
+                                flex-direction: column;
+                                margin-left: 250px;
+                                margin-top: -30px;
+                                padding: 5px 10px;
+                                position: absolute;
+                                background: rgba(100,40,41,0.7);
+                                width: 200px;
+
+                                .lineup:nth-child(even) {
+                                    background: rgba(0, 0, 0, 0.1);
+                                }
+                                .lineup:nth-child(odd) {
+                                    background: rgba(0, 0, 0, 0.3);
+                                }
+
+                                .lineup:hover {
+                                    background-color: rgba(80, 80, 240, 0.4);
+                                }
+
+                                .lineup {
+                                    color: $text;
+                                    margin-bottom: 5px;
+                                    padding: 0 5px;
+
+                                    &.selected {
+                                        background-color: green;
+                                    }
+                                }
+
+                                .new-lineup {
+                                    text-align: center;
+                                }
+                            }
+
                             &.team.selected,
                             &.available-user.selected,
                             &.invitation-by-email.selected,
                             &.my-game.selected {
                                 background-color: green;
+                            }
+
+                            &.team.selected {
+                               .lineups-container {
+                                    display: flex;
+                                } 
+                            }
+
+                            .to-lineup {
+                                float: right;
+                                font-size: 22px;
+                                padding-top: 2px;
+                            }
+
+                            &.new-team {
+                                text-align: center;
                             }
                         }
 

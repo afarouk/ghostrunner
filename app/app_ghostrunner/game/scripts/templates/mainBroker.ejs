@@ -1,23 +1,26 @@
-<div class="broker-part">
+<div class="broker-part left-broker">
 	<div class="broker-buttons">
 		<button type="button" name="teams">My teams</button>
-		<button type="button" name="empty">...</button>
+		<button type="button" name="empty" disabled>Cancel</button>
 	</div>
 	<div class="broker-list left-list">
 		<div class="list-container" id="left-list"></div>
-		<div class="broker-left-buttons">
-			<button type="button" name="create-team">+</button>
-			<button type="button" name="team-confirm" disabled>Send</button>	
-		</div>
 	</div>
 </div>
-<div class="broker-part">
+<div class="broker-part right-broker">
 	<div class="broker-buttons">
 		<button type="button" name="invite" >Invite</button>
 		<button type="button" name="games">My games</button>
 	</div>
 	<div class="broker-list right-list">
 		<div class="list-container" id="right-list"></div>
-		<button type="button" name="confirm" disabled>Send</button>
+		<button type="button" name="confirm" disabled>Confirm</button>
+	</div>
+
+	<div class="team-choose-head">
+		<div class="tip">
+			<i class="fa fa-arrow-circle-o-left" aria-hidden="true"></i><span>Choose Team/lineUp</span>
+		</div>
+		<button type="button" name="team-confirm" disabled>Send</button>
 	</div>
 </div>

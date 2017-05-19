@@ -72,43 +72,42 @@ define([
                 }.bind(this));
         },
 
-        onSendInvitation: function(inviteeUID, teamId) {
-            service.sendInvitation({
-                inviteeUID: inviteeUID
-            }).then(function(result){
-                var gameModel = this.getGameModel();
-                if (!gameModel) {
-                    gameModel = new GameModel(result);
-                } else {
-                    gameModel.set('gameUUID', result.gameUUID);                               
-                }
-
-                this.publicController.getStateController().refreshStatus(result.gameUUID);
-            }.bind(this), function(err){
-                //on error
-                this.publicController.getInterfaceController().hideLoader();
-            }.bind(this));
-        },
-
-        onSendInvitationByEmail: function(credentials, teamId) {
+        onSendInvitation: function(credentials) {
             var onInvitationSent = credentials.callback;
             delete credentials.callback;
-            console.log('teamId: ', teamId);
-            service.sendInvitationAndRegister({
-                payload: credentials
-            }).then(function(result){
-                var gameModel = this.getGameModel();
-                if (!gameModel) {
-                    gameModel = new GameModel(result);
-                } else {
-                    gameModel.set('gameUUID', result.gameUUID);                               
-                }
+            service.sendInvitation(credentials)
+                .then(function(result){
+                    var gameModel = this.getGameModel();
+                    if (!gameModel) {
+                        gameModel = new GameModel(result);
+                    } else {
+                        gameModel.set('gameUUID', result.gameUUID);                               
+                    }
+                    onInvitationSent(true, result);
+                    this.publicController.getStateController().refreshStatus(result.gameUUID);
+                }.bind(this), function(err){
+                    //on error
+                    this.publicController.getInterfaceController().hideLoader();
+                }.bind(this));
+        },
 
-                onInvitationSent(true, result);
-                this.publicController.getStateController().refreshStatus(result.gameUUID);
-            }.bind(this), function(err){
-                onInvitationSent(false, err);
-            }.bind(this));
+        onSendInvitationByEmail: function(credentials) {
+            var onInvitationSent = credentials.callback;
+            delete credentials.callback;
+            service.sendInvitationAndRegister(credentials)
+                .then(function(result){
+                    var gameModel = this.getGameModel();
+                    if (!gameModel) {
+                        gameModel = new GameModel(result);
+                    } else {
+                        gameModel.set('gameUUID', result.gameUUID);                               
+                    }
+
+                    onInvitationSent(true, result);
+                    this.publicController.getStateController().refreshStatus(result.gameUUID);
+                }.bind(this), function(err){
+                    onInvitationSent(false, err);
+                }.bind(this));
         },
 
         onRetrieveInvitation: function(message) {

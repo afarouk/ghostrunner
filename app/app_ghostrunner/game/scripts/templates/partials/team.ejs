@@ -1,1 +1,12 @@
-<%= teamName %>
+<%= displayText %>
+<i class="fa fa-arrow-circle-o-right to-lineup" aria-hidden="true"></i>
+<div class="lineups-container">
+	<% _.each(lineUps, function(lineUp) { %>
+		<div class="lineup" data-id="<%= lineUp.lineUpId %>">
+			<span><%= lineUp.displayText %></span>
+		</div>
+	<% }) %>
+	<div class="lineup new-lineup" data-id="new">
+		<span>[Create new lineup]</span>
+	</div>
+</div>

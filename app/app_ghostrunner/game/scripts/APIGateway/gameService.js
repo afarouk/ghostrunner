@@ -90,6 +90,10 @@ define([
         sendInvitationAndRegister: function(params) {
             var user = appCache.get('user');
             params.UID = user.get('uid');
+            params.payload = {
+                email: params.email
+            };
+            delete params.email;
             return gateway.sendRequest('sendInvitationAndRegister', params);
         },
         getAvailableUsers: function(params) {
@@ -104,13 +108,6 @@ define([
             params.UID = user.get('uid');
             return gateway.sendRequest('getMyGames', params);
         },
-        getTeams: function() {
-            var user = appCache.get('user'),
-                params = {
-                    UID: user.get('uid')
-                };
-            return gateway.sendRequest('getTeams', params);
-        },
         abandonGame : function(){
             var user = appCache.get('user'),
                 game = appCache.get('game'),
@@ -120,6 +117,37 @@ define([
              params.gameUUID = game.get('gameUUID');   
             }
             return gateway.sendRequest('abandonGame',params);
+        },
+
+        //teams part
+        getBaseballFieldPositions: function() {
+            var user = appCache.get('user'),
+                params = {
+                    UID: user.get('uid')
+                };
+            return gateway.sendRequest('getTeams', params);
+        },
+
+        getTeams: function() {
+            var user = appCache.get('user'),
+                params = {
+                    UID: user.get('uid')
+                };
+            return gateway.sendRequest('getTeams', params);
+        },
+        createTeam: function() {
+            var user = appCache.get('user'),
+                params = {
+                    UID: user.get('uid')
+                };
+            return gateway.sendRequest('createTeam', params);
+        },
+        createLineup: function() {
+            var user = appCache.get('user'),
+                params = {
+                    UID: user.get('uid')
+                };
+            return gateway.sendRequest('createLineup', params);
         }
     });
 

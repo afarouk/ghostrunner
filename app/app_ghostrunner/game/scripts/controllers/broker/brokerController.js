@@ -62,49 +62,59 @@ define([
         onGetTeams: function() {
             service.getTeams()
                 .then(function(response){
-                   //TODO teams list
-                    if (response.length === 0) {
-                        response = [
-                            {
-                                teamName: 'team1',
-                                teamId: 0
-                            },
-                            {
-                                teamName: 'team2',
-                                teamId: 1
-                            },
-                            {
-                                teamName: 'team3',
-                                teamId: 2
-                            },
-                            {
-                                teamName: 'team4',
-                                teamId: 3
-                            },
-                            {
-                                teamName: 'team5',
-                                teamId: 4
-                            }
-                        ];
-                    }
                     this.showTeamsList(response);
                 }.bind(this), function(err){
                     
                 }.bind(this));
         },
         showTeamsList: function(response) {
-            var teamsList = new TeamsList({
-                collection: new Backbone.Collection(response)
+            var collection = new Backbone.Collection(response.teams),
+                teamsList;
+            collection.add({newTeam: true});
+            teamsList = new TeamsList({
+                collection: collection
             });
             this.view.showChildView('leftList', teamsList);
             this.listenTo(teamsList, 'team:selected', this.onSelectTeam.bind(this));
+            this.listenTo(teamsList, 'lineUp:selected', this.onSelectLineUp.bind(this));
             this.view.$el.find('.broker-list.left-list')
                 .addClass('shown presented');
         },
+
         onSelectTeam: function(team) {
             this.selectedTeam = team;
+            this.selectedTeam.unset('lineUpId', {silent: true});
+            this.view.ui.teamConfirm.attr('disabled', true);
+        },
+
+        onSelectLineUp: function(lineUpId) {
+            this.selectedTeam.set('lineUpId', lineUpId, {silent: true});
             this.view.ui.teamConfirm.attr('disabled', false);
         },
+
+        afterLineUpSelected: function() {
+            var teamId = this.selectedTeam.get('teamId'),
+                lineUpId  = this.selectedTeam.get('lineUpId');
+
+            if (this.selectedUser.get('byEmail')) {
+                this.publicController.getStateController().onSendInvitationByEmail({
+                    email: this.credentials.email,
+                    callback: this.credentials.callback,
+                    teamId: teamId,
+                    lineUpId: lineUpId
+                });
+            } else {
+                var inviteeUID = this.selectedUser.get('uid');
+                this.publicController.getStateController().onSendInvitation({
+                    inviteeUID: inviteeUID, 
+                    teamId: teamId,
+                    lineUpId: lineUpId,
+                    callback: this.afterInvitationSent.bind(this)
+                });
+                this.reRender();
+            }
+        },
+
         onTeamCreate: function() {
             this.publicController.getCreateTeamController().create();
         },
@@ -134,14 +144,7 @@ define([
             }
         },
         confirmUser: function() {
-            if (this.selectedUser.get('byEmail')) {
-                this.confirmInvitationByEmail();
-            } else {
-                var inviteeUID = this.selectedUser.get('uid'),
-                teamId = this.selectedTeam.get('teamId');
-                this.publicController.getStateController().onSendInvitation(inviteeUID, teamId);
-                this.reRender();
-            }
+            this.switchToTeamState();
         },
         showUsersList: function(response) {
             var collection = new Backbone.Collection(response.users),
@@ -171,10 +174,20 @@ define([
             }
             this.selectedUser = user;
         },
-        //invite by email
-        confirmInvitationByEmail: function() {
-            this.publicController.getStateController().onSendInvitationByEmail(this.credentials);
+        afterInvitationSent: function(success, result) {
+            if (success) {
+                var userName = 'to ' + result.otherUser.user.userName;
+                this.publicController.getChoiceController().showConfirmation({
+                    message: 'Your invitation ' + userName + ' successfully sent.',
+                    confirm: 'ok'
+                }).then(function() {
+                    this.reRender();
+                }.bind(this));
+            } else {
+                //todo manage error
+            }
         },
+        //invite by email
         onInvitationByEmailSent: function(view, success, result) {
             if (success) {
                 var userName = 'to ' + result.otherUser.user.userName;
@@ -249,7 +262,12 @@ define([
         },
 
         onTeamConfirm: function() {
-            this.view.ui.invite.attr('disabled', false);
+            this.view.ui.invite.attr('disabled', true);
+            this.afterLineUpSelected();
+        },
+
+        switchToTeamState: function() {
+            this.view.ui.rightBroker.addClass('team-state');
         }
     });
 
