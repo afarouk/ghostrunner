@@ -14,23 +14,6 @@
 </section>
 <section class="players-list-container">
 	<table>
-		<tbody>
-			<% _.each(players, function(player){ %>
-				<tr>
-					<td class="with-name"><%= player.displayText %></td>
-					<td class="with-cost"><%= player.cost %></td>
-					<td class="with-checkbox">
-						<input type="checkbox"></input>
-					</td>
-					<td class="with-select">
-						<select name="position">
-							<% _.each(positions, function(position){ %>
-								<option value="position1"><%= position.displayText %></option>
-							<% }) %>
-						</select>
-					</td>
-				</tr>
-			<% }) %>
-		</tbody>
+		<!-- team players list -->
 	</table>
 </section>

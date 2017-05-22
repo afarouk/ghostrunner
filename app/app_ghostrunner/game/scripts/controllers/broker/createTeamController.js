@@ -30,7 +30,7 @@ define([
         },
         onCreateTeam: function(players, positions) {
             var createData = {
-                    players: players.players,
+                    players: new Backbone.Collection(players.players),
                     positions: positions
                 },
                 teamCreation = new TeamCreationView(createData);
@@ -40,7 +40,7 @@ define([
         },
         onCreateLineUp: function(players, positions) {
             var createData = {
-                    players: players.players,
+                    players: new Backbone.Collection(players.players),
                     positions: positions
                 },
                 lineUpCreation = new LineUpCreationView(createData);
