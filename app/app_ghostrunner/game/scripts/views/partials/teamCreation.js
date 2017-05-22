@@ -36,7 +36,6 @@ define([
 			});
 			this.showChildView('players', teamPlayersList);
 			this.listenTo(teamPlayersList, 'team:changed', this.onTeamChanged.bind(this));
-			// this.listenTo(teamPlayersList, 'player:changed', this.onPlayerChanged.bind(this));
 		},
 		onNameChanged: function() {
 			var name = this.ui.name.val();
@@ -50,7 +49,8 @@ define([
 		},
 		onTeamChanged: function(checked, model) {
 			var playerId = model.get('playerId'),
-				seasonId = model.get('seasonId');
+				seasonId = model.get('seasonId'),
+				balance;
 
 			if (!checked) {
 				var forRemove = this.team.findWhere({playerId: playerId, seasonId: seasonId});
@@ -58,6 +58,10 @@ define([
 			} else {
 				this.team.add(model);
 			}
+			balance = this.team.reduce(function(sum, model) { 
+				return sum + model.get('cost') 
+			}, 0);
+			this.ui.balance.text(balance);
 			console.log(this.team.toJSON());
 		},
 		checkIfSaveAllowed: function() {

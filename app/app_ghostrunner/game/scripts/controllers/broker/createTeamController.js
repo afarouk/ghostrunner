@@ -18,10 +18,11 @@ define([
                 }.bind(this));
             this.layout = layout;
         },
-        lineUpCreate: function(layout, teamId) {
+        lineUpCreate: function(layout, team) {
+            var teamId = team.get('teamId');
             $.when(service.retrieveTeamPlayers(teamId), service.getBaseballFieldPositions())
                 .done(function(players, positions){
-                    this.onCreateLineUp(players[0], positions[0]);
+                    this.onCreateLineUp(players[0], positions[0], team);
                 }.bind(this));
             this.layout = layout;
         },
@@ -37,7 +38,6 @@ define([
             this.layout.$el.addClass('creation-state');
             this.layout.showChildView('creation', teamCreation);
             this.listenTo(teamCreation, 'team:save', this.onTeamSave.bind(this, team));
-            // team.on('change add remove', this.onTeamChanged.bind(this));
         },
         onTeamSave: function(team, teamName) {
             var players = team.map(function(model) {
@@ -51,19 +51,20 @@ define([
                     description: '',
                     players: players
                 };
-            service.createTeam(teamData);
+            service.createTeam(teamData)
+                .then(function(){
+                    this.layout.trigger('cancel');//temporary
+                }.bind(this));
         },
-        // onTeamChanged: function(model, collection, action) {
-            
-        // },
 
         //lineUp creation
-        onCreateLineUp: function(players, positions) {
+        onCreateLineUp: function(players, positions, team) {
             var lineUp = new Backbone.Collection(),
                 createData = {
                     players: new Backbone.Collection(players.players),
                     positions: positions,
-                    lineUp: lineUp
+                    lineUp: lineUp,
+                    teamName: team.get('displayText')
                 },
                 lineUpCreation = new LineUpCreationView(createData);
 
@@ -84,7 +85,10 @@ define([
                     description: '',
                     players: players
                 };
-            service.createLineup(lineUpData);
+            service.createLineup(lineUpData)
+                .then(function(){
+                    this.layout.trigger('cancel');//temporary
+                }.bind(this));
         },
     });
 

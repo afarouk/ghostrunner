@@ -55,17 +55,43 @@ define([
             this.view.showChildView('rightList', emptyList);
         },
         destroyCurrentView: function() {
-            var currentView = this.view.getRegion('rightList').currentView;
-            if (currentView) currentView.destroy();
+            var currentView = this.view.getRegion('rightList').currentView || 
+                this.view.getRegion('leftList').currentView;
+            if (currentView) {
+                currentView.destroy();
+            }
         },
         //teams
         onGetTeams: function() {
-            service.getTeams()
-                .then(function(response){
-                    this.showTeamsList(response);
-                }.bind(this), function(err){
-                    
-                }.bind(this));
+            if (this.teamConfirm) {
+                this.teamConfirm = undefined;
+                this.view.$el.find('.broker-list.left-list').removeClass('shown presented');
+                this.destroyCurrentView();
+            } else {
+                this.teamConfirm = true;
+                this.hideRight();
+                service.getTeams()
+                    .then(function(response){
+                        this.showTeamsList(response);
+                    }.bind(this), function(err){
+                        
+                    }.bind(this));
+            }
+        },
+        hideTeams: function() {
+            if (this.teamConfirm) {
+                this.teamConfirm = undefined;
+                this.view.$el.find('.broker-list.left-list').removeClass('shown presented');
+                this.destroyCurrentView();
+            }
+        },
+        hideRight: function() {
+            if (this.confirm === 'games' || this.confirm === 'users') {
+                this.confirm = undefined;
+                this.view.$el.find('.broker-list.right-list')
+                    .removeClass('shown presented games-active');
+                this.destroyCurrentView();
+            }
         },
         showTeamsList: function(response) {
             var collection = new Backbone.Collection(response.teams),
@@ -93,7 +119,7 @@ define([
 
         onSelectLineUp: function(lineUpId) {
             if (lineUpId === 'new') {
-                this.publicController.getCreateTeamController().lineUpCreate(this.view, this.selectedTeam.get('teamId'));
+                this.publicController.getCreateTeamController().lineUpCreate(this.view, this.selectedTeam);
             } else {
                 this.selectedTeam.set('lineUpId', lineUpId, {silent: true});
                 this.view.ui.teamConfirm.attr('disabled', false);
@@ -131,6 +157,7 @@ define([
                 this.destroyCurrentView();
             } else {
                 this.publicController.getInterfaceController().showLoader();
+                this.hideTeams();
                 service.getAvailableUsers()
                     .then(function(response){
                         this.publicController.getInterfaceController().hideLoader();
@@ -215,6 +242,7 @@ define([
                 this.destroyCurrentView();
             } else {
                 this.publicController.getInterfaceController().showLoader();
+                this.hideTeams();
                 service.getMyGames()
                     .then(function(response){
                         this.publicController.getInterfaceController().hideLoader();
@@ -222,7 +250,7 @@ define([
                             this.showGamesList(response);
                         } else {
                             this.view.$el.find('.broker-list.right-list')
-                                .removeClass('presented').addClass('games-active');
+                                .addClass('shown presented games-active');
                             this.showEmptyList('No games are presented.');
                         }
                     }.bind(this), function(err){
@@ -269,6 +297,8 @@ define([
         onCancel: function() {
             this.reRender();
             this.view.$el.removeClass('creation-state');
+            this.teamConfirm = undefined;
+            this.confirm = undefined;
         },
 
         onTeamConfirm: function() {

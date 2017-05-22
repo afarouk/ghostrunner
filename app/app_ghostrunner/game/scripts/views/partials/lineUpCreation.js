@@ -28,6 +28,11 @@ define([
 			this.lineUp = options.lineUp;
 			this.lineUp.on('change add remove', this.checkIfSaveAllowed, this);
 		},
+		serializeData: function() {
+			return {
+				teamName: this.options.teamName
+			};
+		},
 		onRender: function() {
 			console.log('lineUp creation');
 			var lineUpPlayersList = new LineUpPlayersList({
@@ -57,6 +62,7 @@ define([
 			} else {
 				this.lineUp.add(model);
 			}
+			this.ui.count.text(this.lineUp.length);
 			console.log(this.lineUp.toJSON());
 		},
 		checkIfSaveAllowed: function() {
