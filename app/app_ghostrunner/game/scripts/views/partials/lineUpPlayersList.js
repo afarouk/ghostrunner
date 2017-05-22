@@ -31,17 +31,18 @@ define([
 		childViewOptions: function() {
 			return this.options;
 		},
-		onChildviewSelectionChanged: function(view) {
-			debugger;
-			this.children.each(function(childView) {
-				
-			}.bind(this));
+		onChildviewSelectionChanged: function(view, e) {
+			var checked = $(e.currentTarget).is(':checked'),
+				model = view.model;
+
+			this.trigger('lineUp:changed', checked, model);
 		},
-		onChildviewPositionChanged: function(view) {
-			debugger;
-			this.children.each(function(childView) {
-				
-			}.bind(this));
+		onChildviewPositionChanged: function(view, e) {
+			var $target = $(e.currentTarget),
+				model = view.model,
+				selected = $target.find(':selected').val(),
+				position = _.findWhere(this.options.positions, {enumText: selected});
+			model.set('position', position);
 		}
 	});
 	return LineUpPlayersListView;

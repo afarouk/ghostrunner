@@ -153,17 +153,19 @@ define([
             return gateway.sendRequest('retrieveTeamPlayers', params);
         },
 
-        createTeam: function() {
+        createTeam: function(teamData) {
             var user = appCache.get('user'),
                 params = {
-                    UID: user.get('uid')
+                    UID: user.get('uid'),
+                    payload: teamData
                 };
             return gateway.sendRequest('createTeam', params);
         },
-        createLineup: function() {
+        createLineup: function(lineUpData) {
             var user = appCache.get('user'),
                 params = {
-                    UID: user.get('uid')
+                    UID: user.get('uid'),
+                    payload: lineUpData
                 };
             return gateway.sendRequest('createLineup', params);
         }
