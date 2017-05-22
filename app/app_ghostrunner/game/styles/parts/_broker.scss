@@ -237,10 +237,28 @@
                                 } 
                             }
 
-                            .to-lineup {
+                            .icon-actions {
                                 float: right;
-                                font-size: 22px;
+                                font-size: 20px;
                                 padding-top: 2px;
+
+                                i {
+                                    padding-left: 6px;
+                                    &:hover::before {
+                                        padding: 2px;
+                                        border-radius: 2px;
+                                        background-color: rgba(0, 255, 0, 0.5);
+                                    }
+                                }
+                                .to-lineup {
+                                    
+                                }
+                                .edit-icon {
+                                    font-size: 18px;
+                                }
+                                .remove-icon {
+
+                                }
                             }
 
                             &.new-team {

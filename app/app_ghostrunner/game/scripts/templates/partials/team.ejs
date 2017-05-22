@@ -1,9 +1,17 @@
 <%= displayText %>
-<i class="fa fa-arrow-circle-o-right to-lineup" aria-hidden="true"></i>
+<div class="icon-actions">
+	<i class="fa fa-trash-o remove-icon" name="remove-team" aria-hidden="true"></i>
+	<i class="fa fa-pencil-square-o edit-icon" name="edit-team" aria-hidden="true"></i>
+	<i class="fa fa-arrow-circle-o-right to-lineup" aria-hidden="true"></i>
+</div>
 <div class="lineups-container">
 	<% _.each(lineUps, function(lineUp) { %>
 		<div class="lineup" data-id="<%= lineUp.lineUpId %>">
 			<span><%= lineUp.displayText %></span>
+			<div class="icon-actions">
+				<i class="fa fa-trash-o remove-icon" name="remove-lineUp" aria-hidden="true"></i>
+				<i class="fa fa-pencil-square-o edit-icon" name="edit-lineUp" aria-hidden="true"></i>
+			</div>
 		</div>
 	<% }) %>
 	<div class="lineup new-lineup" data-id="new">

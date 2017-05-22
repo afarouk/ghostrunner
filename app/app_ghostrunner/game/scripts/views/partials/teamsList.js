@@ -11,13 +11,21 @@ define([
 		className: 'team',
 		template: teamTemplate,
 		ui: {
-			lineup: '.lineup'
+			lineup: '.lineup',
+			removeTeam: '[name="remove-team"]',
+			editTeam: '[name="edit-team"]',
+			removeLineUp: '[name="remove-lineUp"]',
+			editLineUp: '[name="edit-lineUp"]'
 		},
 		events: {
 			'click @ui.lineup': 'onLineupSelected'
 		},
 		triggers: {
-			'click': 'team:selected'
+			'click': 'team:selected',
+			'click @ui.removeTeam': 'team:remove',
+			'click @ui.editTeam': 'team:edit',
+			'click @ui.removeLineUp': 'lineUp:remove',
+			'click @ui.editLineUp': 'lineUp:edit'
 		},
 		onLineupSelected: function(e) {
 			var $target = $(e.currentTarget),
@@ -68,6 +76,23 @@ define([
 		},
 		onChildviewLineupSelected: function(lineUpId) {
 			this.trigger('lineUp:selected', lineUpId);
+		},
+		onChildviewTeamRemove: function(view, e) {
+			// e.preventDefault();
+			this.trigger('team:remove', view.model);
+		},
+		onChildviewTeamEdit: function(view, e) {
+			// e.preventDefault();
+		},
+		onChildviewLineUpRemove: function(view, e) {
+			// e.preventDefault();
+			var $target = $(e.currentTarget),
+				lineUpId = $target.parent().parent().data('id'),
+				lineUp = _.findWhere(view.model.get('lineUps'), {lineUpId: lineUpId});
+			this.trigger('lineUp:remove', lineUp);
+		},
+		onChildviewLineUpEdit: function(view, e) {
+			// e.preventDefault();
 		}
 	});
 	return TeamsListView;
