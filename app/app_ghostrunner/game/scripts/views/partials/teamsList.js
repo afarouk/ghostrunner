@@ -83,6 +83,7 @@ define([
 		},
 		onChildviewTeamEdit: function(view, e) {
 			// e.preventDefault();
+			this.trigger('team:edit', view.model);
 		},
 		onChildviewLineUpRemove: function(view, e) {
 			// e.preventDefault();
@@ -93,6 +94,10 @@ define([
 		},
 		onChildviewLineUpEdit: function(view, e) {
 			// e.preventDefault();
+			var $target = $(e.currentTarget),
+				lineUpId = $target.parent().parent().data('id'),
+				lineUp = _.findWhere(view.model.get('lineUps'), {lineUpId: lineUpId});
+			this.trigger('lineUp:edit', lineUp);
 		}
 	});
 	return TeamsListView;

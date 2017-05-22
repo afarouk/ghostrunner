@@ -101,10 +101,15 @@ define([
                 collection: collection
             });
             this.view.showChildView('leftList', teamsList);
+            //team
             this.listenTo(teamsList, 'team:selected', this.onSelectTeam.bind(this));
             this.listenTo(teamsList, 'team:remove', this.onRemoveTeam.bind(this));
+            this.listenTo(teamsList, 'team:edit', this.onEditTeam.bind(this));
+            //lineup
             this.listenTo(teamsList, 'lineUp:selected', this.onSelectLineUp.bind(this));
             this.listenTo(teamsList, 'lineUp:remove', this.onRemoveLineUp.bind(this));
+            this.listenTo(teamsList, 'lineUp:edit', this.onEditLineUp.bind(this));
+
             this.view.$el.find('.broker-list.left-list')
                 .addClass('shown presented');
         },
@@ -135,7 +140,7 @@ define([
                 cancel: 'cancel',
                 confirm: 'confirm'
             }).then(function(){
-                
+                //todo delete request
             }.bind(this), function() {
                 
             }.bind(this));
@@ -148,10 +153,20 @@ define([
                 cancel: 'cancel',
                 confirm: 'confirm'
             }).then(function(){
-                
+                //todo delete request
             }.bind(this), function() {
                 
             }.bind(this));
+        },
+
+        onEditTeam: function(model) {
+            var teamId = model.get('teamId');
+            //todo need API for that
+        },
+
+        onEditLineUp: function(lineUp) {
+            var lineUpId = lineUp.lineUpId;
+            //todo need API for that
         },
 
         afterLineUpSelected: function() {
