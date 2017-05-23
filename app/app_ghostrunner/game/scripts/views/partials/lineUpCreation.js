@@ -36,12 +36,12 @@ define([
 		},
 		onRender: function() {
 			console.log('lineUp creation');
-			var lineUpPlayersList = new LineUpPlayersList({
+			this.lineUpPlayersList = new LineUpPlayersList({
 				collection: this.options.players,
 				positions: this.options.positions
 			});
-			this.showChildView('players', lineUpPlayersList);
-			this.listenTo(lineUpPlayersList, 'lineUp:changed', this.onLineUpChanged.bind(this));
+			this.showChildView('players', this.lineUpPlayersList);
+			this.listenTo(this.lineUpPlayersList, 'lineUp:changed', this.onLineUpChanged.bind(this));
 		},
 		onNameChanged: function() {
 			var name = this.ui.name.val();
@@ -66,9 +66,29 @@ define([
 			this.ui.count.text(this.lineUp.length);
 			console.log(this.lineUp.toJSON());
 		},
+		showCountWarning: function() {
+			this.publicController.getChoiceController().showConfirmation({
+                message: 'Count should be less than 10.',
+                confirm: 'ok'
+            });
+		},
+		checkCount: function() {
+			var count  = this.lineUp.length;
+			this.ui.count.text(count);
+			if (count > 9) {
+				this.ui.count.css('color', 'red');
+				this.lineUpPlayersList.triggerMethod('players:selection:allow', false);
+				this.showCountWarning();
+				return false;
+			} else {
+				this.ui.count.css('color', '#71ff61');
+				this.lineUpPlayersList.triggerMethod('players:selection:allow', true);
+				return true;
+			}
+		},
 		checkIfSaveAllowed: function() {
 			console.log(this.lineUp.toJSON());
-			if (this.lineUp.length > 0 && this.lineUpName) {
+			if (this.checkCount() && this.lineUp.length > 0 && this.lineUpName) {
 				this.ui.save.attr('disabled', false);
 				return true;
 			} else {

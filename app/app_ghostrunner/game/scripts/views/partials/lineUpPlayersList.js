@@ -43,6 +43,21 @@ define([
 				selected = $target.find(':selected').val(),
 				position = _.findWhere(this.options.positions, {enumText: selected});
 			model.set('position', position);
+		},
+		onPlayersSelectionAllow: function(allow) {
+			this.children.each(function(view) {
+				var $checkbox = view.ui.select,
+					isChecked = $checkbox.is(':checked');
+				if (isChecked) {
+					$checkbox.attr('disabled', false);
+				} else {
+					if (allow) {
+						$checkbox.attr('disabled', false);
+					} else {
+						$checkbox.attr('disabled', true);
+					}
+				}
+			});
 		}
 	});
 	return LineUpPlayersListView;
