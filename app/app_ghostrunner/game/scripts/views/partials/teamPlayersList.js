@@ -11,11 +11,9 @@ define([
 		template: template,
 		ui: {
 			select: '[name="select-player"]',
-			position: '[name="player-position"]'
 		},
 		triggers: {
 			'change @ui.select': 'selection:changed',
-			'change @ui.position': 'position:changed'
 		},
 		serializeData: function() {
 			return _.extend(this.model.toJSON(), {
@@ -37,13 +35,20 @@ define([
 
 			this.trigger('team:changed', checked, model);
 		},
-		onChildviewPositionChanged: function(view, e) {
-			var $target = $(e.currentTarget),
-				model = view.model,
-				selected = $target.find(':selected').val(),
-				position = _.findWhere(this.options.positions, {enumText: selected});
-			model.set('position', position);
-			// this.trigger('player:changed', position, model);
+		onPlayersSelectionAllow: function(allow) {
+			this.children.each(function(view) {
+				var $checkbox = view.ui.select,
+					isChecked = $checkbox.is(':checked');
+				if (isChecked) {
+					$checkbox.attr('disabled', false);
+				} else {
+					if (allow) {
+						$checkbox.attr('disabled', false);
+					} else {
+						$checkbox.attr('disabled', true);
+					}
+				}
+			});
 		}
 	});
 	return TeamPlayersListView;

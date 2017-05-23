@@ -21,6 +21,7 @@ define([
 		},
 		events: {
 			'change @ui.name': 'onNameChanged',
+			'keyup @ui.name': 'onNameChanged',
 			'click @ui.save': 'onSave'
 		},
 		lineUpName: '',

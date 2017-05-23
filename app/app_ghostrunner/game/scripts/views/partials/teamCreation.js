@@ -21,6 +21,7 @@ define([
 		},
 		events: {
 			'change @ui.name': 'onNameChanged',
+			'keyup @ui.name': 'onNameChanged',
 			'click @ui.save': 'onSave'
 		},
 		teamName: '',
@@ -30,12 +31,12 @@ define([
 		},
 		onRender: function() {
 			console.log('team creation');
-			var teamPlayersList = new TeamPlayersList({
+			this.teamPlayersList = new TeamPlayersList({
 				collection: this.options.players,
 				positions: this.options.positions
 			});
-			this.showChildView('players', teamPlayersList);
-			this.listenTo(teamPlayersList, 'team:changed', this.onTeamChanged.bind(this));
+			this.showChildView('players', this.teamPlayersList);
+			this.listenTo(this.teamPlayersList, 'team:changed', this.onTeamChanged.bind(this));
 		},
 		onNameChanged: function() {
 			var name = this.ui.name.val();
@@ -49,8 +50,7 @@ define([
 		},
 		onTeamChanged: function(checked, model) {
 			var playerId = model.get('playerId'),
-				seasonId = model.get('seasonId'),
-				balance;
+				seasonId = model.get('seasonId');
 
 			if (!checked) {
 				var forRemove = this.team.findWhere({playerId: playerId, seasonId: seasonId});
@@ -58,15 +58,34 @@ define([
 			} else {
 				this.team.add(model);
 			}
-			balance = this.team.reduce(function(sum, model) { 
+			console.log(this.team.toJSON());
+		},
+		showCostWarning: function() {
+			this.publicController.getChoiceController().showConfirmation({
+                message: 'Cost should be less or equal 100.',
+                confirm: 'ok'
+            });
+		},
+		checkBallance: function() {
+			var balance = this.team.reduce(function(sum, model) { 
 				return sum + model.get('cost') 
 			}, 0);
+
 			this.ui.balance.text(balance);
-			console.log(this.team.toJSON());
+			if (balance > 100) {
+				this.ui.balance.css('color', 'red');
+				this.teamPlayersList.triggerMethod('players:selection:allow', false);
+				this.showCostWarning();
+				return false;
+			} else {
+				this.ui.balance.css('color', '#71ff61');
+				this.teamPlayersList.triggerMethod('players:selection:allow', true);
+				return true;
+			}
 		},
 		checkIfSaveAllowed: function() {
 			console.log(this.team.toJSON());
-			if (this.team.length > 0 && this.teamName) {
+			if (this.checkBallance() && this.team.length > 0 && this.teamName) {
 				this.ui.save.attr('disabled', false);
 				return true;
 			} else {

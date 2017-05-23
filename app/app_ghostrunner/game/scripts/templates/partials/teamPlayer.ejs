@@ -4,9 +4,7 @@
 	<input type="checkbox" name="select-player"></input>
 </td>
 <td class="with-select">
-	<select name="player-position">
-		<% _.each(positions, function(pPosition){ %>
-			<option value="<%= pPosition.enumText %>" <% if (position.enumText === pPosition.enumText) { %>selected="selected"<% } %> ><%= pPosition.displayText %></option>
-		<% }) %>
-	</select>
+	<div class="player-position">
+		<span><%= position.displayText %></span>
+	</div>
 </td>
