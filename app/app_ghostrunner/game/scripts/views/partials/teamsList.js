@@ -27,6 +27,11 @@ define([
 			'click @ui.removeLineUp': 'lineUp:remove',
 			'click @ui.editLineUp': 'lineUp:edit'
 		},
+		serializeData: function() {
+			return _.extend({
+				type: 'PUBLIC'
+			}, this.model.toJSON());
+		},
 		onLineupSelected: function(e) {
 			var $target = $(e.currentTarget),
 				lineUpId = $target.data('id');
@@ -79,25 +84,37 @@ define([
 		},
 		onChildviewTeamRemove: function(view, e) {
 			// e.preventDefault();
-			this.trigger('team:remove', view.model);
+			if (this.allowChanges(view)) {
+				this.trigger('team:remove', view.model);
+			}
 		},
 		onChildviewTeamEdit: function(view, e) {
 			// e.preventDefault();
-			this.trigger('team:edit', view.model);
+			if (this.allowChanges(view)) {
+				this.trigger('team:edit', view.model);
+			}
 		},
 		onChildviewLineUpRemove: function(view, e) {
 			// e.preventDefault();
 			var $target = $(e.currentTarget),
 				lineUpId = $target.parent().parent().data('id'),
 				lineUp = _.findWhere(view.model.get('lineUps'), {lineUpId: lineUpId});
-			this.trigger('lineUp:remove', lineUp);
+			if (this.allowChanges(view)) {
+				this.trigger('lineUp:remove', lineUp);
+			}
 		},
 		onChildviewLineUpEdit: function(view, e) {
 			// e.preventDefault();
 			var $target = $(e.currentTarget),
 				lineUpId = $target.parent().parent().data('id'),
 				lineUp = _.findWhere(view.model.get('lineUps'), {lineUpId: lineUpId});
-			this.trigger('lineUp:edit', lineUp);
+			if (this.allowChanges(view)) {
+				this.trigger('lineUp:edit', lineUp);
+			}
+		},
+		allowChanges: function(view) {
+			var allow = view.model.get('type') ===  'PRIVATE' ? true : false;
+			return allow;
 		}
 	});
 	return TeamsListView;
