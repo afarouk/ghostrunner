@@ -120,11 +120,33 @@ define([
         },
 
         //teams part
+        tempData: function(def) {//temporary
+            var data = [
+                [
+                    {
+                        displayText: 'position1',
+                        enumText: 'POSITION1'
+                    },
+                    {
+                        displayText: 'position2',
+                        enumText: 'POSITION2'
+                    }
+                ]
+            ];
+            setTimeout(function(){
+                def.resolve(data);
+            }, 1);
+        },
         getBaseballFieldPositions: function() {
             var user = appCache.get('user'),
                 params = {
                     UID: user.get('uid')
                 };
+            //temporary
+            var def = $.Deferred();
+            this.tempData(def);
+            return def;
+            //.........
             return gateway.sendRequest('getBaseballFieldPositions', params);
         },
 
