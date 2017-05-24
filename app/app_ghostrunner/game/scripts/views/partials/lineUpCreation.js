@@ -32,7 +32,7 @@ define([
 		serializeData: function() {
 			return {
 				teamName: this.options.teamName,
-				lineUpName: this.options.editedLineUp.displayText || ''
+				lineUpName: this.options.editedLineUp ? this.options.editedLineUp.displayText : ''
 			};
 		},
 		onRender: function() {

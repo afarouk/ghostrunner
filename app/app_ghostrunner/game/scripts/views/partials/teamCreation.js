@@ -31,7 +31,7 @@ define([
 		},
 		serializeData: function() {
 			return  {
-				teamName: this.options.editedTeam.get('displayText') || ''
+				teamName: this.options.editedTeam ? this.options.editedTeam.get('displayText') : ''
 			};
 		},
 		onRender: function() {
