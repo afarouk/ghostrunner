@@ -95,7 +95,7 @@ define([
 				lineUpId = $target.parent().parent().data('id'),
 				lineUp = _.findWhere(view.model.get('lineUps'), {lineUpId: lineUpId});
 			if (this.allowChanges(view)) {
-				this.trigger('lineUp:remove', view.model, lineUp);
+				this.trigger('lineUp:remove', lineUp);
 			}
 		},
 		onChildviewLineUpEdit: function(view, e) {
