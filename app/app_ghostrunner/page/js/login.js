@@ -4,7 +4,8 @@
 	var loginManager = {
 		logged: false,
 		//API
-		apiRoot: 'https://simfel.com/apptsvc/rest',
+		// apiRoot: 'https://simfel.com/apptsvc/rest',
+        apiRoot: 'http://54.191.91.125/apptsvc/rest',
 		loginRequest: ['POST', '/gaming/login'],
 		registerRequest: ['POST', '/gaming/registerNewMember'],
         logoutRequest: ['GET', '/gaming/logout'],

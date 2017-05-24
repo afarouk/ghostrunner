@@ -52,9 +52,10 @@ define([
         },
     
         updateGameModel: function (state) {
-            var gameModel = this.getGameModel();
+            var gameModel = this.getGameModel(),
+                state = state.attributes ? state.attributes : state;
             gameModel.set(state);
-            if (state.get('showTossAnimation')) {
+            if (gameModel.get('showTossAnimation')) {
                 this.publicController.getInterfaceController().showTossAnimation();
             }
             this.publicController.getStateManager().manage(gameModel);
@@ -115,10 +116,17 @@ define([
             this.refreshStatus(gameUUID);
         },
 
-        onInvitationAccepted: function(role) {
+        onInvitationAccepted: function(role, selectedTeam) {
+            var teamId = selectedTeam.get('teamId'),
+                teamType = selectedTeam.get('type').enumText,
+                lineUpId  = selectedTeam.get('lineUpId');
             service.acceptInvitation({
-                preferredRole: role
+                preferredRole: role,
+                teamId: teamId,
+                teamType: teamType,
+                lineUpId: lineUpId
             }).then(function(state){
+                this.publicController.getBrokerController().reRender();
                 this.updateGameModel(state);
                 this.publicController.getGameBtnController().opponentInGame(true);
             }.bind(this), function(err){

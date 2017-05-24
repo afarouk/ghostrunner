@@ -169,15 +169,17 @@ define([
             //todo need API for that
         },
 
-        afterLineUpSelected: function() {
-            var teamId = this.selectedTeam.get('teamId'),
-                lineUpId  = this.selectedTeam.get('lineUpId');
-
+        afterLineUpSelected: function(selectedTeam) {
+            var teamId = selectedTeam.get('teamId'),
+                teamType = selectedTeam.get('type').enumText,
+                lineUpId  = selectedTeam.get('lineUpId');
+                
             if (this.selectedUser.get('byEmail')) {
                 this.publicController.getStateController().onSendInvitationByEmail({
                     email: this.credentials.email,
                     callback: this.credentials.callback,
                     teamId: teamId,
+                    teamType: teamType,
                     lineUpId: lineUpId
                 });
             } else {
@@ -186,6 +188,7 @@ define([
                     inviteeUID: inviteeUID, 
                     teamId: teamId,
                     lineUpId: lineUpId,
+                    teamType: teamType,
                     callback: this.afterInvitationSent.bind(this)
                 });
                 this.reRender();
@@ -219,7 +222,10 @@ define([
             }
         },
         confirmUser: function() {
-            this.switchToTeamState();
+            this.switchToTeamState()
+                .then(function(selectedTeam){
+                    this.afterLineUpSelected(selectedTeam);
+                }.bind(this));
         },
         showUsersList: function(response) {
             var collection = new Backbone.Collection(response.users),
@@ -346,12 +352,19 @@ define([
 
         onTeamConfirm: function() {
             this.view.ui.invite.attr('disabled', true);
-            this.afterLineUpSelected();
+            this.invitationDef.resolve(this.selectedTeam);
+            // if (this.invitationType === 'SEND') {
+            //     this.afterLineUpSelected();
+            // } else if(this.invitationType === 'ACCEPT') {
+            //     this.publicController.getStateController().onInvitationAccepted(role);
+            // }
         },
 
         switchToTeamState: function() {
             this.view.ui.rightBroker.addClass('team-state');
             this.view.ui.cancel.attr('disabled', false);
+            this.invitationDef = $.Deferred();
+            return this.invitationDef;
         }
     });
 

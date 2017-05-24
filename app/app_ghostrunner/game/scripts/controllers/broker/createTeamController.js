@@ -19,8 +19,7 @@ define([
             this.layout = layout;
         },
         lineUpCreate: function(layout, team) {
-            var teamId = team.get('teamId');
-            $.when(service.retrieveTeamPlayers(teamId), service.getBaseballFieldPositions())
+            $.when(service.retrieveTeamPlayers(team), service.getBaseballFieldPositions())
                 .done(function(players, positions){
                     this.onCreateLineUp(players[0], positions[0], team);
                 }.bind(this));
@@ -70,9 +69,9 @@ define([
 
             this.layout.$el.addClass('creation-state');
             this.layout.showChildView('creation', lineUpCreation);
-            this.listenTo(lineUpCreation, 'lineUp:save', this.onLineUpSave.bind(this, lineUp));
+            this.listenTo(lineUpCreation, 'lineUp:save', this.onLineUpSave.bind(this, team, lineUp));
         },
-        onLineUpSave: function(lineUp, lineUpName) {
+        onLineUpSave: function(team, lineUp, lineUpName) {
             var players = lineUp.map(function(model) {
                     return {
                         playerId: model.get('playerId'),
@@ -81,11 +80,13 @@ define([
                     };
                 }),
                 lineUpData = {
+                    teamId: team.get('teamId'),
                     displayText: lineUpName,
                     description: '',
-                    players: players
+                    players: players,
+                    type: 'PRIVATE',
                 };
-            service.createLineup(lineUpData)
+            service.createLineup(lineUpData, team.get('teamUUID'))
                 .then(function(){
                     this.layout.trigger('cancel');//temporary
                 }.bind(this));

@@ -40,8 +40,11 @@ define([
             }).then(function(){
                 this.onSelectRole()
                     .then(function(role){
-                        //TODO select players for game (team)
-                        this.publicController.getStateController().onInvitationAccepted(role);
+                        return this.publicController
+                            .getBrokerController().switchToTeamState()
+                            .then(function(selectedTeam){
+                                this.publicController.getStateController().onInvitationAccepted(role, selectedTeam);
+                            }.bind(this));
                     }.bind(this));
             }.bind(this), function(type) {
                 //TODO something

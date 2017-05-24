@@ -27,11 +27,6 @@ define([
 			'click @ui.removeLineUp': 'lineUp:remove',
 			'click @ui.editLineUp': 'lineUp:edit'
 		},
-		serializeData: function() {
-			return _.extend({
-				type: 'PUBLIC'
-			}, this.model.toJSON());
-		},
 		onLineupSelected: function(e) {
 			var $target = $(e.currentTarget),
 				lineUpId = $target.data('id');

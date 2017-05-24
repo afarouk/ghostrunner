@@ -119,34 +119,11 @@ define([
             return gateway.sendRequest('abandonGame',params);
         },
 
-        //teams part
-        tempData: function(def) {//temporary
-            var data = [
-                [
-                    {
-                        displayText: 'position1',
-                        enumText: 'POSITION1'
-                    },
-                    {
-                        displayText: 'position2',
-                        enumText: 'POSITION2'
-                    }
-                ]
-            ];
-            setTimeout(function(){
-                def.resolve(data);
-            }, 1);
-        },
         getBaseballFieldPositions: function() {
             var user = appCache.get('user'),
                 params = {
                     UID: user.get('uid')
                 };
-            //temporary
-            var def = $.Deferred();
-            this.tempData(def);
-            return def;
-            //.........
             return gateway.sendRequest('getBaseballFieldPositions', params);
         },
 
@@ -166,12 +143,15 @@ define([
             return gateway.sendRequest('retrieveAvailablePlayers', params);
         },
 
-        retrieveTeamPlayers: function(teamId) {
-            var user = appCache.get('user'),
+        retrieveTeamPlayers: function(team) {
+            var teamId = team.get('teamId'),
+                user = appCache.get('user'),
                 params = {
-                    UID: user.get('uid'),
                     teamId: teamId
                 };
+            if (team.get('type').enumText === 'PRIVATE') {
+                params.UID = user.get('uid');
+            }
             return gateway.sendRequest('retrieveTeamPlayers', params);
         },
 
@@ -183,10 +163,11 @@ define([
                 };
             return gateway.sendRequest('createTeam', params);
         },
-        createLineup: function(lineUpData) {
+        createLineup: function(lineUpData, teamUUID) {
             var user = appCache.get('user'),
                 params = {
                     UID: user.get('uid'),
+                    teamUUID: teamUUID,
                     payload: lineUpData
                 };
             return gateway.sendRequest('createLineup', params);

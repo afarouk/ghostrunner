@@ -2,7 +2,8 @@
 
 'use strict';
 
-var apiRoot = 'https://simfel.com/apptsvc/rest'
+// var apiRoot = 'https://simfel.com/apptsvc/rest';
+var apiRoot = 'http://54.191.91.125/apptsvc/rest';
 
 module.exports = {
     getAPIRoot: function() {

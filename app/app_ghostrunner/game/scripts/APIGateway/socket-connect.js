@@ -7,7 +7,8 @@ define([
     ], function(){
     //TODO simulate socket errors and disconnect
     var socketConnect = Mn.Object.extend({
-        WebSocketRoot: 'ws://simfel.com/apptsvc/ws/gaming/gamingsecret',
+        // WebSocketRoot: 'ws://simfel.com/apptsvc/ws/gaming/gamingsecret',
+        WebSocketRoot: 'ws://54.191.91.125/apptsvc/ws/gaming/gamingsecret',
         initialize: function(UID) {
             var URL = this.getWebSocketRoot() + '?UID=' + UID;
             this.connect(URL);
