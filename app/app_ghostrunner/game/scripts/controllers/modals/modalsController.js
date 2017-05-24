@@ -140,7 +140,7 @@ define([
                 this.publicController.getGameController().switchToBroker();
                 this.publicController.getStateController().refreshStatus();
             }.bind(this));
-            console.log('invitation received');
+            console.log('game over');
         },
 
         onAbandoneGame: function() {

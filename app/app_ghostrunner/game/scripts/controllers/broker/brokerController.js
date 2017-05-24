@@ -140,10 +140,21 @@ define([
                 cancel: 'cancel',
                 confirm: 'confirm'
             }).then(function(){
-                //todo delete request
+                service.deleteTeam(model.get('teamUUID'))
+                    .then(this.afterTeamRemoved.bind(this, teamName));
             }.bind(this), function() {
                 
             }.bind(this));
+        },
+
+        afterTeamRemoved: function(teamName) {
+            this.publicController.getChoiceController().showConfirmation({
+                message: 'Team ' + teamName + ' succesfully removed.',
+                confirm: 'ok'
+            }).then(function() {
+                this.onCancel();
+            }.bind(this));
+            console.log('team removed');
         },
 
         onRemoveLineUp: function(lineUp) {
@@ -153,10 +164,21 @@ define([
                 cancel: 'cancel',
                 confirm: 'confirm'
             }).then(function(){
-                //todo delete request
+                service.deleteLineUp(this.selectedTeam.get('teamUUID'), lineUp.lineUpId)
+                    .then(this.afterLineUpRemoved.bind(this, lineUpName));
             }.bind(this), function() {
                 
             }.bind(this));
+        },
+
+        afterLineUpRemoved: function(lineUpName) {
+            this.publicController.getChoiceController().showConfirmation({
+                message: 'LineUp ' + lineUpName + ' succesfully removed.',
+                confirm: 'ok'
+            }).then(function() {
+                this.onCancel();
+            }.bind(this));
+            console.log('team removed');
         },
 
         onEditTeam: function(model) {
@@ -173,7 +195,7 @@ define([
             var teamId = selectedTeam.get('teamId'),
                 teamType = selectedTeam.get('type').enumText,
                 lineUpId  = selectedTeam.get('lineUpId');
-                
+
             if (this.selectedUser.get('byEmail')) {
                 this.publicController.getStateController().onSendInvitationByEmail({
                     email: this.credentials.email,
@@ -353,11 +375,6 @@ define([
         onTeamConfirm: function() {
             this.view.ui.invite.attr('disabled', true);
             this.invitationDef.resolve(this.selectedTeam);
-            // if (this.invitationType === 'SEND') {
-            //     this.afterLineUpSelected();
-            // } else if(this.invitationType === 'ACCEPT') {
-            //     this.publicController.getStateController().onInvitationAccepted(role);
-            // }
         },
 
         switchToTeamState: function() {

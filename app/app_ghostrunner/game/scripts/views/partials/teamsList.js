@@ -108,7 +108,7 @@ define([
 			}
 		},
 		allowChanges: function(view) {
-			var allow = view.model.get('type') ===  'PRIVATE' ? true : false;
+			var allow = view.model.get('type').enumText ===  'PRIVATE' ? true : false;
 			return allow;
 		}
 	});

@@ -170,8 +170,25 @@ define([
                     teamUUID: teamUUID,
                     payload: lineUpData
                 };
-            return gateway.sendRequest('createLineup', params);
-        }
+            return gateway.sendRequest('createLineUp', params);
+        },
+        deleteTeam: function(teamUUID) {
+            var user = appCache.get('user'),
+                params = {
+                    UID: user.get('uid'),
+                    teamUUID: teamUUID
+                };
+            return gateway.sendRequest('deleteTeam', params);
+        },
+        deleteLineUp: function(teamUUID, lineUpId) {
+            var user = appCache.get('user'),
+                params = {
+                    UID: user.get('uid'),
+                    teamUUID: teamUUID,
+                    lineUpId: lineUpId
+                };
+            return gateway.sendRequest('deleteLineUp', params);
+        },
     });
 
     return new GameService();
