@@ -182,13 +182,11 @@ define([
         },
 
         onEditTeam: function(model) {
-            var teamId = model.get('teamId');
-            //todo need API for that
+            this.publicController.getCreateTeamController().teamEdit(this.view, model);
         },
 
-        onEditLineUp: function(lineUp) {
-            var lineUpId = lineUp.lineUpId;
-            //todo need API for that
+        onEditLineUp: function(model, lineUp) {
+            this.publicController.getCreateTeamController().lineUpEdit(this.view, model, lineUp);
         },
 
         afterLineUpSelected: function(selectedTeam) {

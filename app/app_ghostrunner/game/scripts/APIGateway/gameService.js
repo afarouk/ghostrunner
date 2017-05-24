@@ -155,6 +155,20 @@ define([
             return gateway.sendRequest('retrieveTeamPlayers', params);
         },
 
+        retrieveLineUpPlayers: function(team, lineUp) {
+            var teamId = team.get('teamId'),
+                lineUpId = lineUp.lineUpId,
+                user = appCache.get('user'),
+                params = {
+                    teamId: teamId,
+                    lineUpId: lineUpId
+                };
+            if (team.get('type').enumText === 'PRIVATE') {
+                params.UID = user.get('uid');
+            }
+            return gateway.sendRequest('retrieveLineUpPlayers', params);
+        },
+
         createTeam: function(teamData) {
             var user = appCache.get('user'),
                 params = {

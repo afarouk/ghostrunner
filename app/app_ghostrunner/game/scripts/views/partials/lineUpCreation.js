@@ -31,7 +31,8 @@ define([
 		},
 		serializeData: function() {
 			return {
-				teamName: this.options.teamName
+				teamName: this.options.teamName,
+				lineUpName: this.options.editedLineUp.displayText || ''
 			};
 		},
 		onRender: function() {

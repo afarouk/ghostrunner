@@ -3,7 +3,7 @@
 	<div class="team-info">
 		<div class="block">
 			<label>LineUp name:</label>
-			<input type="text" name="lineUp-name" placeholder="...">
+			<input type="text" name="lineUp-name" placeholder="..." value="<%= lineUpName %>" <% if (lineUpName) { %>disabled<% } %>>
 		</div>
 		<div class="block">
 			<label>Count:</label>
@@ -15,7 +15,7 @@
 	</div>
 	<button type="button" name="save" disabled>save</button>
 </section>
-<section class="players-list-container">
+<section class="players-list-container" <% if (lineUpName) { %>style="pointer-events: none"<% } %>>
 	<table>
 		<!-- lineUp players list -->
 	</table>

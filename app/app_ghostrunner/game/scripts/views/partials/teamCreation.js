@@ -29,6 +29,11 @@ define([
 			this.team = options.team;
 			this.team.on('change add remove', this.checkIfSaveAllowed, this);
 		},
+		serializeData: function() {
+			return  {
+				teamName: this.options.editedTeam.get('displayText') || ''
+			};
+		},
 		onRender: function() {
 			console.log('team creation');
 			this.teamPlayersList = new TeamPlayersList({

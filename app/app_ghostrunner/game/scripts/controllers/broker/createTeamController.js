@@ -18,10 +18,24 @@ define([
                 }.bind(this));
             this.layout = layout;
         },
+        teamEdit: function(layout, team) {
+            $.when(service.retrieveTeamPlayers(team), service.getBaseballFieldPositions())
+                .done(function(players, positions){
+                    this.onEditTeam(players[0], positions[0], team);
+                }.bind(this));
+            this.layout = layout;
+        },
         lineUpCreate: function(layout, team) {
             $.when(service.retrieveTeamPlayers(team), service.getBaseballFieldPositions())
                 .done(function(players, positions){
                     this.onCreateLineUp(players[0], positions[0], team);
+                }.bind(this));
+            this.layout = layout;
+        },
+        lineUpEdit: function(layout, team, lineUp) {
+            $.when(service.retrieveLineUpPlayers(team, lineUp), service.getBaseballFieldPositions())
+                .done(function(players, positions){
+                    this.onEditLineUp(players[0], positions[0], team, lineUp);
                 }.bind(this));
             this.layout = layout;
         },
@@ -37,6 +51,20 @@ define([
             this.layout.$el.addClass('creation-state');
             this.layout.showChildView('creation', teamCreation);
             this.listenTo(teamCreation, 'team:save', this.onTeamSave.bind(this, team));
+        },
+        onEditTeam: function(players, positions, editedTeam) {
+            var team = new Backbone.Collection(players),
+                createData = {
+                    players: new Backbone.Collection(players.players),
+                    positions: positions,
+                    team: team,
+                    editedTeam: editedTeam
+                },
+                teamEdition = new TeamCreationView(createData);
+
+            this.layout.$el.addClass('creation-state');
+            this.layout.showChildView('creation', teamEdition);
+            this.listenTo(teamEdition, 'team:save', this.onTeamSave.bind(this, team));
         },
         onTeamSave: function(team, teamName) {
             var players = team.map(function(model) {
@@ -70,6 +98,21 @@ define([
             this.layout.$el.addClass('creation-state');
             this.layout.showChildView('creation', lineUpCreation);
             this.listenTo(lineUpCreation, 'lineUp:save', this.onLineUpSave.bind(this, team, lineUp));
+        },
+        onEditLineUp: function(players, positions, team, editedLineUp) {
+            var lineUp = new Backbone.Collection(players),
+                createData = {
+                    players: new Backbone.Collection(players.players),
+                    positions: positions,
+                    lineUp: lineUp,
+                    teamName: team.get('displayText'),
+                    editedLineUp: editedLineUp
+                },
+                lineUpEdition = new LineUpCreationView(createData);
+
+            this.layout.$el.addClass('creation-state');
+            this.layout.showChildView('creation', lineUpEdition);
+            this.listenTo(lineUpEdition, 'lineUp:save', this.onLineUpSave.bind(this, team, lineUp));
         },
         onLineUpSave: function(team, lineUp, lineUpName) {
             var players = lineUp.map(function(model) {

@@ -95,7 +95,7 @@ define([
 				lineUpId = $target.parent().parent().data('id'),
 				lineUp = _.findWhere(view.model.get('lineUps'), {lineUpId: lineUpId});
 			if (this.allowChanges(view)) {
-				this.trigger('lineUp:remove', lineUp);
+				this.trigger('lineUp:remove', view.model, lineUp);
 			}
 		},
 		onChildviewLineUpEdit: function(view, e) {
@@ -104,7 +104,7 @@ define([
 				lineUpId = $target.parent().parent().data('id'),
 				lineUp = _.findWhere(view.model.get('lineUps'), {lineUpId: lineUpId});
 			if (this.allowChanges(view)) {
-				this.trigger('lineUp:edit', lineUp);
+				this.trigger('lineUp:edit', view.model, lineUp);
 			}
 		},
 		allowChanges: function(view) {
