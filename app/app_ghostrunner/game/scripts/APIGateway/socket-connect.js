@@ -3,14 +3,12 @@
 'use strict';
 
 define([
-
-    ], function(){
+    '../appConfig'
+    ], function(config){
     //TODO simulate socket errors and disconnect
     var socketConnect = Mn.Object.extend({
-        // WebSocketRoot: 'ws://simfel.com/apptsvc/ws/gaming/gamingsecret',
-        WebSocketRoot: 'ws://54.191.91.125/apptsvc/ws/gaming/gamingsecret',
         initialize: function(UID) {
-            var URL = this.getWebSocketRoot() + '?UID=' + UID;
+            var URL = config.getWebSocketRoot() + '?UID=' + UID;
             this.connect(URL);
         },
 
@@ -28,40 +26,6 @@ define([
             this.websocket.onclose = function(evnt) {
                 this.onClose(evnt);
             }.bind(this);
-        },
-
-        getWebSocketRoot: function() {
-        	var search = window.location.search,
-        		params = this.parseQueryString(search),
-        		server;
-        	if (params && params.server) {
-        		server = params.server;
-        	}
-
-            if(server=='localhost:8080'){
-						return server ? 'ws://' + server + '/apptsvc/ws/gaming/gamingsecret' : this.WebSocketRoot;
-		      }else{
-						return server ? 'wss://' + server + '/apptsvc/ws/gaming/gamingsecret' : this.WebSocketRoot;
-					}
-        },
-
-        parseQueryString: function(qs) {
-            if (!qs) return;
-            var result = {};
-            var params = qs.replace('?', '').split('&');
-
-            _(params).each(function (param) {
-                var pair = param.split('=');
-                if (pair[1] === 'true' ) {
-                    pair[1] = true;
-                }
-                else if (pair[1] === 'false') {
-                    pair[1] = false;
-                }
-                result[pair[0]] = pair[1];
-            });
-
-            return result;
         },
 
         onOpen: function() {

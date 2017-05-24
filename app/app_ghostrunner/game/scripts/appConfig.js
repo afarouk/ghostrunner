@@ -2,18 +2,29 @@
 
 'use strict';
 
-// var apiRoot = 'https://simfel.com/apptsvc/rest';
-var apiRoot = 'http://54.191.91.125/apptsvc/rest';
+// var baseRoot = 'simfel.com';
+var baseRoot = '54.191.91.125',
+	apiSufix = '/apptsvc/rest',
+	wsSufix = '/apptsvc/ws/gaming/gamingsecret';
 
 module.exports = {
-    getAPIRoot: function() {
-    	return apiRoot
+	setBaseRoot: function(server) {
+    	baseRoot = server;
     },
-    setAPIRoot: function(server) {
-    	apiRoot = 'https://' + server + '/apptsvc/rest';
-      if(server=='localhost:8080'){
-        apiRoot='http://'+server+'/apptsvc/rest';
-      }
 
-    }
+    getAPIRoot: function() {
+    	if(baseRoot === 'localhost:8080' || '54.191.91.125') {
+	        return 'http://' + baseRoot + apiSufix;
+		} else {
+			return 'https://' + baseRoot + apiSufix;
+		}
+    },
+
+    getWebSocketRoot: function() {
+        if ( baseRoot === 'localhost:8080' || '54.191.91.125') {
+			return 'ws://' + baseRoot + wsSufix;
+		} else {
+			return 'wss://' + baseRoot + wsSufix;
+		}
+    },
 };
