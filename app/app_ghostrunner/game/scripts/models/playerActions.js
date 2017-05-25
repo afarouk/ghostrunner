@@ -10,10 +10,6 @@ define([
     		dual: {
 	    		displayText: 'Your Team Currently playing Dual',
 	    		actions: [
-	    			{
-	    				action: 'move',
-		    			text: 'Move'
-	    			},
 		    		{
 		    			action: 'pitch',
 		    			text: 'Pitch to the Batter'
@@ -35,10 +31,6 @@ define([
 	    	defence: {
 	    		displayText: 'Your Team Currently playing Defence',
 	    		actions: [
-	    			{
-	    				action: 'move',
-		    			text: 'Move'
-	    			},
 		    		{
 		    			action: 'pitch',
 		    			text: 'Pitch to the Batter'
@@ -61,10 +53,6 @@ define([
 	    	offence: {
 	    		displayText: 'Your Team Currently playing Offence',
 	    		actions: [
-	    			{
-	    				action: 'move',
-		    			text: 'Move'
-	    			},
 	    			{
 		    			action: 'hit',
 		    			text: 'Hit by pitch'

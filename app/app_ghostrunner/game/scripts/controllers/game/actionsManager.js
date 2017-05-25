@@ -8,12 +8,12 @@ define([
     var ActionsManager = Mn.Object.extend({
 		onAction: function(action) {
             switch (action) {
-                case 'move':
-                    this.publicController.getStateController().onPlayerMove();
+                case 'pitch':
+                    this.publicController.getStateController().onPlayerMove(action);
                     break;
 
                 default:
-                    // this.publicController.getStateController().onPlayerMove();
+                    this.publicController.getStateController().onPlayerMove(action);
                     break;
             }
         }
