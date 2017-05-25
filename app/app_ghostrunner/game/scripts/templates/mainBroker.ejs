@@ -1,20 +1,21 @@
 <div class="broker-part left-broker">
 	<div class="broker-buttons">
+		<button type="button" name="invite" >Invite</button>
 		<button type="button" name="teams">My teams</button>
-		<button type="button" name="cancel" disabled>Cancel</button>
 	</div>
 	<div class="broker-list left-list">
 		<div class="list-container" id="left-list"></div>
+		<button type="button" class="confirm-btn" name="confirm" disabled>Confirm</button>
+		<button type="button" class="btn-default cancel-btn" name="cancel">Cancel</button>
 	</div>
 </div>
 <div class="broker-part right-broker">
 	<div class="broker-buttons">
-		<button type="button" name="invite" >Invite</button>
 		<button type="button" name="games">My games</button>
 	</div>
 	<div class="broker-list right-list">
 		<div class="list-container" id="right-list"></div>
-		<button type="button" name="confirm" disabled>Confirm</button>
+		<button type="button" class="confirm-btn" name="confirm" disabled>Confirm</button>
 	</div>
 
 	<div class="team-choose-head">
@@ -25,3 +26,6 @@
 	</div>
 </div>
 <div id="creation-region" class="creation-region"></div>
+<div id="broker-loader" class="broker-loader">
+	<div class="loader-svg"></div>
+</div>

@@ -179,8 +179,17 @@
                 flex-direction: column;
                 
                 .list-container {
-                    max-height: 320px;
+                    max-height: 340px;
                     overflow-y: auto;
+
+                    &::-webkit-scrollbar {
+                        width: 10px;
+                        background-color: rgba(255, 160, 90, 0.6);
+                    }
+                    &::-webkit-scrollbar-thumb {
+                        background-color: rgba(0, 0, 0, 0.7);
+                        border: 2px solid rgba(255, 120, 60, 0.8);
+                    }
 
                     ul {
                         list-style: none;
@@ -333,8 +342,26 @@
                 }
 
                 &.shown.presented {
-                    button {
+                    button.confirm-btn {
                         display: block;
+                    }
+                    button.cancel-btn {
+                        display: none;
+                        background-color: #ddd;
+                        &:hover {
+                            color: #333;
+                            background-color: #e6e6e6;
+                            border-color: #adadad;
+                        }
+                    }
+
+                    &.my-teams {
+                        button.confirm-btn {
+                            display: none;
+                        }
+                        button.cancel-btn {
+                            display: block;
+                        }
                     }
                 }
 
@@ -348,9 +375,31 @@
                 }
 
                 &.shown.games-active .list-container:before {
+                    // margin-left: 210px;
+                }
+                &.shown.my-teams .list-container:before {
                     margin-left: 210px;
                 }
             }
         }
+    }
+}
+.broker-loader {
+    background: rgba(0,0,0,0.3);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    display: none;
+    .loader-svg {
+        position: absolute;
+        bottom: 0;
+        top: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+        background: url('images/loader.svg') no-repeat center;
     }
 }

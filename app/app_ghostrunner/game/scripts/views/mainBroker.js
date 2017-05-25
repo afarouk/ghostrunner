@@ -24,6 +24,7 @@ define([
 			createTeam: '[name="create-team"]',
 			teamConfirm: '[name="team-confirm"]',
 			confirm: '[name="confirm"]',
+			loader: '#broker-loader'
 		},
 		events: {
 			'click @ui.teams': 'onGetTeams',
