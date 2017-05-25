@@ -79,13 +79,13 @@ define([
 		},
 		onChildviewTeamRemove: function(view, e) {
 			// e.preventDefault();
-			if (this.allowChanges(view)) {
+			if (this.allowChanges(view.model.toJSON())) {
 				this.trigger('team:remove', view.model);
 			}
 		},
 		onChildviewTeamEdit: function(view, e) {
 			// e.preventDefault();
-			if (this.allowChanges(view)) {
+			if (this.allowChanges(view.model.toJSON())) {
 				this.trigger('team:edit', view.model);
 			}
 		},
@@ -94,7 +94,7 @@ define([
 			var $target = $(e.currentTarget),
 				lineUpId = $target.parent().parent().data('id'),
 				lineUp = _.findWhere(view.model.get('lineUps'), {lineUpId: lineUpId});
-			if (this.allowChanges(view)) {
+			if (this.allowChanges(lineUp)) {
 				this.trigger('lineUp:remove', lineUp);
 			}
 		},
@@ -103,12 +103,12 @@ define([
 			var $target = $(e.currentTarget),
 				lineUpId = $target.parent().parent().data('id'),
 				lineUp = _.findWhere(view.model.get('lineUps'), {lineUpId: lineUpId});
-			if (this.allowChanges(view)) {
+			if (this.allowChanges(lineUp)) {
 				this.trigger('lineUp:edit', view.model, lineUp);
 			}
 		},
-		allowChanges: function(view) {
-			var allow = view.model.get('type').enumText ===  'PRIVATE' ? true : false;
+		allowChanges: function(part) {
+			var allow = part.type.enumText ===  'PRIVATE' ? true : false;
 			return allow;
 		}
 	});
