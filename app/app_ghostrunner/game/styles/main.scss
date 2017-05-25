@@ -1,9 +1,10 @@
 @import "./core/colors";
 @import "./core/fonts";
 @import "./core/animations";
-@import "./parts/game";
 @import "./parts/broker";
 @import "./parts/modals";
+@import "./parts/game";
+@import "./parts/information-table";
 
 a.expand-btn{
     position: absolute;

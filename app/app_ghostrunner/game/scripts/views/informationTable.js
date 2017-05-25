@@ -8,6 +8,7 @@ define([
 	], function(Vent, template){
 	var InformationTableView = Mn.View.extend({
 		template: template,
+		className: 'information-table-container',
 		modelEvents: {
 	        'change': 'render'
 	    },
