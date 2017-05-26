@@ -1,7 +1,6 @@
 .information-table {
-    height: 360px;
+    height: 400px;
     color: $text;
-    margin: 30px 0px 50px !important;
     padding: 0;
 
     .information-table-container {
@@ -17,14 +16,67 @@
     		&.left-table,
 	    	&.right-table {
 	    		width: 200px;
-	    		height: 360px;
+	    		height: 400px;
 	    	}
 
 	    	&.left-table,
 	    	&.right-table {
+
+	    		.game-interruption-buttons {
+	    			display: flex;
+				    width: 100%;
+				    height: 30px;
+				    padding: 4px;
+				    margin-bottom: 4px;
+				    background: $tables-back;
+				    justify-content: space-between;
+	    			.menu-btn.abandon_btn,
+				    .menu-btn.pause_btn {
+				        font-size: 12px;
+					    padding: 5px 14px;
+					    height: 20px;
+					    background-color: #576996 !important;
+					    border-radius: 2px;
+					    font-weight: 600;
+				    }
+	    		}
+
+	    		.opponent-status {
+			        padding-right: 8px;
+				    padding-top: 3px;
+				    margin-bottom: 4px;
+				    background: $tables-back;
+				    line-height: 24px;
+
+			        .opponent-in-game {
+			            width: 18px;
+			            height: 18px;
+			            border-radius: 50%;
+			            border: 1px solid #888;
+			            background-color: #aaa;
+			            float: left;
+			            margin: 2px 8px;
+
+			            &.online {
+			                border-color: $online-border;
+			                background-color: $online-back;
+			            }
+			            &.offline {
+			                border-color: $offline-border;
+			                background-color: $offline-back;
+			            }
+			        }
+
+			        .status-text {
+			            font-weight: 600;
+			            color: $text;
+			            font-size: 12px;
+			        }
+			    }
+
 	    		.left-player-info,
 	    		.right-player-info {
-	    			background: rgba(10, 30, 60, 0.8);
+	    			background: $tables-back;
 				    height: 150px;
 				    margin-bottom: 10px;
 				    display: flex;
@@ -63,6 +115,21 @@
 				    				color: green;
 				    			}
 				    		}
+
+				    		&.stamina-status {
+				    			display: flex;
+				    			flex-direction: column;
+				    			justify-content: space-between;
+					    		.stamina-line {
+								    width: 100%;
+								    padding: 3px;
+								    background-color: green;
+								}
+								.stamina-text {
+									font-size: 10px;
+									font-weight: 600;
+								}
+							}
 				    	}
 				    }
 	    		}
@@ -72,7 +139,7 @@
     				height: calc(100% - 160px);
     				display: flex;
 				    flex-direction: column;
-				    background: rgba(10, 30, 60, 0.8);
+				    background: $tables-back;
 				    text-align: center;
 
 				    .team-info {
@@ -99,7 +166,12 @@
 			    		}
 			    		.team-status {
 			    			background-color: gray;
-    						margin: 10px;
+						    border-radius: 50%;
+						    margin: 5px;
+						    padding: 3px;
+    						img {
+    							width: 24px;
+    						}
 			    		}
 			    	}
 
@@ -144,7 +216,7 @@
 
 	    			.game-table-left,
 	    			.game-table-right {
-	    				background: rgba(10, 30, 60, 0.8);
+	    				background: $tables-back;
 	    				display: flex;
 	    				flex-direction: column;
 	    			}
@@ -172,6 +244,11 @@
 											    padding-right: 12px;
 											}
     										padding-left: 12px;
+    										.ball {
+    											img {
+    												width: 20px;
+    											}
+    										}
 	    								}
 	    							}
 	    						}
@@ -219,5 +296,24 @@
 	    		}
 	    	}
     	}
+    }
+}
+.player-actions {
+    background: $tables-back;
+    position: absolute;
+    bottom: 5px;
+    display: flex;
+    padding: 7px 10px;
+    margin-right: 50px;
+
+    .team-role {
+    	color: $text;
+        font-weight: 500;
+    }
+
+    .actions-buttons {
+        button {
+            font-size: 12px;
+        }
     }
 }

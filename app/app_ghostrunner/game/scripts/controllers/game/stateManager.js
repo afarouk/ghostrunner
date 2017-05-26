@@ -31,8 +31,10 @@ define([
                     this.publicController.getPlayerActionsController().updateRole('defence');
                     break;
 
+                case 'UNDECIDED':
+                    break;
+                    
                 default:
-
                     break;
             }
         },
@@ -94,7 +96,7 @@ define([
             var otherUser = gameModel.get('otherUser');
             switch (otherUser.user.presence) {
                 case 'ONLINE':
-                    this.publicController.getGameBtnController().opponentInGame(true);
+                    this.publicController.getInformationTableController().opponentInGame(true);
                     break;
 
                 case 'ACTIVE':
@@ -106,7 +108,7 @@ define([
                     break;
 
                 case 'OFFLINE':
-                    this.publicController.getGameBtnController().opponentInGame(false);
+                    this.publicController.getInformationTableController().opponentInGame(false);
                     break;
 
                 default:

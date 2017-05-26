@@ -128,7 +128,7 @@ define([
             }).then(function(state){
                 this.publicController.getBrokerController().reRender();
                 this.updateGameModel(state);
-                this.publicController.getGameBtnController().opponentInGame(true);
+                this.publicController.getInformationTableController().opponentInGame(true);
             }.bind(this), function(err){
                 //on error
             }.bind(this));

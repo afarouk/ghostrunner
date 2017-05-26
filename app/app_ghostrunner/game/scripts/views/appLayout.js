@@ -16,7 +16,7 @@ define([
 			modals: '#modals'
 		},
 		events: {
-			'click .expand-btn': 'onExpand'
+			'click #expand-btn': 'onExpand'
 		},
 		onRender: function() {
 			this.renderGame();

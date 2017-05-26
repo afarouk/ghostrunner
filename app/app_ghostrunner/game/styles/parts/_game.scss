@@ -136,29 +136,10 @@
         }
     }
 }
-.player-actions {
-    background: rgba(10, 30, 60, 0.8);
-    position: absolute;
-    bottom: 10px;
-    display: flex;
-    padding: 10px;
-    margin-right: 50px;
-
-    .team-status {
-        color: $online-back;
-        font-weight: 500;
-    }
-
-    .actions-buttons {
-        button {
-            font-size: 12px;
-        }
-    }
-}
 .chat {
     background: transparent;
     position: absolute;
-    bottom: 10px;
+    bottom: 5px;
     right: 10px;
     font-weight: bold;
     padding: 2px;
@@ -168,69 +149,4 @@
         font-size: 30px;
         cursor: pointer;
     }
-}
-
-.game-btn {
-    position: absolute;
-    top: 5px;
-    float: right;
-    display: flex;
-    width: 100%;
-    justify-content: space-between;
-    padding-right: 50px;
-    padding-left: 10px;
-
-    .opponent-status {
-        padding-right: 8px;
-        padding-top: 1px;
-        background: rgba(255,255,255, 0.2);
-        line-height: 24px;
-
-        .opponent-in-game {
-            width: 18px;
-            height: 18px;
-            border-radius: 50%;
-            border: 1px solid #888;
-            background-color: #aaa;
-            float: left;
-            margin: 2px 8px;
-
-            &.online {
-                border-color: $online-border;
-                background-color: $online-back;
-            }
-            &.offline {
-                border-color: $offline-border;
-                background-color: $offline-back;
-            }
-        }
-
-        .status-text {
-            font-weight: normal;
-            color: $text;
-            font-size: 12px;
-        }
-    }
-
-    .menu-btn.abandon_btn,
-    .menu-btn.pause_btn {
-        z-index: 999;
-        position: relative;
-        color: $text;
-        font-size: 12px;
-        background-color: #fc603b !important;
-        border-radius: 2px;
-        padding: 8px 6px 5px 6px;
-        font-weight: 500;
-        display: none;
-    }
-
-    &.visible .menu-btn.abandon_btn,
-    &.visible .menu-btn.pause_btn {
-        display: inline-block;
-    }
-}
-
-.information-table {
-    margin: 30px 10px 50px !important;
 }

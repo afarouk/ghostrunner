@@ -10,7 +10,6 @@ define([
 		template: template,
 		className: 'game-container',
 		regions: {
-            btn: '#game-btn',
 			field: '#game-field',
 			interface: '#game-interface'
 		},
@@ -20,7 +19,6 @@ define([
 		renderGame: function() {
 			this.publicController.getFieldController().create(this, 'field');
 			this.publicController.getInterfaceController().create(this, 'interface');
-            this.publicController.getGameBtnController().create(this, 'btn');
 		}
 	});
 	return GameLayoutView;

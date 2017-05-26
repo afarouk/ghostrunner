@@ -19,11 +19,11 @@ define([
                     break;
 
                 case 'OPPONENT_OFFLINE':
-                    this.publicController.getGameBtnController().opponentInGame(false);
+                    this.publicController.getInformationTableController().opponentInGame(false);
                     break;
 
                 case 'OPPONENT_ONLINE':
-                    this.publicController.getGameBtnController().opponentInGame(true);
+                    this.publicController.getInformationTableController().opponentInGame(true);
                     break;
 
                 case 'INVITATION_RECEIVED':

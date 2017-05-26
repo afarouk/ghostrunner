@@ -25,13 +25,11 @@ define([
         switchToGame: function() {
             this.appLayout.getRegion('game').$el.addClass('active');
             this.appLayout.getRegion('broker').$el.removeClass('active');
-            this.publicController.getGameBtnController().showGameBtns();
         },
         switchToBroker: function() {
             this.appLayout.getRegion('game').$el.removeClass('active');
             this.appLayout.getRegion('broker').$el.addClass('active');
             this.publicController.getBrokerController().reRender();
-            this.publicController.getGameBtnController().hideGameBtns();
             this.publicController.getStateController().killGame();
         },
         createUser: function(user) {

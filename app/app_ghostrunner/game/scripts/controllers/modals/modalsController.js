@@ -41,7 +41,7 @@ define([
                 this.onSelectRole()
                     .then(function(role){
                         return this.publicController
-                            .getBrokerController().switchToTeamState()
+                            .getBrokerController().switchToLineUpState()
                             .then(function(selectedTeam){
                                 this.publicController.getStateController().onInvitationAccepted(role, selectedTeam);
                             }.bind(this));
