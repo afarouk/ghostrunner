@@ -32,6 +32,7 @@ define([
                     break;
 
                 case 'UNDECIDED':
+                    this.publicController.getPlayerActionsController().updateRole('undecided');
                     break;
                     
                 default:

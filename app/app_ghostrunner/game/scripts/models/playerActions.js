@@ -75,6 +75,16 @@ define([
 		    		}
 	    		]
 	    	},
+	    	undecided: {
+	    		displayText: 'Undecided/some API issue if you can see it',
+	    		actions: [
+	    			{
+		    			action: 'undecided',
+		    			text: 'Undecided issue'
+		    		}
+	    		]
+
+	    	}
 	    },
 
         initialize: function(role) {
