@@ -15,7 +15,7 @@
 
     		&.left-table,
 	    	&.right-table {
-	    		width: 200px;
+	    		width: 220px;
 	    		height: 400px;
 	    	}
 
@@ -141,11 +141,14 @@
 				    flex-direction: column;
 				    background: $tables-back;
 				    text-align: center;
+				    max-height: 200px;
+    				overflow-y: auto;
 
 				    .team-info {
 			    		display: flex;
 			    		flex-direction: row;
 			    		justify-content: space-between;
+			    		min-height: 40px;
 			    		.user-field {
 			    			display: flex;
 			    			flex-direction: column;
@@ -207,7 +210,7 @@
 
 	    	&.center-table {
 	    		height: 110px;
-	    		margin: 0 10px;
+	    		margin: 0 5px;
 
 	    		.game-table {
 	    			display: flex;
@@ -271,7 +274,7 @@
 	    			}
 
 	    			.game-table-right {
-	    				margin-left: 10px;
+	    				margin-left: 5px;
 	    				.game-status {
 	    					display: flex;
 	    					flex-direction: column;

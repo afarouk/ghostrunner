@@ -10,10 +10,8 @@ define([
     '../../models/informationTable'
     ], function(Vent, service, appCache, InformationTableView, InformationTableModel){
     var InformationTableController = Mn.Object.extend({
-        //TODO show interface
-        //depending on model
 		create: function(layout, region) {
-            this.model = new InformationTableModel;
+            this.model = new InformationTableModel();
 			this.view = new InformationTableView({
                 model: this.model
             });
