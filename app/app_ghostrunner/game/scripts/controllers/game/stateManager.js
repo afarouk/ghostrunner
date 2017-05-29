@@ -57,7 +57,19 @@ define([
                     break;
 
                 case 'INVITATION_RECEIVED':
-                    this.publicController.getModalsController().onInvitationReceived();
+                    this.publicController.getModalsController().onInvitationReceived(gameModel);
+                    break;
+
+                case 'STARTER_SELECTED':
+                    
+                    break;
+
+                case 'LINEUP_SELECTED':
+
+                    break;
+
+                case 'INVITATON_ACCEPTED':
+
                     break;
 
                 case 'IN_MOVE':
@@ -126,6 +138,14 @@ define([
 
                 case 'INVITING':
                     
+                    break;
+
+                case 'STARTERS':
+
+                    break;
+
+                case 'LINEUPS':
+
                     break;
 
                 case 'ACCEPTED':

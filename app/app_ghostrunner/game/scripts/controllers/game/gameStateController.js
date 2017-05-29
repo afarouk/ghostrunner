@@ -69,7 +69,7 @@ define([
             this.getGameStatus(gameUUID)
                 .then(function(game){
                     this.updateGameModel(game);
-                    this.publicController.getStateManager().manage(game);                     
+                    // this.publicController.getStateManager().manage(game);                     
                 }.bind(this));
         },
 
@@ -114,6 +114,30 @@ define([
         onRetrieveInvitation: function(message) {
             var gameUUID = message.gameUUID;
             this.refreshStatus(gameUUID);
+        },
+
+        afterCandidateSelected: function(team, lineUpName, playerModel) {
+            var teamUUID = team.get('teamUUID'),
+                teamId = team.get('teamId'),
+                teamType = team.get('type').enumText,
+                player = {
+                    playerId: playerModel.get('playerId'),
+                    seasonId: playerModel.get('seasonId'),
+                    position: playerModel.get('position').enumText,
+                };
+console.log(appCache.get('game'));
+            service.selectStarter({
+                teamUUID: teamUUID,
+                teamId: teamId,
+                teamType: teamType,
+                lineUpDisplayText: lineUpName,
+                player: player
+            }).then(function(state) {
+                this.publicController.getBrokerController().reRender();
+                this.updateGameModel(state);
+            }.bind(this), function(err) {
+                //on error
+            }.bind(this));
         },
 
         onInvitationAccepted: function(role, selectedTeam) {

@@ -30,6 +30,14 @@ define([
                     this.publicController.getStateController().onRetrieveInvitation(message);
                     break;
 
+                case 'STARTER_SELECTED':
+                    this.publicController.getStateController().refreshStatus(message.gameUUID);
+                    break;
+
+                case 'LINEUP_SELECTED':
+                    
+                    break;
+
                 case 'INVITATION_ACCEPTED':
                     this.publicController.getStateController().refreshStatus(message.gameUUID);
                     break;

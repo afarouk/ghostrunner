@@ -81,20 +81,40 @@ define([
                 };
             return gateway.sendRequest('rejectInvitation', params);
         },
-        sendInvitation: function(params) {
-            var user = appCache.get('user');
-            params = params || {};
-            params.UID = user.get('uid');
+        sendInvitation: function(payload) {
+            var user = appCache.get('user'),
+                params = {
+                    UID: user.get('uid'),
+                    payload: payload
+                };
             return gateway.sendRequest('sendInvitation', params);
         },
-        sendInvitationAndRegister: function(params) {
-            var user = appCache.get('user');
-            params.UID = user.get('uid');
-            params.payload = {
-                email: params.email
-            };
-            delete params.email;
+        sendInvitationAndRegister: function(payload) {
+            var user = appCache.get('user'),
+                params = {
+                    UID: user.get('uid'),
+                    payload: payload
+                };
             return gateway.sendRequest('sendInvitationAndRegister', params);
+        },
+        selectStarter: function(payload) {
+            var game = appCache.get('game'),
+                user = appCache.get('user'),
+                params = {
+                    UID: user.get('uid'),
+                    payload: payload
+                };
+            if (game) params.payload.gameUUID = game.get('gameUUID');
+            debugger;
+            return gateway.sendRequest('selectStarter', params);
+        },
+        selectLineUp: function(payload) {
+            var user = appCache.get('user'),
+                params = {
+                    UID: user.get('uid'),
+                    payload: payload
+                };
+            return gateway.sendRequest('selectLineUp', params);
         },
         getAvailableUsers: function(params) {
             var user = appCache.get('user');
@@ -144,10 +164,10 @@ define([
         },
 
         retrieveTeamPlayers: function(team) {
-            var teamId = team.get('teamId'),
+            var teamUUID = team.get('teamUUID'),
                 user = appCache.get('user'),
                 params = {
-                    teamId: teamId
+                    teamUUID: teamUUID
                 };
             if (team.get('type').enumText === 'PRIVATE') {
                 params.UID = user.get('uid');

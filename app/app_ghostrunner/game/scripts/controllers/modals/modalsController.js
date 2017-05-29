@@ -28,23 +28,51 @@ define([
             this.view.getRegion('container').$el.hide();
         },
         //modals parts
-        onInvitationReceived: function() {
-            var game = appCache.get('game'),
-                other = game.get('otherUser').user.userName,
-                gameName = game.get('displayText');
+        // onInvitationReceived: function() {
+        //     var game = appCache.get('game'),
+        //         other = game.get('otherUser').user.userName,
+        //         gameName = game.get('displayText');
+        //     this.publicController.getChoiceController().showConfirmation({
+        //         message: other + ' sent you invitation to '+ gameName + '<br> accept invitation?',
+        //         cancel: 'cancel',
+        //         reject: 'no',
+        //         confirm: 'yes'
+        //     }).then(function(){
+        //         this.onSelectRole()
+        //             .then(function(role){
+        //                 return this.publicController
+        //                     .getBrokerController().switchToLineUpState()
+        //                     .then(function(selectedTeam){
+        //                         this.publicController.getStateController().onInvitationAccepted(role, selectedTeam);
+        //                     }.bind(this));
+        //             }.bind(this));
+        //     }.bind(this), function(type) {
+        //         //TODO something
+        //         if (type === 'reject') {
+        //             this.publicController.getStateController().onInvitationRejected(game);
+        //         } else {
+        //             // this.publicController.getStateController().onGetMygames();
+        //         }
+        //     }.bind(this));
+        //     console.log('invitation received');
+        // },
+        onInvitationReceived: function(gameModel) {
+            // debugger;
+            var other = gameModel.get('otherUser').user.userName,
+                gameName = gameModel.get('displayText');
             this.publicController.getChoiceController().showConfirmation({
                 message: other + ' sent you invitation to '+ gameName + '<br> accept invitation?',
                 cancel: 'cancel',
                 reject: 'no',
                 confirm: 'yes'
             }).then(function(){
-                this.onSelectRole()
-                    .then(function(role){
+                this.onOtherPlayerLineUp(gameModel)
+                    .then(function(){
                         return this.publicController
                             .getBrokerController().switchToLineUpState()
-                            .then(function(selectedTeam){
-                                this.publicController.getStateController().onInvitationAccepted(role, selectedTeam);
-                            }.bind(this));
+                                .then(function(team, lineUpName, playerModel) {
+                                    this.publicController.getStateController().afterCandidateSelected(team, lineUpName, playerModel);
+                                }.bind(this));
                     }.bind(this));
             }.bind(this), function(type) {
                 //TODO something
@@ -55,6 +83,22 @@ define([
                 }
             }.bind(this));
             console.log('invitation received');
+        },
+
+        onOtherPlayerLineUp: function(gameModel) {
+            var def = $.Deferred(),
+                otherLineUp = gameModel.get('otherLineUp'),
+                lineUpName = otherLineUp.displayText,
+                player = otherLineUp.players[0].displayText;
+
+            this.publicController.getChoiceController().showConfirmation({
+                message: 'Opponent created lineup ' + lineUpName + ' and selected ' + player + ' player',
+                confirm: 'ok'
+            }).then(function() {
+                def.resolve()
+            }.bind(this));
+
+            return def;
         },
 
         onSelectRole: function() {

@@ -7,21 +7,22 @@ define([
     '../../appCache',
     '../../APIGateway/gameService',
     '../../views/partials/teamCreation',
-    '../../views/partials/lineUpCreation'
-    ], function(Vent, appCache, service, TeamCreationView, LineUpCreationView){
+    '../../views/partials/lineUpCreation',
+    '../../views/partials/selectCandidate'
+    ], function(Vent, appCache, service, TeamCreationView, LineUpCreationView, SelectCandidateView){
     var CreateTeamController = Mn.Object.extend({
         //team creation
         teamCreate: function(layout) {
-            $.when(service.retrieveAvailablePlayers(), service.getBaseballFieldPositions())
-                .done(function(players, positions){
-                    this.onCreateTeam(players[0], positions[0]);
+            service.retrieveAvailablePlayers()
+                .then(function(players){
+                    this.onCreateTeam(players);
                 }.bind(this));
             this.layout = layout;
         },
         teamEdit: function(layout, team) {
-            $.when(service.retrieveTeamPlayers(team), service.getBaseballFieldPositions())
-                .done(function(players, positions){
-                    this.onEditTeam(players[0], positions[0], team);
+            service.retrieveTeamPlayers(team)
+                .then(function(players){
+                    this.onEditTeam(players, team);
                 }.bind(this));
             this.layout = layout;
         },
@@ -32,6 +33,13 @@ define([
                 }.bind(this));
             this.layout = layout;
         },
+        selectCandidate: function(layout, team) {
+            service.retrieveTeamPlayers(team)
+                .then(function(players){
+                    this.onSelectCandidate(players, team);
+                }.bind(this));
+            this.layout = layout;
+        },
         lineUpEdit: function(layout, team, lineUp) {
             $.when(service.retrieveLineUpPlayers(team, lineUp), service.getBaseballFieldPositions())
                 .done(function(players, positions){
@@ -39,11 +47,10 @@ define([
                 }.bind(this));
             this.layout = layout;
         },
-        onCreateTeam: function(players, positions) {
+        onCreateTeam: function(players) {
             var team = new Backbone.Collection(),
                 createData = {
                     players: new Backbone.Collection(players.players),
-                    positions: positions,
                     team: team
                 },
                 teamCreation = new TeamCreationView(createData);
@@ -52,11 +59,10 @@ define([
             this.layout.showChildView('creation', teamCreation);
             this.listenTo(teamCreation, 'team:save', this.onTeamSave.bind(this, team));
         },
-        onEditTeam: function(players, positions, editedTeam) {
+        onEditTeam: function(players, editedTeam) {
             var team = new Backbone.Collection(players),
                 createData = {
                     players: new Backbone.Collection(players.players),
-                    positions: positions,
                     team: team,
                     editedTeam: editedTeam
                 },
@@ -84,6 +90,21 @@ define([
                 }.bind(this));
         },
 
+        //select candidate
+        onSelectCandidate: function(players, team) {
+            var createData = {
+                    players: new Backbone.Collection(players.players),
+                    teamName: team.get('displayText')
+                },
+                candidateSelection = new SelectCandidateView(createData);
+
+            this.layout.$el.addClass('creation-state');
+            this.layout.showChildView('creation', candidateSelection);
+            this.listenTo(candidateSelection, 'lineUp:save', this.onCandidateSelected.bind(this));
+        },
+        onCandidateSelected: function(lineUpName, player) {
+            this.publicController.getBrokerController().onCandidateSelected(lineUpName, player);
+        },
         //lineUp creation
         onCreateLineUp: function(players, positions, team) {
             var lineUp = new Backbone.Collection(),

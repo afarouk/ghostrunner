@@ -296,9 +296,8 @@
         	var UID = Cookie.get('cmxUID');
             return this.sendRequest(this.logoutRequest,{
                 UID: UID
-            }).then(function(response) {
-                this.onLogoutSuccess(UID);
-            }.bind(this));
+            }).then(this.onLogoutSuccess.bind(this, UID), 
+                this.onLogoutSuccess.bind(this, UID));
         },
 
         getAPIRoot: function() {

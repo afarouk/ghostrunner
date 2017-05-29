@@ -30,7 +30,7 @@ define([
             this.appLayout.getRegion('game').$el.removeClass('active');
             this.appLayout.getRegion('broker').$el.addClass('active');
             this.publicController.getBrokerController().reRender();
-            this.publicController.getStateController().killGame();
+            // this.publicController.getStateController().killGame();
         },
         createUser: function(user) {
             new userModel({

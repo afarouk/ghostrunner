@@ -26,6 +26,7 @@ define([
         },
         reRender: function () {
             this.confirm = undefined;
+            this.view.$el.removeClass('creation-state');
             this.view.render();
         },
         //url uuid precense
@@ -106,6 +107,7 @@ define([
                     break;
                 case 'lineUp':
                     this.view.ui.invite.attr('disabled', true);
+                    this.view.ui.confirm.attr('disabled', true);
                     this.view.ui.rightBroker.addClass('team-state');
                     this.view.ui.cancel.attr('disabled', false);
                     this.onGetTeams();
@@ -158,8 +160,8 @@ define([
         },
         confirmUser: function() {
             this.switchToLineUpState()
-                .then(function(selectedTeam){
-                    this.afterLineUpSelected(selectedTeam);
+                .then(function(team, lineUpName, player){
+                    this.afterCandidateSelected(lineUpName, player);
                 }.bind(this));
         },
         showUsersList: function(response) {
@@ -256,6 +258,7 @@ define([
                 this.selectedTeam = team;
                 this.selectedTeam.unset('lineUpId', {silent: true});
                 this.view.ui.teamConfirm.attr('disabled', true);
+                this.view.ui.confirm.attr('disabled', false);
             }
         },
 
@@ -266,6 +269,15 @@ define([
                 this.selectedTeam.set('lineUpId', lineUpId, {silent: true});
                 this.view.ui.teamConfirm.attr('disabled', false);
             }
+        },
+
+        selectCandidate: function() {
+            this.publicController.getCreateTeamController().selectCandidate(this.view, this.selectedTeam);
+        },
+
+        onCandidateSelected: function (lineUpName, player) {
+            this.invitationDef.resolve(this.selectedTeam, lineUpName, player);
+            this.invitationDef = null;
         },
 
         onRemoveTeam: function(model) {
@@ -322,6 +334,46 @@ define([
 
         onEditLineUp: function(model, lineUp) {
             this.publicController.getCreateTeamController().lineUpEdit(this.view, model, lineUp);
+        },
+
+        afterCandidateSelected: function(lineUpName, playerModel) {
+            var teamUUID = this.selectedTeam.get('teamUUID'),
+                teamId = this.selectedTeam.get('teamId'),
+                teamType = this.selectedTeam.get('type').enumText,
+                player = {
+                    playerId: playerModel.get('playerId'),
+                    seasonId: playerModel.get('seasonId'),
+                    position: playerModel.get('position').enumText,
+                };
+
+            if (this.selectedUser.get('byEmail')) {
+                this.publicController.getStateController().onSendInvitationByEmail({
+                    callback: this.credentials.callback,
+                    email: this.credentials.email,
+                    teamUUID: teamUUID,
+                    inviteeUID: null, 
+                    // teamUUID: null,
+                    teamId: null,
+                    // teamId: teamId,
+                    teamType: teamType,
+                    lineUpDisplayText: lineUpName,
+                    player: player
+                });
+            } else {
+                var inviteeUID = this.selectedUser.get('uid');
+                this.publicController.getStateController().onSendInvitation({
+                    callback: this.afterInvitationSent.bind(this),
+                    inviteeUID: inviteeUID, 
+                    // teamUUID: teamUUID,
+                    email: null,
+                    teamUUID: null,
+                    teamId: teamId,
+                    teamType: teamType,
+                    lineUpDisplayText: lineUpName,
+                    player: player
+                });
+                this.reRender();
+            }
         },
 
         afterLineUpSelected: function(selectedTeam) {
@@ -398,6 +450,11 @@ define([
                 case 'games':
                     this.confirmGame();
                     break;
+                case 'teams':
+                    if (this.invitationDef) {
+                        this.selectCandidate();
+                    } 
+                    break;
                 default:
                     break;
             }
@@ -408,11 +465,13 @@ define([
             this.view.$el.removeClass('creation-state');
             this.teamConfirm = undefined;
             this.confirm = undefined;
+            this.invitationDef = null;
         },
 
         onTeamConfirm: function() {
             this.view.ui.invite.attr('disabled', true);
             this.invitationDef.resolve(this.selectedTeam);
+            this.invitationDef = null;
         },
 
         switchToLineUpState: function() {

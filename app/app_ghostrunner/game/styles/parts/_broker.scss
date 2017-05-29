@@ -342,6 +342,10 @@
                 }
 
                 &.shown.presented {
+
+                    .left-buttons {
+                        display: flex;
+                    }
                     button.confirm-btn {
                         display: block;
                     }
@@ -358,7 +362,7 @@
 
                     &.my-teams {
                         button.confirm-btn {
-                            display: none;
+                            display: block;
                         }
                         button.cancel-btn {
                             display: block;
