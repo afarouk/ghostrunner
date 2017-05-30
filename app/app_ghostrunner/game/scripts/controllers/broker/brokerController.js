@@ -280,6 +280,11 @@ define([
             this.invitationDef = null;
         },
 
+        lineUpShape: function(accept) {
+            this.view.$el.addClass('creation-state');
+            this.publicController.getCreateTeamController().lineUpShape(this.view, accept);
+        },
+
         onRemoveTeam: function(model) {
             var teamName = model.get('displayText');
             this.publicController.getChoiceController().showConfirmation({

@@ -42,7 +42,8 @@ define([
 
 		_manageUserState: function(gameModel) {
             //States of a user
-            var thisUser = gameModel.get('thisUser');
+            var thisUser = gameModel.get('thisUser'),
+                otherUser = gameModel.get('otherUser');
             switch (thisUser.state) {
                 case 'UNDEFINED':
 
@@ -61,7 +62,12 @@ define([
                     break;
 
                 case 'STARTER_SELECTED':
-                    
+                    if (thisUser.initiator && otherUser.state === 'STARTER_SELECTED') {
+                        this.publicController.getBrokerController().lineUpShape();
+                    }
+                    if (otherUser.state === 'LINEUP_SELECTED') {
+                        this.publicController.getBrokerController().lineUpShape('accept');
+                    }
                     break;
 
                 case 'LINEUP_SELECTED':

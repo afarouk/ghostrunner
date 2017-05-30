@@ -18,7 +18,12 @@ define([
 			'change @ui.position': 'position:changed'
 		},
 		serializeData: function() {
+			var starterModel = this.options.lineUp.at(0),
+				starter = this.model.get('playerId') === starterModel.get('playerId') &&
+					this.model.get('seasonId') === starterModel.get('seasonId') ? true : false;
+			if (starter) this.$el.addClass('starter-player');
 			return _.extend(this.model.toJSON(), {
+				starter: starter,
 				positions: this.options.positions
 			});
 		}

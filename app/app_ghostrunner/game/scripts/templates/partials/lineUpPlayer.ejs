@@ -1,6 +1,6 @@
-<td class="with-name"><%= displayText %></td>
+<td class="with-name"><%= displayText %><i class="fa fa-star starter-star" aria-hidden="true"></i></td>
 <td class="with-checkbox">
-	<input type="checkbox" name="select-player"></input>
+	<input type="checkbox" name="select-player" <% if (starter) { %>checked<% } %>></input>
 </td>
 <td class="with-select">
 	<select name="player-position">

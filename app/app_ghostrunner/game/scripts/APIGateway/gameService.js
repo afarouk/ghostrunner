@@ -105,7 +105,6 @@ define([
                     payload: payload
                 };
             if (game) params.payload.gameUUID = game.get('gameUUID');
-            debugger;
             return gateway.sendRequest('selectStarter', params);
         },
         selectLineUp: function(payload) {

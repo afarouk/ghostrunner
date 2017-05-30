@@ -30,16 +30,18 @@ define([
 			this.lineUp.on('change add remove', this.checkIfSaveAllowed, this);
 		},
 		serializeData: function() {
+			this.lineUpName = this.options.lineUpName;
 			return {
 				teamName: this.options.teamName,
-				lineUpName: this.options.editedLineUp ? this.options.editedLineUp.displayText : ''
+				lineUpName: this.options.lineUpName
 			};
 		},
 		onRender: function() {
 			console.log('lineUp creation');
 			this.lineUpPlayersList = new LineUpPlayersList({
 				collection: this.options.players,
-				positions: this.options.positions
+				positions: this.options.positions,
+				lineUp: this.lineUp
 			});
 			this.showChildView('players', this.lineUpPlayersList);
 			this.listenTo(this.lineUpPlayersList, 'lineUp:changed', this.onLineUpChanged.bind(this));
