@@ -144,7 +144,10 @@ define([
                     players: players
                 };
             if (accept) {
-                debugger;
+                this.publicController.getModalsController().onSelectRole()
+                    .then(function(role){
+                       this.publicController.getStateController().onInvitationAccepted(lineUpData, role); 
+                    }.bind(this));
             } else {
                 service.selectLineUp(lineUpData)
                     .then(function(){

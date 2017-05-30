@@ -140,19 +140,14 @@ console.log(appCache.get('game'));
             }.bind(this));
         },
 
-        onInvitationAccepted: function(role, selectedTeam) {
-            var teamId = selectedTeam.get('teamId'),
-                teamType = selectedTeam.get('type').enumText,
-                lineUpId  = selectedTeam.get('lineUpId');
+        onInvitationAccepted: function(lineUpData, role) {
             service.acceptInvitation({
                 preferredRole: role,
-                teamId: teamId,
-                teamType: teamType,
-                lineUpId: lineUpId
+                payload: lineUpData
             }).then(function(state){
                 this.publicController.getBrokerController().reRender();
                 this.updateGameModel(state);
-                this.publicController.getInformationTableController().opponentInGame(true);
+                // this.publicController.getInformationTableController().opponentInGame(true);
             }.bind(this), function(err){
                 //on error
             }.bind(this));

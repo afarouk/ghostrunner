@@ -70,7 +70,6 @@ define([
                 game = appCache.get('game');
             params = params || {};
             params.UID = user.get('uid');
-            if (game) params.gameUUID = game.get('gameUUID');
             return gateway.sendRequest('acceptInvitation', params);
         },
         rejectInvitation: function(game) {
