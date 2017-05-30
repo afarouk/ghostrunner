@@ -14,7 +14,6 @@ define([
 			chat: '#chat'
 		},
 		onRender: function() {
-			console.log('show interface');
 			this.renderInterfaceParts();
 		},
 		renderInterfaceParts: function() {
@@ -23,11 +22,9 @@ define([
 			this.publicController.getChatController().create(this, 'chat');
 		},
 		onShowLoader: function() {
-			console.log('show loader');
 			this.$('.loader').show();
 		},
 		onHideLoader: function() {
-			console.log('hide loader');
 			this.$('.loader').hide();
 		},
 		onShowTossAnimation: function() {

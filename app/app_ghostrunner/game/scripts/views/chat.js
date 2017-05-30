@@ -9,7 +9,6 @@ define([
 	var ChatView = Mn.View.extend({
 		template: template,
 		onRender: function() {
-			console.log('ChatView');
 		}
 	});
 	return ChatView;

@@ -17,7 +17,6 @@ define([
         _manageUserRole: function(gameModel) {
             //Roles of a user within a game
             var thisUser = gameModel.get('thisUser');
-            console.log('user role: ', thisUser.role);
             switch (thisUser.role) {
                 case 'DUAL':
                     this.publicController.getPlayerActionsController().updateRole('dual');

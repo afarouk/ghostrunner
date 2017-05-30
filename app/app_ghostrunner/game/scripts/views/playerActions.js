@@ -17,8 +17,6 @@ define([
 		},
 		behaviors: [maskBehavior],
 		onRender: function() {
-			console.log('PlayerActionsView');
-			console.log(this.model.toJSON());
 		},
 		onAction: function(e) {
 			var $target = $(e.currentTarget),

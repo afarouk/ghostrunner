@@ -13,7 +13,6 @@ define([
 			container: '#modals-container'
 		},
 		onRender: function() {
-			console.log('ModalsView');
 		}
 	});
 	return ModalsLayoutView;

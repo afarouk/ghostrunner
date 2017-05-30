@@ -43,8 +43,6 @@ define([
                     break;
 
                 case 'INVITATION_REJECTED':
-                    /* TODO  Show informational popup only */
-                    console.log(" Received invitation rejected signal ");
                     this.publicController.getModalsController().onRejectedByOponnent(message);
                     break;
 

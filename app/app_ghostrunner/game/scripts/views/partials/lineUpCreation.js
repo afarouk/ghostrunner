@@ -37,7 +37,6 @@ define([
 			};
 		},
 		onRender: function() {
-			console.log('lineUp creation');
 			this.lineUpPlayersList = new LineUpPlayersList({
 				collection: this.options.players,
 				positions: this.options.positions,
@@ -48,7 +47,6 @@ define([
 		},
 		onNameChanged: function() {
 			var name = this.ui.name.val();
-			console.log(name);
 			if (name.length > 1) { //TODO validation
 				this.lineUpName = name;
 			} else {
@@ -67,7 +65,6 @@ define([
 				this.lineUp.add(model);
 			}
 			this.ui.count.text(this.lineUp.length);
-			console.log(this.lineUp.toJSON());
 		},
 		showCountWarning: function() {
 			this.publicController.getChoiceController().showConfirmation({

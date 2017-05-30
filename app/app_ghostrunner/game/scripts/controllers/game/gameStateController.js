@@ -85,7 +85,6 @@ define([
                     }
                     onInvitationSent(true, result);
                     this.updateGameModel(result);
-                    // this.publicController.getStateController().refreshStatus(result.gameUUID);
                 }.bind(this), function(err){
                     //on error
                     this.publicController.getInterfaceController().hideLoader();
@@ -106,7 +105,6 @@ define([
 
                     onInvitationSent(true, result);
                     this.updateGameModel(result);
-                    // this.publicController.getStateController().refreshStatus(result.gameUUID);
                 }.bind(this), function(err){
                     onInvitationSent(false, err);
                 }.bind(this));
@@ -126,7 +124,6 @@ define([
                     seasonId: playerModel.get('seasonId'),
                     position: playerModel.get('position').enumText,
                 };
-console.log(appCache.get('game'));
             service.selectStarter({
                 teamUUID: teamUUID,
                 teamId: teamId,
@@ -148,7 +145,6 @@ console.log(appCache.get('game'));
             }).then(function(state){
                 this.publicController.getBrokerController().reRender();
                 this.updateGameModel(state);
-                // this.publicController.getInformationTableController().opponentInGame(true);
             }.bind(this), function(err){
                 //on error
             }.bind(this));
@@ -209,7 +205,6 @@ console.log(appCache.get('game'));
 
         killGame: function() {
             var gameModel = this.getGameModel();
-            console.log(gameModel);
             if (gameModel) {
                 gameModel.kill();
             }

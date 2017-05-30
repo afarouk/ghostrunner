@@ -10,7 +10,6 @@ define([
 		template: template,
 		className: 'canvas-container',
 		onRender: function() {
-			console.log('show field');
 		}
 	});
 	return GameFieldView;

@@ -20,7 +20,6 @@ define([
 		onButtonClicked: function (e) {
 			var $target = $(e.currentTarget),
 				action = $target.data('action');
-			console.log(action);
 			this.model.get('callback')(action);
 		}
 	});

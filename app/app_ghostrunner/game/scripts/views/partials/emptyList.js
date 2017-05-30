@@ -10,7 +10,6 @@ define([
 		template: template,
 		tagName: 'ul',
 		onRender: function() {
-			console.log('EmptyListView');
 		}
 	});
 	return EmptyListView;
