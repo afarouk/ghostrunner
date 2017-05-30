@@ -246,9 +246,9 @@ define([
             this.listenTo(teamsList, 'team:remove', this.onRemoveTeam.bind(this));
             this.listenTo(teamsList, 'team:edit', this.onEditTeam.bind(this));
             //lineup
-            this.listenTo(teamsList, 'lineUp:selected', this.onSelectLineUp.bind(this));
-            this.listenTo(teamsList, 'lineUp:remove', this.onRemoveLineUp.bind(this));
-            this.listenTo(teamsList, 'lineUp:edit', this.onEditLineUp.bind(this));
+            // this.listenTo(teamsList, 'lineUp:selected', this.onSelectLineUp.bind(this));
+            // this.listenTo(teamsList, 'lineUp:remove', this.onRemoveLineUp.bind(this));
+            // this.listenTo(teamsList, 'lineUp:edit', this.onEditLineUp.bind(this));
         },
 
         onSelectTeam: function(team) {
@@ -262,14 +262,14 @@ define([
             }
         },
 
-        onSelectLineUp: function(lineUpId) {
-            if (lineUpId === 'new') {
-                this.publicController.getCreateTeamController().lineUpCreate(this.view, this.selectedTeam);
-            } else {
-                this.selectedTeam.set('lineUpId', lineUpId, {silent: true});
-                this.view.ui.teamConfirm.attr('disabled', false);
-            }
-        },
+        // onSelectLineUp: function(lineUpId) {
+        //     if (lineUpId === 'new') {
+        //         this.publicController.getCreateTeamController().lineUpCreate(this.view, this.selectedTeam);
+        //     } else {
+        //         this.selectedTeam.set('lineUpId', lineUpId, {silent: true});
+        //         this.view.ui.teamConfirm.attr('disabled', false);
+        //     }
+        // },
 
         selectCandidate: function() {
             this.publicController.getCreateTeamController().selectCandidate(this.view, this.selectedTeam);
@@ -309,37 +309,37 @@ define([
             console.log('team removed');
         },
 
-        onRemoveLineUp: function(lineUp) {
-            var lineUpName = lineUp.displayText;
-            this.publicController.getChoiceController().showConfirmation({
-                message: 'Are you sure you want to delete ' + lineUpName +' lineUp?',
-                cancel: 'cancel',
-                confirm: 'confirm'
-            }).then(function(){
-                service.deleteLineUp(this.selectedTeam.get('teamUUID'), lineUp.lineUpId)
-                    .then(this.afterLineUpRemoved.bind(this, lineUpName));
-            }.bind(this), function() {
+        // onRemoveLineUp: function(lineUp) {
+        //     var lineUpName = lineUp.displayText;
+        //     this.publicController.getChoiceController().showConfirmation({
+        //         message: 'Are you sure you want to delete ' + lineUpName +' lineUp?',
+        //         cancel: 'cancel',
+        //         confirm: 'confirm'
+        //     }).then(function(){
+        //         service.deleteLineUp(this.selectedTeam.get('teamUUID'), lineUp.lineUpId)
+        //             .then(this.afterLineUpRemoved.bind(this, lineUpName));
+        //     }.bind(this), function() {
                 
-            }.bind(this));
-        },
+        //     }.bind(this));
+        // },
 
-        afterLineUpRemoved: function(lineUpName) {
-            this.publicController.getChoiceController().showConfirmation({
-                message: 'LineUp ' + lineUpName + ' succesfully removed.',
-                confirm: 'ok'
-            }).then(function() {
-                this.onCancel();
-            }.bind(this));
-            console.log('team removed');
-        },
+        // afterLineUpRemoved: function(lineUpName) {
+        //     this.publicController.getChoiceController().showConfirmation({
+        //         message: 'LineUp ' + lineUpName + ' succesfully removed.',
+        //         confirm: 'ok'
+        //     }).then(function() {
+        //         this.onCancel();
+        //     }.bind(this));
+        //     console.log('team removed');
+        // },
 
-        onEditTeam: function(model) {
-            this.publicController.getCreateTeamController().teamEdit(this.view, model);
-        },
+        // onEditTeam: function(model) {
+        //     this.publicController.getCreateTeamController().teamEdit(this.view, model);
+        // },
 
-        onEditLineUp: function(model, lineUp) {
-            this.publicController.getCreateTeamController().lineUpEdit(this.view, model, lineUp);
-        },
+        // onEditLineUp: function(model, lineUp) {
+        //     this.publicController.getCreateTeamController().lineUpEdit(this.view, model, lineUp);
+        // },
 
         afterCandidateSelected: function(lineUpName, playerModel) {
             var teamUUID = this.selectedTeam.get('teamUUID'),
