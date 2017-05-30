@@ -35,7 +35,7 @@ define([
                     break;
 
                 case 'LINEUP_SELECTED':
-                    
+                    this.publicController.getStateController().refreshStatus(message.gameUUID);
                     break;
 
                 case 'INVITATION_ACCEPTED':

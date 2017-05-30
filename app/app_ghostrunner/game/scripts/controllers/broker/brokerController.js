@@ -214,7 +214,8 @@ define([
                     this.reRender();
                 }.bind(this));
             } else {
-                view.triggerMethod('error', result);
+                // view.triggerMethod('error', result);
+                this.publicController.getModalsController().onError(result);
             }
         },
         //teams
@@ -244,7 +245,7 @@ define([
             //team
             this.listenTo(teamsList, 'team:selected', this.onSelectTeam.bind(this));
             this.listenTo(teamsList, 'team:remove', this.onRemoveTeam.bind(this));
-            this.listenTo(teamsList, 'team:edit', this.onEditTeam.bind(this));
+            // this.listenTo(teamsList, 'team:edit', this.onEditTeam.bind(this));
             //lineup
             // this.listenTo(teamsList, 'lineUp:selected', this.onSelectLineUp.bind(this));
             // this.listenTo(teamsList, 'lineUp:remove', this.onRemoveLineUp.bind(this));

@@ -221,6 +221,16 @@ define([
             }.bind(this), function() {
                 this.publicController.getGameController().switchToBroker();
             }.bind(this));
+        },
+
+        onError: function (error) {
+            var message = error.responseJSON.error.message;
+            this.publicController.getChoiceController().showConfirmation({
+                message: message,
+                confirm: 'ok'
+            }).then(function() {
+                this.publicController.getBrokerController().onCancel();
+            }.bind(this));
         }
 
     });

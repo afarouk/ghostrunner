@@ -54,7 +54,8 @@ define([
 
 		onError: function(error) {
 			var message = error.responseJSON.error.message;
-			this.ui.error.html('&#9888; ' + message);
+			// this.ui.error.html('&#9888; ' + message);
+			//TODO show error popup instead
 		}
 	});
 
