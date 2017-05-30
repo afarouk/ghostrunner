@@ -27,37 +27,55 @@ define([
             $('#modals').hide();
             this.view.getRegion('container').$el.hide();
         },
-        //modals parts
-        // onInvitationReceived: function() {
-        //     var game = appCache.get('game'),
-        //         other = game.get('otherUser').user.userName,
-        //         gameName = game.get('displayText');
+        //remove team
+        onRemoveTeam: function(teamName, teamUUID) {
+            var $def = $.Deferred();
+            this.publicController.getChoiceController().showConfirmation({
+                message: 'Are you sure you want to delete ' + teamName +' team?',
+                cancel: 'cancel',
+                confirm: 'confirm'
+            }).then(function(){
+                service.deleteTeam(teamUUID)
+                    .then(this.afterTeamRemoved.bind(this, teamName, $def));
+            }.bind(this), function() {
+                $def.reject();
+            }.bind(this));
+            return $def;
+        },
+        afterTeamRemoved: function(teamName, $def) {
+            this.publicController.getChoiceController().showConfirmation({
+                message: 'Team ' + teamName + ' succesfully removed.',
+                confirm: 'ok'
+            }).then(function() {
+                $def.resolve();
+            }.bind(this));
+            console.log('team removed');
+        },
+        // onRemoveLineUp: function(lineUp) {
+        //     var lineUpName = lineUp.displayText;
         //     this.publicController.getChoiceController().showConfirmation({
-        //         message: other + ' sent you invitation to '+ gameName + '<br> accept invitation?',
+        //         message: 'Are you sure you want to delete ' + lineUpName +' lineUp?',
         //         cancel: 'cancel',
-        //         reject: 'no',
-        //         confirm: 'yes'
+        //         confirm: 'confirm'
         //     }).then(function(){
-        //         this.onSelectRole()
-        //             .then(function(role){
-        //                 return this.publicController
-        //                     .getBrokerController().switchToLineUpState()
-        //                     .then(function(selectedTeam){
-        //                         this.publicController.getStateController().onInvitationAccepted(role, selectedTeam);
-        //                     }.bind(this));
-        //             }.bind(this));
-        //     }.bind(this), function(type) {
-        //         //TODO something
-        //         if (type === 'reject') {
-        //             this.publicController.getStateController().onInvitationRejected(game);
-        //         } else {
-        //             // this.publicController.getStateController().onGetMygames();
-        //         }
+        //         service.deleteLineUp(this.selectedTeam.get('teamUUID'), lineUp.lineUpId)
+        //             .then(this.afterLineUpRemoved.bind(this, lineUpName));
+        //     }.bind(this), function() {
+                
         //     }.bind(this));
-        //     console.log('invitation received');
         // },
+
+        // afterLineUpRemoved: function(lineUpName) {
+        //     this.publicController.getChoiceController().showConfirmation({
+        //         message: 'LineUp ' + lineUpName + ' succesfully removed.',
+        //         confirm: 'ok'
+        //     }).then(function() {
+        //         this.onCancel();
+        //     }.bind(this));
+        //     console.log('team removed');
+        // },
+        //invitation
         onInvitationReceived: function(gameModel) {
-            // debugger;
             var other = gameModel.get('otherUser').user.userName,
                 gameName = gameModel.get('displayText');
             this.publicController.getChoiceController().showConfirmation({
@@ -77,13 +95,25 @@ define([
             }.bind(this), function(type) {
                 //TODO something
                 if (type === 'reject') {
-                    this.publicController.getStateController().onInvitationRejected(game);
+                    this.publicController.getStateController().onInvitationRejected(gameModel);
                 } else {
                     // this.publicController.getStateController().onGetMygames();
                 }
             }.bind(this));
             console.log('invitation received');
         },
+
+        afterInvitationSend: function(userName) {
+            var $def = $.Deferred();
+            this.publicController.getChoiceController().showConfirmation({
+                    message: 'Your invitation ' + userName + ' successfully sent.',
+                    confirm: 'ok'
+                }).then(function() {
+                    $def.resolve();
+                }.bind(this));
+            return $def;
+        },
+
 
         onOtherPlayerLineUp: function(gameModel) {
             var def = $.Deferred(),
@@ -124,6 +154,8 @@ define([
             }.bind(this));
             return def;
         },
+
+        //....interrupt
 
         onPausedByOponnent: function() {
             this.publicController.getChoiceController().showConfirmation({

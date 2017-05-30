@@ -193,12 +193,10 @@ define([
         afterInvitationSent: function(success, result) {
             if (success) {
                 var userName = 'to ' + result.otherUser.user.userName;
-                this.publicController.getChoiceController().showConfirmation({
-                    message: 'Your invitation ' + userName + ' successfully sent.',
-                    confirm: 'ok'
-                }).then(function() {
-                    this.reRender();
-                }.bind(this));
+                this.publicController.getModalsController().afterInvitationSend(userName)
+                    .then(function() {
+                        this.reRender();
+                    }.bind(this));
             } else {
                 //todo manage error
             }
@@ -207,14 +205,11 @@ define([
         onInvitationByEmailSent: function(view, success, result) {
             if (success) {
                 var userName = 'to ' + result.otherUser.user.userName;
-                this.publicController.getChoiceController().showConfirmation({
-                    message: 'Your invitation ' + userName + ' successfully sent.',
-                    confirm: 'ok'
-                }).then(function() {
-                    this.reRender();
-                }.bind(this));
+                this.publicController.getModalsController().afterInvitationSend(userName)
+                    .then(function() {
+                        this.reRender();
+                    }.bind(this));
             } else {
-                // view.triggerMethod('error', result);
                 this.publicController.getModalsController().onError(result);
             }
         },
@@ -245,7 +240,6 @@ define([
             //team
             this.listenTo(teamsList, 'team:selected', this.onSelectTeam.bind(this));
             this.listenTo(teamsList, 'team:remove', this.onRemoveTeam.bind(this));
-            // this.listenTo(teamsList, 'team:edit', this.onEditTeam.bind(this));
             //lineup
             // this.listenTo(teamsList, 'lineUp:selected', this.onSelectLineUp.bind(this));
             // this.listenTo(teamsList, 'lineUp:remove', this.onRemoveLineUp.bind(this));
@@ -287,60 +281,13 @@ define([
         },
 
         onRemoveTeam: function(model) {
-            var teamName = model.get('displayText');
-            this.publicController.getChoiceController().showConfirmation({
-                message: 'Are you sure you want to delete ' + teamName +' team?',
-                cancel: 'cancel',
-                confirm: 'confirm'
-            }).then(function(){
-                service.deleteTeam(model.get('teamUUID'))
-                    .then(this.afterTeamRemoved.bind(this, teamName));
-            }.bind(this), function() {
-                
-            }.bind(this));
+            var teamName = model.get('displayText'),
+                teamUUID = model.get('teamUUID');
+            this.publicController.getModalsController().onRemoveTeam(teamName, teamUUID)
+                .then(function() {
+                    this.onCancel();
+                }.bind(this));
         },
-
-        afterTeamRemoved: function(teamName) {
-            this.publicController.getChoiceController().showConfirmation({
-                message: 'Team ' + teamName + ' succesfully removed.',
-                confirm: 'ok'
-            }).then(function() {
-                this.onCancel();
-            }.bind(this));
-            console.log('team removed');
-        },
-
-        // onRemoveLineUp: function(lineUp) {
-        //     var lineUpName = lineUp.displayText;
-        //     this.publicController.getChoiceController().showConfirmation({
-        //         message: 'Are you sure you want to delete ' + lineUpName +' lineUp?',
-        //         cancel: 'cancel',
-        //         confirm: 'confirm'
-        //     }).then(function(){
-        //         service.deleteLineUp(this.selectedTeam.get('teamUUID'), lineUp.lineUpId)
-        //             .then(this.afterLineUpRemoved.bind(this, lineUpName));
-        //     }.bind(this), function() {
-                
-        //     }.bind(this));
-        // },
-
-        // afterLineUpRemoved: function(lineUpName) {
-        //     this.publicController.getChoiceController().showConfirmation({
-        //         message: 'LineUp ' + lineUpName + ' succesfully removed.',
-        //         confirm: 'ok'
-        //     }).then(function() {
-        //         this.onCancel();
-        //     }.bind(this));
-        //     console.log('team removed');
-        // },
-
-        // onEditTeam: function(model) {
-        //     this.publicController.getCreateTeamController().teamEdit(this.view, model);
-        // },
-
-        // onEditLineUp: function(model, lineUp) {
-        //     this.publicController.getCreateTeamController().lineUpEdit(this.view, model, lineUp);
-        // },
 
         afterCandidateSelected: function(lineUpName, playerModel) {
             var teamUUID = this.selectedTeam.get('teamUUID'),
@@ -358,9 +305,7 @@ define([
                     email: this.credentials.email,
                     teamUUID: teamUUID,
                     inviteeUID: null, 
-                    // teamUUID: null,
                     teamId: null,
-                    // teamId: teamId,
                     teamType: teamType,
                     lineUpDisplayText: lineUpName,
                     player: player
@@ -370,7 +315,6 @@ define([
                 this.publicController.getStateController().onSendInvitation({
                     callback: this.afterInvitationSent.bind(this),
                     inviteeUID: inviteeUID, 
-                    // teamUUID: teamUUID,
                     email: null,
                     teamUUID: null,
                     teamId: teamId,
@@ -472,6 +416,8 @@ define([
             this.teamConfirm = undefined;
             this.confirm = undefined;
             this.invitationDef = null;
+            //TODO maybe return to previous step
+            //and same when team created
         },
 
         onTeamConfirm: function() {

@@ -68,8 +68,7 @@ define([
         refreshStatus: function(gameUUID) {
             this.getGameStatus(gameUUID)
                 .then(function(game){
-                    this.updateGameModel(game);
-                    // this.publicController.getStateManager().manage(game);                     
+                    this.updateGameModel(game);                  
                 }.bind(this));
         },
 
@@ -85,7 +84,8 @@ define([
                         gameModel.set('gameUUID', result.gameUUID);                               
                     }
                     onInvitationSent(true, result);
-                    this.publicController.getStateController().refreshStatus(result.gameUUID);
+                    this.updateGameModel(result);
+                    // this.publicController.getStateController().refreshStatus(result.gameUUID);
                 }.bind(this), function(err){
                     //on error
                     this.publicController.getInterfaceController().hideLoader();
@@ -105,7 +105,8 @@ define([
                     }
 
                     onInvitationSent(true, result);
-                    this.publicController.getStateController().refreshStatus(result.gameUUID);
+                    this.updateGameModel(result);
+                    // this.publicController.getStateController().refreshStatus(result.gameUUID);
                 }.bind(this), function(err){
                     onInvitationSent(false, err);
                 }.bind(this));

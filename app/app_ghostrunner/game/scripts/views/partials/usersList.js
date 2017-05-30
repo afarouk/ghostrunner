@@ -17,10 +17,8 @@ define([
 			error: '[name="error"]'
 		},
 		events: {
-			'keyup input': 'validateCredentials',
 			'paste input': 'validateCredentials',
 			'change input': 'validateCredentials',
-			'input input': 'validateCredentials',
 			'click': 'onEmailClicked'
 		},
 		triggers: {
@@ -48,14 +46,10 @@ define([
 			if (h().validateEmail(email)) {
 				this.ui.error.html('');
 				return email;
+			} else {
+				this.ui.error.html('&#9888; please, type correct email.');
+				return '';
 			}
-			return '';
-		},
-
-		onError: function(error) {
-			var message = error.responseJSON.error.message;
-			// this.ui.error.html('&#9888; ' + message);
-			//TODO show error popup instead
 		}
 	});
 
