@@ -36,7 +36,7 @@ define([
             this.destroy();
 		},
 		onExpand: function() {
-			$('#game-layout').toggleClass('full_screen_game');
+			$('.header-content-wrapper').toggleClass('full_screen_game');
 			$('.fa-expand').toggleClass('fa-compress');            
 		},
 	});

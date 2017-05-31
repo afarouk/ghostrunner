@@ -74,6 +74,7 @@ define([
         //     }.bind(this));
         //     console.log('team removed');
         // },
+        
         //invitation
         onInvitationReceived: function(gameModel) {
             var other = gameModel.get('otherUser').user.userName,
@@ -93,11 +94,8 @@ define([
                                 }.bind(this));
                     }.bind(this));
             }.bind(this), function(type) {
-                //TODO something
                 if (type === 'reject') {
                     this.publicController.getStateController().onInvitationRejected(gameModel);
-                } else {
-                    // this.publicController.getStateController().onGetMygames();
                 }
             }.bind(this));
             console.log('invitation received');
@@ -220,9 +218,6 @@ define([
         },
 
         onAbandoneGame: function() {
-            // var game = appCache.get('game'),
-            //     other = game.get('otherUser').user.userName,
-            //     gameName = game.get('displayText');
             this.publicController.getChoiceController().showConfirmation({
                 message: 'Abandon the game (final)?',
                 cancel: 'cancel',
