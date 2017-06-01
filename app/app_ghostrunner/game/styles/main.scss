@@ -18,7 +18,7 @@
     -webkit-transition: .6s;
     transition: .6s;
     min-width: 1000px;
-    min-height: 480px;
+    min-height: 560px;
 
     .game_canvas_wrap {
         transition: .6s;
@@ -29,8 +29,8 @@
         width: calc(100vw/1.6);
         height: calc(63vw/1.6);
         position: relative;
-        min-width: 768px;
-        min-height: 480px;
+        min-width: 896px;
+        min-height: 560px;
 
         .expand-button {
             position: absolute;
@@ -63,8 +63,8 @@
             width: 27%;
             -webkit-transition: .6s;
             transition: .6s;
-            min-height: 480px;
-            margin-left: 5px;
+            min-height: 560px;
+            margin-left: 10px;
         }
     }
 

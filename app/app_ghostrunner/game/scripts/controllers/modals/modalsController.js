@@ -85,6 +85,7 @@ define([
                 reject: 'no',
                 confirm: 'yes'
             }).then(function(){
+                this.publicController.getGameController().switchToBroker();
                 this.onOtherPlayerLineUp(gameModel)
                     .then(function(){
                         return this.publicController

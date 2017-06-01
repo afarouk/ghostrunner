@@ -24,9 +24,11 @@ define([
         getGameStatus: function(gameUUID) {
             var def = $.Deferred();
             var gameUUID = gameUUID || this.publicController.getBrokerController().getUrlGameUUID(); 
-            if (!gameUUID) return def; 
+            if (!gameUUID) return def;
+            this.publicController.getInterfaceController().showLoader();
             service.getGame(gameUUID)
                 .then(function(game, status){
+                    this.publicController.getInterfaceController().hideLoader();
                     this.publicController.getBrokerController().removeUrlGameUUID();
                     if (status === 'nocontent') {
                         def.reject();
@@ -41,6 +43,7 @@ define([
                     }
                 }.bind(this), function(err){
                     //TODO manage User not in game warning or other error
+                    this.publicController.getInterfaceController().hideLoader();
                     console.log('waiting on get game error...');
                     this.publicController.getBrokerController().removeUrlGameUUID();
                 }.bind(this));
