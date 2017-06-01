@@ -17,7 +17,7 @@
     justify-content: space-between;
     -webkit-transition: .6s;
     transition: .6s;
-    min-width: 1000px;
+    min-width: 896px;
     min-height: 560px;
 
     .game_canvas_wrap {
@@ -48,6 +48,8 @@
             border: 1px solid #8f8fc2;
             color: $text;
             font-size: 21px;
+            -webkit-transition: .6s;
+            transition: .6s;
 
             &:focus,
             &:visited {
