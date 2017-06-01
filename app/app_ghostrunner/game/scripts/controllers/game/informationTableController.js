@@ -35,19 +35,7 @@ define([
         },
 
         clickPauseBtn: function() {
-            this.publicController.getInterfaceController().showLoader();
-            var game = appCache.get('game');
-
-            service.pauseGame()
-                .then(function(status){
-                    this.publicController.getInterfaceController().hideLoader();
-                    this.publicController.getGameController().switchToBroker();
-                    this.publicController.getStateController().onGameStop();
-                    this.publicController.getStateController().refreshStatus();
-                }
-                .bind(this), function(err){
-                    this.publicController.getInterfaceController().hideLoader();
-                }.bind(this));
+            this.publicController.getModalsController().onPauseGameConfirmation();
         }
     });
 

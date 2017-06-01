@@ -47,7 +47,7 @@ define([
                     break;
 
                 case 'GAME_STARTED':
-                    this.publicController.getStateController().refreshStatus(message.gameUUID);
+                    this.publicController.getModalsController().onStartGameConfirmation(message.gameUUID);
                     break;
 
                 case 'GAME_ABANDONED':
@@ -59,7 +59,7 @@ define([
                     break;
 
                 case 'GAME_RESTARTED':
-                    this.publicController.getGameController().switchToBroker();
+                    this.publicController.getModalsController().onStartGameConfirmation(message.gameUUID);
                     break;
 
                 case 'GAME_OVER':

@@ -33,12 +33,16 @@ define([
                 };
             return gateway.sendRequest('startGame', params);
         },
-        pauseGame: function() {
+        pauseGame: function(gameUUID) {
             var user = appCache.get('user'),
                 game = appCache.get('game'),
                 params = {};
             params.UID = user.get('uid');
-            if (game) params.gameUUID = game.get('gameUUID');
+            if (gameUUID) {
+                params.gameUUID = gameUUID;
+            } else if (game) {
+                params.gameUUID = game.get('gameUUID');
+            }
             return gateway.sendRequest('pauseGame', params);
         },
         unPauseGame: function(gameUUID) {

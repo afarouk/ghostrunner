@@ -154,6 +154,44 @@ define([
         },
 
         //....interrupt
+        onStartGameConfirmation: function(gameUUID) {
+            this.publicController.getChoiceController().showConfirmation({
+                message: 'Start game?',
+                cancel: 'cancel',
+                confirm: 'confirm'
+            }).then(function(){
+                this.publicController.getStateController().refreshStatus(gameUUID);
+            }.bind(this), function() {
+                this.onPauseGame(gameUUID);
+            }.bind(this));
+        },
+
+        onPauseGameConfirmation: function() {
+            this.publicController.getChoiceController().showConfirmation({
+                message: 'Pause game?',
+                cancel: 'cancel',
+                confirm: 'confirm'
+            }).then(function(){
+                this.onPauseGame();
+            }.bind(this), function() {
+                //
+            }.bind(this));
+        },
+
+        onPauseGame: function(gameUUID) {
+            this.publicController.getInterfaceController().showLoader();
+
+            service.pauseGame(gameUUID)
+                .then(function(status){
+                    this.publicController.getInterfaceController().hideLoader();
+                    this.publicController.getGameController().switchToBroker();
+                    this.publicController.getStateController().onGameStop();
+                    this.publicController.getStateController().refreshStatus();
+                }
+                .bind(this), function(err){
+                    this.publicController.getInterfaceController().hideLoader();
+                }.bind(this));
+        },
 
         onPausedByOponnent: function() {
             this.publicController.getChoiceController().showConfirmation({
