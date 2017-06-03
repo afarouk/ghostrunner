@@ -58,9 +58,13 @@ define([
                     this.publicController.getModalsController().onPausedByOponnent();
                     break;
 
-                case 'GAME_RESTARTED':
+                case 'GAME_UNPAUSED':
                     this.publicController.getModalsController().onStartGameConfirmation(message.gameUUID);
                     break;
+
+                case 'GAME_RESTARTED':
+                        this.publicController.getModalsController().onStartGameConfirmation(message.gameUUID);
+                        break;
 
                 case 'GAME_OVER':
                     this.publicController.getModalsController().onGameOver();
