@@ -78,7 +78,7 @@ define([
         onSendInvitation: function(credentials) {
             var onInvitationSent = credentials.callback;
             delete credentials.callback;
-            service.sendInvitation(credentials)
+            service.selectStarterAndInvite(credentials)
                 .then(function(result){
                     var gameModel = this.getGameModel();
                     if (!gameModel) {
@@ -97,7 +97,7 @@ define([
         onSendInvitationByEmail: function(credentials) {
             var onInvitationSent = credentials.callback;
             delete credentials.callback;
-            service.sendInvitationAndRegister(credentials)
+            service.selectStarterAndInviteAndRegister(credentials)
                 .then(function(result){
                     var gameModel = this.getGameModel();
                     if (!gameModel) {
@@ -142,7 +142,7 @@ define([
         },
 
         onInvitationAccepted: function(lineUpData, role) {
-            service.acceptInvitation({
+            service.selectLineUpAndAccept({
                 preferredRole: role,
                 payload: lineUpData
             }).then(function(state){

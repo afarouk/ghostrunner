@@ -69,12 +69,12 @@ define([
             params.UID = user.get('uid');
             return gateway.sendRequest('retrieveInvitation', params);
         },
-        acceptInvitation: function(params) {
+        selectLineUpAndAccept: function(params) {
             var user = appCache.get('user'),
                 game = appCache.get('game');
             params = params || {};
             params.UID = user.get('uid');
-            return gateway.sendRequest('acceptInvitation', params);
+            return gateway.sendRequest('selectLineUpAndAccept', params);
         },
         rejectInvitation: function(game) {
             var user = appCache.get('user'),
@@ -84,21 +84,21 @@ define([
                 };
             return gateway.sendRequest('rejectInvitation', params);
         },
-        sendInvitation: function(payload) {
+        selectStarterAndInvite: function(payload) {
             var user = appCache.get('user'),
                 params = {
                     UID: user.get('uid'),
                     payload: payload
                 };
-            return gateway.sendRequest('sendInvitation', params);
+            return gateway.sendRequest('selectStarterAndInvite', params);
         },
-        sendInvitationAndRegister: function(payload) {
+        selectStarterAndInviteAndRegister: function(payload) {
             var user = appCache.get('user'),
                 params = {
                     UID: user.get('uid'),
                     payload: payload
                 };
-            return gateway.sendRequest('sendInvitationAndRegister', params);
+            return gateway.sendRequest('selectStarterAndInviteAndRegister', params);
         },
         selectStarter: function(payload) {
             var game = appCache.get('game'),

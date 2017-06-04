@@ -33,7 +33,7 @@ define([
                 case 'UNDECIDED':
                     this.publicController.getPlayerActionsController().updateRole('undecided');
                     break;
-                    
+
                 default:
                     break;
             }
@@ -49,7 +49,7 @@ define([
                     break;
 
                 case 'AVAILABLE':
-                    
+
                     break;
 
                 case 'INVITATION_SENT':
@@ -104,7 +104,7 @@ define([
                     this.publicController.getGameController().switchToBroker();
                     break;
                 default:
-                    
+
                     break;
             }
         },
@@ -118,11 +118,11 @@ define([
                     break;
 
                 case 'ACTIVE':
-                    
+
                     break;
 
                 case 'INACTIVE':
-                    
+
                     break;
 
                 case 'OFFLINE':
@@ -130,7 +130,7 @@ define([
                     break;
 
                 default:
-                    
+
                     break;
             }
         },
@@ -141,19 +141,19 @@ define([
                 case 'UNDEFINED':
                     break;
 
-                case 'INVITING':
-                    
+                case 'STARTER_INVITING':
+
                     break;
 
                 case 'STARTERS':
 
                     break;
 
-                case 'LINEUPS':
+                case 'LINEUP':
 
                     break;
 
-                case 'ACCEPTED':
+                case 'LINEUPS_ACCEPTED':
                     this.publicController.getStateController().afterGameWasAccepted(gameModel);
                     break;
 
