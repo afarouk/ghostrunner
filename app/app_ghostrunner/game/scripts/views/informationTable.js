@@ -21,6 +21,7 @@ define([
             'click @ui.pause' :'onClickPauseBtn'
 		},
 		onRender: function() {
+			// debugger;
 		},
 		onClickPauseBtn: function() {
             this.publicController.getInformationTableController().clickPauseBtn();

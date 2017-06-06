@@ -15,10 +15,6 @@ define([
             });
 			layout.showChildView( region, this.view );
 		},
-        update: function() {
-            var game = appCache.get('game');
-            this.model.set()
-        },
         onBeforeDestroy: function(){
             this.stopListening();
         },

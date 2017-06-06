@@ -137,7 +137,7 @@
 </section>
 <section class="table-column right-table">
 	<section class="opponent-status">
-		<span class="opponent-in-game online"></span>
+		<span class="opponent-in-game <% if (otherUser.user.presence === 'ONLINE') { %>online<% } else { %>offline<% } %>"></span>
 		<span class="status-text">OPPONENT STATUS</span>
 	</section>
 	<div class="right-player-info">

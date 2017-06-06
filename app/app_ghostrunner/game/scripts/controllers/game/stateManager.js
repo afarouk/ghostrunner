@@ -113,7 +113,7 @@ define([
             var otherUser = gameModel.get('otherUser');
             switch (otherUser.user.presence) {
                 case 'ONLINE':
-                    this.publicController.getInformationTableController().opponentInGame(true);
+                    // this.publicController.getInformationTableController().opponentInGame(true);
                     break;
 
                 case 'ACTIVE':
@@ -125,7 +125,7 @@ define([
                     break;
 
                 case 'OFFLINE':
-                    this.publicController.getInformationTableController().opponentInGame(false);
+                    // this.publicController.getInformationTableController().opponentInGame(false);
                     break;
 
                 default:

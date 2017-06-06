@@ -57,9 +57,6 @@ define([
             var gameModel = this.getGameModel(),
                 state = state.attributes ? state.attributes : state;
             gameModel.set(state);
-            if (gameModel.get('showTossAnimation')) {
-                // this.publicController.getInterfaceController().showTossAnimation();
-            }
             this.publicController.getStateManager().manage(gameModel);
         },
     
