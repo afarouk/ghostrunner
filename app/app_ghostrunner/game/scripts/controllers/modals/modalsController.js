@@ -185,7 +185,7 @@ define([
                 .then(function(status){
                     this.publicController.getGameController().hideLoader();
                     this.publicController.getGameController().switchToBroker();
-                    this.publicController.getStateController().onGameStop();
+                    this.publicController.getStateController().killGame();
                     this.publicController.getStateController().refreshStatus();
                 }
                 .bind(this), function(err){

@@ -224,11 +224,11 @@ define([
             if (gameModel) {
                 gameModel.kill();
             }
-            this.publicController.getModalsController().onConnectionLost();
         },
 
         onGameStop: function() {
             this.killGame();
+            this.publicController.getModalsController().onConnectionLost();
         }
 
     });

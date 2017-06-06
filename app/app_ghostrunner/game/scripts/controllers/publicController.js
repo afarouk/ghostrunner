@@ -23,9 +23,9 @@ define([
     './game/informationTableController', //shows table with game scores, current players info, etc
     './game/playerActionsController', //show buttons related on role 
     './game/actionsManager' //manage player actions buttons
-    ], function( pageController, urlController, chatController, 
+    ], function( pageController, gameController, urlController, chatController, 
         modalsController, choiceController, brokerController, createTeamController,
-        gameController, stateController , stateManager, signalManager, socketController, 
+        stateController , stateManager, signalManager, socketController, 
         fieldController,interfaceController, informationTableController, 
         playerActionsController, actionsManager ) {
     var PublicController = Mn.Object.extend({
