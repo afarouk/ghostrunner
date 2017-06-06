@@ -26,7 +26,7 @@ define([
         },
         onAction: function(action) {
             console.log('action: ', action);
-            this.publicController.getInterfaceController().showLoader();
+            this.publicController.getGameController().showLoader();
 
             this.publicController.getActionsManager().onAction(action);
         }

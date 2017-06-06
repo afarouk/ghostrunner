@@ -22,15 +22,30 @@ define([
             this.publicController.getSocketController().start(user.uid);
         },
         switchToGame: function() {
+            this.appState = 'GAME';
             this.appLayout.renderGame();
             this.appLayout.getRegion('game').$el.addClass('active');
             this.appLayout.getRegion('broker').$el.removeClass('active');
         },
         switchToBroker: function() {
+            this.appState = 'BROKER';
             this.appLayout.getRegion('game').$el.removeClass('active');
             this.appLayout.getRegion('broker').$el.addClass('active');
             this.publicController.getBrokerController().reRender();
-            // this.publicController.getStateController().killGame();
+        },
+        showLoader: function() {
+            if (this.appState === 'GAME') {
+                this.publicController.getInterfaceController().showLoader();
+            } else {
+                this.publicController.getBrokerController().showLoader();
+            }
+        },
+        hideLoader: function() {
+            if (this.appState === 'GAME') {
+                this.publicController.getInterfaceController().hideLoader();
+            } else {
+                this.publicController.getBrokerController().hideLoader();
+            }
         },
         createUser: function(user) {
             new userModel({
@@ -49,11 +64,12 @@ define([
             this.publicController.destroyGame();
         },
         waitingForMove: function() {
-            this.publicController.getInterfaceController().hideLoader();
+            console.log('waiting for move');
+            this.hideLoader();
         },
         waitingForTurn: function() {
             console.log('waiting for turn');
-            //this.publicController.getInterfaceController().showLoader();
+            this.showLoader();
         }
     });
 

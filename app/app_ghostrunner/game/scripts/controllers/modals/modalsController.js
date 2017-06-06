@@ -179,17 +179,17 @@ define([
         },
 
         onPauseGame: function(gameUUID) {
-            // this.publicController.getInterfaceController().showLoader();
+            this.publicController.getGameController().showLoader();
 
             service.pauseGame(gameUUID)
                 .then(function(status){
-                    this.publicController.getInterfaceController().hideLoader();
+                    this.publicController.getGameController().hideLoader();
                     this.publicController.getGameController().switchToBroker();
                     this.publicController.getStateController().onGameStop();
                     this.publicController.getStateController().refreshStatus();
                 }
                 .bind(this), function(err){
-                    this.publicController.getInterfaceController().hideLoader();
+                    this.publicController.getGameController().hideLoader();
                 }.bind(this));
         },
 
@@ -210,15 +210,15 @@ define([
                 cancel: 'cancel',
                 confirm: 'confirm'
             }).then(function(){
-                this.publicController.getInterfaceController().showLoader();
+                this.publicController.getGameController().showLoader();
                 service.abandonGame()
                 .then(function(status){
-                    this.publicController.getInterfaceController().hideLoader();
+                    this.publicController.getGameController().hideLoader();
                     this.publicController.getGameController().switchToBroker();
                     this.publicController.getStateController().refreshStatus();
                 }
                 .bind(this), function(err){
-                    this.publicController.getInterfaceController().hideLoader();
+                    this.publicController.getGameController().hideLoader();
                 }.bind(this));
             }.bind(this), function() {
                 //todo
@@ -261,15 +261,15 @@ define([
                 cancel: 'cancel',
                 confirm: 'confirm'
             }).then(function(){
-                this.publicController.getInterfaceController().showLoader();
+                this.publicController.getGameController().showLoader();
                 service.abandonGame()
                 .then(function(status){
-                    this.publicController.getInterfaceController().hideLoader();
+                    this.publicController.getGameController().hideLoader();
                     this.publicController.getGameController().switchToBroker();
                     this.publicController.getStateController().refreshStatus();
                 }
                 .bind(this), function(err){
-                    this.publicController.getInterfaceController().hideLoader();
+                    this.publicController.getGameController().hideLoader();
                 }.bind(this));
             }.bind(this), function() {
                 //todo

@@ -10,7 +10,7 @@ define([
 
     var GameStateController = Mn.Object.extend({
         onGameStart: function() {
-            // this.publicController.getInterfaceController().hideLoader();
+            // this.publicController.getGameController().hideLoader();
         },
 
         startGame: function(gameUUID, role) {
@@ -24,10 +24,10 @@ define([
             var def = $.Deferred();
             var gameUUID = gameUUID || this.publicController.getBrokerController().getUrlGameUUID(); 
             if (!gameUUID) return def;
-            // this.publicController.getInterfaceController().showLoader();
+            this.publicController.getGameController().showLoader();
             service.getGame(gameUUID)
                 .then(function(game, status){
-                    // this.publicController.getInterfaceController().hideLoader();
+                    this.publicController.getGameController().hideLoader();
                     this.publicController.getBrokerController().removeUrlGameUUID();
                     if (status === 'nocontent') {
                         def.reject();
@@ -42,7 +42,7 @@ define([
                     }
                 }.bind(this), function(err){
                     //TODO manage User not in game warning or other error
-                    //this.publicController.getInterfaceController().hideLoader();
+                    this.publicController.getGameController().hideLoader();
                     console.log('waiting on get game error...');
                     this.publicController.getBrokerController().removeUrlGameUUID();
                 }.bind(this));
@@ -106,7 +106,7 @@ define([
                     this.updateGameModel(result);
                 }.bind(this), function(err){
                     //on error
-                    //this.publicController.getInterfaceController().hideLoader();
+                    this.publicController.getGameController().hideLoader();
                 }.bind(this));
         },
 
@@ -214,11 +214,11 @@ define([
         unPauseGame: function(gameUUID) {
             service.unPauseGame(gameUUID)
                 .then(function(status){
-                    // this.publicController.getInterfaceController().hideLoader();
+                    this.publicController.getGameController().hideLoader();
                     this.publicController.getStateController().refreshStatus(gameUUID);
                 }
                 .bind(this), function(err){
-                    //this.publicController.getInterfaceController().hideLoader();
+                    this.publicController.getGameController().hideLoader();
                 }.bind(this));
         },
 
