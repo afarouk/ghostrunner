@@ -224,6 +224,7 @@ define([
             if (gameModel) {
                 gameModel.kill();
             }
+            this.publicController.getModalsController().onConnectionLost();
         },
 
         onGameStop: function() {

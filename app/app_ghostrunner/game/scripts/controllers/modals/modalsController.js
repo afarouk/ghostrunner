@@ -296,6 +296,15 @@ define([
             }).then(function() {
                 this.publicController.getBrokerController().onCancel();
             }.bind(this));
+        },
+
+        onConnectionLost: function() {
+            this.publicController.getChoiceController().showConfirmation({
+                message: 'Connection was lost.',
+                confirm: 'ok'
+            }).then(function() {
+                this.publicController.getGameController().switchToBroker();
+            }.bind(this));
         }
 
     });

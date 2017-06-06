@@ -28,10 +28,10 @@ define([
             this.appLayout.getRegion('broker').$el.removeClass('active');
         },
         switchToBroker: function() {
-            this.appState = 'BROKER';
             if (this.appState === 'GAME') {
                 this.appLayout.getRegion('game').$el.removeClass('active');
             }
+            this.appState = 'BROKER';
             this.appLayout.getRegion('broker').$el.addClass('active');
             this.publicController.getBrokerController().reRender();
         },

@@ -10,6 +10,8 @@ define([
         initialize: function(UID) {
             var URL = config.getWebSocketRoot() + '?UID=' + UID;
             this.connect(URL);
+
+            this.setDisconnectTimeout();
         },
 
         connect: function(URL) {
@@ -135,6 +137,16 @@ define([
                     // this never happens
                     break;
             }
+        },
+
+        setDisconnectTimeout: function() {
+            var interval = setInterval(function(){
+                var onLine = window.navigator.onLine;
+                if (onLine === false) {
+                    clearInterval(interval);
+                    this.updateStatus('Disconnected');
+                }
+            }.bind(this), 5000);
         }
     });
 
