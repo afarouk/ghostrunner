@@ -378,7 +378,7 @@ define([
             var gameUUID = this.selectedGame.get('gameUUID'),
                 state = this.selectedGame.get('state');
             if (state === 'RUNNING') {
-                this.publicController.getStateController().restartGame(gameUUID);
+                this.publicController.getStateController().notifyOpponentOfGameResumption(gameUUID);
             } else {
                 this.publicController.getStateController().refreshStatus(gameUUID);
             }

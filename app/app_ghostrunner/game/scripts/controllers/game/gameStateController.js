@@ -71,8 +71,8 @@ define([
                 }.bind(this));
         },
 
-        restartGame: function(gameUUID) {
-            service.restartGame(gameUUID)
+        notifyOpponentOfGameResumption: function(gameUUID) {
+            service.notifyOpponentOfGameResumption(gameUUID)
                 .then(function(game){
                     this.refreshStatus(gameUUID);
                 }.bind(this));

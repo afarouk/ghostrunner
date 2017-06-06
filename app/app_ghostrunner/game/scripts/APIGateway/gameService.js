@@ -33,7 +33,7 @@ define([
                 };
             return gateway.sendRequest('startGame', params);
         },
-        restartGame: function(gameUUID) {
+        notifyOpponentOfGameResumption: function(gameUUID) {
             var user = appCache.get('user'),
                 game = appCache.get('game'),
                 params = {};
@@ -43,7 +43,7 @@ define([
             } else if (game) {
                 params.gameUUID = game.get('gameUUID');
             }
-            return gateway.sendRequest('restartGame', params);
+            return gateway.sendRequest('notifyOpponentOfGameResumption', params);
         },
         pauseGame: function(gameUUID) {
             var user = appCache.get('user'),
