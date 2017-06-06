@@ -49,6 +49,11 @@ define([
                 this.publicController.getBrokerController().hideLoader();
             }
         },
+        opponentInGame: function(inGame) {
+            if (this.appState === 'GAME') {
+                this.publicController.getInformationTableController().opponentInGame(inGame);
+            }
+        },
         createUser: function(user) {
             new userModel({
                 uid: user.uid, 
