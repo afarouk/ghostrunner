@@ -7,7 +7,7 @@ define([
     ], function(appCache){
     var PlayerActionsModel = Backbone.Model.extend({
     	roles: {
-    		dual: {
+    		DUAL: {
 	    		displayText: 'Your Team Currently playing Dual',
 	    		actions: [
 		    		{
@@ -28,8 +28,8 @@ define([
 		    		}
 		    	]
 	    	},
-	    	defence: {
-	    		displayText: 'Your Team Currently playing Defence',
+	    	DEFENSE: {
+	    		displayText: 'Your Team Currently playing Defense',
 	    		actions: [
 		    		{
 		    			action: 'pitch',
@@ -50,8 +50,8 @@ define([
 		    	]
 	    	},
 
-	    	offence: {
-	    		displayText: 'Your Team Currently playing Offence',
+	    	OFFENSE: {
+	    		displayText: 'Your Team Currently playing Offense',
 	    		actions: [
 	    			{
 		    			action: 'hit',
@@ -75,7 +75,7 @@ define([
 		    		}
 	    		]
 	    	},
-	    	undecided: {
+	    	UNDECIDED: {
 	    		displayText: 'Undecided/some API issue if you can see it',
 	    		actions: [
 	    			{

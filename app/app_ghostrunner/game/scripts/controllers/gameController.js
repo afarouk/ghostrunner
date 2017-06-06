@@ -54,6 +54,11 @@ define([
                 this.publicController.getInformationTableController().opponentInGame(inGame);
             }
         },
+        updateRole: function(role) {
+            if (this.appState === 'GAME') {
+                this.publicController.getPlayerActionsController().updateRole(role);
+            }
+        },
         createUser: function(user) {
             new userModel({
                 uid: user.uid, 

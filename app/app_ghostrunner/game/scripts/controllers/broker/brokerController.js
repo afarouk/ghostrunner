@@ -275,6 +275,8 @@ define([
         },
 
         lineUpShape: function(accept) {
+            console.log('switch to broker');
+            this.publicController.getGameController().switchToBroker();
             this.view.$el.addClass('creation-state');
             this.publicController.getCreateTeamController().lineUpShape(this.view, accept);
         },

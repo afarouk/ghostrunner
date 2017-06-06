@@ -3,12 +3,14 @@
 'use strict';
 
 define([
+    '../../appCache',
     '../../views/playerActions',
     '../../models/playerActions'
-    ], function(PlayerActionsView, PlayerActionsModel){
+    ], function(appCache, PlayerActionsView, PlayerActionsModel){
     var PlayerActionsController = Mn.Object.extend({
 		create: function(layout, region) {
-            this.model = new PlayerActionsModel('defence');
+            var gameModel = appCache.get('game');
+            this.model = new PlayerActionsModel(gameModel.get('thisUser').role);
 			this.view = new PlayerActionsView({
                 model: this.model
             });

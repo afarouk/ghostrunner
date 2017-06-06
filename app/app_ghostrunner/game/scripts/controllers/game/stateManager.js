@@ -18,19 +18,19 @@ define([
             var thisUser = gameModel.get('thisUser');
             switch (thisUser.role) {
                 case 'DUAL':
-                    this.publicController.getPlayerActionsController().updateRole('dual');
+                    this.publicController.getGameController().updateRole('DUAL');
                     break;
 
                 case 'OFFENSE':
-                    this.publicController.getPlayerActionsController().updateRole('offence');
+                    this.publicController.getGameController().updateRole('OFFENSE');
                     break;
 
                 case 'DEFENSE':
-                    this.publicController.getPlayerActionsController().updateRole('defence');
+                    this.publicController.getGameController().updateRole('DEFENSE');
                     break;
 
                 case 'UNDECIDED':
-                    this.publicController.getPlayerActionsController().updateRole('undecided');
+                    this.publicController.getGameController().updateRole('UNDECIDED');
                     break;
 
                 default:
