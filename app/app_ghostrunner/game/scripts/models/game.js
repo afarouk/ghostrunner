@@ -16,12 +16,3 @@ define([
     });
     return GameModel;
 });
-
-/*
-- Home(id)
-- Away(id)
-- id(id)
-- current inning
-- player positions
-- [game state]
-*/

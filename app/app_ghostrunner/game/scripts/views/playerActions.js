@@ -4,7 +4,6 @@
 
 define([
 	'ejs!../templates/playerActions.ejs',
-	'../controllers/game/interfaceMaskBehavior'
 	], function(template, maskBehavior){
 	var PlayerActionsView = Mn.View.extend({
 		template: template,
@@ -14,7 +13,6 @@ define([
 		events: {
 			'click button': 'onAction'
 		},
-		behaviors: [maskBehavior],
 		onRender: function() {
 		},
 		onAction: function(e) {

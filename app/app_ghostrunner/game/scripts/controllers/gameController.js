@@ -3,10 +3,10 @@
 'use strict';
 
 define([
-    '../../models/user',
-    '../../appCache',
-    '../../APIGateway/gameService',
-    '../../views/appLayout'
+    '../models/user',
+    '../appCache',
+    '../APIGateway/gameService',
+    '../views/appLayout'
     ], function(userModel, appCache, service, AppLayout){
     var GameController = Mn.Object.extend({
         start: function(user){

@@ -3,26 +3,26 @@
 'use strict';
 
 define([
-    './pageController',
-    './urlController',
-    './chatController',
+    './pageController', //manage parent page (login/logout)
+    './gameController', //switch between broker/game etc...
+    './urlController',  //manage url query
+    './chatController', //for chat
 
-    './modals/modalsController',
-    './modals/choiceController',
+    './modals/modalsController', //modals
+    './modals/choiceController', //user choice
 
-    './broker/brokerController',
-    './broker/createTeamController',
+    './broker/brokerController', //broker part with user/game selection
+    './broker/createTeamController', // select players in team/lineUp
 
-    './game/gameController',
-    './game/gameStateController',
-    './game/stateManager',
-    './game/signalManager',
-    './game/socketController',
+    './game/gameStateController', //make changes/calls related on game model state
+    './game/stateManager', //manage states for game model
+    './game/signalManager', //manege websocket signals
+    './game/socketController', //websockets connect/disconnect
     './game/gameFieldController',
     './game/gameInterfaceController',
-    './game/informationTableController',
-    './game/playerActionsController',
-    './game/actionsManager'
+    './game/informationTableController', //shows table with game scores, current players info, etc
+    './game/playerActionsController', //show buttons related on role 
+    './game/actionsManager' //manage player actions buttons
     ], function( pageController, urlController, chatController, 
         modalsController, choiceController, brokerController, createTeamController,
         gameController, stateController , stateManager, signalManager, socketController, 
