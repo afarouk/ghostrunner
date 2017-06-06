@@ -375,8 +375,11 @@ define([
         confirmGame: function() {
             var gameUUID = this.selectedGame.get('gameUUID'),
                 state = this.selectedGame.get('state');
-
-            this.publicController.getStateController().refreshStatus(gameUUID);
+            if (state === 'RUNNING') {
+                this.publicController.getStateController().restartGame(gameUUID);
+            } else {
+                this.publicController.getStateController().refreshStatus(gameUUID);
+            }
             this.reRender();
         },
         showGamesList: function(response) {

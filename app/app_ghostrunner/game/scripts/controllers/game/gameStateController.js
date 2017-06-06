@@ -74,6 +74,23 @@ define([
                 }.bind(this));
         },
 
+        restartGame: function(gameUUID) {
+            service.restartGame(gameUUID)
+                .then(function(game){
+                    this.refreshStatus(gameUUID);
+                }.bind(this));
+        },
+
+        onCheckRestart: function(gameUUID) {
+            //if user already in this game don't show confirmation 
+            var gameModel = this.getGameModel();
+            if (gameModel && gameUUID === gameModel.get('gameUUID')) {
+                this.refreshStatus(gameUUID);
+            } else {
+                this.publicController.getModalsController().onStartGameConfirmation(gameUUID);
+            }
+        },
+
         onSendInvitation: function(credentials) {
             var onInvitationSent = credentials.callback;
             delete credentials.callback;

@@ -179,7 +179,7 @@ define([
         },
 
         onPauseGame: function(gameUUID) {
-            this.publicController.getInterfaceController().showLoader();
+            // this.publicController.getInterfaceController().showLoader();
 
             service.pauseGame(gameUUID)
                 .then(function(status){
