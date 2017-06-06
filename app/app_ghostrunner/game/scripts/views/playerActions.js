@@ -3,10 +3,9 @@
 'use strict';
 
 define([
-	'../Vent',
 	'ejs!../templates/playerActions.ejs',
 	'../controllers/game/interfaceMaskBehavior'
-	], function(Vent, template, maskBehavior){
+	], function(template, maskBehavior){
 	var PlayerActionsView = Mn.View.extend({
 		template: template,
 		modelEvents: {

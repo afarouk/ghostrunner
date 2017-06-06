@@ -3,9 +3,8 @@
 'use strict';
 
 define([
-	'../Vent',
 	'ejs!../templates/informationTable.ejs',
-	], function(Vent, template){
+	], function(template){
 	var InformationTableView = Mn.View.extend({
 		template: template,
 		className: 'information-table-container',

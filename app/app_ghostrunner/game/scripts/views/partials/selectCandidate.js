@@ -3,10 +3,9 @@
 'use strict';
 
 define([
-	'../../Vent',
 	'ejs!../../templates/partials/selectCandidate.ejs',
 	'./selectCandidateList'
-	], function(Vent, template, SelectCandidateList){
+	], function(template, SelectCandidateList){
 	var SelectCandidateView = Mn.View.extend({
 		template: template,
 		tagName: 'section',

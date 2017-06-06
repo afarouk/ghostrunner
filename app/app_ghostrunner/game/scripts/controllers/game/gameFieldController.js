@@ -3,9 +3,8 @@
 'use strict';
 
 define([
-    '../../Vent',
     '../../views/gameField'
-    ], function(Vent, GameFieldView){
+    ], function(GameFieldView){
     var GameFieldController = Mn.Object.extend({
 		create: function(layout, region) {
 			this.view = new GameFieldView();

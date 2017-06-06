@@ -3,10 +3,9 @@
 'use strict';
 
 define([
-	'../Vent',
 	'ejs!../templates/appLayout.ejs',
 	'./gameLayout'
-	], function(Vent, template, GameLayout ){
+	], function(template, GameLayout ){
 	var AppLayoutView = Mn.View.extend({
 		template: template,
 		el: '#game-layout',
@@ -19,14 +18,15 @@ define([
 			'click #expand-btn': 'onExpand'
 		},
 		onRender: function() {
-			this.renderGame();
+			this.renderBroker();
+		},
+		renderBroker: function() {
+			this.publicController.getBrokerController().create(this, 'broker');
+			this.publicController.getModalsController().create(this, 'modals');
 		},
 		renderGame: function() {
 			var gameLayout = new GameLayout();
 			this.showChildView( 'game',  gameLayout);
-
-			this.publicController.getBrokerController().create(this, 'broker');
-			this.publicController.getModalsController().create(this, 'modals');
 		},
 		destroyView: function() {
 			this.undelegateEvents();

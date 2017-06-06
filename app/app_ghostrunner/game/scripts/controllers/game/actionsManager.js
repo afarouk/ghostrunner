@@ -3,8 +3,7 @@
 'use strict';
 
 define([
-    '../../Vent'
-    ], function(Vent){
+    ], function(){
     var ActionsManager = Mn.Object.extend({
 		onAction: function(action) {
             switch (action) {

@@ -3,8 +3,7 @@
 'use strict';
 
 define([
-    '../../Vent'
-    ], function(Vent){
+    ], function(){
     var StatesManager = Mn.Object.extend({
 
         manage: function(gameModel) {

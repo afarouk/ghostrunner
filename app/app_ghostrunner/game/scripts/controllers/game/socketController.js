@@ -3,10 +3,9 @@
 'use strict';
 
 define([
-    '../../Vent',
     '../../models/user',
     '../../APIGateway/socket-connect'
-    ], function(Vent, userModel, SocketConnect){
+    ], function(userModel, SocketConnect){
     var SocketController = Mn.Object.extend({
         start: function(user){
             this.connector = new SocketConnect(user);

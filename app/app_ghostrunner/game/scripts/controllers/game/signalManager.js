@@ -3,8 +3,7 @@
 'use strict';
 
 define([
-    '../../Vent'
-    ], function(Vent){
+    ], function(){
     var SignalsManager = Mn.Object.extend({
 		onMessage: function(message) {
             switch (message.signal) {

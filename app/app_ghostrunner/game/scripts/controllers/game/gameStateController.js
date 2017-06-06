@@ -3,11 +3,10 @@
 'use strict';
 
 define([
-    '../../Vent',
     '../../appCache',
     '../../models/game',
     '../../APIGateway/gameService'
-    ], function(Vent, appCache, GameModel, service){
+    ], function(appCache, GameModel, service){
 
     var GameStateController = Mn.Object.extend({
         onGameStart: function() {
@@ -25,10 +24,10 @@ define([
             var def = $.Deferred();
             var gameUUID = gameUUID || this.publicController.getBrokerController().getUrlGameUUID(); 
             if (!gameUUID) return def;
-            this.publicController.getInterfaceController().showLoader();
+            // this.publicController.getInterfaceController().showLoader();
             service.getGame(gameUUID)
                 .then(function(game, status){
-                    this.publicController.getInterfaceController().hideLoader();
+                    // this.publicController.getInterfaceController().hideLoader();
                     this.publicController.getBrokerController().removeUrlGameUUID();
                     if (status === 'nocontent') {
                         def.reject();
@@ -43,7 +42,7 @@ define([
                     }
                 }.bind(this), function(err){
                     //TODO manage User not in game warning or other error
-                    this.publicController.getInterfaceController().hideLoader();
+                    //this.publicController.getInterfaceController().hideLoader();
                     console.log('waiting on get game error...');
                     this.publicController.getBrokerController().removeUrlGameUUID();
                 }.bind(this));
@@ -59,7 +58,7 @@ define([
                 state = state.attributes ? state.attributes : state;
             gameModel.set(state);
             if (gameModel.get('showTossAnimation')) {
-                this.publicController.getInterfaceController().showTossAnimation();
+                // this.publicController.getInterfaceController().showTossAnimation();
             }
             this.publicController.getStateManager().manage(gameModel);
         },
@@ -90,7 +89,7 @@ define([
                     this.updateGameModel(result);
                 }.bind(this), function(err){
                     //on error
-                    this.publicController.getInterfaceController().hideLoader();
+                    //this.publicController.getInterfaceController().hideLoader();
                 }.bind(this));
         },
 
@@ -198,11 +197,11 @@ define([
         unPauseGame: function(gameUUID) {
             service.unPauseGame(gameUUID)
                 .then(function(status){
-                    this.publicController.getInterfaceController().hideLoader();
+                    // this.publicController.getInterfaceController().hideLoader();
                     this.publicController.getStateController().refreshStatus(gameUUID);
                 }
                 .bind(this), function(err){
-                    this.publicController.getInterfaceController().hideLoader();
+                    //this.publicController.getInterfaceController().hideLoader();
                 }.bind(this));
         },
 

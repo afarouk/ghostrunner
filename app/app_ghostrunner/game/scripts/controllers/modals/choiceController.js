@@ -3,9 +3,8 @@
 'use strict';
 
 define([
-    '../../Vent',
     '../../views/partials/confirmChoice'
-    ], function(Vent, ConfirmChoiceView){
+    ], function(ConfirmChoiceView){
     var ChoiceController = Mn.Object.extend({
         showConfirmation: function(options) {
             var def = $.Deferred(),

@@ -3,14 +3,18 @@
 'use strict';
 
 define([
-    '../../Vent',
+    '../../appCache',
     '../../views/gameInterface'
-    ], function(Vent, GameInterfaceView){
+    ], function(appCache, GameInterfaceView){
     var GameInterfaceController = Mn.Object.extend({
 		create: function(layout, region) {
+            var gameModel = appCache.get('game');
 			this.view = new GameInterfaceView();
 			layout.showChildView( region, this.view );
 			this.showLoader();
+            if (gameModel.get('showTossAnimation')) {
+                this.showTossAnimation();
+            }
 		},
         showLoader: function() {
             this.view.triggerMethod('showLoader');

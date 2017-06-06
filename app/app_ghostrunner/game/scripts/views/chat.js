@@ -3,9 +3,8 @@
 'use strict';
 
 define([
-	'../Vent',
 	'ejs!../templates/chat.ejs',
-	], function(Vent, template){
+	], function(template){
 	var ChatView = Mn.View.extend({
 		template: template,
 		onRender: function() {

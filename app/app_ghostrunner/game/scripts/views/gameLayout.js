@@ -3,9 +3,8 @@
 'use strict';
 
 define([
-	'../Vent',
 	'ejs!../templates/gameLayout.ejs'
-	], function(Vent, template){
+	], function(template){
 	var GameLayoutView = Mn.View.extend({
 		template: template,
 		className: 'game-container',

@@ -3,11 +3,10 @@
 'use strict';
 
 define([
-    '../../Vent',
     '../../appCache',
     '../../APIGateway/gameService',
     '../../views/modalsLayout'
-    ], function(Vent, appCache, service, ModalsLayoutView){
+    ], function(appCache, service, ModalsLayoutView){
     //We need it for show modal dialogs
     var ModalsController = Mn.Object.extend({
         //create/show/hide logic

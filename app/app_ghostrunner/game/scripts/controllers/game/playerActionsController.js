@@ -3,10 +3,9 @@
 'use strict';
 
 define([
-    '../../Vent',
     '../../views/playerActions',
     '../../models/playerActions'
-    ], function(Vent, PlayerActionsView, PlayerActionsModel){
+    ], function(PlayerActionsView, PlayerActionsModel){
     var PlayerActionsController = Mn.Object.extend({
         //TODO show buttons enabled/disabled 
         //depending on model

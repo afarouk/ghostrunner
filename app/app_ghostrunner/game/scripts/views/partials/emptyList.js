@@ -3,9 +3,8 @@
 'use strict';
 
 define([
-	'../../Vent',
 	'ejs!../../templates/partials/emptyList.ejs',
-	], function(Vent, template){
+	], function(template){
 	var EmptyListView = Mn.View.extend({
 		template: template,
 		tagName: 'ul',

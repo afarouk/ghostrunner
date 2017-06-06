@@ -3,20 +3,22 @@
 'use strict';
 
 define([
-    '../../Vent',
     '../../APIGateway/gameService',
     '../../appCache',
-    '../../views/informationTable',
-    '../../models/informationTable'
-    ], function(Vent, service, appCache, InformationTableView, InformationTableModel){
+    '../../views/informationTable'
+    ], function(service, appCache, InformationTableView){
     var InformationTableController = Mn.Object.extend({
 		create: function(layout, region) {
-            this.model = new InformationTableModel();
+            this.model = appCache.get('game');
 			this.view = new InformationTableView({
                 model: this.model
             });
 			layout.showChildView( region, this.view );
 		},
+        update: function() {
+            var game = appCache.get('game');
+            this.model.set()
+        },
         onBeforeDestroy: function(){
             this.stopListening();
         },

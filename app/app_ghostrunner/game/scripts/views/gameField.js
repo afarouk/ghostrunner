@@ -3,9 +3,8 @@
 'use strict';
 
 define([
-	'../Vent',
 	'ejs!../templates/gameField.ejs',
-	], function(Vent, template){
+	], function(template){
 	var GameFieldView = Mn.View.extend({
 		template: template,
 		className: 'canvas-container',

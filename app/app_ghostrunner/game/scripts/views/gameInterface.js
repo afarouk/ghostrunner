@@ -3,9 +3,8 @@
 'use strict';
 
 define([
-	'../Vent',
 	'ejs!../templates/gameInterface.ejs'
-	], function(Vent, template){
+	], function(template){
 	var GameInterfaceView = Mn.View.extend({
 		template: template,
 		regions: {

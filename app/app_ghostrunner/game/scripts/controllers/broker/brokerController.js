@@ -3,7 +3,6 @@
 'use strict';
 
 define([
-    '../../Vent',
     '../../appCache',
     '../../views/mainBroker',
     '../../views/partials/teamsList',
@@ -11,7 +10,7 @@ define([
     '../../views/partials/gamesList',
     '../../views/partials/emptyList',
     '../../APIGateway/gameService'
-    ], function(Vent, appCache, MainBrokerView, TeamsList, UsersList, GamesList, EmptyListView, service){
+    ], function(appCache, MainBrokerView, TeamsList, UsersList, GamesList, EmptyListView, service){
     var BrokerController = Mn.Object.extend({
         create: function(layout, region) {
             this.view = new MainBrokerView();

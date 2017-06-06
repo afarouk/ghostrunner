@@ -3,12 +3,11 @@
 'use strict';
 
 define([
-    '../../Vent',
     '../../models/user',
     '../../appCache',
     '../../APIGateway/gameService',
     '../../views/appLayout'
-    ], function(Vent, userModel, appCache, service, AppLayout){
+    ], function(userModel, appCache, service, AppLayout){
     var GameController = Mn.Object.extend({
         start: function(user){
             console.log('game start');
@@ -23,6 +22,7 @@ define([
             this.publicController.getSocketController().start(user.uid);
         },
         switchToGame: function() {
+            this.appLayout.renderGame();
             this.appLayout.getRegion('game').$el.addClass('active');
             this.appLayout.getRegion('broker').$el.removeClass('active');
         },
@@ -53,7 +53,7 @@ define([
         },
         waitingForTurn: function() {
             console.log('waiting for turn');
-            this.publicController.getInterfaceController().showLoader();
+            //this.publicController.getInterfaceController().showLoader();
         }
     });
 

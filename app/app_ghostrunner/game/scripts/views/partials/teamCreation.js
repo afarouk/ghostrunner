@@ -3,10 +3,9 @@
 'use strict';
 
 define([
-	'../../Vent',
 	'ejs!../../templates/partials/teamCreation.ejs',
 	'./teamPlayersList'
-	], function(Vent, template, TeamPlayersList){
+	], function(template, TeamPlayersList){
 	var TeamCreationView = Mn.View.extend({
 		template: template,
 		tagName: 'section',

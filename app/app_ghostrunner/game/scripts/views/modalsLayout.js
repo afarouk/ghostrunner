@@ -3,9 +3,8 @@
 'use strict';
 
 define([
-	'../Vent',
 	'ejs!../templates/modalsLayout.ejs',
-	], function(Vent, template){
+	], function(template){
 	var ModalsLayoutView = Mn.View.extend({
 		template: template,
 		className: 'modals-layout',

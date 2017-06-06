@@ -3,10 +3,9 @@
 'use strict';
 
 define([
-	'../../Vent',
 	'ejs!../../templates/partials/lineUpCreation.ejs',
 	'./lineUpPlayersList'
-	], function(Vent, template, LineUpPlayersList){
+	], function(template, LineUpPlayersList){
 	var LineUpCreationView = Mn.View.extend({
 		template: template,
 		tagName: 'section',

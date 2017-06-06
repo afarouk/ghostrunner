@@ -3,13 +3,12 @@
 'use strict';
 
 define([
-    '../../Vent',
     '../../appCache',
     '../../APIGateway/gameService',
     '../../views/partials/teamCreation',
     '../../views/partials/lineUpCreation',
     '../../views/partials/selectCandidate'
-    ], function(Vent, appCache, service, TeamCreationView, LineUpCreationView, SelectCandidateView){
+    ], function(appCache, service, TeamCreationView, LineUpCreationView, SelectCandidateView){
     var CreateTeamController = Mn.Object.extend({
         //team creation
         teamCreate: function(layout) {

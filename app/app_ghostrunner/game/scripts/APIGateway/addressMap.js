@@ -8,6 +8,7 @@ module.exports = {
         	getGame: ['GET', '/gaming/getGame'],
         	makeMove: ['POST', '/gaming/makeMove'],
             startGame: ['PUT', '/gaming/startGame'],
+            restartGame: ['PUT', '/gaming/restartGame'],
             pauseGame: ['PUT', '/gaming/pauseGame'],
             unPauseGame: ['PUT', '/gaming/unPauseGame'],
             updateGamePresence: ['PUT', '/gaming/updateGamePresence'],
