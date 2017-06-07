@@ -242,6 +242,7 @@ define([
             var $def = $.Deferred();
             service.pauseGame(gameUUID)
                 .then(function(){
+                    this.killGame();
                     $def.resolve();
                 }.bind(this), function(err){
                     $def.reject();
