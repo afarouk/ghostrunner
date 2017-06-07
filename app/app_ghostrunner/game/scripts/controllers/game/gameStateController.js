@@ -10,7 +10,16 @@ define([
 
     var GameStateController = Mn.Object.extend({
         onGameStart: function() {
-            // this.publicController.getGameController().hideLoader();
+            this.publicController.getGameController().showLoader();
+            service.getMyRunningGame()
+                .then(function(response){
+                    this.publicController.getGameController().hideLoader();
+                    if (response.games.length > 0) {
+                        this.publicController.getModalsController().onRuningGamePresented(response.games[0]);
+                    }
+                }.bind(this), function(){
+                    this.publicController.getGameController().hideLoader();
+                }.bind(this));
         },
 
         startGame: function(gameUUID, role) {

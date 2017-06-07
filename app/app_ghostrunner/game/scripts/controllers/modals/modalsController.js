@@ -73,6 +73,18 @@ define([
         //     }.bind(this));
         //     console.log('team removed');
         // },
+
+        onRuningGamePresented: function(game) {
+            this.publicController.getChoiceController().showConfirmation({
+                message: 'You have a running game with ' + game.opponentUserName + ' .Restart the game?',
+                cancel: 'cancel',
+                confirm: 'confirm'
+            }).then(function(){
+                this.publicController.getStateController().refreshStatus(game.gameUUID);
+            }.bind(this), function() {
+                this.onPauseGame(game.gameUUID);
+            }.bind(this));
+        },
         
         //invitation
         onInvitationReceived: function(gameModel) {

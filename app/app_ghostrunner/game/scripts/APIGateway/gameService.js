@@ -142,6 +142,12 @@ define([
             params.UID = user.get('uid');
             return gateway.sendRequest('getMyGames', params);
         },
+        getMyRunningGame: function(params) {
+            var user = appCache.get('user');
+            params = params || {};
+            params.UID = user.get('uid');
+            return gateway.sendRequest('getMyRunningGame', params);
+        },
         abandonGame : function(){
             var user = appCache.get('user'),
                 game = appCache.get('game'),
