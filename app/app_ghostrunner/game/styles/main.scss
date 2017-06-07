@@ -23,7 +23,7 @@
     .game_canvas_wrap {
         transition: .6s;
         -webkit-transition: .6s;
-        background-image:url("./images/baseballPark-min.png");
+        background-image:url("./images/please_login.png");
         background-repeat: repeat-x;
         background-size: 100% 100%;
         width: calc(100vw/1.6);
@@ -31,6 +31,10 @@
         position: relative;
         min-width: 896px;
         min-height: 560px;
+
+        &.logged {
+            background-image:url("./images/baseballPark-min.png");
+        }
 
         .expand-button {
             position: absolute;

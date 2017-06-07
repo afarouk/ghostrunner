@@ -18,6 +18,7 @@ define([
 			'click #expand-btn': 'onExpand'
 		},
 		onRender: function() {
+			this.$el.addClass('logged');
 			this.renderBroker();
 		},
 		renderBroker: function() {
@@ -29,6 +30,7 @@ define([
 			this.showChildView( 'game',  gameLayout);
 		},
 		destroyView: function() {
+			this.$el.removeClass('logged');
 			this.undelegateEvents();
             this.$el.removeData().unbind(); 
             this.$el.html('');

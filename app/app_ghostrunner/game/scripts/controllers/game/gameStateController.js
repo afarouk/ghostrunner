@@ -237,7 +237,7 @@ define([
 
         onGameStop: function() {
             this.killGame();
-            this.publicController.getModalsController().onConnectionLost();
+            // this.publicController.getModalsController().onConnectionLost();
         }
 
     });
