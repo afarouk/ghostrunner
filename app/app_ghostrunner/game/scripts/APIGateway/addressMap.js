@@ -22,7 +22,7 @@ module.exports = {
             selectLineUp: ['PUT', '/gaming/selectLineUp'],
         	abandonGame: ['PUT', '/gaming/abandonGame'],
         	getMyGames: ['GET', '/gaming/getMyGames'],
-            getMyRunningGame: ['GET', '/gaming/getMyRunnningGame'],
+            getMyRunningGame: ['GET', '/gaming/getMyRunningGame'],
             getTeams: ['GET', '/gaming/getMyTeams'],
             retrieveAvailablePlayers: ['GET', '/gaming/retrieveAvailablePlayers'],
             retrieveTeamPlayers: ['GET', '/gaming/retrieveTeamPlayers'],
