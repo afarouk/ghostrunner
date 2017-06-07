@@ -137,7 +137,7 @@ define([
 
         onRetrieveInvitation: function(message) {
             var gameUUID = message.gameUUID;
-            this.refreshStatus(gameUUID);
+            this.beforeRefreshStatus(gameUUID);
         },
 
         afterCandidateSelected: function(team, lineUpName, playerModel) {
@@ -161,6 +161,27 @@ define([
             }.bind(this), function(err) {
                 //on error
             }.bind(this));
+        },
+
+        beforeRefreshStatus: function(gameUUID) {
+            var gameModel = this.getGameModel();
+            if (gameModel && gameModel.get('gameUUID') !== gameUUID) {
+                this.publicController.getModalsController().onMessageFromAnotherUser()
+                    .then(function(){
+                        this.onPauseGame(gameModel.get('gameUUID'))
+                            .then(function(status){
+                                this.publicController.getGameController().hideLoader();
+                                this.refreshStatus(gameUUID);
+                            }
+                            .bind(this), function(err){
+                                this.publicController.getGameController().hideLoader();
+                            }.bind(this)); 
+                    }.bind(this), function(){
+                        //ignore message
+                    }.bind(this));
+            } else {
+                this.refreshStatus(gameUUID);
+            }
         },
 
         onInvitationAccepted: function(lineUpData, role) {
@@ -215,6 +236,17 @@ define([
             this.killGame();
             this.publicController.getGameController().destroy();
             this.App.destroy();
+        },
+
+        onPauseGame: function(gameUUID) {
+            var $def = $.Deferred();
+            service.pauseGame(gameUUID)
+                .then(function(){
+                    $def.resolve();
+                }.bind(this), function(err){
+                    $def.reject();
+                }.bind(this));
+            return $def;
         },
 
         unPauseGame: function(gameUUID) {

@@ -74,9 +74,23 @@ define([
         //     console.log('team removed');
         // },
 
+        onMessageFromAnotherUser: function() {
+            var $def = $.Deferred();
+            this.publicController.getChoiceController().showConfirmation({
+                message: 'You received message from another user.<br>Pause current game?',
+                cancel: 'cancel',
+                confirm: 'confirm'
+            }).then(function(){
+                $def.resolve();
+            }.bind(this), function() {
+                $def.reject();
+            }.bind(this));
+            return $def;
+        },
+
         onRuningGamePresented: function(game) {
             this.publicController.getChoiceController().showConfirmation({
-                message: 'You have a running game with ' + game.opponentUserName + ' .Restart the game?',
+                message: 'You have a running game with ' + game.opponentUserName + '.<br>Restart the game?',
                 cancel: 'cancel',
                 confirm: 'confirm'
             }).then(function(){
@@ -96,21 +110,27 @@ define([
                 reject: 'no',
                 confirm: 'yes'
             }).then(function(){
-                this.publicController.getGameController().switchToBroker();
-                this.onOtherPlayerLineUp(gameModel)
-                    .then(function(){
-                        return this.publicController
-                            .getBrokerController().switchToLineUpState()
-                                .then(function(team, lineUpName, playerModel) {
-                                    this.publicController.getStateController().afterCandidateSelected(team, lineUpName, playerModel);
-                                }.bind(this));
-                    }.bind(this));
+
+                this.onInvitationConfirmed(gameModel);
+                
             }.bind(this), function(type) {
                 if (type === 'reject') {
                     this.publicController.getStateController().onInvitationRejected(gameModel);
                 }
             }.bind(this));
             console.log('invitation received');
+        },
+
+        onInvitationConfirmed: function(gameModel) {
+            this.publicController.getGameController().switchToBroker();
+            this.onOtherPlayerLineUp(gameModel)
+                .then(function(){
+                    return this.publicController
+                        .getBrokerController().switchToLineUpState()
+                            .then(function(team, lineUpName, playerModel) {
+                                this.publicController.getStateController().afterCandidateSelected(team, lineUpName, playerModel);
+                            }.bind(this));
+                }.bind(this));
         },
 
         afterInvitationSend: function(userName) {
@@ -193,7 +213,7 @@ define([
         onPauseGame: function(gameUUID) {
             this.publicController.getGameController().showLoader();
 
-            service.pauseGame(gameUUID)
+            this.publicController.getStateController().onPauseGame(gameUUID)
                 .then(function(status){
                     this.publicController.getGameController().hideLoader();
                     this.publicController.getGameController().switchToBroker();
