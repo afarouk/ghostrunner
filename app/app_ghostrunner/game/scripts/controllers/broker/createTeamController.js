@@ -52,6 +52,7 @@ define([
             this.layout.$el.addClass('creation-state');
             this.layout.showChildView('creation', teamCreation);
             this.listenTo(teamCreation, 'team:save', this.onTeamSave.bind(this, team));
+            this.listenTo(teamCreation, 'cancel', this.onReturnToTeamSelection.bind(this, team));
         },
         onTeamSave: function(team, teamName) {
             var players = team.map(function(model) {
@@ -67,8 +68,12 @@ define([
                 };
             service.createTeam(teamData)
                 .then(function(){
-                    this.layout.trigger('cancel');//temporary
+                    this.onReturnToTeamSelection();
                 }.bind(this));
+        },
+
+        onReturnToTeamSelection: function() {
+            this.publicController.getBrokerController().onReturnToTeamSelection();
         },
 
         //select candidate
@@ -82,6 +87,7 @@ define([
             this.layout.$el.addClass('creation-state');
             this.layout.showChildView('creation', candidateSelection);
             this.listenTo(candidateSelection, 'lineUp:save', this.onCandidateSelected.bind(this));
+            this.listenTo(candidateSelection, 'cancel', this.onReturnToTeamSelection.bind(this));
         },
         onCandidateSelected: function(lineUpName, player) {
             this.publicController.getBrokerController().onCandidateSelected(lineUpName, player);

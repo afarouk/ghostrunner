@@ -285,6 +285,13 @@ define([
         //     }
         // },
 
+        onReturnToTeamSelection: function() {
+            this.view.$el.removeClass('creation-state');
+            this.teamConfirm = undefined;
+            this.confirm = undefined;
+            this.onGetTeams();
+        },
+
         selectCandidate: function() {
             this.publicController.getCreateTeamController().selectCandidate(this.view, this.selectedTeam);
         },
@@ -306,7 +313,7 @@ define([
                 teamUUID = model.get('teamUUID');
             this.publicController.getModalsController().onRemoveTeam(teamName, teamUUID)
                 .then(function() {
-                    this.onCancel();
+                    this.onReturnToTeamSelection();
                 }.bind(this));
         },
 

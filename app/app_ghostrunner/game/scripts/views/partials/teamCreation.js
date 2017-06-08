@@ -16,12 +16,16 @@ define([
 		ui: {
 			name: '[name="team-name"]',
 			balance: '[name="balance"]',
-			save: '[name="save"]'
+			save: '[name="save"]',
+			cancel: '[name="cancel"]'
 		},
 		events: {
 			'change @ui.name': 'onNameChanged',
 			'keyup @ui.name': 'onNameChanged',
 			'click @ui.save': 'onSave'
+		},
+		triggers: {
+			'click @ui.cancel': 'cancel'
 		},
 		teamName: '',
 		initialize: function(options) {
