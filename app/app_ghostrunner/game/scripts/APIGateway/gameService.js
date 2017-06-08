@@ -136,6 +136,12 @@ define([
             params.UID = user.get('uid');
             return gateway.sendRequest('getAvailableUsers', params);
         },
+        getMyInvitations: function(params) {
+            var user = appCache.get('user');
+            params = params || {};
+            params.UID = user.get('uid');
+            return gateway.sendRequest('getMyInvitations', params);
+        },
         getMyGames: function(params) {
             var user = appCache.get('user');
             params = params || {};

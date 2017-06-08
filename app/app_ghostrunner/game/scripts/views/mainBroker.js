@@ -20,61 +20,24 @@ define([
 			cancel: '[name="cancel"]',
 			invite: '[name="invite"]',
 			byemail: '[name="byemail"]',
-			games: '[name="games"]',
+			my_invites: '[name="my_invites"]',
+			my_games: '[name="my_games"]',
 			createTeam: '[name="create-team"]',
 			teamConfirm: '[name="team-confirm"]',
 			confirm: '[name="confirm"]',
 			loader: '#broker-loader'
 		},
-		events: {
-			'click @ui.teams': 'onGetTeams',
-			'click @ui.cancel': 'onCancel',
-			'click @ui.invite': 'onGetUsers',
-			'click @ui.byemail': 'onInviteByEmail',
-			'click @ui.games': 'onGetGames',
-			'click @ui.createTeam': 'onCreateTeam',
-			'click @ui.teamConfirm': 'onTeamConfirm',
-			'click @ui.confirm': 'onConfirm'
-		},
-		initialize: function (options) {
-
-		},
-		onRender: function() {
-			
-		},
-
-		onGetTeams: function() {
-			this.trigger('getTeams');
-		},
-
-		onGetUsers: function() {
-			this.trigger('getUsers');
-		},
-
-		onInviteByEmail: function() {
-			this.trigger('inviteByEmail');
-		},
-
-		onGetGames: function() {
-			this.trigger('getGames');
-		},
-
-		onConfirm: function() {
-			//TODO make difference between left and right parts
-			this.trigger('confirm');
-		},
-
-		onTeamConfirm: function() {
-			this.trigger('team:confirm');
-		},
-
-		onCreateTeam: function() {
-			this.trigger('team:create');
-		}, 
-		onCancel: function() {
-			this.trigger('cancel');
+		triggers: {
+			'click @ui.teams': 'getTeams',
+			'click @ui.cancel': 'cancel',
+			'click @ui.invite': 'getUsers',
+			'click @ui.byemail': 'inviteByEmail',
+			'click @ui.my_invites': 'getInvites',
+			'click @ui.my_games': 'getGames',
+			'click @ui.createTeam': 'team:create',
+			'click @ui.teamConfirm': 'team:confirm',
+			'click @ui.confirm': 'confirm'
 		}
-
 	});
 	return MainBrokerView;
 });

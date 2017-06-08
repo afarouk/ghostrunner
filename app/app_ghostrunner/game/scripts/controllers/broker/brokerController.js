@@ -8,15 +8,17 @@ define([
     '../../views/partials/teamsList',
     '../../views/partials/usersList',
     '../../views/partials/gamesList',
+    '../../views/partials/invitesList',
     '../../views/partials/emptyList',
     '../../APIGateway/gameService'
-    ], function(appCache, MainBrokerView, TeamsList, UsersList, GamesList, EmptyListView, service){
+    ], function(appCache, MainBrokerView, TeamsList, UsersList, GamesList, InvitesList, EmptyListView, service){
     var BrokerController = Mn.Object.extend({
         create: function(layout, region) {
             this.view = new MainBrokerView();
             layout.showChildView( region, this.view );
             this.listenTo(this.view, 'getTeams', this.onGetTeams.bind(this));
             this.listenTo(this.view, 'getUsers', this.onGetUsers.bind(this));
+            this.listenTo(this.view, 'getInvites', this.onGetInvites.bind(this));
             this.listenTo(this.view, 'getGames', this.onGetGames.bind(this));
             this.listenTo(this.view, 'confirm', this.onConfirm.bind(this));
             this.listenTo(this.view, 'cancel', this.onCancel.bind(this));
@@ -90,12 +92,28 @@ define([
                         this.destroyCurrentView();
                     }
                     break;
+                case 'invites':
+                    if (show) {
+                        this.hideLeft();
+                        this.confirm = 'invites';
+                        this.view.$el.find('.broker-list.right-list')
+                            .addClass('shown invites-active')
+                            .removeClass('presented games-active');
+                        this.view.ui.confirm.attr('disabled', true);
+                    } else {
+                        this.confirm = undefined;
+                        this.view.$el.find('.broker-list.right-list')
+                            .removeClass('shown invites-active');
+                        this.destroyCurrentView();
+                    }
+                    break;
                 case 'games':
                     if (show) {
                         this.hideLeft();
                         this.confirm = 'games';
                         this.view.$el.find('.broker-list.right-list')
-                            .addClass('shown presented games-active');
+                            .addClass('shown presented games-active')
+                            .removeClass('invites-active');
                         this.view.ui.confirm.attr('disabled', true);
                     } else {
                         this.confirm = undefined;
@@ -123,10 +141,10 @@ define([
             }
         },
         hideRight: function() {
-            if (this.confirm === 'games') {
+            if (this.confirm === 'games' || this.confirm === 'invites') {
                 this.confirm = undefined;
                 this.view.$el.find('.broker-list.right-list')
-                    .removeClass('shown presented games-active');
+                    .removeClass('shown presented games-active invites-active');
                 this.destroyCurrentView();
             }
         },
@@ -354,6 +372,32 @@ define([
         },
 
         // Right part
+        //invites
+        onGetInvites: function() {
+            if (this.confirm === 'invites') {
+                this.switchBrokerState('invites', false);
+            } else {
+                this.showLoader();
+                this.switchBrokerState('invites', true);
+                service.getMyInvitations()
+                    .then(function(response){
+                        this.hideLoader();
+                        if( response.games.length > 0 ){
+                            this.showInvitesList(response);
+                        } else {
+                            this.showEmptyList('No invites are presented.');
+                        }
+                    }.bind(this), function(err){
+                        //TODO error
+                    }.bind(this));
+            }
+        },
+        showInvitesList: function(response) {
+            var invitesList = new InvitesList({
+                collection: new Backbone.Collection(response.games)
+            });
+            this.view.showChildView('rightList', invitesList);
+        },
         //games
         onGetGames: function() {
             if (this.confirm === 'games') {

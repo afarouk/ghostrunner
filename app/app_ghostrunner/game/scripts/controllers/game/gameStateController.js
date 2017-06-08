@@ -171,6 +171,7 @@ define([
                         this.onPauseGame(gameModel.get('gameUUID'))
                             .then(function(status){
                                 this.publicController.getGameController().hideLoader();
+                                this.publicController.getGameController().switchToBroker();
                                 this.refreshStatus(gameUUID);
                             }
                             .bind(this), function(err){
