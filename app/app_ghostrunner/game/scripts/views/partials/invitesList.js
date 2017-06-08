@@ -3,7 +3,7 @@
 'use strict';
 
 define([
-	'ejs!../../templates/partials/myGame.ejs'
+	'ejs!../../templates/partials/myInvite.ejs'
 	], function(template){
 	var InviteView = Mn.View.extend({
 		tagName: 'li',
