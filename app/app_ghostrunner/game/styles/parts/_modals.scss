@@ -30,6 +30,16 @@
 
                     button {
                         margin-right: 10px;
+
+                        &.no-btn,
+                        &.cancel-btn {
+                            background-color: $gray;
+                            &:hover {
+                                color: #333;
+                                background-color: $lightgray;
+                                border-color: #adadad;
+                            }
+                        }
                     }
                 }
             }

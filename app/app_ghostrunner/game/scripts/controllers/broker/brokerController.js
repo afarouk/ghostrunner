@@ -85,6 +85,8 @@ define([
                         this.confirm = 'teams';
                         this.view.$el.find('.broker-list.left-list')
                             .addClass('shown presented my-teams');
+                        this.view.ui.teams.attr('disabled', false)
+                            .addClass('inactive');
                     } else {
                         this.view.$el.find('.broker-list.left-list')
                             .removeClass('shown presented');

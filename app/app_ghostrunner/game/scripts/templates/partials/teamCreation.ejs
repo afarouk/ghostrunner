@@ -1,16 +1,16 @@
 <section class="creation-header">
-	<button type="button" name="cancel">cancel</button>
+	<button class="cancel-btn" type="button" name="cancel">cancel</button>
 	<div class="team-info">
 		<div class="block">
 			<label>Team name:</label>
-			<input type="text" name="team-name" placeholder="..." value="<%= teamName %>" <% if (teamName) { %>disabled<% } %>>
+			<input type="text" name="team-name" placeholder="(enter team name)" value="<%= teamName %>" <% if (teamName) { %>disabled<% } %>>
 		</div>
 		<div class="block">
 			<label>Balance</label>
 			<span class="balance" name="balance">0</span>
 		</div>
 	</div>
-	<button type="button" name="save" disabled>save</button>
+	<button type="button" name="save" disabled>send</button>
 </section>
 <section class="players-list-container" <% if (teamName) { %>style="pointer-events: none"<% } %> >
 	<table>

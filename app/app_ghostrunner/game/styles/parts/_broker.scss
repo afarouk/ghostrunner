@@ -50,6 +50,15 @@
                     align-items: center;
                     background-color: rgba(255, 255, 255, 0.3);
 
+                    button.cancel-btn {
+                        background-color: $gray;
+                        &:hover {
+                            color: #333;
+                            background-color: $lightgray;
+                            border-color: #adadad;
+                        }
+                    }
+
                     .team-info {
                         display: flex;
                         color: white;
@@ -67,6 +76,7 @@
                             input {
                                 height: 30px;
                                 padding: 0 5px;
+                                min-width: 150px;
                             }
 
                             .balance, 
@@ -188,6 +198,10 @@
             .broker-buttons {
                 flex-direction: row;
                 min-width: 300px;
+
+                button.inactive {
+                    pointer-events: none;
+                }
             }
 
             .broker-list {
@@ -372,11 +386,11 @@
                     }
                     button.cancel-btn {
                         display: none;
-                        background-color: #ddd;
+                        background-color: $gray;
                         margin-left: 0;
                         &:hover {
                             color: #333;
-                            background-color: #e6e6e6;
+                            background-color: $lightgray;
                             border-color: #adadad;
                         }
                     }

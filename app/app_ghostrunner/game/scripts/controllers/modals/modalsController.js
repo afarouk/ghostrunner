@@ -77,7 +77,7 @@ define([
         onMessageFromAnotherUser: function() {
             var $def = $.Deferred();
             this.publicController.getChoiceController().showConfirmation({
-                message: 'You received message from another user.<br>Pause current game?',
+                message: 'Message received regarding other game.<br>Pause game and answer?',
                 cancel: 'cancel',
                 confirm: 'confirm'
             }).then(function(){
@@ -136,7 +136,7 @@ define([
         afterInvitationSend: function(userName) {
             var $def = $.Deferred();
             this.publicController.getChoiceController().showConfirmation({
-                    message: 'Your invitation ' + userName + ' successfully sent.',
+                    message: 'Invitation sent to ' + userName,
                     confirm: 'ok'
                 }).then(function() {
                     $def.resolve();
