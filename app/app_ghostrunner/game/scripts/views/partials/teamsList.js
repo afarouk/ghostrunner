@@ -18,26 +18,26 @@ define([
 			editLineUp: '[name="edit-lineUp"]'
 		},
 		events: {
-			'click @ui.lineup': 'onLineupSelected'
+			// 'click @ui.lineup': 'onLineupSelected'
 		},
 		triggers: {
 			'click': 'team:selected',
 			'click @ui.removeTeam': 'team:remove',
-			'click @ui.editTeam': 'team:edit',
-			'click @ui.removeLineUp': 'lineUp:remove',
-			'click @ui.editLineUp': 'lineUp:edit'
+			// 'click @ui.editTeam': 'team:edit',
+			// 'click @ui.removeLineUp': 'lineUp:remove',
+			// 'click @ui.editLineUp': 'lineUp:edit'
 		},
-		onLineupSelected: function(e) {
-			var $target = $(e.currentTarget),
-				lineUpId = $target.data('id');
-			this.ui.lineup.removeClass('selected');
-			$target.addClass('selected');
-			this.trigger('lineup:selected', lineUpId);
-			e.stopPropagation();
-		},
-		onRemoveLineUpSelection: function() {
-			this.ui.lineup.removeClass('selected');
-		}
+		// onLineupSelected: function(e) {
+		// 	var $target = $(e.currentTarget),
+		// 		lineUpId = $target.data('id');
+		// 	this.ui.lineup.removeClass('selected');
+		// 	$target.addClass('selected');
+		// 	this.trigger('lineup:selected', lineUpId);
+		// 	e.stopPropagation();
+		// },
+		// onRemoveLineUpSelection: function() {
+		// 	this.ui.lineup.removeClass('selected');
+		// }
 	});
 
 	var NewTeamView = Mn.View.extend({
@@ -55,6 +55,7 @@ define([
 		className: 'teams-list',
 		tagName: 'ul',
 		initialize: function (options) {
+
 		},
 		childView: function(model) {
 			if (model.get('newTeam')) {
@@ -64,15 +65,21 @@ define([
 			}
 		},
 		onChildviewTeamSelected: function(view) {
-			this.children.each(function(childView) {
-				if (childView === view) {
-					childView.$el.addClass('selected');
-				} else {
-					childView.$el.removeClass('selected');
+			if (!this.options.my_teams) {
+				this.children.each(function(childView) {
+					if (childView === view) {
+						childView.$el.addClass('selected');
+					} else {
+						childView.$el.removeClass('selected');
+					}
+					childView.triggerMethod('removeLineUpSelection');
+				}.bind(this));
+				this.trigger('team:selected', view.model);
+			} else {
+				if (view.model.get('newTeam')) {
+					this.trigger('team:selected', view.model);
 				}
-				childView.triggerMethod('removeLineUpSelection');
-			}.bind(this));
-			this.trigger('team:selected', view.model);
+			}
 		},
 		onChildviewLineupSelected: function(lineUpId) {
 			this.trigger('lineUp:selected', lineUpId);

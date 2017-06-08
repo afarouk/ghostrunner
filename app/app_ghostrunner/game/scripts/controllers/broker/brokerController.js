@@ -16,7 +16,7 @@ define([
         create: function(layout, region) {
             this.view = new MainBrokerView();
             layout.showChildView( region, this.view );
-            this.listenTo(this.view, 'getTeams', this.onGetTeams.bind(this));
+            this.listenTo(this.view, 'getTeams', this.onGetMyTeams.bind(this));
             this.listenTo(this.view, 'getUsers', this.onGetUsers.bind(this));
             this.listenTo(this.view, 'getInvites', this.onGetInvites.bind(this));
             this.listenTo(this.view, 'getGames', this.onGetGames.bind(this));
@@ -70,7 +70,7 @@ define([
                         this.hideRight();
                         this.confirm = 'invite';
                         this.view.$el.find('.broker-list.left-list')
-                            .addClass('shown presented').removeClass('my-teams');
+                            .addClass('shown presented').removeClass('my-teams without-buttons');
                         this.view.ui.confirm.attr('disabled', true);
                     } else {
                         this.view.$el.find('.broker-list.left-list')
@@ -84,12 +84,27 @@ define([
                         this.hideRight();
                         this.confirm = 'teams';
                         this.view.$el.find('.broker-list.left-list')
-                            .addClass('shown presented my-teams');
+                            .addClass('shown presented my-teams')
+                            .removeClass('without-buttons');
                         this.view.ui.teams.attr('disabled', false)
                             .addClass('inactive');
                     } else {
                         this.view.$el.find('.broker-list.left-list')
                             .removeClass('shown presented');
+                        this.confirm = undefined;
+                        this.destroyCurrentView();
+                    }
+                    break;
+                case 'my_teams':
+                    if (show) {
+                        this.hideRight();
+                        this.confirm = 'my_teams';
+                        this.view.$el.find('.broker-list.left-list')
+                            .addClass('shown presented my-teams without-buttons');
+                        this.view.ui.teams.attr('disabled', false);
+                    } else {
+                        this.view.$el.find('.broker-list.left-list')
+                            .removeClass('shown presented without-buttons');
                         this.confirm = undefined;
                         this.destroyCurrentView();
                     }
@@ -100,7 +115,7 @@ define([
                         this.confirm = 'invites';
                         this.view.$el.find('.broker-list.right-list')
                             .addClass('shown invites-active')
-                            .removeClass('presented games-active');
+                            .removeClass('presented games-active without-buttons');
                         this.view.ui.confirm.attr('disabled', true);
                     } else {
                         this.confirm = undefined;
@@ -115,7 +130,7 @@ define([
                         this.confirm = 'games';
                         this.view.$el.find('.broker-list.right-list')
                             .addClass('shown presented games-active')
-                            .removeClass('invites-active');
+                            .removeClass('invites-active without-buttons');
                         this.view.ui.confirm.attr('disabled', true);
                     } else {
                         this.confirm = undefined;
@@ -233,6 +248,34 @@ define([
             }
         },
         //teams
+        onGetMyTeams: function() {
+            if (this.confirm === 'my_teams') {
+                this.switchBrokerState('my_teams', false);
+            } else {
+                this.switchBrokerState('my_teams', true);
+                this.showLoader();
+                service.getTeams()
+                    .then(function(response){
+                        this.hideLoader();
+                        this.showMyTeamsList(response);
+                    }.bind(this), function(err){
+                        
+                    }.bind(this));
+            }
+        },
+        showMyTeamsList: function(response) {
+            var collection = new Backbone.Collection(response.teams),
+                teamsList;
+            collection.add({newTeam: true});
+            teamsList = new TeamsList({
+                collection: collection,
+                my_teams: true
+            });
+            this.view.showChildView('leftList', teamsList);
+            //team
+            this.listenTo(teamsList, 'team:selected', this.onSelectTeam.bind(this));
+            this.listenTo(teamsList, 'team:remove', this.onRemoveTeam.bind(this));
+        },
         onGetTeams: function() {
             if (this.confirm === 'teams') {
                 this.switchBrokerState('teams', false);
@@ -288,8 +331,13 @@ define([
         onReturnToTeamSelection: function() {
             this.view.$el.removeClass('creation-state');
             this.teamConfirm = undefined;
-            this.confirm = undefined;
-            this.onGetTeams();
+            if (this.confirm === 'my_teams') {
+                this.confirm = undefined;
+                this.onGetMyTeams();
+            } else {
+                this.confirm = undefined;
+                this.onGetTeams();
+            }
         },
 
         selectCandidate: function() {
