@@ -79,7 +79,7 @@ define([
             this.publicController.getChoiceController().showConfirmation({
                 message: 'Message received regarding other game.<br>Pause game and answer?',
                 cancel: 'cancel',
-                confirm: 'confirm'
+                confirm: 'next'
             }).then(function(){
                 $def.resolve();
             }.bind(this), function() {
@@ -94,7 +94,7 @@ define([
             this.publicController.getChoiceController().showConfirmation({
                 message: text,
                 cancel: 'cancel',
-                confirm: 'confirm'
+                confirm: 'next'
             }).then(function(){
                 $def.resolve();
             }.bind(this), function() {
@@ -107,7 +107,7 @@ define([
             this.publicController.getChoiceController().showConfirmation({
                 message: 'You have a running game with ' + game.opponentUserName + '.<br>Restart the game?',
                 cancel: 'cancel',
-                confirm: 'confirm'
+                confirm: 'yes'
             }).then(function(){
                 this.publicController.getStateController().refreshStatus(game.gameUUID);
             }.bind(this), function() {
