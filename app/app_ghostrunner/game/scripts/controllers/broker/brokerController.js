@@ -41,11 +41,11 @@ define([
         setGameUUID: function(gameUUID){
             appCache.set('urlGameUUID', gameUUID); //for temporary save gameUUID that passed through url params
         },
-    
+
         getUrlGameUUID: function() {
             return appCache.get('urlGameUUID');
         },
-    
+
         removeUrlGameUUID: function() {
             appCache.remove('urlGameUUID');
         },
@@ -57,7 +57,7 @@ define([
             this.view.showChildView('rightList', emptyList);
         },
         destroyCurrentView: function() {
-            var currentView = this.view.getRegion('rightList').currentView || 
+            var currentView = this.view.getRegion('rightList').currentView ||
                 this.view.getRegion('leftList').currentView;
             if (currentView) {
                 currentView.destroy();
@@ -146,7 +146,7 @@ define([
                     this.view.ui.cancel.attr('disabled', false);
                     this.onGetTeams();
                     break;
-                default: 
+                default:
                     break;
             }
         },
@@ -185,7 +185,7 @@ define([
                         if (response.count > 0) {
                             this.showUsersList(response);
                         } else {
-                            this.showEmptyList('No users are presented.');
+                            this.showEmptyList('No users are present.');
                         }
                     }.bind(this), function(err){
                         //TODO error
@@ -259,7 +259,7 @@ define([
                         this.hideLoader();
                         this.showMyTeamsList(response);
                     }.bind(this), function(err){
-                        
+
                     }.bind(this));
             }
         },
@@ -287,7 +287,7 @@ define([
                         this.hideLoader();
                         this.showTeamsList(response);
                     }.bind(this), function(err){
-                        
+
                     }.bind(this));
             }
         },
@@ -380,7 +380,7 @@ define([
                     callback: this.credentials.callback,
                     email: this.credentials.email,
                     teamUUID: teamUUID,
-                    inviteeUID: null, 
+                    inviteeUID: null,
                     teamId: null,
                     teamType: teamType,
                     lineUpDisplayText: lineUpName,
@@ -390,7 +390,7 @@ define([
                 var inviteeUID = this.selectedUser.get('uid');
                 this.publicController.getStateController().onSendInvitation({
                     callback: this.afterInvitationSent.bind(this),
-                    inviteeUID: inviteeUID, 
+                    inviteeUID: inviteeUID,
                     email: null,
                     teamUUID: null,
                     teamId: teamId,
@@ -418,7 +418,7 @@ define([
             } else {
                 var inviteeUID = this.selectedUser.get('uid');
                 this.publicController.getStateController().onSendInvitation({
-                    inviteeUID: inviteeUID, 
+                    inviteeUID: inviteeUID,
                     teamId: teamId,
                     lineUpId: lineUpId,
                     teamType: teamType,
@@ -442,7 +442,7 @@ define([
                         if( response.games.length > 0 ){
                             this.showInvitesList(response);
                         } else {
-                            this.showEmptyList('No invites are presented.');
+                            this.showEmptyList('No invitations outstanding.');
                         }
                     }.bind(this), function(err){
                         //TODO error
@@ -468,7 +468,7 @@ define([
                         if( response.games.length > 0 ){
                             this.showGamesList(response);
                         } else {
-                            this.showEmptyList('No games are presented.');
+                            this.showEmptyList('No active or paused games.');
                         }
                     }.bind(this), function(err){
                         //TODO error
@@ -508,7 +508,7 @@ define([
                 case 'teams':
                     if (this.invitationDef) {
                         this.selectCandidate();
-                    } 
+                    }
                     break;
                 default:
                     break;
