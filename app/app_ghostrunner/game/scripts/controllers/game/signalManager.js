@@ -30,11 +30,11 @@ define([
                     break;
 
                 case 'STARTER_SELECTED':
-                    this.publicController.getStateController().beforeRefreshStatus(message.gameUUID);
+                    this.publicController.getStateController().beforeRefreshStatus(message);
                     break;
 
                 case 'LINEUP_SELECTED':
-                    this.publicController.getStateController().beforeRefreshStatus(message.gameUUID);
+                    this.publicController.getStateController().beforeRefreshStatus(message);
                     break;
 
                 case 'INVITATION_ACCEPTED':

@@ -88,6 +88,21 @@ define([
             return $def;
         },
 
+        onPayloadMessage: function(message) {
+            var $def = $.Deferred(),
+                text = message.payload + '<br>Please, select yours';
+            this.publicController.getChoiceController().showConfirmation({
+                message: text,
+                cancel: 'cancel',
+                confirm: 'confirm'
+            }).then(function(){
+                $def.resolve();
+            }.bind(this), function() {
+                $def.reject();
+            }.bind(this));
+            return $def;
+        },
+
         onRuningGamePresented: function(game) {
             this.publicController.getChoiceController().showConfirmation({
                 message: 'You have a running game with ' + game.opponentUserName + '.<br>Restart the game?',

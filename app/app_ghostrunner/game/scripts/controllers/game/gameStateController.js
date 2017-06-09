@@ -136,8 +136,7 @@ define([
         },
 
         onRetrieveInvitation: function(message) {
-            var gameUUID = message.gameUUID;
-            this.beforeRefreshStatus(gameUUID);
+            this.beforeRefreshStatus(message);
         },
 
         afterCandidateSelected: function(team, lineUpName, playerModel) {
@@ -163,8 +162,9 @@ define([
             }.bind(this));
         },
 
-        beforeRefreshStatus: function(gameUUID) {
-            var gameModel = this.getGameModel();
+        beforeRefreshStatus: function(message) {
+            var gameUUID = message.gameUUID,
+                gameModel = this.getGameModel();
             if (gameModel && gameModel.get('gameUUID') !== gameUUID) {
                 this.publicController.getModalsController().onMessageFromAnotherUser()
                     .then(function(){
@@ -172,7 +172,7 @@ define([
                             .then(function(status){
                                 this.publicController.getGameController().hideLoader();
                                 this.publicController.getGameController().switchToBroker();
-                                this.refreshStatus(gameUUID);
+                                this.onPayloadMsgBeforeRefresh(message);
                             }
                             .bind(this), function(err){
                                 this.publicController.getGameController().hideLoader();
@@ -181,7 +181,21 @@ define([
                         //ignore message
                     }.bind(this));
             } else {
-                this.refreshStatus(gameUUID);
+                this.onPayloadMsgBeforeRefresh(message);
+            }
+        },
+
+        onPayloadMsgBeforeRefresh: function(message) {
+            if (message.signal === 'STARTER_SELECTED' || 
+                message.signal === 'LINEUP_SELECTED') {
+                this.publicController.getModalsController().onPayloadMessage(message)
+                    .then(function() {
+                        this.refreshStatus(message.gameUUID);
+                    }.bind(this), function(){
+                        //do nothing
+                    }.bind(this));
+            } else {
+                this.refreshStatus(message.gameUUID);
             }
         },
 
