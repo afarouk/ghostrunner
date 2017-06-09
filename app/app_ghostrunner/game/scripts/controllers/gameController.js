@@ -36,9 +36,9 @@ define([
             this.appLayout.getRegion('broker').$el.addClass('active');
             this.publicController.getBrokerController().reRender();
         },
-        showLoader: function() {
+        showLoader: function(type) {
             if (this.appState === 'GAME') {
-                this.publicController.getInterfaceController().showLoader();
+                this.publicController.getInterfaceController().showLoader(type);
             } else {
                 this.publicController.getBrokerController().showLoader();
             }
@@ -82,7 +82,7 @@ define([
         },
         waitingForTurn: function() {
             console.log('waiting for turn');
-            this.showLoader();
+            this.showLoader('waiting');
         }
     });
 

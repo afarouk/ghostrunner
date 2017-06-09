@@ -20,11 +20,18 @@ define([
 			this.publicController.getPlayerActionsController().create(this, 'playerActions');
 			this.publicController.getChatController().create(this, 'chat');
 		},
-		onShowLoader: function() {
-			this.$('.loader').show();
+		onShowLoader: function(type) {
+			if (type) {
+				this.$('.loader').hide();
+				this.$('.waiting-msg').show();
+			} else {
+				this.$('.waiting-msg').hide();
+				this.$('.loader').show();
+			}
 		},
 		onHideLoader: function() {
 			this.$('.loader').hide();
+			this.$('.waiting-msg').hide();
 		},
 		onShowTossAnimation: function() {
 			console.log('show toss animation');

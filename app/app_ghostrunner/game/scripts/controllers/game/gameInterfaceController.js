@@ -16,8 +16,8 @@ define([
                 this.showTossAnimation();
             }
 		},
-        showLoader: function() {
-            this.view.triggerMethod('showLoader');
+        showLoader: function(type) {
+            this.view.triggerMethod('showLoader', type);
         },
         hideLoader: function() {
             this.view.triggerMethod('hideLoader');

@@ -78,6 +78,27 @@
         background: url('images/loader.svg') no-repeat center;
     }
 }
+.waiting-msg {
+    background: rgba(0,0,0,0.3);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    .waiting-for-turn {
+        position: absolute;
+        bottom: 0;
+        top: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+        opacity: 0.15;
+        animation: 4s waiting-animation infinite;
+        background: url('images/waitForTurn.png') no-repeat center;
+        background-size: 320px;
+    }
+}
 .toss {
     background: rgba(0,0,0,0.3);
     justify-content: center;
