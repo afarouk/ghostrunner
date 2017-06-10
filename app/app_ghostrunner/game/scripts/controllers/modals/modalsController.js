@@ -187,11 +187,11 @@ define([
                     },
                     {
                         action: 'OFFENSE',
-                        displayText: 'Offence'
+                        displayText: 'OFFENSE'
                     },
                     {
                         action: 'DEFENSE',
-                        displayText: 'Defence'
+                        displayText: 'DEFENSE'
                     }
                 ]
             }).then(function(role){
