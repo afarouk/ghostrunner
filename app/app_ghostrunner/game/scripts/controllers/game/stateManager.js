@@ -82,6 +82,7 @@ define([
 
                 case 'MAKE_YOUR_MOVE':
                     this.publicController.getGameController().waitingForMove();
+                    this.publicController.getStateController().checkForSecondaryMove(gameModel.toJSON(), false);
                     break;
                 case 'WAIT_FOR_TURN':
                     this.publicController.getGameController().waitingForTurn();

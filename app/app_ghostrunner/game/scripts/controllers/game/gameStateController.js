@@ -244,17 +244,22 @@ define([
                 }
             }).then(function(state){
                 var events = state.thisUser.events;
-                if (_.isEmpty(events)) {
-                    this.updateGameModel(state);
-                } else {
-                    var secondary = _.findWhere(events, {type: 'SECONDARY_MOVE'});
-                    if (secondary) {
-                        this.publicController.getModalsController().onSecondaryMove(secondary);
-                    } else {
-                        this.updateGameModel(state);
-                    }
-                }
+                this.checkForSecondaryMove(state, true);
             }.bind(this));
+        },
+
+        checkForSecondaryMove: function(game, update) {
+            var events = game.thisUser.events;
+            if (_.isEmpty(events)) {
+                if (update) this.updateGameModel(state);
+            } else {
+                var secondary = _.findWhere(events, {type: 'SECONDARY_MOVE'});
+                if (secondary) {
+                    this.publicController.getModalsController().onSecondaryMove(secondary);
+                } else {
+                    if (update) this.updateGameModel(state);
+                }
+            }
         },
 
         makeSecondaryMove: function(eventId, choiceId) {
@@ -263,7 +268,7 @@ define([
                 choiceId: choiceId
             }).then(function(state){
                 this.updateGameModel(state);
-            });
+            }.bind(this));
         },
 
         onPlayerLogout: function() {
