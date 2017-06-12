@@ -9,6 +9,7 @@ module.exports = {
         	makeMove: ['POST', '/gaming/makeMove'],
             makeSecondaryMove: ['POST', '/gaming/makeSecondaryMove'],
             startGame: ['PUT', '/gaming/startGame'],
+            refresh: ['GET', '/gaming/refresh'],
             notifyOpponentOfGameResumption: ['PUT', '/gaming/notifyOpponentOfGameResumption'],
             pauseGame: ['PUT', '/gaming/pauseGame'],
             unPauseGame: ['PUT', '/gaming/unPauseGame'],
