@@ -200,6 +200,21 @@ define([
             return def;
         },
 
+        //secondary
+        onSecondaryMove: function(secondary) {
+            this.publicController.getChoiceController().showChoise({
+                message: secondary.displayText,
+                choices: secondary.choices.map(function(choice){
+                    return {
+                        action: choice.choiceId,
+                        displayText: choice.displayText
+                    };
+                }),
+            }).then(function(choiceId){
+                this.publicController.getStateController().makeSecondaryMove(secondary.eventId, choiceId);
+            }.bind(this));
+        },
+
         //....interrupt
         onStartGameConfirmation: function(gameUUID) {
             this.publicController.getChoiceController().showConfirmation({

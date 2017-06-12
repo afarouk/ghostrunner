@@ -75,6 +75,13 @@ define([
             if (game) params.gameUUID = game.get('gameUUID');
             return gateway.sendRequest('makeMove', params);
         },
+        makeSecondaryMove: function(params) {
+            var user = appCache.get('user'),
+                game = appCache.get('game');
+            params.UID = user.get('uid');
+            params.gameUUID = game.get('gameUUID');
+            return gateway.sendRequest('makeSecondaryMove', params);
+        },
         retrieveInvitation: function(params) {
             var user = appCache.get('user');
             params = params || {};

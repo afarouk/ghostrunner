@@ -243,8 +243,27 @@ define([
                     'actionDetail':'some string'
                 }
             }).then(function(state){
-                this.updateGameModel(state);
+                var events = state.thisUser.events;
+                if (_.isEmpty(events)) {
+                    this.updateGameModel(state);
+                } else {
+                    var secondary = _.findWhere(events, {type: 'SECONDARY_MOVE'});
+                    if (secondary) {
+                        this.publicController.getModalsController().onSecondaryMove(secondary);
+                    } else {
+                        this.updateGameModel(state);
+                    }
+                }
             }.bind(this));
+        },
+
+        makeSecondaryMove: function(eventId, choiceId) {
+            service.makeSecondaryMove({
+                eventId: eventId,
+                choiceId: choiceId
+            }).then(function(state){
+                this.updateGameModel(state);
+            });
         },
 
         onPlayerLogout: function() {
