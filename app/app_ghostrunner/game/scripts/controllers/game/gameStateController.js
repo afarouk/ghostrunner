@@ -304,7 +304,18 @@ define([
 
         onGameStop: function() {
             this.killGame();
-            // this.publicController.getModalsController().onConnectionLost();
+        },
+
+        onDestroy: function() {
+            var user = appCache.get('user');
+            this.killGame();
+            this.publicController.getModalsController().onConnectionLost()
+                .then(function(){
+                    this.publicController.getGameController().destroy();
+                    this.publicController.getGameController().start(user.toJSON());
+                }.bind(this), function(){
+                    this.publicController.getGameController().stop(user.get('uid'));
+                }.bind(this))
         }
 
     });

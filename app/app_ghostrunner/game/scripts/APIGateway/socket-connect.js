@@ -59,7 +59,7 @@ define([
             var reason;
 
             // See http://tools.ietf.org/html/rfc6455#section-7.4.1
-            /*
+            
                 switch (event.code) {
                 case 1000:
                     reason = "Normal closure, meaning that the purpose for which the connection was established has been fulfilled.";
@@ -104,9 +104,9 @@ define([
                 default:
                     reason = "Unknown reason";
             }
-                */
+                
 
-            console.log('websocket disconnected: ', event.code + ":" + event.reason);
+            console.log('websocket disconnected: ', event.code + ":" + reason);
             this.updateStatus('Disconnected');
         },
 

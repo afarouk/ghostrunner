@@ -360,12 +360,17 @@ define([
         },
 
         onConnectionLost: function() {
+            var $def = $.Deferred();
             this.publicController.getChoiceController().showConfirmation({
-                message: 'Connection was lost.',
-                confirm: 'ok'
+                message: 'Connection was lost.<br>Try to reconnect?',
+                cancel: 'cancel',
+                confirm: 'confirm'
             }).then(function() {
-                this.publicController.getGameController().switchToBroker();
+                $def.resolve();
+            }.bind(this), function(){
+                $def.reject();
             }.bind(this));
+            return $def;
         }
 
     });

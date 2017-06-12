@@ -22,7 +22,7 @@ define([
                     this.publicController.getStateController().onGameStart();
                     break;
                 case 'Disconnected':
-                    this.publicController.getStateController().onGameStop();
+                    this.publicController.getStateController().onDestroy();
                     break;
             }
         },
