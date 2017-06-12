@@ -202,14 +202,10 @@ define([
 
         //secondary
         onSecondaryMove: function(secondary) {
-            this.publicController.getChoiceController().showChoise({
+            this.publicController.getChoiceController().showRadioChoise({
                 message: secondary.displayText,
-                choices: secondary.choices.map(function(choice){
-                    return {
-                        action: choice.choiceId,
-                        displayText: choice.displayText
-                    };
-                }),
+                choices: secondary.choices,
+                confirm: 'SEND'
             }).then(function(choiceId){
                 this.publicController.getStateController().makeSecondaryMove(secondary.eventId, choiceId);
             }.bind(this));

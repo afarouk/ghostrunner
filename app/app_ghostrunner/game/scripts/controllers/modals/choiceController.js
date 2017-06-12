@@ -3,8 +3,9 @@
 'use strict';
 
 define([
-    '../../views/partials/confirmChoice'
-    ], function(ConfirmChoiceView){
+    '../../views/partials/confirmChoice',
+    '../../views/partials/radioChoice'
+    ], function(ConfirmChoiceView, RadioChoiceView){
     var ChoiceController = Mn.Object.extend({
         showConfirmation: function(options) {
             var def = $.Deferred(),
@@ -63,7 +64,30 @@ define([
                 def.resolve(action);
             }.bind(this);
             return new Backbone.Model(options);
-        }
+        },
+
+        showRadioChoise: function(options) {
+            var def = $.Deferred(),
+                model = this.getRadioChoiceModel(def, options);
+            this.radioChoiceView = new RadioChoiceView({
+                model: model
+            });
+            this.onClose = this.publicController.getModalsController().show(this.radioChoiceView);
+            return def;
+        },
+
+        getRadioChoiceModel: function(def, options) {
+            var options = options || {};
+            options.confirm = options.confirm || false;
+            options.message = options.message || '?';
+            options.callback = function (action) {
+                this.onClose();
+                this.radioChoiceView.destroy();
+                this.radioChoiceView = null;
+                def.resolve(action);
+            }.bind(this);
+            return new Backbone.Model(options);
+        },
 
     });
 

@@ -1,0 +1,14 @@
+<h4><%= message %></h4>
+<div class="radio-block">
+	<% _.each(choices, function(choice) { %>
+		<div class="choice-row">
+			<input type="radio" name="second-move-choices" value="<%=choice.choiceId%>">
+			<span><%= choice.displayText %></span>
+		</div>
+	<% }) %>
+</div>
+<% if(confirm) { %>
+	<div class="confirm-button">
+		<button type="button" name="send" disabled><%= confirm %></button>
+	</div>
+<% } %>

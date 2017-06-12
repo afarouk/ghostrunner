@@ -243,13 +243,12 @@ define([
                     'actionDetail':'some string'
                 }
             }).then(function(state){
-                var events = state.thisUser.events;
                 this.checkForSecondaryMove(state, true);
             }.bind(this));
         },
 
-        checkForSecondaryMove: function(game, update) {
-            var events = game.thisUser.events;
+        checkForSecondaryMove: function(state, update) {
+            var events = state.thisUser.events;
             if (_.isEmpty(events)) {
                 if (update) this.updateGameModel(state);
             } else {

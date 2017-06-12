@@ -19,7 +19,8 @@
             box-shadow: 5px 4px 10px 5px $modals-shadow;
             margin: 0 50px;
 
-            .confirm-choice {
+            .confirm-choice,
+            .radio-choice {
                 h4 {
                     color: $text;
                 }
@@ -41,6 +42,28 @@
                             }
                         }
                     }
+                }
+            }
+
+            .radio-choice {
+                display: flex;
+                flex-direction: column;
+                .radio-block {
+                    .choice-row {
+                        color: $text;
+                        [name="second-move-choices"] {
+                            transform: scale(1.3);
+                        }
+                        span {
+                            padding-left: 10px;
+                            font-weight: 600;
+                        }
+                    }
+                }
+                .confirm-button {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: center;
                 }
             }
         }
