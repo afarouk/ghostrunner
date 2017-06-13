@@ -31,7 +31,7 @@ define([
 
         getGameStatus: function(gameUUID) {
             var def = $.Deferred();
-            var gameUUID = gameUUID || this.publicController.getBrokerController().getUrlGameUUID(); 
+            var gameUUID = gameUUID || this.publicController.getBrokerController().getUrlGameUUID();
             if (!gameUUID) return def;
             this.publicController.getGameController().showLoader();
             service.getGame(gameUUID)
@@ -45,7 +45,7 @@ define([
                         if (!gameModel) {
                             gameModel = new GameModel(game);
                         } else {
-                            gameModel.set(game);                                
+                            gameModel.set(game);
                         }
                         def.resolve(gameModel);
                     }
@@ -57,26 +57,26 @@ define([
                 }.bind(this));
             return def;
         },
-               
+
         getGameModel: function() {
             return appCache.get('game');
         },
-    
+
         updateGameModel: function (state) {
             var gameModel = this.getGameModel(),
                 state = state.attributes ? state.attributes : state;
             gameModel.set(state);
             this.publicController.getStateManager().manage(gameModel);
         },
-    
+
         getUrlGameUUID: function() {
             return appCache.get('urlGameUUID');
         },
-    
+
         refreshStatus: function(gameUUID) {
             this.getGameStatus(gameUUID)
                 .then(function(game){
-                    this.updateGameModel(game);                  
+                    this.updateGameModel(game);
                 }.bind(this));
         },
 
@@ -88,7 +88,7 @@ define([
         },
 
         onCheckRestart: function(gameUUID) {
-            //if user already in this game don't show confirmation 
+            //if user already in this game don't show confirmation
             var gameModel = this.getGameModel();
             if (gameModel && gameUUID === gameModel.get('gameUUID')) {
                 this.refreshStatus(gameUUID);
@@ -106,7 +106,7 @@ define([
                     if (!gameModel) {
                         gameModel = new GameModel(result);
                     } else {
-                        gameModel.set('gameUUID', result.gameUUID);                               
+                        gameModel.set('gameUUID', result.gameUUID);
                     }
                     onInvitationSent(true, result);
                     this.updateGameModel(result);
@@ -125,7 +125,7 @@ define([
                     if (!gameModel) {
                         gameModel = new GameModel(result);
                     } else {
-                        gameModel.set('gameUUID', result.gameUUID);                               
+                        gameModel.set('gameUUID', result.gameUUID);
                     }
 
                     onInvitationSent(true, result);
@@ -176,7 +176,7 @@ define([
                             }
                             .bind(this), function(err){
                                 this.publicController.getGameController().hideLoader();
-                            }.bind(this)); 
+                            }.bind(this));
                     }.bind(this), function(){
                         //ignore message
                     }.bind(this));
@@ -186,7 +186,7 @@ define([
         },
 
         onPayloadMsgBeforeRefresh: function(message) {
-            if (message.signal === 'STARTER_SELECTED' || 
+            if (message.signal === 'STARTER_SELECTED' ||
                 message.signal === 'LINEUP_SELECTED') {
                 this.publicController.getModalsController().onPayloadMessage(message)
                     .then(function() {
@@ -238,7 +238,7 @@ define([
 
         onPlayerMove: function() {
             service.makeMove({
-                payload: { 
+                payload: {
                     'actionType':1,
                     'actionDetail':'some string'
                 }
@@ -252,7 +252,7 @@ define([
             if (_.isEmpty(events)) {
                 if (update) this.updateGameModel(state);
             } else {
-                var secondary = _.findWhere(events, {type: 'SECONDARY_MOVE'});
+                var secondary = _.findWhere(events, {type: 'CHOICE_NEEDED'});
                 if (secondary) {
                     this.publicController.getModalsController().onSecondaryMove(secondary);
                 } else {
