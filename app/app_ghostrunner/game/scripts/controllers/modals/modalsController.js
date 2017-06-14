@@ -301,6 +301,16 @@ define([
             }.bind(this));
         },
 
+        onInningOver: function(gameUUID) {
+            this.publicController.getChoiceController().showConfirmation({
+                message: 'Inning over.',
+                confirm: 'ok'
+            }).then(function() {
+                this.publicController.getStateController().refreshStatus(gameUUID);
+            }.bind(this));
+            console.log('inning over');
+        },
+
         onGameOver: function() {
             this.publicController.getChoiceController().showConfirmation({
                 message: 'Game over.',

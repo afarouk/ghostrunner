@@ -62,8 +62,12 @@ define([
                     break;
 
                 case 'GAME_RESTARTED':
-                        this.publicController.getStateController().onCheckRestart(message.gameUUID);
-                        break;
+                    this.publicController.getStateController().onCheckRestart(message.gameUUID);
+                    break;
+
+                case 'GAME_INNING_OVER':
+                    this.publicController.getModalsController().onInningOver(message.gameUUID);
+                    break;
 
                 case 'GAME_OVER':
                     this.publicController.getModalsController().onGameOver();
