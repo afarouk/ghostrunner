@@ -1,6 +1,6 @@
 <span class="team-role"><%= displayText %></span>
 <div class="actions-buttons">
 	<% _.each(actions, function(action) { %>
-		<button type="button" data-type="interface-btn" data-action="<%= action.action %>" class="btn move"><%= action.text %></button>
+		<button type="button" data-type="interface-btn" data-move="<%= action.gameMove %>" data-action="<%= action.action %>" class="btn move"><%= action.text %></button>
 	<% }); %>
 </div>

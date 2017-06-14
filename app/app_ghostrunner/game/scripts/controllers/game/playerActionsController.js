@@ -24,11 +24,11 @@ define([
         updateRole: function(role) {
             this.model.updateRole(role);
         },
-        onAction: function(action) {
-            console.log('action: ', action);
+        onAction: function(action, move) {
+            console.log('action: ', action, move);
             this.publicController.getGameController().showLoader();
 
-            this.publicController.getActionsManager().onAction(action);
+            this.publicController.getActionsManager().onAction(action, move);
         }
     });
 

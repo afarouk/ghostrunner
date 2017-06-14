@@ -12,19 +12,23 @@ define([
 	    		actions: [
 		    		{
 		    			action: 'pitch',
-		    			text: 'Pitch to the Batter'
+		    			text: 'Pitch to the Batter',
+		    			gameMove: 'DUAL1'
 		    		},
 		    		{
 		    			action: 'walk',
-		    			text: 'International Walk'
+		    			text: 'International Walk',
+		    			gameMove: 'DUAL2'
 		    		},
 		    		{
 		    			action: 'substitution',
-		    			text: 'Defencive Substitution'
+		    			text: 'Defencive Substitution',
+		    			gameMove: 'DUAL3'
 		    		},
 		    		{
 		    			action: 'relief',
-		    			text: 'Relief Pitcher'
+		    			text: 'Relief Pitcher',
+		    			gameMove: 'DUAL4'
 		    		}
 		    	]
 	    	},
@@ -33,19 +37,23 @@ define([
 	    		actions: [
 		    		{
 		    			action: 'pitch',
-		    			text: 'Pitch to the Batter'
+		    			text: 'Pitch to the Batter',
+		    			gameMove: 'DEFENSE1'
 		    		},
 		    		{
 		    			action: 'walk',
-		    			text: 'International Walk'
+		    			text: 'International Walk',
+		    			gameMove: 'DEFENSE2'
 		    		},
 		    		{
 		    			action: 'substitution',
-		    			text: 'Defencive Substitution'
+		    			text: 'Defencive Substitution',
+		    			gameMove: 'DEFENSE3'
 		    		},
 		    		{
 		    			action: 'relief',
-		    			text: 'Relief Pitcher'
+		    			text: 'Relief Pitcher',
+		    			gameMove: 'DEFENSE4'
 		    		}
 		    	]
 	    	},
@@ -55,23 +63,28 @@ define([
 	    		actions: [
 	    			{
 		    			action: 'hit',
-		    			text: 'Hit by pitch'
+		    			text: 'Hit by pitch',
+		    			gameMove: 'OFFENSE1'
 		    		},
 		    		{
 		    			action: 'single',
-		    			text: 'Single'
+		    			text: 'Single',
+		    			gameMove: 'OFFENSE2'
 		    		},
 		    		{
 		    			action: 'double',
-		    			text: 'Double'
+		    			text: 'Double',
+		    			gameMove: 'OFFENSE3'
 		    		},
 		    		{
 		    			action: 'triple',
-		    			text: 'Triple'
+		    			text: 'Triple',
+		    			gameMove: 'OFFENSE4'
 		    		},
 		    		{
 		    			action: 'run',
-		    			text: 'Home run'
+		    			text: 'Home run',
+		    			gameMove: 'OFFENSE5'
 		    		}
 	    		]
 	    	},
@@ -80,7 +93,8 @@ define([
 	    		actions: [
 	    			{
 		    			action: 'undecided',
-		    			text: 'Undecided issue'
+		    			text: 'Undecided issue',
+		    			gameMove: 'UNDECIDED'
 		    		}
 	    		]
 

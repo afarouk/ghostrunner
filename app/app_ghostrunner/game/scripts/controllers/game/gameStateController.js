@@ -236,11 +236,12 @@ define([
             }.bind(this));
         },
 
-        onPlayerMove: function() {
+        onPlayerMove: function(moveEnum) {
             service.makeMove({
                 payload: {
                     'actionType':1,
-                    'actionDetail':'some string'
+                    'actionDetail':'some string',
+                    'gameMove': moveEnum
                 }
             }).then(function(state){
                 this.checkForSecondaryMove(state, true);

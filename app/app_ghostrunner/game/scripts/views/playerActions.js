@@ -17,9 +17,10 @@ define([
 		},
 		onAction: function(e) {
 			var $target = $(e.currentTarget),
-				action = $target.data('action');
+				action = $target.data('action'),
+				move = $target.data('move');
 
-			this.trigger('onPlayer:action', action);
+			this.trigger('onPlayer:action', action, move);
 		}
 	});
 	return PlayerActionsView;

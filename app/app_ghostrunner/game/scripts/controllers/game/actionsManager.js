@@ -5,14 +5,14 @@
 define([
     ], function(){
     var ActionsManager = Mn.Object.extend({
-		onAction: function(action) {
+		onAction: function(action, moveEnum) {
             switch (action) {
                 case 'pitch':
-                    this.publicController.getStateController().onPlayerMove(action);
+                    this.publicController.getStateController().onPlayerMove(moveEnum);
                     break;
 
                 default:
-                    this.publicController.getStateController().onPlayerMove(action);
+                    this.publicController.getStateController().onPlayerMove(moveEnum);
                     break;
             }
         }
