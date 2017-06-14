@@ -239,8 +239,8 @@ define([
         onPlayerMove: function(moveEnum) {
             service.makeMove({
                 payload: {
-                    'actionType':1,
-                    'actionDetail':'some string',
+                    'actionType':1, //I left that fields, because
+                    'actionDetail':'some string', //It can be necessary in a future
                     'gameMove': moveEnum
                 }
             }).then(function(state){

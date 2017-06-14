@@ -6,20 +6,155 @@
 
         .game-field {
             height: 100%;
+            position: relative;
 
-            .canvas-container {
+            .field-container {
                 height: 100%;
+                width:100%;
+                display: flex;
+                justify-content: center;
+                padding: 120px 0 80px;
+                position: relative;
+                z-index: 999;
 
                 .game-field-class {
-                    width: 100%;
-                }
-                .field-background {
-                    /*temporary*/
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    width: 100%;
-                    height: 100%;
+                    width: 54%;
+                    min-width: 475px;
+                    margin: 0 5px;
+                    background-color: rgba(40, 255, 80, 0.25);
+                    padding: 0 20px;
+
+                    .field-top {
+                        top: 20%;
+                        position: relative;
+                        width: 100%;
+                        // background-color: rgba(100, 20, 20, 0.5);
+                        display: flex;
+                        justify-content: space-between;
+
+                        .field {
+                            width: 80px;
+                            height: 40px;
+                            // background-color: blue;
+                            display: flex;
+                            justify-content: center;
+
+                            &.left-field,
+                            &.right-field {
+                                margin-top: 20px;
+                            }
+                        }
+                    }
+                    .field-bases {
+                        // background-color: rgba(20, 80, 80, 0.6);
+                        display: flex;
+                        justify-content: space-between;
+                        top: 18%;
+                        position: relative;
+                        width: 100%;
+                        height: 52%;
+
+                        .base-part {
+                            display: flex;
+                            justify-content: space-between;
+                            flex: 1;
+
+                            .base {
+                                width: 80px;
+                                height: 40px;
+                                margin-bottom: 18px;
+                                margin: 2px;
+                                // background-color: red;
+                                display: flex;
+                                flex-direction: row;
+                                justify-content: center;
+
+                                &.first-base,
+                                &.third-base {
+                                    top: 20%;
+                                    position: relative;
+                                }
+
+                                &.on-left-catcher {
+                                    justify-content: flex-end;
+                                    position: relative;
+                                    left: 30px;
+                                    top: 30px;
+                                }
+
+                                &.on-right-catcher {
+                                    justify-content: flex-start;
+                                    position: relative;
+                                    margin-left: -30px;
+                                    top: 30px;
+                                }
+                            }
+
+                            &.left-base-part {
+                                flex-direction: row;
+                                position: relative;
+
+                                .short-stop {
+                                    position: absolute;
+                                    margin-left: 70%;
+                                }
+                            }
+
+                            &.right-base-part {
+                                flex-direction: row;
+                                justify-content: flex-end;
+                            }
+
+                            &.center-base-part {
+                                display: flex;
+                                flex-direction: row;
+                                justify-content: center;
+                                position: relative;
+                                margin-left: -20px;
+
+                                .on-left-central-part,
+                                .middle-central-part,
+                                .on-right-central-part {
+                                    display: flex;
+                                    flex-direction: column;
+                                    justify-content: space-between;
+                                    position: relative;
+
+                                }
+                                .on-left-central-part,
+                                .on-right-central-part {
+                                    justify-content: flex-end;
+                                    margin-bottom: 20%;
+                                    position: relative;
+                                }
+                            }
+                        }
+                    }
+
+                    .player {
+                        height: 100%;
+                        width: 50%;
+                        position: relative;
+
+                        span {
+                            position: absolute;
+                            color: #ffe55d;
+                            font-weight: 800;
+                            font-size: 7px;
+                            line-height: 12px;
+                            top: 30px;
+                            max-width: 40px;
+                            word-wrap: break-word;
+                        }
+
+                        img {
+                            width: 100%;
+                            top: 0;
+                            bottom: 0;
+                            margin: auto;
+                            position: absolute;
+                        }
+                    }
                 }
             }
         }
