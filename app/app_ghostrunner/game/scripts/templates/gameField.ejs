@@ -2,7 +2,7 @@
 	<div class="field-top">
 		<div class="field left-field">
 			<% if (FIELD_LF) { %>
-				<div class="player">
+				<div class="player" data-enum="FIELD_LF">
 					<img src="./images/defenseCap.png" alt="">
 					<span><%= FIELD_LF.name %></span>
 				</div>
@@ -10,7 +10,7 @@
 		</div>
 		<div class="field center-field">
 			<% if (FIELD_CF) { %>
-				<div class="player">
+				<div class="player" data-enum="FIELD_CF">
 					<img src="./images/defenseCap.png" alt="">
 					<span><%= FIELD_CF.name %></span>
 				</div>
@@ -18,7 +18,7 @@
 		</div>
 		<div class="field right-field">
 			<% if (FIELD_RF) { %>
-				<div class="player">
+				<div class="player" data-enum="FIELD_RF">
 					<img src="./images/defenseCap.png" alt="">
 					<span><%= FIELD_RF.name %></span>
 				</div>
@@ -29,13 +29,13 @@
 		<div class="base-part left-base-part">
 			<div class="base third-base">
 				<% if (FIELD_3B) { %>
-					<div class="player">
+					<div class="player" data-enum="FIELD_3B">
 						<img src="./images/defenseCap.png" alt="">
 						<span><%= FIELD_3B.name %></span>
 					</div>
 				<% } %>
 				<% if (BATTER_3R) { %>
-					<div class="player">
+					<div class="player" data-enum="BATTER_3R">
 						<img src="./images/offenseCap.png" alt="">
 						<span><%= BATTER_3R.name %></span>
 					</div>
@@ -43,7 +43,7 @@
 			</div>
 			<div class="base short-stop">
 					<% if (FIELD_SS) { %>
-						<div class="player">
+						<div class="player" data-enum="FIELD_SS">
 							<img src="./images/defenseCap.png" alt="">
 							<span><%= FIELD_SS.name %></span>
 						</div>
@@ -55,7 +55,7 @@
 			<div class="on-left-central-part">
 				<div class="base on-left-catcher">
 					<% if (BATTER_LH) { %>
-						<div class="player">
+						<div class="player" data-enum="BATTER_LH">
 							<img src="./images/offenseCap.png" alt="">
 							<span><%= BATTER_LH.name %></span>
 						</div>
@@ -66,13 +66,13 @@
 			<div class="middle-central-part">
 				<div class="base second-base">
 					<% if (FIELD_2B) { %>
-						<div class="player">
+						<div class="player" data-enum="FIELD_2B">
 							<img src="./images/defenseCap.png" alt="">
 							<span><%= FIELD_2B.name %></span>
 						</div>
 					<% } %>
 					<% if (BATTER_2R) { %>
-					<div class="player">
+					<div class="player" data-enum="BATTER_2R">
 						<img src="./images/offenseCap.png" alt="">
 						<span><%= BATTER_2R.name %></span>
 					</div>
@@ -80,7 +80,7 @@
 				</div>
 				<div class="base pitcher">
 					<% if (FIELD_P) { %>
-						<div class="player">
+						<div class="player" data-enum="FIELD_P">
 							<img src="./images/defenseCap.png" alt="">
 							<span><%= FIELD_P.name %></span>
 						</div>
@@ -88,7 +88,7 @@
 				</div>
 				<div class="base catcher">
 					<% if (FIELD_C) { %>
-						<div class="player">
+						<div class="player" data-enum="FIELD_C">
 							<img src="./images/defenseCap.png" alt="">
 							<span><%= FIELD_C.name %></span>
 						</div>
@@ -99,7 +99,7 @@
 			<div class="on-right-central-part">
 				<div class="base on-right-catcher">
 					<% if (BATTER_RH) { %>
-						<div class="player">
+						<div class="player" data-enum="BATTER_RH">
 							<img src="./images/offenseCap.png" alt="">
 							<span><%= BATTER_RH.name %></span>
 						</div>
@@ -111,13 +111,13 @@
 		<div class="base-part right-base-part">
 			<div class="base first-base">
 				<% if (FIELD_1B) { %>
-					<div class="player">
+					<div class="player" data-enum="FIELD_1B">
 						<img src="./images/defenseCap.png" alt="">
 						<span><%= FIELD_1B.name %></span>
 					</div>
 				<% } %>
 				<% if (BATTER_1R) { %>
-					<div class="player">
+					<div class="player" data-enum="BATTER_1R">
 						<img src="./images/offenseCap.png" alt="">
 						<span><%= BATTER_1R.name %></span>
 					</div>

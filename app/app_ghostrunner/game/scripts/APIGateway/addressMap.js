@@ -37,7 +37,8 @@ module.exports = {
             getBaseballFieldPositions: ['GET', '/gaming/getBaseballFieldPositions'],
             getMessage: ['GET', '/gaming/getMessage'],
             getPoll: ['GET', '/gaming'],
-            getAvailablePlayers: ['GET', '/gaming/getAvailablePlayers']
+            getAvailablePlayers: ['GET', '/gaming/getAvailablePlayers'],
+            retrievePlayerCard: ['GET', '/gaming/retrievePlayerCard']
         };
     }
 };

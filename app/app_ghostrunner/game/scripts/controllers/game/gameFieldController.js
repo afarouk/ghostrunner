@@ -4,14 +4,16 @@
 
 define([
 	'../../appCache',
+	'../../APIGateway/gameService',
     '../../views/gameField'
-    ], function(appCache, GameFieldView){
+    ], function(appCache, service, GameFieldView){
     var GameFieldController = Mn.Object.extend({
 		create: function(layout, region) {
 			this.view = new GameFieldView({
 				model: this.getBaseballFieldModel()
 			});
 			layout.showChildView( region, this.view );
+			this.listenTo(this.view, 'onPlayerCard', this.onPlayerCard.bind(this));
 			this.view.triggerMethod('initContext');
 		},
 		getBaseballFieldModel: function() {
@@ -44,6 +46,14 @@ define([
 			});
 			console.log(field);
 			return new Backbone.Model(field);
+		},
+		onPlayerCard: function(player) {
+			service.retrievePlayerCard({
+				playerId: player.playerId,
+				seasonId: player.seasonId
+			}).then(function(card) {
+
+			}.bind(this));
 		}
     });
 

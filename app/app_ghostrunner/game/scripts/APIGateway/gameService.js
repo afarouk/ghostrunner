@@ -256,6 +256,13 @@ define([
                 };
             return gateway.sendRequest('deleteLineUp', params);
         },
+
+        retrievePlayerCard: function(params) {
+            var user = appCache.get('user');
+            
+                params.UID = user.get('uid');
+            return gateway.sendRequest('retrievePlayerCard', params);
+        }
     });
 
     return new GameService();
