@@ -7,6 +7,7 @@ define([
 	], function(template, maskBehavior){
 	var PlayerActionsView = Mn.View.extend({
 		template: template,
+		className: 'player-actions-container',
 		modelEvents: {
             'change': 'render'
         },

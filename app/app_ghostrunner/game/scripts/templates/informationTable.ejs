@@ -23,7 +23,11 @@
 				<span class="team-city"><%= thisUser.team.city %></span>
 			</div>
 			<div class="team-status">
-				<img src="./images/baseball_cap.png" alt="">
+				<% if (thisUser.team.role === "OFFENSE") { %>
+					<img src="./images/offenseCap.png" alt="">
+				<% } else {%>
+					<img src="./images/defenseCap.png" alt="">
+				<% } %>
 			</div>
 		</div>
 		<table>
@@ -174,7 +178,11 @@
 				<span class="team-city"><%= otherUser.team.city %></span>
 			</div>
 			<div class="team-status">
-				<img src="./images/baseball_cap.png" alt="">
+				<% if (otherUser.team.role === "OFFENSE") { %>
+					<img src="./images/offenseCap.png" alt="">
+				<% } else {%>
+					<img src="./images/defenseCap.png" alt="">
+				<% } %>
 			</div>
 		</div>
 		<table>
