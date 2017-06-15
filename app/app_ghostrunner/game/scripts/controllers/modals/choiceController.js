@@ -4,8 +4,9 @@
 
 define([
     '../../views/partials/confirmChoice',
-    '../../views/partials/radioChoice'
-    ], function(ConfirmChoiceView, RadioChoiceView){
+    '../../views/partials/radioChoice',
+    '../../views/partials/playersCard'
+    ], function(ConfirmChoiceView, RadioChoiceView, PlayersCardView){
     var ChoiceController = Mn.Object.extend({
         showConfirmation: function(options) {
             var def = $.Deferred(),
@@ -88,6 +89,20 @@ define([
             }.bind(this);
             return new Backbone.Model(options);
         },
+
+        showPlayersCard: function(card) {
+            var cardModel = new Backbone.Model(card),
+                callback = function () {
+                    this.onClose();
+                    this.cardView.destroy();
+                    this.cardView = null;
+                }.bind(this);
+            cardModel.set('callback', callback);
+            this.cardView = new PlayersCardView({
+                model: cardModel
+            });
+            this.onClose = this.publicController.getModalsController().show(this.cardView);
+        }
 
     });
 

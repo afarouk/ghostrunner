@@ -197,11 +197,11 @@
 
             &.fadeIn {
                 .game-field {
-                    animation: active-animation-2 3.8s forwards;
+                    animation: active-animation-2 2.8s forwards;
 
                 }
                 .game-interraction {
-                    animation: active-animation-2 3.8s forwards;
+                    animation: active-animation-2 2.8s forwards;
                 }
             }
         } 
@@ -276,15 +276,75 @@
     &.begin {
         display: flex;
         // animation: toss-animation infinite;
-        animation: toss-animation 3.0s forwards;
+        animation: toss-animation 2.0s forwards;
 
         .toss-block {
             .dice {
-               animation: rollTheDice 1.5s infinite;
+               animation: rollTheDice 1.2s infinite;
                animation-timing-function: linear;
             }
         }
     }
+}
+.modals-layout {
+    .players-card {
+        box-shadow: 6px 7px 16px 3px rgba(0,0,0,0.75);
+        background: -moz-linear-gradient(180deg, rgba(128,128,128,0.9) 0%, rgba(128,128,128,0.9) 9%, rgba(0,0,0,0.99) 93%, rgba(0,0,0,1) 99%); /* ff3.6+ */
+        background: -webkit-gradient(linear, left top, right top, color-stop(1%, rgba(0,0,0,1)), color-stop(7%, rgba(0,0,0,0.99)), color-stop(91%, rgba(128,128,128,0.9)), color-stop(100%, rgba(128,128,128,0.9))); /* safari4+,chrome */
+        background: -webkit-linear-gradient(180deg, rgba(128,128,128,0.9) 0%, rgba(128,128,128,0.9) 9%, rgba(0,0,0,0.99) 93%, rgba(0,0,0,1) 99%); /* safari5.1+,chrome10+ */
+        background: -o-linear-gradient(180deg, rgba(128,128,128,0.9) 0%, rgba(128,128,128,0.9) 9%, rgba(0,0,0,0.99) 93%, rgba(0,0,0,1) 99%); /* opera 11.10+ */
+        background: -ms-linear-gradient(180deg, rgba(128,128,128,0.9) 0%, rgba(128,128,128,0.9) 9%, rgba(0,0,0,0.99) 93%, rgba(0,0,0,1) 99%); /* ie10+ */
+        background: linear-gradient(270deg, rgba(128,128,128,0.9) 0%, rgba(128,128,128,0.9) 9%, rgba(0,0,0,0.99) 93%, rgba(0,0,0,1) 99%);
+        margin: -20px;
+        padding: 0;
+        width: 200px;
+        height: 300px;
+        border: 2px solid #758dbc;
+        border-radius: 5px;
+
+        .card-top {
+            display: flex;
+            justify-content: space-between;
+            padding: 0 5px;
+            h4 {
+                color: #6fb16f;
+                font-size: 14px;
+                font-weight: 600;
+                text-align: center;
+                line-height: 20px;
+            }
+
+            i {
+                margin-top: 3px;
+                color: white;
+            }
+        }
+
+        .card {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+
+            img {
+                width: 180px;
+                margin: auto;
+                margin-bottom: 10px;
+            }
+
+            span {
+                color: white;
+                font-weight: 600;
+                text-align: center;
+            }
+            span.season {
+                color: #6fb16f;
+            }
+            span.year {
+                color: #7c7cda;
+            }
+        }
+    }
+
 }
 .chat {
     background: transparent;

@@ -52,7 +52,7 @@ define([
 				playerId: player.playerId,
 				seasonId: player.seasonId
 			}).then(function(card) {
-
+				this.publicController.getChoiceController().showPlayersCard(card);
 			}.bind(this));
 		}
     });
