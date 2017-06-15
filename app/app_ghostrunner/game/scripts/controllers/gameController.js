@@ -23,7 +23,7 @@ define([
         },
         switchToGame: function() {
             var gameModel = appCache.get('game'),
-                showTossAnimation = gameModel.get('showTossAnimation');
+                showTossAnimation = gameModel.get('showTossAnimation') && this.appState !== 'GAME' ? true : false;
             this.appState = 'GAME';
             this.appLayout.renderGame(showTossAnimation);
             this.appLayout.getRegion('game').$el.addClass('active');

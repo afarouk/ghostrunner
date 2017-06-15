@@ -24,7 +24,7 @@ define([
             this.model.updateRole();
         },
         onAction: function(move) {
-            console.log('action: ', action, move);
+            console.log('move: ', move);
             this.publicController.getGameController().showLoader();
 
             this.publicController.getStateController().onPlayerMove(move);

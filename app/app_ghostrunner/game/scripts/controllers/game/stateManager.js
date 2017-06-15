@@ -15,28 +15,7 @@ define([
 
         _manageUserRole: function(gameModel) {
             //Roles of a user within a game
-            var thisUser = gameModel.get('thisUser');
             this.publicController.getGameController().updateRole();
-            // switch (thisUser.role) {
-            //     case 'DUAL':
-            //         this.publicController.getGameController().updateRole('DUAL');
-            //         break;
-
-            //     case 'OFFENSE':
-            //         this.publicController.getGameController().updateRole('OFFENSE');
-            //         break;
-
-            //     case 'DEFENSE':
-            //         this.publicController.getGameController().updateRole('DEFENSE');
-            //         break;
-
-            //     case 'UNDECIDED':
-            //         this.publicController.getGameController().updateRole('UNDECIDED');
-            //         break;
-
-            //     default:
-            //         break;
-            // }
         },
 
 		_manageUserState: function(gameModel) {
