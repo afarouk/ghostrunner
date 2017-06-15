@@ -20,6 +20,20 @@
     pointer-events: all;
   }
 }
+@keyframes active-animation-2 {
+  0% {
+    opacity: 0;
+    display: block;
+    visibility: visible;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+    pointer-events: all;
+  }
+}
 
 /*TODO change to good looking toss animation here*/
 /* and replace image with css gradients*/

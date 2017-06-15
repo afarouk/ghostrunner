@@ -9,8 +9,7 @@ define([
     ], function(appCache, PlayerActionsView, PlayerActionsModel){
     var PlayerActionsController = Mn.Object.extend({
 		create: function(layout, region) {
-            var gameModel = appCache.get('game');
-            this.model = new PlayerActionsModel(gameModel.get('thisUser').role);
+            this.model = new PlayerActionsModel();
 			this.view = new PlayerActionsView({
                 model: this.model
             });
@@ -21,14 +20,14 @@ define([
         onBeforeDestroy: function(){
             this.stopListening();
         },
-        updateRole: function(role) {
-            this.model.updateRole(role);
+        updateRole: function() {
+            this.model.updateRole();
         },
-        onAction: function(action, move) {
+        onAction: function(move) {
             console.log('action: ', action, move);
             this.publicController.getGameController().showLoader();
 
-            this.publicController.getActionsManager().onAction(action, move);
+            this.publicController.getStateController().onPlayerMove(move);
         }
     });
 

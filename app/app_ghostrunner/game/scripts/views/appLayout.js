@@ -25,8 +25,8 @@ define([
 			this.publicController.getBrokerController().create(this, 'broker');
 			this.publicController.getModalsController().create(this, 'modals');
 		},
-		renderGame: function() {
-			var gameLayout = new GameLayout();
+		renderGame: function(showTossAnimation) {
+			var gameLayout = new GameLayout({showTossAnimation: showTossAnimation});
 			this.showChildView( 'game',  gameLayout);
 		},
 		destroyView: function() {

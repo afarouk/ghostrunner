@@ -32,10 +32,6 @@ define([
 		onHideLoader: function() {
 			this.$('.loader').hide();
 			this.$('.waiting-msg').hide();
-		},
-		onShowTossAnimation: function() {
-			console.log('show toss animation');
-			this.$('.toss').addClass('begin');
 		}
 	});
 	return GameInterfaceView;

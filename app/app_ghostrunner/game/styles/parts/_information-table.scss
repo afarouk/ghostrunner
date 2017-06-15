@@ -331,7 +331,7 @@
 	    background: rgba(10, 30, 60, 0.85);
 	    padding: 10px;
 	    display: flex;
-	    height: 90px;
+	    height: 100px;
 	    flex-direction: column;
 	    justify-content: space-between;
 	}
@@ -343,7 +343,31 @@
 
     .actions-buttons {
         button {
-            font-size: 12px;
+            font-size: 10px;
+		    font-weight: 600;
+		    padding: 4px 5px;
         }
+    }
+}
+
+.waiting-msg {
+    background: rgba(0,0,0,0.3);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    .waiting-for-turn {
+        position: absolute;
+        bottom: 0;
+        top: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+        opacity: 0.15;
+        animation: 4s waiting-animation infinite;
+        background: url('images/waitForTurn.png') no-repeat center;
+        background-size: 320px;
     }
 }

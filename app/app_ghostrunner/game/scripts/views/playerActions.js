@@ -15,13 +15,13 @@ define([
 			'click button': 'onAction'
 		},
 		onRender: function() {
+			console.log(this.model.toJSON());
 		},
 		onAction: function(e) {
 			var $target = $(e.currentTarget),
-				action = $target.data('action'),
 				move = $target.data('move');
 
-			this.trigger('onPlayer:action', action, move);
+			this.trigger('onPlayer:action', move);
 		}
 	});
 	return PlayerActionsView;

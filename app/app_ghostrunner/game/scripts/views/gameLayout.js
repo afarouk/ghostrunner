@@ -18,7 +18,15 @@ define([
 		renderGame: function() {
 			this.publicController.getFieldController().create(this, 'field');
 			this.publicController.getInterfaceController().create(this, 'interface');
-		}
+			if (this.options.showTossAnimation) {
+                this.showTossAnimation();
+            }
+		},
+		showTossAnimation: function() {
+			console.log('show toss animation');
+			this.$el.addClass('fadeIn');
+			this.$('.toss').addClass('begin');
+        }
 	});
 	return GameLayoutView;
 });

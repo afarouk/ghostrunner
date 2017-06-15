@@ -22,8 +22,10 @@ define([
             this.publicController.getSocketController().start(user.uid);
         },
         switchToGame: function() {
+            var gameModel = appCache.get('game'),
+                showTossAnimation = gameModel.get('showTossAnimation');
             this.appState = 'GAME';
-            this.appLayout.renderGame();
+            this.appLayout.renderGame(showTossAnimation);
             this.appLayout.getRegion('game').$el.addClass('active');
             this.appLayout.getRegion('broker').$el.removeClass('active');
         },
