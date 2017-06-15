@@ -1,6 +1,15 @@
-<span class="team-role"><%= displayText %></span>
-<div class="actions-buttons">
-	<% _.each(buttons, function(button) { %>
-		<button type="button" data-type="interface-btn" data-move="<%= button.gameMove %>" class="btn move" <% if (!button.enabled) { %>disabled<% } %>><%= button.displayText %></button>
-	<% }); %>
+<div class="actions-available">
+	<span class="team-role"><%= displayText %></span>
+	<div class="actions-buttons">
+		<% _.each(buttons, function(button) { %>
+			<button type="button" data-type="interface-btn" data-move="<%= button.gameMove %>" class="btn move" <% if (!button.enabled) { %>disabled<% } %>><%= button.displayText %></button>
+		<% }); %>
+	</div>
+</div>
+
+<!-- <div class="loader">
+	<div class="loader-svg"></div>
+</div> -->
+<div class="waiting-msg">
+	<div class="waiting-for-turn"></div>
 </div>

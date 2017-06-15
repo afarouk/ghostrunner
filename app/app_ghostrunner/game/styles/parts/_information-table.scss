@@ -12,6 +12,7 @@
     	.table-column {
     		display: flex;
     		flex-direction: column;
+    		pointer-events: all;
 
     		&.left-table,
 	    	&.right-table {
@@ -326,48 +327,70 @@
     margin: 0;
     width: 100%;
     justify-content: center;
+    pointer-events: all;
+
 
     .player-actions-container {
 	    background: rgba(10, 30, 60, 0.85);
-	    padding: 10px;
-	    display: flex;
-	    height: 100px;
-	    flex-direction: column;
-	    justify-content: space-between;
+	    position: relative;
+
+	    .actions-available {
+			padding: 10px;
+		    display: flex;
+		    height: 100px;
+		    flex-direction: column;
+		    justify-content: space-between;
+		    transition: .8s;
+		    opacity: 1;
+		    
+			.team-role {
+		    	color: $text;
+		        font-weight: 500;
+		    }
+
+		    .actions-buttons {
+		        button {
+		            font-size: 10px;
+				    font-weight: 600;
+				    padding: 4px 5px;
+		        }
+		    }
+		}
+
+	    .waiting-msg {
+		    position: absolute;
+		    top: 0;
+		    left: 0;
+		    right: 0;
+		    bottom: 0;
+		    margin: auto;
+		    opacity:1;
+	    	transition: .8s;
+		    .waiting-for-turn {
+		        position: absolute;
+		        bottom: 0;
+		        top: 0;
+		        left: 0;
+		        right: 0;
+		        margin: auto;
+		        opacity: 0.15;
+		        animation: 4s waiting-animation infinite;
+		        background: url('images/waitForTurn.png') no-repeat center;
+		        background-size: 160px;
+		    }
+		}
 	}
 
-    .team-role {
-    	color: $text;
-        font-weight: 500;
-    }
+	&.waiting {
+    	.player-actions-container {
 
-    .actions-buttons {
-        button {
-            font-size: 10px;
-		    font-weight: 600;
-		    padding: 4px 5px;
-        }
-    }
-}
+    		.actions-available {
+    			opacity: 0;
+    		}
 
-.waiting-msg {
-    background: rgba(0,0,0,0.3);
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    margin: auto;
-    .waiting-for-turn {
-        position: absolute;
-        bottom: 0;
-        top: 0;
-        left: 0;
-        right: 0;
-        margin: auto;
-        opacity: 0.15;
-        animation: 4s waiting-animation infinite;
-        background: url('images/waitForTurn.png') no-repeat center;
-        background-size: 320px;
+    		.waiting-msg {
+	    		opacity: 1;
+	    	}
+    	}
     }
 }

@@ -12,6 +12,9 @@ define([
 			playerActions: '#playerActions',
 			chat: '#chat'
 		},
+		ui: {
+			playerActions: '#playerActions'
+		},
 		onRender: function() {
 			this.renderInterfaceParts();
 		},
@@ -23,14 +26,17 @@ define([
 		onShowLoader: function(type) {
 			if (type) {
 				this.$('.loader').hide();
+				this.ui.playerActions.addClass('waiting');
 				this.$('.waiting-msg').show();
 			} else {
 				this.$('.waiting-msg').hide();
+				this.ui.playerActions.removeClass('waiting');
 				this.$('.loader').show();
 			}
 		},
 		onHideLoader: function() {
 			this.$('.loader').hide();
+			this.ui.playerActions.removeClass('waiting');
 			this.$('.waiting-msg').hide();
 		}
 	});
