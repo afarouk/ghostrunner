@@ -34,7 +34,8 @@ define([
 					BATTER_RH: null,
 					BATTER_1R: null,
 					BATTER_2R: null,
-					BATTER_3R: null
+					BATTER_3R: null,
+					BATTER_SS: null //I am not sure that it's needed
 				};
 			_.each(baseballField.defensePlayers, function(player){
 				var position = player.position.enumText;
