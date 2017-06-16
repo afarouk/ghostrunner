@@ -1,0 +1,22 @@
+.card-g-p {
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  width: 320px;
+  height: 320px;
+  border: none;
+  font: normal 1.5px/normal Arial, Helvetica, sans-serif;
+  color: rgba(255,255,255,1);
+  -o-text-overflow: clip;
+  text-overflow: clip;
+  background: -webkit-radial-gradient(circle, rgba(226,209,195,1) 0, rgb(35,29,24) 4%, rgb(35,29,24) 7%, rgb(35,29,24) 11%, rgba(0,0,0,0) 26%, rgba(0,0,0,0) 100%), rgba(239,245,247,1);
+  background: -moz-radial-gradient(circle, rgba(226,209,195,1) 0, rgb(35,29,24) 4%, rgb(35,29,24) 7%, rgb(35,29,24) 11%, rgba(0,0,0,0) 26%, rgba(0,0,0,0) 100%), rgba(239,245,247,1);
+  background: radial-gradient(circle, rgba(226,209,195,1) 0, rgb(35,29,24) 4%, rgb(35,29,24) 7%, rgb(35,29,24) 11%, rgba(0,0,0,0) 26%, rgba(0,0,0,0) 100%), rgba(239,245,247,1);
+  background-position: 6em 7em;
+  -webkit-background-origin: padding-box;
+  background-origin: padding-box;
+  -webkit-background-clip: border-box;
+  background-clip: border-box;
+  -webkit-background-size: 3em 3em;
+  background-size: 3em 3em;
+}

@@ -6,7 +6,7 @@ define([
 	'ejs!../../templates/partials/playersCard.ejs'
 	], function(template){
 	var PlayersCardView = Mn.View.extend({
-		className: 'players-card',
+		className: 'players-card card-g-p',
 		template: template,
 		ui: {
 			close: '[name="close"]'

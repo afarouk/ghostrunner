@@ -1,10 +1,131 @@
-<section class="card-top">
-	<h4><%= displayText %></h4>
-	<i class="fa fa-times" aria-hidden="true" name="close"></i>
+<section class="card-player">
+	<div class="player-photo">
+		<img src="<%= imageURL %>" alt="">
+	</div>
+	<div class="player-info">
+		<div class="player-name">
+			<h3 class="name">Michael Blomeyer</h3>
+			<h4 class="position">Outfield</h4>
+		</div>
+		<div class="player-additional card-g-p">
+			<span>Born: August 10, 1970</span>
+			<span>Height: 6'4 ft</span>
+			<span>Weight: 220 lbs</span>
+			<span>Bats: Right</span>
+			<span>Throws: Right</span>
+		</div>
+	</div>
+	<i class="fa fa-times close" aria-hidden="true" name="close"></i>
 </section>
-<section class="card">
+<section class="card-stats">
+	<div class="record batting-record">
+		<div class="records-title">
+			<h4>Batting Record</h4>
+		</div>
+		<div class="records-table">
+			<table>
+				<thead>
+					<tr>
+						<th>Year<i class="divider">|</i></th>
+						<th>Age<i class="divider">|</i></th>
+						<th>Lg<i class="divider">|</i></th>
+						<th>Lev<i class="divider">|</i></th>
+						<th>G<i class="divider">|</i></th>
+						<th>PA<i class="divider">|</i></th>
+						<th>AB<i class="divider">|</i></th>
+						<th>R<i class="divider">|</i></th>
+						<th>H<i class="divider">|</i></th>
+						<th>2B<i class="divider">|</i></th>
+						<th>3B<i class="divider">|</i></th>
+						<th>HR<i class="divider">|</i></th>
+						<th>RBI<i class="divider">|</i></th>
+						<th>SB<i class="divider">|</i></th>
+						<th>CS<i class="divider">|</i></th>
+						<th>BB<i class="divider">|</i></th>
+						<th>SO<i class="divider">|</i></th>
+						<th>BA</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>1991</td>
+						<td>20</td>
+						<td>ARIZ</td>
+						<td>Rk</td>
+						<td>30</td>
+						<td>103</td>
+						<td>88</td>
+						<td>5</td>
+						<td>18</td>
+						<td>1</td>
+						<td>1</td>
+						<td>0</td>
+						<td>6</td>
+						<td>4</td>
+						<td>2</td>
+						<td>12</td>
+						<td>32</td>
+						<td>.205</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="record fielding-record">
+		<div class="records-title">
+			<h4>Fielding Record</h4>
+		</div>
+		<div class="records-table">
+			<table>
+				<thead>
+					<tr>
+						<th>Year<i class="divider">|</i></th>
+						<th>Age<i class="divider">|</i></th>
+						<th>Lg<i class="divider">|</i></th>
+						<th>Lev<i class="divider">|</i></th>
+						<th>...<i class="divider">|</i></th>
+						<th>G<i class="divider">|</i></th>
+						<th>Ch<i class="divider">|</i></th>
+						<th>PO<i class="divider">|</i></th>
+						<th>A<i class="divider">|</i></th>
+						<th>E<i class="divider">|</i></th>
+						<th>DP<i class="divider">|</i></th>
+						<th>Fld%<i class="divider">|</i></th>
+						<th>RF/G</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>1991</td>
+						<td>20</td>
+						<td>ARIZ</td>
+						<td>Rk</td>
+						<td>OF</td>
+						<td>29</td>
+						<td>46</td>
+						<td>42</td>
+						<td>2</td>
+						<td>2</td>
+						<td>2</td>
+						<td>.957</td>
+						<td>1.52</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</section>
+<section class="card-footer">
+	<div class="card-year">
+		<span class="year"><%= year %></span>
+	</div>
+	<div class="card-ball">
+		<span class="players-team">Giants</span>
+	</div>
+</section>
+<!-- <section class="card">
 	<img src="<%= imageURL %>" alt="">
 	<span class="season"><%= seasonDisplayText %></span>
 	<span><%= playerDisplayText %></span>
 	<span class="year"><%= year %></span>
-</section>
+</section> -->
