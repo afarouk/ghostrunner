@@ -145,6 +145,7 @@
 				    text-align: center;
 				    max-height: 200px;
     				overflow-y: auto;
+    				overflow-x: hidden;
 
     				&::-webkit-scrollbar {
                         width: 10px;

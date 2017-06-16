@@ -75,6 +75,7 @@ define([
             this.publicController.getStateController().onPlayerLogout();
         },
         destroy: function() {
+            this.appState = undefined;
             this.appLayout.destroyView();
             this.publicController.destroyGame();
         },
