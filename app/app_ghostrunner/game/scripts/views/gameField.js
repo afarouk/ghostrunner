@@ -16,6 +16,9 @@ define([
 			'contextmenu @ui.player': 'onContextMenu',
 			'contextmenu': 'onPreventContextMenu'
 		},
+		modelEvents: {
+			'change': 'render'
+		},
 		onRender: function() {
 
 		},
