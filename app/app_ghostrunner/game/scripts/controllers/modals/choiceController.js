@@ -5,8 +5,9 @@
 define([
     '../../views/partials/confirmChoice',
     '../../views/partials/radioChoice',
-    '../../views/partials/playersCard'
-    ], function(ConfirmChoiceView, RadioChoiceView, PlayersCardView){
+    '../../views/partials/playersCard',
+    '../../models/playersCard'
+    ], function(ConfirmChoiceView, RadioChoiceView, PlayersCardView, PlayersCardModel){
     var ChoiceController = Mn.Object.extend({
         showConfirmation: function(options) {
             var def = $.Deferred(),
@@ -91,7 +92,7 @@ define([
         },
 
         showPlayersCard: function(card) {
-            var cardModel = new Backbone.Model(card),
+            var cardModel = new PlayersCardModel(card),
                 callback = function () {
                     this.onClose();
                     this.cardView.destroy();

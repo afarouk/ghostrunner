@@ -4,15 +4,15 @@
 	</div>
 	<div class="player-info">
 		<div class="player-name">
-			<h3 class="name">Michael Blomeyer</h3>
-			<h4 class="position">Outfield</h4>
+			<h3 class="name"><%= fullName %></h3>
+			<h4 class="position"><%= role.displayText %></h4>
 		</div>
 		<div class="player-additional card-g-p">
-			<span>Born: August 10, 1970</span>
-			<span>Height: 6'4 ft</span>
-			<span>Weight: 220 lbs</span>
-			<span>Bats: Right</span>
-			<span>Throws: Right</span>
+			<span>Born: <%= playerInfo.born %></span>
+			<span>Height: <%= playerInfo.height %></span>
+			<span>Weight: <%= playerInfo.weight %></span>
+			<span>Bats: <%= playerInfo.bats %></span>
+			<span>Throws: <%= playerInfo.throws %></span>
 		</div>
 	</div>
 	<i class="fa fa-times close" aria-hidden="true" name="close"></i>
@@ -47,65 +47,25 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td>1991</td>
-						<td>20</td>
-						<td>ARIZ</td>
-						<td>Rk</td>
-						<td>30</td>
-						<td>103</td>
-						<td>88</td>
-						<td>5</td>
-						<td>18</td>
-						<td>1</td>
-						<td>1</td>
-						<td>0</td>
-						<td>6</td>
-						<td>4</td>
-						<td>2</td>
-						<td>12</td>
-						<td>32</td>
-						<td>.205</td>
-					</tr>
-					<tr>
-						<td>1992</td>
-						<td>21</td>
-						<td>ARIZ</td>
-						<td>Rk</td>
-						<td>30</td>
-						<td>103</td>
-						<td>88</td>
-						<td>5</td>
-						<td>18</td>
-						<td>1</td>
-						<td>1</td>
-						<td>0</td>
-						<td>6</td>
-						<td>4</td>
-						<td>2</td>
-						<td>12</td>
-						<td>32</td>
-						<td>.205</td>
-					</tr>
+					<% _.each(records.batting.seasons, function(season) { %>
+						<tr>
+							<% _.each(season, function(fieldValue) { %>
+								<td><%= fieldValue %></td>
+							<% }) %>
+						</tr>
+					<% }) %>
 					<tr class="seasons-sum">
 						<td colspan="4" class="seasons-text">2 Seasons</td>
 						<td class="empty"></td>
 						<td class="empty"></td>
 						<td class="empty"></td>
-						<td>54</td>
-						<td>199</td>
-						<td>169</td>
-						<td>19</td>
-						<td>32</td>
-						<td>7</td>
-						<td>2</td>
-						<td>1</td>
-						<td>18</td>
-						<td>7</td>
-						<td>2</td>
-						<td>26</td>
-						<td>58</td>
-						<td>.189</td>
+						<% _.each(records.batting.seasonsSum, function(fieldValue) { %>
+							<% if(Math.round(fieldValue) === fieldValue) { %>
+								<td><%= fieldValue %></td>
+							<% } else { %>
+								<td><%= fieldValue.toFixed(3) %></td>
+							<% } %>
+						<% }) %>
 					</tr>
 				</tbody>
 			</table>
@@ -135,50 +95,26 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td>1991</td>
-						<td>20</td>
-						<td>ARIZ</td>
-						<td>Rk</td>
-						<td>OF</td>
-						<td>29</td>
-						<td>46</td>
-						<td>42</td>
-						<td>2</td>
-						<td>2</td>
-						<td>2</td>
-						<td>.957</td>
-						<td>1.52</td>
-					</tr>
-					<tr>
-						<td>1992</td>
-						<td>21</td>
-						<td>ARIZ</td>
-						<td>Rk</td>
-						<td>OF</td>
-						<td>29</td>
-						<td>46</td>
-						<td>42</td>
-						<td>2</td>
-						<td>2</td>
-						<td>2</td>
-						<td>.957</td>
-						<td>1.52</td>
-					</tr>
+					<% _.each(records.fielding.seasons, function(season) { %>
+						<tr>
+							<% _.each(season, function(fieldValue) { %>
+								<td><%= fieldValue %></td>
+							<% }) %>
+						</tr>
+					<% }) %>
 					<tr class="seasons-sum">
 						<td colspan="5" class="seasons-text">2 Seasons</td>
 						<td class="empty"></td>
 						<td class="empty"></td>
 						<td class="empty"></td>
 						<td class="empty"></td>
-						<td>52</td>
-						<td>85</td>
-						<td>79</td>
-						<td>3</td>
-						<td>3</td>
-						<td>2</td>
-						<td>.965</td>
-						<td>1.55</td>
+						<% _.each(records.fielding.seasonsSum, function(fieldValue) { %>
+							<% if(Math.round(fieldValue) === fieldValue) { %>
+								<td><%= fieldValue %></td>
+							<% } else { %>
+								<td><%= fieldValue.toFixed(3) %></td>
+							<% } %>
+						<% }) %>
 					</tr>
 				</tbody>
 			</table>
@@ -190,12 +126,6 @@
 		<span class="year"><%= year %></span>
 	</div>
 	<div class="card-ball">
-		<span class="players-team">Giants</span>
+		<span class="players-team"><%= teamName %></span>
 	</div>
 </section>
-<!-- <section class="card">
-	<img src="<%= imageURL %>" alt="">
-	<span class="season"><%= seasonDisplayText %></span>
-	<span><%= playerDisplayText %></span>
-	<span class="year"><%= year %></span>
-</section> -->
