@@ -106,7 +106,7 @@
 	    		this.onSignin(username, password);
 	    	}.bind(this));
             
-             
+            $(window).on('ghostrunner.afterLogout', this.onAfterLogout.bind(this));
 		},
         
         listenRegister: function() {
@@ -260,6 +260,12 @@
 			$(window).trigger('ghostrunner.signout', UID);
 			this.updateLoginButton();
 		},
+
+        onAfterLogout: function() {
+            this.logged = false;
+            $('.show_userName').text('');
+            this.updateLoginButton();
+        },
 
 		//TODO temporary for testing
 		updateLoginButton: function() {

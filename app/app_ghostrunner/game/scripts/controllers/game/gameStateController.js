@@ -320,6 +320,7 @@ define([
                     this.publicController.getGameController().start(user.toJSON());
                 }.bind(this), function(){
                     this.publicController.getGameController().stop(user.get('uid'));
+                    $(window).trigger('ghostrunner.afterLogout');
                 }.bind(this))
         }
 
