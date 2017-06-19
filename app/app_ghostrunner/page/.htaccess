@@ -1,0 +1,5 @@
+
+<ifmodule mod_rewrite.c>
+ RewriteEngine on
+ RewriteRule    ^blogadmin/?$    blogadmin.php    [NC,L] 	
+</ifmodule>

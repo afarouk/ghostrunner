@@ -19,7 +19,10 @@ define([
         },
         onSignin: function(e, user) {
             this.publicController.getUrlController().checkOptions();
-            this.publicController.getGameController().start(user);
+            if(window.pageName != 'BLOG'){                
+                this.publicController.getGameController().start(user);
+            }
+            
         },
         onSignout: function(e, UID) {
             this.publicController.getGameController().stop(UID);

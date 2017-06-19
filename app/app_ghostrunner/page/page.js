@@ -6,8 +6,13 @@ require('./css/font-awesome.min.css');
 require('./css/slick.css');
 require('./css/slick-theme.css');
 require('./css/jquery.fancybox.css');
+require('./css/html5imageupload.css');
 require('./css/style.css');
 require('file?name=[name].[ext]!./index.php');
+require('file?name=[name].[ext]!./blogadmin.php');
+require('file?name=[name].[ext]!./header.php');
+require('file?name=[name].[ext]!./footer.php');
+require('file?name=[name].[ext]!./.htaccess');
 
 //require scripts
 require('./js/jquery-1.11.3.min');
@@ -25,5 +30,6 @@ require('./js/jquery.mousewheel-3.0.6.pack');
 require('./js/jquery.fancybox.pack');
 require('./js/jquery.fancybox-media');
 require('./js/parallax.min');
+require('./js/html5imageupload.js');
 require('./js/script');
 require('./js/login');
