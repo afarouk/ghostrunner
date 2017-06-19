@@ -311,7 +311,19 @@ define([
             this.killGame();
         },
 
+        onForceLogout: function() {
+            this.disconnectLocked = true;
+            this.publicController.getModalsController().onForceLogout()
+                .then(function(){
+                    this.disconnectLocked = false;
+                    this.killGame();
+                    this.publicController.getGameController().destroy();
+                    $(window).trigger('ghostrunner.afterLogout');
+                }.bind(this))
+        },
+
         onDestroy: function() {
+            if (this.disconnectLocked) return;
             var user = appCache.get('user');
             this.killGame();
             this.publicController.getModalsController().onConnectionLost()

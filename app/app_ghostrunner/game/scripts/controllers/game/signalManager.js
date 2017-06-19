@@ -11,6 +11,7 @@ define([
                     break;
 
                 case 'FORCED_LOGOUT':
+                    this.publicController.getStateController().onForceLogout();
                     break;
 
                 case 'YOUR_MOVE':

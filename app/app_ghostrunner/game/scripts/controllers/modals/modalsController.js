@@ -365,6 +365,19 @@ define([
             }.bind(this));
         },
 
+        onForceLogout: function() {
+            var $def = $.Deferred();
+            this.publicController.getChoiceController().showConfirmation({
+                message: 'Parallel login detected.',
+                confirm: 'ok'
+            }).then(function() {
+                $def.resolve();
+            }.bind(this), function(){
+                $def.reject();
+            }.bind(this));
+            return $def;
+        },
+
         onConnectionLost: function() {
             var $def = $.Deferred();
             this.publicController.getChoiceController().showConfirmation({
