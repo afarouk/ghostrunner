@@ -13,10 +13,10 @@ define([
 			this.view = new GameFieldView({
 				model: gameModel.getBaseballFieldModel()
 			});
+			gameModel.on('change', this.onGameModelChange.bind(this));
 			layout.showChildView( region, this.view );
 			this.listenTo(this.view, 'onPlayerCard', this.onPlayerCard.bind(this));
 			this.view.triggerMethod('initContext');
-			//todo change field model on game model changed
 		},
 		onPlayerCard: function(player) {
 			service.retrievePlayerCard({
@@ -25,6 +25,9 @@ define([
 			}).then(function(card) {
 				this.publicController.getChoiceController().showPlayersCard(card);
 			}.bind(this));
+		},
+		onGameModelChange: function(gameModel) {
+			this.view.model.set(gameModel.getBaseballFieldModel())
 		}
     });
 
