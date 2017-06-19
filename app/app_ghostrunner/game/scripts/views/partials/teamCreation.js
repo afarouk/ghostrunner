@@ -45,6 +45,13 @@ define([
 			});
 			this.showChildView('players', this.teamPlayersList);
 			this.listenTo(this.teamPlayersList, 'team:changed', this.onTeamChanged.bind(this));
+
+			this.focusInput();
+		},
+		focusInput: function() {
+			setTimeout(function(){
+				this.ui.name.focus();
+			}.bind(this), 1);
 		},
 		onNameChanged: function() {
 			var name = this.ui.name.val();

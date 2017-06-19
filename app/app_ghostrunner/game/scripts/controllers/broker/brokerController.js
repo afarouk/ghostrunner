@@ -302,10 +302,6 @@ define([
             //team
             this.listenTo(teamsList, 'team:selected', this.onSelectTeam.bind(this));
             this.listenTo(teamsList, 'team:remove', this.onRemoveTeam.bind(this));
-            //lineup
-            // this.listenTo(teamsList, 'lineUp:selected', this.onSelectLineUp.bind(this));
-            // this.listenTo(teamsList, 'lineUp:remove', this.onRemoveLineUp.bind(this));
-            // this.listenTo(teamsList, 'lineUp:edit', this.onEditLineUp.bind(this));
         },
 
         onSelectTeam: function(team) {
@@ -318,15 +314,6 @@ define([
                 this.view.ui.confirm.attr('disabled', false);
             }
         },
-
-        // onSelectLineUp: function(lineUpId) {
-        //     if (lineUpId === 'new') {
-        //         this.publicController.getCreateTeamController().lineUpCreate(this.view, this.selectedTeam);
-        //     } else {
-        //         this.selectedTeam.set('lineUpId', lineUpId, {silent: true});
-        //         this.view.ui.teamConfirm.attr('disabled', false);
-        //     }
-        // },
 
         onReturnToTeamSelection: function() {
             this.view.$el.removeClass('creation-state');

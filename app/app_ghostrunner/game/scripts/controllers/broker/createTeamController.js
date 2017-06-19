@@ -12,6 +12,7 @@ define([
     var CreateTeamController = Mn.Object.extend({
         //team creation
         teamCreate: function(layout) {
+            this.publicController.getBrokerController().showLoader();
             service.retrieveAvailablePlayers()
                 .then(function(players){
                     this.onCreateTeam(players);
@@ -53,6 +54,8 @@ define([
             this.layout.showChildView('creation', teamCreation);
             this.listenTo(teamCreation, 'team:save', this.onTeamSave.bind(this, team));
             this.listenTo(teamCreation, 'cancel', this.onReturnToTeamSelection.bind(this, team));
+
+            this.publicController.getBrokerController().hideLoader();
         },
         onTeamSave: function(team, teamName) {
             var players = team.map(function(model) {

@@ -16,7 +16,8 @@ define([
 		ui: {
 			name: '[name="lineUp-name"]',
 			save: '[name="save"]',
-			cancel: '[name="cancel"]'
+			cancel: '[name="cancel"]',
+			listContainer: '[name="list-container"]'
 		},
 		events: {
 			'change @ui.name': 'onNameChanged',
@@ -39,14 +40,23 @@ define([
 			});
 			this.showChildView('players', this.playersList);
 			this.listenTo(this.playersList, 'player:selected', this.onPlayerSelected.bind(this));
+
+			this.focusInput();
+		},
+		focusInput: function() {
+			setTimeout(function(){
+				this.ui.name.focus();
+			}.bind(this), 1);
 		},
 		onNameChanged: function() {
 			var name = this.ui.name.val();
 			console.log(name);
 			if (name.length > 1) { //TODO validation
 				this.lineUpName = name;
+				this.ui.listContainer.removeClass('masked');
 			} else {
 				this.lineUpName = '';
+				this.ui.listContainer.addClass('masked');
 			}
 			this.checkIfSaveAllowed();
 		},

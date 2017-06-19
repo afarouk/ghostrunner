@@ -77,6 +77,11 @@
                                 height: 30px;
                                 padding: 0 5px;
                                 min-width: 150px;
+
+                                &:focus {
+                                    border: 1px solid #45c234;
+                                    caret-color: red;
+                                }
                             }
 
                             .balance, 
@@ -95,6 +100,16 @@
                     border: 1px solid white;
                     max-height: calc(100% - 100px);
                     border-collapse: collapse;
+
+                    &.masked {
+                        opacity: 0.6;
+                        cursor: not-allowed;
+                        user-select: none;
+
+                        input {
+                            pointer-events: none;
+                        }
+                    }
 
                     table {
                         width: 100%;
