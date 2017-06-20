@@ -141,6 +141,12 @@
                                         width: 80px;
                                     }
 
+                                    &.with-checkbox {
+                                        &.starter {
+                                            margin-right: 20px;
+                                        }
+                                    }
+
                                     &.with-select {
                                         width: 120px;
                                         text-align: center;
