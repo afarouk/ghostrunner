@@ -196,12 +196,13 @@ define([
             return gateway.sendRequest('retrieveAvailablePlayers', params);
         },
 
-        retrieveTeamPlayers: function(team) {
+        retrieveTeamPlayers: function(team, pitcher) {
             var teamUUID = team.get('teamUUID'),
                 user = appCache.get('user'),
                 params = {
                     teamUUID: teamUUID
                 };
+            if (pitcher) params.type = 'PITCHER';
             if (team.get('type').enumText === 'PRIVATE') {
                 params.UID = user.get('uid');
             }

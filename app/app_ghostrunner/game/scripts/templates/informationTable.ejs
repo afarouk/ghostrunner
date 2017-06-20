@@ -153,13 +153,17 @@
 		</div>
 	</div>
 	<div class="game-state-block">
-		<div class="state-line first">
-			<span><%= gameStateLine1 %></span>
-		</div>
-		<div class="state-line">
-			<span><%= gameStateLine2 %></span>
-		</div>
-		<% if (gameStateLine3 !== "(n/a)") { %>
+		<% if (gameStateLine1 && gameStateLine1 !== "(n/a)") { %>
+			<div class="state-line first">
+				<span><%= gameStateLine1 %></span>
+			</div>
+		<% } %>
+		<% if (gameStateLine2 && gameStateLine2 !== "(n/a)") { %>
+			<div class="state-line">
+				<span><%= gameStateLine2 %></span>
+			</div>
+		<% } %>
+		<% if (gameStateLine3 && gameStateLine3 !== "(n/a)") { %>
 			<div class="state-line">
 				<span><%= gameStateLine3 %></span>
 			</div>
