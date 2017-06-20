@@ -54,7 +54,7 @@
 			<tbody class="team-info-body">
 				<% _.each(leftTeam.players, function(player) { %>
 					<tr>
-						<td><%= player.name %></td>
+						<td><%= player.name %><% if (player.showAnnotation) { %><img src="./images/baseball_ball.png" alt=""><% } %></td>
 						<td><%= player.position.displayText %></td>
 					</tr>
 				<% }) %>
@@ -104,9 +104,9 @@
 								<% } %>
 							<% } %>
 							<th></th>
-							<td>0</td>
-							<td>1</td>
-							<td>0</td>
+							<td><%= scoresTable.thisTeam.runs %></td>
+							<td><%= scoresTable.thisTeam.hits %></td>
+							<td><%= scoresTable.thisTeam.errors %></td>
 						</tr>
 						<tr>
 							<td><%= scoresTable.otherTeam.city %></td>
@@ -118,9 +118,9 @@
 								<% } %>
 							<% } %>
 							<th></th>
-							<td>0</td>
-							<td>0</td>
-							<td>0</td>
+							<td><%= scoresTable.otherTeam.runs %></td>
+							<td><%= scoresTable.otherTeam.hits %></td>
+							<td><%= scoresTable.otherTeam.errors %></td>
 						</tr>
 					</tbody>
 				</table>
@@ -130,22 +130,22 @@
 			<div class="game-status">
 				<div class="status-row game-out">
 					<span>OUT:</span>
-					<div class="status-circle">
+					<div class="status-circle <% if (scoresTable.currentOuts > 0) { %>error<% } %>">
 						
 					</div>
-					<div class="status-circle">
+					<div class="status-circle <% if (scoresTable.currentOuts > 1) { %>error<% } %>">
 						
 					</div>
 				</div>
 				<div class="status-row game-h">
 					<span>H:</span>
-					<div class="status-circle">
+					<div class="status-circle <% if (scoresTable.currentHits) { %>success<% } %>">
 						
 					</div>
 				</div>
 				<div class="status-row game-e">
 					<span>E:</span>
-					<div class="status-circle">
+					<div class="status-circle <% if (scoresTable.currentErrors) { %>error<% } %>">
 						
 					</div>
 				</div>
@@ -222,7 +222,7 @@
 			<tbody class="team-info-body">
 				<% _.each(rightTeam.players, function(player) { %>
 					<tr>
-						<td><%= player.name %></td>
+						<td><%= player.name %><% if (player.showAnnotation) { %><img src="./images/baseball_ball.png" alt=""><% } %></td>
 						<td><%= player.position.displayText %></td>
 					</tr>
 				<% }) %>

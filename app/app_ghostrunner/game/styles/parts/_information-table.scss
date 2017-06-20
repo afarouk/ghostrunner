@@ -211,7 +211,18 @@
 								    padding-right: 5px;
 								    text-align: left;
 								    line-height: 19px;
-								    white-space: pre;
+								    max-width: 130px;
+								    display: table-cell;
+								    overflow: hidden;
+								    text-overflow: ellipsis;
+								    white-space: nowrap;
+								    position: relative;
+								    
+								    img {
+								    	width: 14px;
+									    position: absolute;
+									    right: 0;
+								    }
     							}
     							td:last-child {
     								text-align: center;
@@ -308,8 +319,15 @@
 								    height: 15px;
 								    border-radius: 50%;
 								    border: 1px solid gray;
-								    background-color: green;
+								    background-color: $darkgray_t;
 								    margin: 5px;
+
+								    &.error {
+								    	background-color: $error_b;
+								    }
+								    &.success {
+								    	background-color: $success_b;
+								    }
 	    						}
 	    					}
 	    				}
