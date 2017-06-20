@@ -25,7 +25,9 @@ define([
             
         },
         onSignout: function(e, UID) {
-            this.publicController.getGameController().stop(UID);
+            if(window.pageName != 'BLOG'){                
+                this.publicController.getGameController().stop(UID);
+            }
         }
     });
 

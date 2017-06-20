@@ -2199,4 +2199,13 @@ button#delete_blog {
 }
 
 
+#right_content{
+    display:none;
+}
+
+#left_content{
+    display:none;
+}
+
+
 
