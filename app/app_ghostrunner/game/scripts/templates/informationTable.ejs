@@ -4,15 +4,29 @@
 		<button id="abandon_btn" class="menu-btn abandon_btn">Abandon</button>
 	</section>
 	<div class="left-player-info">
-		<span class="player-role"><%= thisUser.team.currentPlayer.role.displayText %></span>
-		<span class="player-name"><%= thisUser.team.currentPlayer.name %></span>
-		<span class="player-year"><%= thisUser.team.city %></span>
+		<span class="player-role"><%= leftTeam.currentPlayer.role.displayText %></span>
+		<span class="player-name"><%= leftTeam.currentPlayer.name %></span>
+		<span class="player-year"><%= leftTeam.city %></span>
 		<div class="player-skills-container">
-			<% _.each(thisUser.team.currentPlayer.skills, function(skill) { %>
-				<div class="player-skills">
-					<span class="skill-name"><%= skill.skillName %>:</span>
-					<span class="skill-level level-<%= skill.level %>"><%= skill.levelName %></span>
-				</div>
+			<% _.each(leftTeam.currentPlayer.skills, function(skill) { %>
+				<% if (skill.dynamic) { %>
+					<div class="player-skills">
+						<span class="skill-name"><%= skill.skillName %>:</span>
+						<span class="skill-level"><%= skill.level %></span>
+					</div>
+					<div class="player-skills stamina-status">
+						<div class="stamina-line"></div>
+						<div class="player-skills">
+							<span class="stamina-text"><%= skill.skillName %></span>
+							<span class="stamina-text"><%= skill.level %>(100%/100%)</span>
+						</div>
+					</div>
+				<% } else { %>
+					<div class="player-skills">
+						<span class="skill-name"><%= skill.skillName %>:</span>
+						<span class="skill-level level-<%= skill.level %>"><%= skill.levelName %></span>
+					</div>
+				<% } %>
 			<% }) %>
 		</div>
 	</div>
@@ -20,10 +34,10 @@
 		<div class="team-info">
 			<div class="user-field">
 				<span class="user-name"><%= thisUser.user.userName %></span>
-				<span class="team-city"><%= thisUser.team.city %></span>
+				<span class="team-city"><%= leftTeam.city %></span>
 			</div>
 			<div class="team-status">
-				<% if (thisUser.team.role === "OFFENSE") { %>
+				<% if (leftTeam.role === "OFFENSE") { %>
 					<img src="./images/offenseCap.png" alt="">
 				<% } else {%>
 					<img src="./images/defenseCap.png" alt="">
@@ -38,7 +52,7 @@
 				</tr>
 			</thead>
 			<tbody class="team-info-body">
-				<% _.each(thisUser.team.players, function(player) { %>
+				<% _.each(leftTeam.players, function(player) { %>
 					<tr>
 						<td><%= player.name %></td>
 						<td><%= player.position.displayText %></td>
@@ -138,6 +152,19 @@
 			</div>
 		</div>
 	</div>
+	<div class="game-state-block">
+		<div class="state-line first">
+			<span><%= gameStateLine1 %></span>
+		</div>
+		<div class="state-line">
+			<span><%= gameStateLine2 %></span>
+		</div>
+		<% if (gameStateLine3 !== "(n/a)") { %>
+			<div class="state-line">
+				<span><%= gameStateLine3 %></span>
+			</div>
+		<% } %>
+	</div>
 </section>
 <section class="table-column right-table">
 	<section class="opponent-status">
@@ -145,11 +172,11 @@
 		<span class="status-text">OPPONENT STATUS</span>
 	</section>
 	<div class="right-player-info">
-		<span class="player-role"><%= otherUser.team.currentPlayer.role.displayText %></span>
-		<span class="player-name"><%= otherUser.team.currentPlayer.name %></span>
-		<span class="player-year"><%= otherUser.team.city %></span>
+		<span class="player-role"><%= rightTeam.currentPlayer.role.displayText %></span>
+		<span class="player-name"><%= rightTeam.currentPlayer.name %></span>
+		<span class="player-year"><%= rightTeam.city %></span>
 		<div class="player-skills-container">
-			<% _.each(otherUser.team.currentPlayer.skills, function(skill) { %>
+			<% _.each(rightTeam.currentPlayer.skills, function(skill) { %>
 				<% if (skill.dynamic) { %>
 					<div class="player-skills">
 						<span class="skill-name"><%= skill.skillName %>:</span>
@@ -175,10 +202,10 @@
 		<div class="team-info">
 			<div class="user-field">
 				<span class="user-name"><%= otherUser.user.userName %></span>
-				<span class="team-city"><%= otherUser.team.city %></span>
+				<span class="team-city"><%= rightTeam.city %></span>
 			</div>
 			<div class="team-status">
-				<% if (otherUser.team.role === "OFFENSE") { %>
+				<% if (rightTeam.role === "OFFENSE") { %>
 					<img src="./images/offenseCap.png" alt="">
 				<% } else {%>
 					<img src="./images/defenseCap.png" alt="">
@@ -193,7 +220,7 @@
 				</tr>
 			</thead>
 			<tbody class="team-info-body">
-				<% _.each(otherUser.team.players, function(player) { %>
+				<% _.each(rightTeam.players, function(player) { %>
 					<tr>
 						<td><%= player.name %></td>
 						<td><%= player.position.displayText %></td>

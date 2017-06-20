@@ -1,5 +1,5 @@
 .information-table {
-    height: 400px;
+    height: 440px;
     color: $text;
     padding: 0;
 
@@ -17,7 +17,7 @@
     		&.left-table,
 	    	&.right-table {
 	    		width: 220px;
-	    		height: 400px;
+	    		height: 440px;
 	    	}
 
 	    	&.left-table,
@@ -143,7 +143,7 @@
 				    flex-direction: column;
 				    background: $tables-back;
 				    text-align: center;
-				    max-height: 200px;
+				    max-height: 240px;
     				overflow-y: auto;
     				overflow-x: hidden;
 
@@ -210,12 +210,12 @@
     								padding-left: 5px;
 								    padding-right: 5px;
 								    text-align: left;
-								    line-height: 18px;
+								    line-height: 19px;
 								    white-space: pre;
     							}
     							td:last-child {
     								text-align: center;
-								    line-height: 18px;
+								    line-height: 19px;
 								    white-space: pre;
 								    font-weight: 900;
 								    color: #e1d77e;
@@ -227,7 +227,7 @@
 	    	}
 
 	    	&.center-table {
-	    		height: 110px;
+	    		// height: 110px;
 	    		margin: 0 5px;
 
 	    		.game-table {
@@ -312,6 +312,27 @@
 								    margin: 5px;
 	    						}
 	    					}
+	    				}
+	    			}
+	    		}
+
+	    		.game-state-block {
+	    			margin: 5px 50px;
+				    display: flex;
+				    flex-direction: column;
+				    background-color: rgba(0,0,0,0.7);
+				    padding: 5px;
+				    text-align: center;
+
+	    			.state-line {
+	    				line-height: 20px;
+	    				font-weight: 400;
+	    				color: $gray;
+
+	    				&.first {
+	    					font-weight: 600;
+    						font-size: 16px;
+    						color: $text;
 	    				}
 	    			}
 	    		}
