@@ -259,6 +259,8 @@
 		onLoginSuccess: function(response) {
 			Cookie.set('cmxUID', response.uid);
 			this.logged = true;
+            $('#right_content').css("display","block");
+            $('#left_content').css("display","block");
             $('.show_userName').text(response.userName);
 			$(window).trigger('ghostrunner.signin', response);
 			this.updateLoginButton();
@@ -267,6 +269,8 @@
 		onLogoutSuccess: function(UID) {
 			this.logged = false;
 			Cookie.remove('cmxUID');
+            $("#right_content").css("display","none");
+            $("#left_content").css("display","none");
             $('.show_userName').text('');
 			$(window).trigger('ghostrunner.signout', UID);
 			this.updateLoginButton();
@@ -529,10 +533,6 @@
             if(UID){
                 $('#right_content').show();
                 $('#left_content').show();
-            }
-            else{
-                $('#right_content').hide();
-                $('#left_content').hide();
             }
         },
         
