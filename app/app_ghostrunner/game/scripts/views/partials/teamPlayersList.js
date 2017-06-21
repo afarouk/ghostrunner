@@ -26,7 +26,7 @@ define([
 	//PITCHER
 	var TeamPlayerPitcherView = Mn.View.extend({
 		tagName: 'tr',
-		className: 'team-player',
+		className: 'team-player pitcher',
 		template: pitcherTmpl,
 		ui: {
 			select: '[name="select-player"]',

@@ -140,6 +140,7 @@
 
                                     &.with-name {
                                         width: 320px;
+                                        font-size: 15px;
                                     }
 
                                     &.with-cost {
@@ -236,6 +237,16 @@
                                         margin-left: 7px;
                                     }
                                 }
+                            }
+
+                            tr.pitcher {
+                                background-color: rgba(27, 169, 169, 0.2);
+                            }
+
+                            tr:not(.pitcher) + tr.pitcher {
+                                border-top: 2px dashed gray;
+                                margin-top: 5px;
+                                padding-top: 5px;
                             }
                         }
                     }
