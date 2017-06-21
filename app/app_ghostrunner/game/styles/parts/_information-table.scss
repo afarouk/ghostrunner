@@ -406,7 +406,8 @@
 		    right: 0;
 		    bottom: 0;
 		    margin: auto;
-		    opacity:1;
+		    opacity: 1;
+		    display: none;
 	    	transition: .8s;
 		    .waiting-for-turn {
 		        position: absolute;
@@ -431,6 +432,7 @@
     		}
 
     		.waiting-msg {
+    			display: block;
 	    		opacity: 1;
 	    	}
     	}

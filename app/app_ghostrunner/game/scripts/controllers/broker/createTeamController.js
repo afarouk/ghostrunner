@@ -8,8 +8,8 @@ define([
     '../../views/partials/teamCreation',
     '../../views/partials/lineUpCreation',
     '../../views/partials/selectCandidate',
-    '../../models/starterPlayers'
-    ], function(appCache, service, TeamCreationView, LineUpCreationView, SelectCandidateView, StarterPlayersCollection){
+    '../../models/playersCollection'
+    ], function(appCache, service, TeamCreationView, LineUpCreationView, SelectCandidateView, PlayersCollection){
     var CreateTeamController = Mn.Object.extend({
         //team creation
         teamCreate: function(layout) {
@@ -83,7 +83,7 @@ define([
         //select candidate
         onSelectCandidate: function(players, team) {
             var createData = {
-                    players: (new StarterPlayersCollection()).create(players.players),
+                    players: (new PlayersCollection()).getStarters(players.players),
                     teamName: team.get('displayText')
                 },
                 candidateSelection = new SelectCandidateView(createData);
@@ -99,7 +99,7 @@ define([
         onShapeLineUp: function(players, positions, starterLineUp, accept) {
             var lineUp = new Backbone.Collection(starterLineUp.get('players')),
                 createData = {
-                    players: new Backbone.Collection(players.players),
+                    players: (new PlayersCollection()).getLineUps(players.players),
                     positions: positions,
                     lineUp: lineUp,
                     teamName: 'test name',
