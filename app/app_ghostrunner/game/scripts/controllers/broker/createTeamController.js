@@ -46,7 +46,7 @@ define([
         onCreateTeam: function(players) {
             var team = new Backbone.Collection(),
                 createData = {
-                    players: new Backbone.Collection(players.players),
+                    players: (new PlayersCollection()).getAvailablePlayers(players.players),
                     team: team
                 },
                 teamCreation = new TeamCreationView(createData);

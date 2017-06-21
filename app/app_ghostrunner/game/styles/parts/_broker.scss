@@ -71,7 +71,12 @@
                             padding: 0 10px;
 
                             label {
-                                padding-right: 10px;
+                                background-color: rgba(0,0,0,0.5);
+                                padding: 3px 5px;
+
+                                &[name="team-name"] {
+                                    background-color: rgba(84, 177, 89, 0.5);
+                                }
                             }
                             input {
                                 height: 30px;
@@ -158,6 +163,8 @@
                                     }
 
                                     &.with-rating {
+                                        width: 80px;
+                                        text-align: center;
                                         span {
                                             border-radius: 2px;
                                             background-color: rgba(0, 0, 0, 0.35);

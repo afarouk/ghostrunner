@@ -82,11 +82,15 @@ define([
             });
 		},
 		checkBallance: function() {
-			var balance = this.team.reduce(function(sum, model) { 
-				return sum + model.get('cost') 
+			var balance = this.team.reduce(function(sum, model) {
+				if (model.get('type').enumText === 'PITCHER')  {
+					return sum;
+				} else {
+					return sum + model.get('cost');
+				}
 			}, 0);
 
-			this.ui.balance.text(balance);
+			this.ui.balance.text('[' + balance + ']');
 			if (balance > 100) {
 				this.ui.balance.css('color', 'red');
 				this.teamPlayersList.triggerMethod('players:selection:allow', false);
