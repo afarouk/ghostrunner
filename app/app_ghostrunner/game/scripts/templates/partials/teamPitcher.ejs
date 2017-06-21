@@ -1,0 +1,18 @@
+<td class="with-name"><%= displayText %></td>
+<td class="with-select">
+	<div class="player-role" data-role="<%= role.enumText %>">
+		<span><%= role.displayText %></span>
+	</div>
+</td>
+<td class="with-text">SP</td>
+<td class="with-text" data-rating="<%= pitcherRating.enumText %>"><%= pitcherRating.displayText %></td>
+<td class="with-select">
+	<select name="positions">
+		<% _.each(pitcherRoles, function(role){ %>
+			<option value="<%= role.enumText %>"><%= role.displayText %></option>
+		<% }) %>
+	</select>
+</td>
+<td class="with-checkbox">
+	<input type="checkbox" name="select-player"></input>
+</td>
