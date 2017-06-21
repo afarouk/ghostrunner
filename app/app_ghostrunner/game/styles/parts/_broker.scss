@@ -141,6 +141,24 @@
                                         width: 80px;
                                     }
 
+                                    &.with-rating {
+                                        span {
+                                            border-radius: 2px;
+                                            background-color: rgba(0, 0, 0, 0.35);
+                                            padding: 0 5px;
+
+                                            &[data-rating="Fair"] {
+                                                color: red;
+                                            }
+                                            &[data-rating="Good"] {
+                                                color: gold;
+                                            }
+                                            &[data-rating="Elite"] {
+                                                color: green;
+                                            }
+                                        }
+                                    }
+
                                     &.with-checkbox {
                                         &.starter {
                                             margin-right: 20px;

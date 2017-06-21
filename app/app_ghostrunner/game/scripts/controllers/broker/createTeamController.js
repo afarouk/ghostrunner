@@ -7,8 +7,9 @@ define([
     '../../APIGateway/gameService',
     '../../views/partials/teamCreation',
     '../../views/partials/lineUpCreation',
-    '../../views/partials/selectCandidate'
-    ], function(appCache, service, TeamCreationView, LineUpCreationView, SelectCandidateView){
+    '../../views/partials/selectCandidate',
+    '../../models/starterPlayers'
+    ], function(appCache, service, TeamCreationView, LineUpCreationView, SelectCandidateView, StarterPlayersCollection){
     var CreateTeamController = Mn.Object.extend({
         //team creation
         teamCreate: function(layout) {
@@ -82,7 +83,7 @@ define([
         //select candidate
         onSelectCandidate: function(players, team) {
             var createData = {
-                    players: new Backbone.Collection(players.players),
+                    players: (new StarterPlayersCollection()).create(players.players),
                     teamName: team.get('displayText')
                 },
                 candidateSelection = new SelectCandidateView(createData);
