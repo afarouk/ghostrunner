@@ -118,7 +118,11 @@ define([
                     return {
                         playerId: model.get('playerId'),
                         seasonId: model.get('seasonId'),
-                        position: model.get('position').enumText
+                        position: model.get('position').enumText,
+                        type: model.get('type').enumText,
+                        role: model.get('role').enumText,
+                        battingOrder: model.get('battingOrder'),
+                        pitchingRole: model.get('pitcherRole').enumText
                     };
                 }),
                 lineUpData = {
