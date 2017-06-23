@@ -13,6 +13,9 @@ require('file?name=[name].[ext]!./blogadmin.php');
 require('file?name=[name].[ext]!./header.php');
 require('file?name=[name].[ext]!./footer.php');
 require('file?name=[name].[ext]!./.htaccess');
+require('file?name=[name].[ext]!./privacypolicy.php');
+require('file?name=[name].[ext]!./termsandcondiction.php');
+require('file?name=[name].[ext]!./navbar.php');
 
 //require scripts
 require('./js/jquery-1.11.3.min');

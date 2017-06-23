@@ -67,7 +67,12 @@ module.exports = function (grunt) {
             cwd: '<%= yeoman.app %>/build',
             src: ['**'],
             dest: '<%= yeoman.dist %>'
-          }
+          },
+          { expand: true,
+            cwd: '<%= yeoman.app %>/build',
+            src: ['.htaccess'],
+            dest: '<%= yeoman.dist %>'
+          }  
         ]
       }
     },

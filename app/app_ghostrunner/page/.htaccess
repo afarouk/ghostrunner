@@ -1,5 +1,6 @@
 
-<ifmodule mod_rewrite.c>
- RewriteEngine on
- RewriteRule    ^blogadmin/?$    blogadmin.php    [NC,L] 	
-</ifmodule>
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([^\.]+)/?$ $1.php [NC,L]
+
+

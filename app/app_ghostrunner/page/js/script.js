@@ -75,16 +75,16 @@
 		
 		// Smooth scrolling to anchor section
 		SmoothScroll: function() {
-			$('a.smooth-scroll').on('click', function(event) {
+			$('a.smooth-scroll').on('click', function(event) {  
 				var $anchor		= $(this);
 				var offsetTop	= '';
-				
+              
 				if (window.Response.band(768)) {
 					offsetTop = parseInt($($anchor.attr('href')).offset().top - 70, 0);
 				} else {
 					offsetTop = parseInt($($anchor.attr('href')).offset().top, 0);
-				}
-				
+				} 
+                
 				$('html, body').stop().animate({
 					scrollTop: offsetTop
 				}, 1500,'easeInOutExpo');

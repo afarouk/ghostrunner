@@ -34,7 +34,9 @@
                             	<li><a href="#">About Us</a></li>
                                 <li><a href="#">Testimonials</a></li>
                                 <li><a href="#">Our Teams</a></li>
-                                <li><a href="#">Contact Us</a></li>
+                                <li><a href="index.php#contact">Contact Us</a></li>
+                                <li><a href="privacypolicy">Privacy Policy</a></li>
+                                <li><a href="termsandcondiction">Terms &amp; Conditions </a></li>
                             </ul>
                         </div>
                     </div>
@@ -44,7 +46,7 @@
                     <h4 class="widget-title">Contact Us</h4>
                     <p>123 Main Street Cottage<br>Long Branch City, P.O Box 65148<br>(00) 123-4567890 / (00) 123-4567890<br><a href="#">www.ghostrunner.com</a><br><a href="#">support@ghostrunner.com</a></p>
                 </div>
-
+                       
             </div>
             <!-- .row end -->
 
