@@ -1,6 +1,9 @@
 <table>
 	<thead>
-		<tr><% _.each(headings, function(heading){ %><td><%= heading.displayText %></td><% }) %></tr>
+		<tr><% _.each(headings, function(heading){ %>
+			<td><%= heading.displayText %></td>
+		<% }) %>
+		<td class="choise"></td></tr>
 	</thead>
 	<tbody>
 		<!-- lineUp players list -->
