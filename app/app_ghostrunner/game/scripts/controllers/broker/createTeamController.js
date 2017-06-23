@@ -84,6 +84,7 @@ define([
         onSelectCandidate: function(players, team) {
             var createData = {
                     players: (new PlayersCollection()).getStarters(players.players),
+                    headings: players.starterHeadings,
                     teamName: team.get('displayText')
                 },
                 candidateSelection = new SelectCandidateView(createData);
