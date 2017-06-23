@@ -11,7 +11,7 @@ define([
 		tagName: 'section',
 		className: 'create-lineUp',
 		regions: {
-			players: '.players-list-container table'
+			players: '.players-list-container'
 		},
 		ui: {
 			name: '[name="lineUp-name"]',
@@ -38,8 +38,8 @@ define([
 		onRender: function() {
 			this.lineUpPlayersList = new LineUpPlayersList({
 				collection: this.options.players,
-				positions: this.options.positions,
-				lineUp: this.lineUp
+				lineUp: this.lineUp,
+				headings: this.options.headings
 			});
 			this.showChildView('players', this.lineUpPlayersList);
 			this.listenTo(this.lineUpPlayersList, 'lineUp:changed', this.onLineUpChanged.bind(this));

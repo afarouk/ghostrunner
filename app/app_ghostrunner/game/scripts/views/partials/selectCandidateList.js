@@ -3,7 +3,7 @@
 'use strict';
 
 define([
-	'ejs!../../templates/partials/lineUpTable.ejs',
+	'ejs!../../templates/partials/starterTable.ejs',
 	'ejs!../../templates/partials/lineUpCandidate.ejs'
 	], function(tableTmpl, childTmpl){
 	var LineUpCandidateView = Mn.View.extend({

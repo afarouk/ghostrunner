@@ -37,9 +37,9 @@ define([
         lineUpShape: function(layout, accept) {
             var game = appCache.get('game'),
                 lineUp = new Backbone.Model(game.get('thisLineUp'));
-            $.when(service.retrieveTeamPlayers(lineUp), service.getBaseballFieldPositions())
-                .done(function(players, positions){
-                    this.onShapeLineUp(players[0], positions[0], lineUp, accept);
+            service.retrieveTeamPlayers(lineUp)
+                .then(function(players){
+                    this.onShapeLineUp(players, lineUp, accept);
                 }.bind(this));
             this.layout = layout;
         },
@@ -97,14 +97,14 @@ define([
         onCandidateSelected: function(lineUpName, player) {
             this.publicController.getBrokerController().onCandidateSelected(lineUpName, player);
         },
-        onShapeLineUp: function(players, positions, starterLineUp, accept) {
+        onShapeLineUp: function(players, starterLineUp, accept) {
             var lineUp = new Backbone.Collection(starterLineUp.get('players')),
                 createData = {
                     players: (new PlayersCollection()).getLineUps(players.players),
-                    positions: positions,
                     lineUp: lineUp,
                     teamName: 'test name',
-                    lineUpName: starterLineUp.get('displayText')
+                    lineUpName: starterLineUp.get('displayText'),
+                    headings: players.lineUpHeadings,
                 },
                 lineUpCreation = new LineUpCreationView(createData);
 
