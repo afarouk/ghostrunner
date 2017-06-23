@@ -7,7 +7,7 @@
 <td class="with-text"><%= pitcherRole.displayText %></td>
 <td class="with-text" data-rating="<%= pitcherRating.enumText %>"><%= pitcherRating.displayText %></td>
 <td class="with-select">
-	<select name="positions">
+	<select name="positions" disabled>
 		<% _.each(pitcherRoles, function(role){ %>
 			<option value="<%= role.enumText %>"><%= role.displayText %></option>
 		<% }) %>

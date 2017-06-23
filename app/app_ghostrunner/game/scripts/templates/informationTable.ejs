@@ -15,10 +15,11 @@
 						<span class="skill-level"><%= skill.level %></span>
 					</div>
 					<div class="player-skills stamina-status">
-						<div class="stamina-line" style="width:<%= Math.round(100 * (skill.currentLevel / skill.level)) %>%;"></div>
+						<% var staminaPercentage = Math.round(100 * (skill.currentLevel / skill.level)) %>
+						<div class="stamina-line <% if (staminaPercentage <= 1) { %>red<% } else if (staminaPercentage <= 30) { %>yellow<% } %>" style="width:<%= staminaPercentage %>%;"></div>
 						<div class="player-skills">
 							<span class="stamina-text"><%= skill.skillName %></span>
-							<span class="stamina-text"><%= skill.currentLevel %>(<%= Math.round(100 * (skill.currentLevel / skill.level)) %>%/100%)</span>
+							<span class="stamina-text"><%= skill.currentLevel %>(<%= staminaPercentage %>%/100%)</span>
 						</div>
 					</div>
 				<% } else { %>
@@ -187,10 +188,11 @@
 						<span class="skill-level"><%= skill.level %></span>
 					</div>
 					<div class="player-skills stamina-status">
-						<div class="stamina-line" style="width:<%= Math.round(100 * (skill.currentLevel / skill.level)) %>%;"></div>
+						<% var staminaPercentage = Math.round(100 * (skill.currentLevel / skill.level)) %>
+						<div class="stamina-line <% if (staminaPercentage <= 1) { %>red<% } else if (staminaPercentage <= 30) { %>yellow<% } %>" style="width:<%= staminaPercentage %>%;"></div>
 						<div class="player-skills">
 							<span class="stamina-text"><%= skill.skillName %></span>
-							<span class="stamina-text"><%= skill.currentLevel %>(<%= Math.round(100 * (skill.currentLevel / skill.level)) %>%/100%)</span>
+							<span class="stamina-text"><%= skill.currentLevel %>(<%= staminaPercentage %>%/100%)</span>
 						</div>
 					</div>
 				<% } else { %>

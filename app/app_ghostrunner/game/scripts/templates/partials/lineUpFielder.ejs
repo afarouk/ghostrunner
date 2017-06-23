@@ -1,23 +1,24 @@
-<td class="with-name"><%= displayText %></td>
+<% _.each(properties, function(prop){ %>
+	<% if (prop) { %>
+		<td class="<%= prop.className %>"><%= prop.displayValue %></td>
+	<% } %>
+<% }) %>
 <td class="with-select">
-	<div class="player-role" data-role="<%= role.enumText %>">
-		<span><%= role.displayText %></span>
-	</div>
-</td>
-<td class="with-select">
-	<select name="player-position">
+	<select name="player-position" class="position">
+		<option disabled selected value>---</option>
 		<% _.each(positions, function(position){ %>
 			<option value="<%= position.enumText %>"><%= position.displayText %></option>
 		<% }) %>
 	</select>
 </td>
 <td class="with-select">
-	<select name="batting-order">
+	<select name="batting-order" class="batting">
+		<option disabled selected value>---</option>
 		<% for (var index = 1; index <=9; index++) { %>
 			<option value="<%= index %>">BO:<%= index %></option>
 		<% } %>
 	</select>
 </td>
 <td class="with-checkbox">
-	<input type="checkbox" name="select-player"></input>
+	<input type="checkbox" name="select-player" disabled></input>
 </td>
