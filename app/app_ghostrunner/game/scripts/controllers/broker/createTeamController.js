@@ -98,7 +98,7 @@ define([
             this.publicController.getBrokerController().onCandidateSelected(lineUpName, player);
         },
         onShapeLineUp: function(players, starterLineUp, accept) {
-            var lineUp = new Backbone.Collection(starterLineUp.get('players')),
+            var lineUp = new Backbone.Collection(),
                 createData = {
                     players: (new PlayersCollection()).getLineUps(players.players),
                     lineUp: lineUp,

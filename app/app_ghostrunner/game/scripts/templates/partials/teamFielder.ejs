@@ -6,7 +6,7 @@
 </td>
 <td class="with-cost"><%= cost %></td>
 <td class="with-select">
-	<select name="positions">
+	<select name="positions" disabled>
 		<% _.each(positions, function(position){ %>
 			<option value="<%= position.enumText %>"><%= position.displayText %></option>
 		<% }) %>

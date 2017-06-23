@@ -48,16 +48,7 @@ define([
 				properties:values,
 				positions: this.model.get('positions')
 			};
-		},
-		// serializeData: function() {
-		// 	var starterModel = this.options.lineUp.at(0),
-		// 		starter = this.model.get('playerId') === starterModel.get('playerId') &&
-		// 			this.model.get('seasonId') === starterModel.get('seasonId') ? true : false;
-		// 	if (starter) this.$el.addClass('starter-player');
-		// 	return _.extend(this.model.toJSON(), {
-		// 		// starter: starter,
-		// 	});
-		// }
+		}
 	});
 
 	// var LineUpPitcherView = Mn.View.extend({
@@ -111,12 +102,20 @@ define([
 				positions = model.get('positions'),
 				position = _.findWhere(positions, {enumText: selected});
 			model.set('position', position);
+			this.checkIfEnable(view, model);
 		},
 		onChildviewBattingOrderChanged: function(view, e) {
 			var $target = $(e.currentTarget),
 				model = view.model,
 				selected = $target.find(':selected').val();
 			model.set('battingOrder', selected);
+			this.checkIfEnable(view);
+		},
+		checkIfEnable: function(view) {
+			var model = view.model;
+			if (model.get('position').enumText !== 'UNDEFINED' && model.get('battingOrder')) {
+				view.ui.select.attr('disabled', false);
+			}
 		},
 		onChildviewPitcherRoleChanged: function(view, e) {
 			var $target = $(e.currentTarget),
@@ -134,12 +133,12 @@ define([
 					$checkbox.attr('disabled', false);
 				} else {
 					if (allow) {
-						$checkbox.attr('disabled', false);
+						this.checkIfEnable(view);
 					} else {
 						$checkbox.attr('disabled', true);
 					}
 				}
-			});
+			}.bind(this));
 		}
 	});
 	return LineUpPlayersListView;
