@@ -38,7 +38,8 @@ module.exports = {
             getMessage: ['GET', '/gaming/getMessage'],
             getPoll: ['GET', '/gaming'],
             getAvailablePlayers: ['GET', '/gaming/getAvailablePlayers'],
-            retrievePlayerCard: ['GET', '/gaming/retrievePlayerCard']
+            retrievePlayerCard: ['GET', '/gaming/retrievePlayerCard'],
+            retrievePinchHitterChoices: ['GET', '/gaming/retrievePinchHitterChoices']
         };
     }
 };

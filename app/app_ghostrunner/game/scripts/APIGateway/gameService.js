@@ -263,6 +263,18 @@ define([
             
                 params.UID = user.get('uid');
             return gateway.sendRequest('retrievePlayerCard', params);
+        },
+        
+        retrievePinchHitterChoices: function() {
+            var params ={};
+            var user = appCache.get('user'),
+                game = appCache.get('game'),
+                team = Cookie.get('Team');
+                params.UID = user.get('uid');
+                if(team) params.teamUUID = team;
+                if (game) params.gameUUID = game.get('gameUUID');
+                params = params || {};
+            return gateway.sendRequest('retrievePinchHitterChoices', params);
         }
     });
 

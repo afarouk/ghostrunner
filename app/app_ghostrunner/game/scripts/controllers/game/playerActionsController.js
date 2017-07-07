@@ -24,10 +24,12 @@ define([
             this.model.updateRole();
         },
         onAction: function(move) {
-            console.log('move: ', move);
             this.publicController.getGameController().showLoader();
-
-            this.publicController.getStateController().onPlayerMove(move);
+            if(move == 'PINCH_HIT'){
+                this.publicController.getBrokerController().retrivePinchHit();
+            }else{
+                this.publicController.getStateController().onPlayerMove(move);
+            }
         }
     });
 

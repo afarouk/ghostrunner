@@ -522,7 +522,13 @@ define([
             this.switchBrokerState('lineUp', true);
             this.invitationDef = $.Deferred();
             return this.invitationDef;
-        }
+        },
+        
+        retrivePinchHit: function(){
+						this.publicController.getGameController().switchToBroker();
+						this.view.$el.addClass('creation-state');
+						this.publicController.getpinchHitterController().retrivePinchHit(this.view);
+					},
     });
 
     return new BrokerController();
