@@ -11,7 +11,8 @@ define([
     '../../models/PlayersCollection'
     ], function(appCache, service, TeamCreationView, PintchlineUpCreation, SelectCandidateView, PlayersCollection){
     var CreateTeamController = Mn.Object.extend({
-            retrivePinchHit:function(layout, accept){
+        
+        retrivePinchHit:function(layout, accept){
             var game = appCache.get('game'),
                 lineUp = new Backbone.Model(appCache.get('thisLineUp'));
             service.retrievePinchHitterChoices(lineUp)
@@ -36,6 +37,7 @@ define([
             var lineUp = new Backbone.Collection(),
                 createData = {
                     players: (new PlayersCollection()).getLineUps(players.currentLineup),
+                    availableplayers: (new PlayersCollection()).getAvailablePlayers(players.availablePlayers),
                     lineUp: lineUp,
                     headings: players.lineUpHeadings,
                 },

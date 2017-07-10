@@ -39,7 +39,8 @@ module.exports = {
             getPoll: ['GET', '/gaming'],
             getAvailablePlayers: ['GET', '/gaming/getAvailablePlayers'],
             retrievePlayerCard: ['GET', '/gaming/retrievePlayerCard'],
-            retrievePinchHitterChoices: ['GET', '/gaming/retrievePinchHitterChoices']
+            retrievePinchHitterChoices: ['GET', '/gaming/retrievePinchHitterChoices'],
+            setPinchHitter:['POST]', '/gaming/setPinchHitter?UID=']
         };
     }
 };

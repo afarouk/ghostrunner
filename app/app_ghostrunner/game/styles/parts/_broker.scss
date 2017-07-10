@@ -339,6 +339,246 @@
                         }
                     }
                 }
+                 .players-list-Availableplayers {
+                    margin-top: 20px;
+                    overflow-y: auto;
+                    border: 1px solid white;
+                    max-height: calc(100% - 100px);
+                    border-collapse: collapse;
+
+                    &.masked {
+                        opacity: 0.6;
+                        cursor: not-allowed;
+                        user-select: none;
+
+                        input {
+                            pointer-events: none;
+                        }
+                    }
+
+                    table.team-creation {
+                        width: 100%;
+                        display: flex;
+                        flex-direction: column;
+                        border-collapse: collapse;
+
+                        thead {
+                            color: white;
+                        }
+
+                        tbody {
+                            width: 100%;
+                            display: flex;
+                            flex-direction: column;
+                            color: white;
+                            font-size: 16px;
+                            font-weight: 600;
+
+                            tr {
+                                width: 100%;
+                                height: 35px;
+                                display: flex;
+                                justify-content: space-between;
+
+                                td {
+                                    padding: 5px 10px;
+                                    height: 40px;
+
+                                    &.with-name {
+                                        width: 320px;
+                                        font-size: 15px;
+                                    }
+
+                                    &.with-cost {
+                                        width: 80px;
+                                    }
+
+                                    &.with-text {
+                                        width: 70px;
+                                        &[data-rating="Poor"] {
+                                            color: red;
+                                        }
+                                        &[data-rating="Fair"] {
+                                            color: gray;
+                                        }
+                                        &[data-rating="Good"] {
+                                            color: gold;
+                                        }
+                                        &[data-rating="Elite"] {
+                                            color: green;
+                                        }
+                                    }
+
+                                    &.with-rating {
+                                        width: 80px;
+                                        text-align: center;
+                                        span {
+                                            border-radius: 2px;
+                                            background-color: rgba(0, 0, 0, 0.35);
+                                            padding: 0 5px;
+
+                                            &[data-rating="Poor"] {
+                                            color: red;
+                                            }
+                                            &[data-rating="Fair"] {
+                                                color: gray;
+                                            }
+                                            &[data-rating="Good"] {
+                                                color: gold;
+                                            }
+                                            &[data-rating="Elite"] {
+                                                color: green;
+                                            }
+                                        }
+                                    }
+
+                                    &.with-checkbox {
+                                        margin-right: 10px;
+                                        &.starter {
+                                            margin-right: 20px;
+                                        }
+                                    }
+
+                                    &.with-select {
+                                        width: 120px;
+                                        text-align: center;
+                                        .player-role,
+                                        .player-position {
+                                            border-radius: 2px;
+                                            background-color: rgba(255,255,255,0.3);
+                                            padding: 0 5px;
+
+                                            &[data-role="FIELDER"] {
+                                                background-color: rgba(164, 200, 230, 0.85);
+                                            }
+                                            &[data-role="PITCHER"] {
+                                                background-color: rgba(164, 220, 195, 0.85);
+                                            }
+                                        }
+
+                                        select {
+                                            background-color: rgba(144, 144, 251, 0.85);
+                                            width: 80px;
+                                            height: 25px;
+                                            color: white;
+                                            font-weight: 600;
+
+                                            &[name="bo"] {
+                                                background-color: rgba(239, 215, 132, 0.86);
+                                            }
+                                        }
+                                    }
+
+                                    select {
+                                        border: 0;
+                                        width: 100%;
+                                    }
+
+                                    .starter-star {
+                                        display: none;
+                                    }
+                                }
+
+                                &.starter-player {
+                                    pointer-events: none;
+                                    background-color: rgba(255, 255, 255, 0.25)!important;
+                                    .starter-star {
+                                        display: inline;
+                                        color: gold;
+                                        margin-left: 7px;
+                                    }
+                                }
+                            }
+
+                            tr.pitcher {
+                                background-color: rgba(27, 169, 169, 0.2);
+                            }
+
+                            tr:not(.pitcher) + tr.pitcher {
+                                border-top: 2px dashed gray;
+                                margin-top: 5px;
+                                padding-top: 5px;
+                            }
+                        }
+                    }
+
+                    .lineUp-players {
+                        padding: 0 5px;
+                        table {
+                            width: 100%;
+                            font-size: 13px;
+                            font-weight: 600;
+                            text-align: center;
+                            border-collapse: separate;
+                            border-spacing: 0px 2px;
+                            thead {
+                                color: $players-black;
+                                tr {
+                                    td {
+                                        background-color: white;
+                                        border-left: 1px solid $players-black;
+                                        &.choise {
+                                            width: 40px;
+                                        }
+                                        &.select {
+                                            width: 70px;
+
+                                            &.position {
+                                                background-color: #00b0f0;
+                                            }
+                                            &.batting {
+                                                background-color: #ffe699;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+                            tbody {
+                                color: white;
+
+                                tr {
+                                    td {
+                                        &.with-bg {
+                                            background-color: #98b898;
+                                            border-left: 1px solid white;
+                                            border-right: 1px solid white;
+                                            border-top: 1px solid white;
+                                            border-bottom: 1px solid white;
+                                            color: $players-black;
+                                            & ~ td.with-bg {
+                                                border-left: none;
+                                            }
+                                        }
+                                        &.with-select {
+                                            select {
+                                                height: 25px;
+                                                width: 60px;
+                                                font-size: 13px;
+                                                font-weight: 600;
+                                                color: $players-black;
+                                                border-radius: 0;
+                                                -webkit-border-radius: 0px;
+                                                &.position {
+                                                    background-color: #00b0f0;
+                                                }
+                                                &.batting {
+                                                    background-color: #ffe699;
+                                                }
+                                            }
+                                        }
+
+                                        &.with-checkbox {
+                                            input {
+                                                
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                } 
             }
         }
 

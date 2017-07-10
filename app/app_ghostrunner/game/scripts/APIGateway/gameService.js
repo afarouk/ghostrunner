@@ -275,8 +275,23 @@ define([
                 if (game) params.gameUUID = game.get('gameUUID');
                 params = params || {};
             return gateway.sendRequest('retrievePinchHitterChoices', params);
-        }
+        },
+        
+        setPinchHitter: function(){
+            /*var params = {};
+            oldPlayerId:  [integer],
+             oldSeasonId: [integer],
+    
+            newPlayerId: [integer],
+            newSeasonId:[integer,
+            newPosition:[FIELD_1B|....],
+    
+           teamId:[integer],
+           lineupId:[integer]*/
+            
+           
+            return gateway.sendRequest('setPinchHitter', params);
+    }
     });
-
     return new GameService();
 });

@@ -11,7 +11,8 @@ define([
 		tagName: 'section',
 		className: 'create-lineUp',
 		regions: {
-			players: '.players-list-container'
+			players: '.players-list-container',
+            availableplayers: '.players-list-Availableplayers'
 		},
 		ui: {
 			name: '[name="lineUp-name"]',
@@ -39,9 +40,17 @@ define([
 			this.lineUpPlayersList = new LineUpPlayersList({
 				collection: this.options.players,
 				lineUp: this.lineUp,
-				headings: this.options.headings
+				headings: this.options.headings,
+                flag:true
+			});
+            this.availableplayers = new LineUpPlayersList({
+				collection: this.options.availableplayers,
+				lineUp: this.lineUp,
+				headings:this.options.headings,
+                flag:false
 			});
 			this.showChildView('players', this.lineUpPlayersList);
+            this.showChildView('availableplayers', this.availableplayers);
 			this.listenTo(this.lineUpPlayersList, 'lineUp:changed', this.onLineUpChanged.bind(this));
 		},
 		onNameChanged: function() {
@@ -87,7 +96,7 @@ define([
 		},
 		checkIfSaveAllowed: function() {
 			console.log(this.lineUp.toJSON());
-			if (this.checkCount() && this.lineUp.length > 0 && this.lineUpName) {
+			if (this.lineUp.length > 0 && this.lineUpName) {
 				this.ui.save.attr('disabled', false);
 				return true;
 			} else {
@@ -96,6 +105,7 @@ define([
             }
 		},
 		onSave: function() {
+            //alert("Right");
 			if(this.checkIfSaveAllowed()) {
 				this.trigger('lineUp:save', this.lineUpName);
 			} else {

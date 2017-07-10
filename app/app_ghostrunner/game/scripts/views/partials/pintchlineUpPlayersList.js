@@ -23,6 +23,7 @@ define([
 		serializeData: function() {
 			var props = this.model.get('properties'),
 				headings = this.options.headings,
+                flag = this.options.flag,
 				values = [];
 			values = _.map(headings, function(heading){
 				var index = heading.index;
@@ -44,6 +45,7 @@ define([
 				}
 			}.bind(this));
 			return {
+                flag:flag,
 				properties:values,
 				positions: this.model.get('positions')
 			};
@@ -61,7 +63,8 @@ define([
 		},
 		serializeData: function() {
 			return {
-				headings: this.options.headings
+				headings: this.options.headings,
+                flag:this.options.flag
 			};
 		},
 		onChildviewSelectionChanged: function(view, e) {
@@ -118,4 +121,6 @@ define([
 		}
 	});
 	return LineUpPlayersListView;
+    
 });
+
