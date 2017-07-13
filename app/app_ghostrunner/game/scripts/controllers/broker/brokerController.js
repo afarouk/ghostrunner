@@ -525,9 +525,9 @@ define([
         },
         
         retrivePinchHit: function(){
-						this.publicController.getGameController().switchToBroker();
-						this.view.$el.addClass('creation-state');
-						this.publicController.getpinchHitterController().retrivePinchHit(this.view);
+             this.publicController.getGameController().setPinchHitter();
+             
+             this.publicController.getpinchHitterController().retrivePinchHit(this.view);
 					},
     });
 

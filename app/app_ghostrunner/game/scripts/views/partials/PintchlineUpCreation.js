@@ -43,6 +43,7 @@ define([
 				headings: this.options.headings,
                 flag:true
 			});
+            
             this.availableplayers = new LineUpPlayersList({
 				collection: this.options.availableplayers,
 				lineUp: this.lineUp,
@@ -51,7 +52,7 @@ define([
 			});
 			this.showChildView('players', this.lineUpPlayersList);
             this.showChildView('availableplayers', this.availableplayers);
-			this.listenTo(this.lineUpPlayersList, 'lineUp:changed', this.onLineUpChanged.bind(this));
+			//this.listenTo(this.lineUpPlayersList, 'lineUp:changed', //this.onLineUpChanged.bind(this));
 		},
 		onNameChanged: function() {
 			var name = this.ui.name.val();
@@ -105,13 +106,34 @@ define([
             }
 		},
 		onSave: function() {
-            //alert("Right");
-			if(this.checkIfSaveAllowed()) {
-				this.trigger('lineUp:save', this.lineUpName);
-			} else {
-				//todo prevent hack attr/ error msg???
-			}
-		}
-	});
-	return LineUpCreationView;
-});
+            var obj = {};
+            var OldseasonId='',OldplayerId='',NewseasonId='',Newposition='',NewplayerId='';
+            
+             $('.CurrentPlayers').each(function () {
+                if (!this.checked) {
+                        OldseasonId= $(this).attr('OldseasonId');
+                        OldplayerId = $(this).attr('OldplayerId'); 
+                }
+            });
+            
+            
+            $('.AvailablePlayers').each(function(){
+                if(this.checked){
+                  NewseasonId =  $(this).attr('NewseasonId');
+                  NewplayerId =  $(this).attr('NewplayerId');
+                  Newposition =  $(this).attr('Newposition');
+                }
+            });
+            
+            obj = {
+                OldseasonId : OldseasonId,
+                OldplayerId : OldplayerId,
+                NewseasonId : NewseasonId,
+                NewplayerId : NewplayerId,
+                Newposition : Newposition
+            }
+             this.trigger('lineUp:save',obj);          
+	 }
+        });
+	  return LineUpCreationView;
+    });

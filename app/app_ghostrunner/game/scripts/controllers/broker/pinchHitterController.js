@@ -8,22 +8,23 @@ define([
     '../../views/partials/teamCreation',
     '../../views/partials/PintchlineUpCreation',
     '../../views/partials/selectCandidate',
-    '../../models/PlayersCollection'
+    '../../models/playersCollection'
     ], function(appCache, service, TeamCreationView, PintchlineUpCreation, SelectCandidateView, PlayersCollection){
-    var CreateTeamController = Mn.Object.extend({
+    var pinchHitterController = Mn.Object.extend({
         
         retrivePinchHit:function(layout, accept){
+            
             var game = appCache.get('game'),
                 lineUp = new Backbone.Model(appCache.get('thisLineUp'));
             service.retrievePinchHitterChoices(lineUp)
                 .then(function(players){
-                console.log(players);
                  this.onShapeLineUp(players, lineUp, accept);
                 }.bind(this));
             this.layout = layout;
         },
-        
         lineUpShape: function(layout, accept) {
+             
+            this.view.$el.addClass('creation-state');
             var game = appCache.get('game'),
                 lineUp = new Backbone.Model(game.get('thisLineUp'));
             service.retrieveTeamPlayers(lineUp)
@@ -33,41 +34,46 @@ define([
             this.layout = layout;
         },
         
-        onShapeLineUp: function(players, starterLineUp, accept) {
+        onShapeLineUp: function(players, starterLineUp, accept) { 
+            this.players = players;
             var lineUp = new Backbone.Collection(),
                 createData = {
                     players: (new PlayersCollection()).getLineUps(players.currentLineup),
                     availableplayers: (new PlayersCollection()).getAvailablePlayers(players.availablePlayers),
                     lineUp: lineUp,
-                    headings: players.lineUpHeadings,
+                    headings: players.lineUpHeadings
                 },
             lineUpCreation = new PintchlineUpCreation(createData);
-            
             this.layout.$el.addClass('creation-state');
             this.layout.showChildView('creation', lineUpCreation);
-            this.listenTo(lineUpCreation, 'lineUp:save', this.onLineUpSave.bind(this, lineUp, accept));
+            this.listenTo(lineUpCreation, 'lineUp:save', this.onLineUpSave.bind(this,lineUp,accept));
         },
-        onLineUpSave: function(lineUp, accept) {
-            lineUp.remove(lineUp.at(0), {silent: true}); //remove starter
-            var game = appCache.get('game'),
-                players = lineUp.map(function(model) {
-                    return {
-                        playerId: model.get('playerId'),
-                        seasonId: model.get('seasonId'),
-                        position: model.get('position').enumText,
-                        type: model.get('type').enumText,
-                        role: model.get('role').enumText,
-                        battingOrder: model.get('battingOrder'),
-                        pitchingRole: model.get('pitcherRole').enumText
-                    };
-                }),
-                lineUpData = {
-                    gameUUID: game.get('gameUUID'),
-                    players: players
-                };
-    
+       
+        onLineUpSave: function(slf,lineUp,obj){
+            var game = appCache.get('game');
+            var obj = { 
+                oldPlayerId : obj.OldplayerId,
+                oldSeasonId : obj.OldseasonId ,
+                newPlayerId : obj.NewplayerId,
+                newSeasonId : obj.NewseasonId ,
+                newPosition : obj.Newposition ,
+                teamId      : this.players.teamId,
+                lineupId    : this.players.lineupId,
+                gameUUID    : game.get('gameUUID')
+            };
+           service.setPinchHitter(obj).then(function(result){
+                this.backInGame( obj.gameUUID , result.state);  
+                
+            }.bind(this));
+            
+        },
+        backInGame: function( gameUUID , state) {
+            
+            this.publicController.getStateController().refreshStatus(gameUUID);            
+            this.publicController.getGameController().switchToGame();
+            
         }
     });
 
-    return new CreateTeamController();
+    return new pinchHitterController();
 });

@@ -26,7 +26,7 @@ define([
         onAction: function(move) {
             this.publicController.getGameController().showLoader();
             if(move == 'PINCH_HIT'){
-                this.publicController.getBrokerController().retrivePinchHit();
+                 this.publicController.getBrokerController().retrivePinchHit();
             }else{
                 this.publicController.getStateController().onPlayerMove(move);
             }

@@ -260,8 +260,7 @@ define([
 
         retrievePlayerCard: function(params) {
             var user = appCache.get('user');
-            
-                params.UID = user.get('uid');
+            params.UID = user.get('uid');
             return gateway.sendRequest('retrievePlayerCard', params);
         },
         
@@ -277,21 +276,20 @@ define([
             return gateway.sendRequest('retrievePinchHitterChoices', params);
         },
         
-        setPinchHitter: function(){
-            /*var params = {};
-            oldPlayerId:  [integer],
-             oldSeasonId: [integer],
-    
-            newPlayerId: [integer],
-            newSeasonId:[integer,
-            newPosition:[FIELD_1B|....],
-    
-           teamId:[integer],
-           lineupId:[integer]*/
+        setPinchHitter: function(payload)
+        {
+             var params ={};
             
-           
+             var user = appCache.get('user');                       
+                params = {
+                       UID: user.get('uid'),
+                       payload: payload
+                    };
+
             return gateway.sendRequest('setPinchHitter', params);
-    }
+            
+        }
+        
     });
     return new GameService();
 });

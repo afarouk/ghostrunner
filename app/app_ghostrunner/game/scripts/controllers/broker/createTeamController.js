@@ -143,6 +143,5 @@ define([
             }
         }
     });
-
     return new CreateTeamController();
 });

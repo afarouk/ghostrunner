@@ -24,7 +24,7 @@ define([
 			var props = this.model.get('properties'),
 				headings = this.options.headings,
                 flag = this.options.flag,
-				values = [];
+				values = [] ;
 			values = _.map(headings, function(heading){
 				var index = heading.index;
 				if (index === 0) {
@@ -43,11 +43,14 @@ define([
                         return undefined;
 					}
 				}
-			}.bind(this));
-			return {
+			}.bind(this)); 
+               return  {
                 flag:flag,
 				properties:values,
-				positions: this.model.get('positions')
+				positions: this.model.get('positions'),
+                seasonId : this.model.get('seasonId'),
+                playerId : this.model.get('playerId'),
+                Position : this.model.get('position')
 			};
 		}
 	});
@@ -61,16 +64,17 @@ define([
 		childViewOptions: function() {
 			return this.options;
 		},
+        
 		serializeData: function() {
 			return {
 				headings: this.options.headings,
                 flag:this.options.flag
 			};
+            
 		},
 		onChildviewSelectionChanged: function(view, e) {
 			var checked = $(e.currentTarget).is(':checked'),
 				model = view.model;
-
 			this.trigger('lineUp:changed', checked, model);
 		},
         onChildviewPositionChanged: function(view, e) {
@@ -101,10 +105,10 @@ define([
 				selected = $target.find(':selected').val(),
 				roles = model.get('pitcherRoles'),
 				role = _.findWhere(roles, {enumText: selected});
-			model.set('pitcherRole', role);
+			    model.set('pitcherRole', role);
 		},
 		onPlayersSelectionAllow: function(allow) {
-			this.children.each(function(view) {
+        this.children.each(function(view) {
 				var $checkbox = view.ui.select,
 					isChecked = $checkbox.is(':checked');
 				if (isChecked) {

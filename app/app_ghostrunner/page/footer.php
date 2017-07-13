@@ -15,7 +15,7 @@
 
                 <div class="col-sm-4 widget"> <!-- 1 -->
                 	<img src="images/logo.png" alt="Logo" class="footer-logo" />
-                    <p>Lorem ipsum dolor sit amet elit consectetur adipiscing rhoncus tempus perdiet risus amet eleifend laoreet lectus mauris volutpat.</p>
+                    <p>The mission of GhostRunner, LLC is to provide our customers with the most satisfying sports simulation experience possible.  Our games are played in real time, on virtually any mobile device.  Our customers create and manage favorite teams - filled with favorite players -  against their friends and colleagues... and leave the game with a smile.</p>
                     <div class="footer-socials">
                         <a href="#" title="facebook"><i class="fa fa-facebook"></i></a>
                         <a href="#" title="twitter"><i class="fa fa-twitter"></i></a>
@@ -34,7 +34,6 @@
                             	<li><a href="#">About Us</a></li>
                                 <li><a href="#">Testimonials</a></li>
                                 <li><a href="#">Our Teams</a></li>
-                                <li><a href="index.php#contact">Contact Us</a></li>
                                 <li><a href="privacypolicy">Privacy Policy</a></li>
                                 <li><a href="termsandcondiction">Terms &amp; Conditions </a></li>
                             </ul>
@@ -44,7 +43,15 @@
 
                 <div class="col-sm-4 widget"> <!-- 3 -->
                     <h4 class="widget-title">Contact Us</h4>
-                    <p>123 Main Street Cottage<br>Long Branch City, P.O Box 65148<br>(00) 123-4567890 / (00) 123-4567890<br><a href="#">www.ghostrunner.com</a><br><a href="#">support@ghostrunner.com</a></p>
+                    
+                    <!--<p>123 Main Street Cottage<br>Long Branch City, P.O Box 65148<br>(00) 123-4567890 / (00) 123-4567890<br><a href="#">www.ghostrunner.com</a><br><a href="#">support@ghostrunner.com</a></p>-->
+                    
+                    <p>Jim Gustafson "JimmyG" can be reached by:<br/>
+                        Instagram (#baseballdailyaffirmation) - search mbbjimmyg<br/>
+                        Twitter - @mbbjimmyg<br/>
+                        Facebook - MatchUp Baseball<br/>
+                        Email - jimgus6078@gmail.com<br/>
+                        Tel. - 404-368-2597</p>
                 </div>
                        
             </div>

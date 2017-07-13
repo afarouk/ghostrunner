@@ -19,12 +19,14 @@
         BlogRequest:['POST', '/gaming/createBlogEntry'],
         retrieveRequest:['GET', '/gaming/retrieveBlog'],
         DeleteEntry:['PUT','/gaming/deactivateBlogEntry'],
-
-		//.....
+        SendContactUsEmail:['POST','/gaming/sendContactUsEmail'],
+	
+        
 		init: function() {
             var params = this.parseQueryString(window.location.search),UID;
 			this.listenLogin();
 			this.listenRegister();
+            this.listenContact();
             if(window.pageName == 'BLOG'){ 
             this.listenBlog();
             this.checkingBlog();  
@@ -73,22 +75,6 @@
 	            });
         },
 
-		sendRequest: function(request, options) {
-            var payload = options.payload ? JSON.stringify(options.payload) : '',
-            	url = this.getAPIRoot() + request[1],
-            	method = request[0];
-            delete options.payload;
-
-            return $.ajax({
-                type: method,
-                url: (options ? url + '?' + $.param(options) : url),
-                data: payload,
-                contentType: 'application/json',
-                processData: false,
-                timeout: 10000
-            });
-        },
-
 		listenLogin: function() {
 			$('.login-btn').on('click', function(){
 				if (this.logged) {
@@ -118,6 +104,13 @@
 	    	}.bind(this));
             
             $(window).on('ghostrunner.afterLogout', this.onAfterLogout.bind(this));
+		},
+        
+        listenContact: function() {
+			$('input[name="submit"]').click(function(){
+				this.SendMessage();
+	    	}.bind(this));
+            
 		},
         
         listenRegister: function() {
@@ -221,15 +214,6 @@
         },
         
         registerUser: function (username, password) {            
-            /*{   
-            "username":"...",
-            "password":"... ",
-            "email":"   ",
-            "securityQuestion":"  ",
-            "hint": "...",
-            "securityAnswer":"  "
-            }*/
-            
             return this.sendRequest(this.registerRequest, {
                 payload: {
                     email: username,
@@ -572,6 +556,37 @@
 	            }.bind(this), function onRequestError (error) {
 	               console.log(error);
 	            });
+        },
+        
+        SendMessage: function(){
+            var Name = $('input[name="name"]').val();
+            var Email = $('input[name="email"]').val();
+            var Subject = $('input[name="subject"]').val();
+            var Message = $('#textarea').val();
+           this.sendRequest(this.SendContactUsEmail,{
+                payload:{
+               name:Name,
+               email:Email,
+               subject:Subject,
+               message:Message
+           } }).then(function(response){
+               alert("Message Send Successfully.");
+            }.bind(this));
+        },
+        sendRequest: function(request, options) {
+            var payload = options.payload ? JSON.stringify(options.payload) : '',
+            	url = this.getAPIRoot() + request[1],
+            	method = request[0];
+            delete options.payload;
+            
+            return $.ajax({
+                type: method,
+                url: (options ? url + '?' + $.param(options) : url),
+                data: payload,
+                contentType: 'application/json',
+                processData: false,
+                timeout: 10000
+            });
         }
     };
 	$(document).ready( function() {

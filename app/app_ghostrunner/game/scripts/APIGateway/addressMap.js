@@ -40,7 +40,7 @@ module.exports = {
             getAvailablePlayers: ['GET', '/gaming/getAvailablePlayers'],
             retrievePlayerCard: ['GET', '/gaming/retrievePlayerCard'],
             retrievePinchHitterChoices: ['GET', '/gaming/retrievePinchHitterChoices'],
-            setPinchHitter:['POST]', '/gaming/setPinchHitter?UID=']
+            setPinchHitter:['POST', '/gaming/setPinchHitter']
         };
     }
 };
