@@ -22,17 +22,6 @@ define([
                 }.bind(this));
             this.layout = layout;
         },
-        lineUpShape: function(layout, accept) {
-             
-            this.view.$el.addClass('creation-state');
-            var game = appCache.get('game'),
-                lineUp = new Backbone.Model(game.get('thisLineUp'));
-            service.retrieveTeamPlayers(lineUp)
-                .then(function(players){
-                    this.onShapeLineUp(players, lineUp, accept);
-                }.bind(this));
-            this.layout = layout;
-        },
         
         onShapeLineUp: function(players, starterLineUp, accept) { 
             this.players = players;
@@ -56,7 +45,7 @@ define([
                 oldSeasonId : obj.OldseasonId ,
                 newPlayerId : obj.NewplayerId,
                 newSeasonId : obj.NewseasonId ,
-                newPosition : obj.Newposition ,
+                newPosition : "UNDEFINED",
                 teamId      : this.players.teamId,
                 lineupId    : this.players.lineupId,
                 gameUUID    : game.get('gameUUID')
@@ -68,7 +57,6 @@ define([
             
         },
         backInGame: function( gameUUID , state) {
-            
             this.publicController.getStateController().refreshStatus(gameUUID);            
             this.publicController.getGameController().switchToGame();
             

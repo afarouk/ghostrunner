@@ -85,7 +85,7 @@ window.pageName = 'INDEX';
                             <!--<p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt quia voluptas.</p>-->
                         </div>
 
-                        <form method="post" action="#" class="affa-form-contact">
+                        <form method="post" action="#" class="affa-form-contact" id="sendMessage">
                             <div class="submit-status"></div> <!-- submit status -->
                             <div class="row">
                                 <div class="col-md-6">

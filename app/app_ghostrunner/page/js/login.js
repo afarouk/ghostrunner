@@ -564,13 +564,14 @@
             var Subject = $('input[name="subject"]').val();
             var Message = $('#textarea').val();
            this.sendRequest(this.SendContactUsEmail,{
-                payload:{
-               name:Name,
-               email:Email,
-               subject:Subject,
-               message:Message
+               payload:{
+                   name:Name,
+                   email:Email,
+                   subject:Subject,
+                   message:Message
            } }).then(function(response){
-               alert("Message Send Successfully.");
+               alert(response.explanation);
+               $("#sendMessage")[0].reset();
             }.bind(this));
         },
         sendRequest: function(request, options) {
