@@ -28,6 +28,7 @@ define([
             if(move == 'PINCH_HIT'){
                  this.publicController.getBrokerController().retrivePinchHit();
             }else{
+                alert(move);
                 this.publicController.getStateController().onPlayerMove(move);
             }
         }

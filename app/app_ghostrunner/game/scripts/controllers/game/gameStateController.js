@@ -244,7 +244,15 @@ define([
                     'gameMove': moveEnum
                 }
             }).then(function(state){
-                this.checkForSecondaryMove(state, true);
+                // Checking //
+                 if(moveEnum == 'SWING_AWAY' && state.thisUser.state == 'MAKE_YOUR_MOVE')
+                 {
+                    //need to implement 
+                 }
+                 else
+                 {
+                   this.checkForSecondaryMove(state, true);
+                 }
             }.bind(this));
         },
 
@@ -334,8 +342,9 @@ define([
                     this.publicController.getGameController().stop(user.get('uid'));
                     $(window).trigger('ghostrunner.afterLogout');
                 }.bind(this))
-        }
-
+        },
+        
+        
     });
 
     return new GameStateController();
