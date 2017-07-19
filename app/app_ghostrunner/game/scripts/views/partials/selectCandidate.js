@@ -20,8 +20,8 @@ define([
 			listContainer: '[name="list-container"]'
 		},
 		events: {
-			'change @ui.name': 'onNameChanged',
-			'keyup @ui.name': 'onNameChanged',
+			//'change @ui.name': 'onNameChanged',
+			//'keyup @ui.name': 'onNameChanged',
 			'click @ui.save': 'onSave'
 		},
 		triggers: {
@@ -35,6 +35,9 @@ define([
 		},
 		onRender: function() {
 			console.log('lineUp creation');
+                        this.ui.listContainer.removeClass('masked');
+                        var name = this.ui.name.val();
+                        this.lineUpName = name;
 			this.playersList = new SelectCandidateList({
 				collection: this.options.players,
 				headings: this.options.headings
@@ -42,7 +45,7 @@ define([
 			this.showChildView('players', this.playersList);
 			this.listenTo(this.playersList, 'player:selected', this.onPlayerSelected.bind(this));
 
-			this.focusInput();
+			//this.focusInput();
 		},
 		focusInput: function() {
 			setTimeout(function(){

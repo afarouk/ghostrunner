@@ -158,6 +158,8 @@ define([
                 }.bind(this));
             return $def;
         },
+        
+        
 
 
         onOtherPlayerLineUp: function(gameModel) {
@@ -390,7 +392,18 @@ define([
                 $def.reject();
             }.bind(this));
             return $def;
-        }
+        },
+        
+        afterSaveRequest: function() {
+            var $def = $.Deferred();
+            this.publicController.getChoiceController().showConfirmation({
+                    message: 'Request Sent',
+                    confirm: 'OK'
+                }).then(function() {
+                    $def.resolve();
+                }.bind(this));
+            return $def;
+        },
 
     });
 

@@ -32,7 +32,15 @@
 				    background: $tables-back;
 				    justify-content: space-between;
 				    z-index: 1;
-	    			.menu-btn.abandon_btn,
+                                    .menu-btn.abandon_btn{
+                                        font-size: 12px;
+					    padding: 5px 14px;
+					    height: 20px;
+					    background-color: #576996 !important;
+					    border-radius: 2px;
+					    font-weight: 600;
+					    visibility: none;
+                                    }
 				    .menu-btn.pause_btn {
 				        font-size: 12px;
 					    padding: 5px 14px;

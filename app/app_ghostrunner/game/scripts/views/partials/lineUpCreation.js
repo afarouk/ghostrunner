@@ -19,8 +19,8 @@ define([
 			save: '[name="save"]'
 		},
 		events: {
-			'change @ui.name': 'onNameChanged',
-			'keyup @ui.name': 'onNameChanged',
+			//'change @ui.name': 'onNameChanged',
+			//'keyup @ui.name': 'onNameChanged',
 			'click @ui.save': 'onSave'
 		},
 		lineUpName: '',
@@ -36,6 +36,8 @@ define([
 			};
 		},
 		onRender: function() {
+                    var name = this.ui.name.val();
+                    this.lineUpName = name;
 			this.lineUpPlayersList = new LineUpPlayersList({
 				collection: this.options.players,
 				lineUp: this.lineUp,
@@ -45,7 +47,6 @@ define([
 			this.listenTo(this.lineUpPlayersList, 'lineUp:changed', this.onLineUpChanged.bind(this));
 		},
 		onNameChanged: function() {
-			var name = this.ui.name.val();
 			if (name.length > 1) { //TODO validation
 				this.lineUpName = name;
 			} else {
