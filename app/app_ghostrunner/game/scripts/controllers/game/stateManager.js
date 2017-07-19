@@ -120,15 +120,13 @@ define([
                     break;
 
                 case 'STARTER_INVITING':
-
+                    
                     break;
 
                 case 'STARTERS':
-
                     break;
 
                 case 'LINEUP':
-
                     break;
 
                 case 'LINEUPS_ACCEPTED':
@@ -158,9 +156,10 @@ define([
                 case 'REJECTED':
                     this.publicController.getGameController().switchToBroker();
                     break;
-
+                case 'REFRESH_GAME':
+                     this.publicController.getGameController().getSocketRefresh();
+                     break;
                 default:
-
                     break;
             }
         }

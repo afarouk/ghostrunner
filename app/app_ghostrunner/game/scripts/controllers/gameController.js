@@ -98,6 +98,11 @@ define([
         waitingForTurn: function() {
             console.log('waiting for turn');
             this.showLoader('waiting');
+        },
+        
+        getSocketRefresh: function(){
+            var gameUUID = appCache.get('gameUUID');
+            this.publicController.getStateController().refreshStatus(gameUUID);
         }
     });
 

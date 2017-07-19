@@ -51,8 +51,9 @@ define([
                 gameUUID    : game.get('gameUUID')
             };
            service.setPinchHitter(obj).then(function(result){
-                this.backInGame( obj.gameUUID , result.state);  
-                
+               this.publicController.getModalsController().afterSaveRequest().then(function(){
+               this.backInGame( obj.gameUUID , result.state);
+               }.bind(this)) 
             }.bind(this));
             
         },

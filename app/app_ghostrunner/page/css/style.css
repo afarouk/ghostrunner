@@ -18,7 +18,7 @@ html {
 }
 
 @media only screen and (-webkit-min-device-pixel-ratio:1.25), only screen and (min-device-pixel-ratio:1.25), only screen and (min-resolution:200dpi), only screen and (min-resolution:1.25dppx) { -webkit-font-smoothing: subpixel-antialiased; }
-
+.
 body {
 	font-family:Poppins, Arial, sans-serif;
 	color:#707070;
@@ -194,7 +194,7 @@ input[type="number"]::-webkit-inner-spin-button {
 input[type="time"]::-webkit-inner-spin-button { margin:14px 0px 0px 5px; }
 select, textarea {
 	height:auto;
-	padding:14.5px 16px;
+        padding:2px 2px 2px 5px;
 }
 ::i-block-chrome, select {
 	padding:10px 20px;
@@ -704,8 +704,6 @@ img.parallax-slider.loaded, .ie img.parallax-slider, .ie9 img.parallax-slider {
 	border-radius:0px;
 	-webkit-transition:all .2s ease;
 	transition:all .2s ease;
-   background-image:url(../images/banner.png);
-    /*background-image:url(../images/mbb_ball.png);*/
     background-repeat:no-repeat;
     background-size: 20% 75%;
     background-position: 1%;
