@@ -81,7 +81,7 @@ window.pageName = 'INDEX';
                 <div class="col-md-6">
                 	<div class="margin-bottom40">
                         <div class="post-heading-left">
-                            <h2>Leave Us a Message</h2>
+                            <h2>Start a Conversation</h2>
                             <!--<p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt quia voluptas.</p>-->
                         </div>
 

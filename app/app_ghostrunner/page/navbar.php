@@ -5,7 +5,7 @@
 
                 <div class="navbar-brand">
                 	<a href="index.php">
-                	<img src="images/banner.png" align="left" />
+                	<img src="images/mbb_ball.png" align="left" />
                 	<img src="images/MatchUp Baseball.png" alt="Logo" />
                 	</a> <!-- site logo -->
                 </div>
