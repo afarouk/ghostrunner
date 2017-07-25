@@ -84,6 +84,7 @@ window.pageName = 'BLOG';
                             <button type="button" class="btn btn-danger pull-right" id="delete_blog">Delete</button>
                         </div>
                         <div id="blog_view_container" class="blog_view_container">
+                             <h4 align="center" >Talking Baseball with JimmyG</h4>
                         <h4 id="header_blog_view"></h4>
                             
                         <div id="nav_picture"><img id="blog_picture" src=""></div>
