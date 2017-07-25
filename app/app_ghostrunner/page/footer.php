@@ -17,12 +17,12 @@
                 	<img src="images/logo.png" alt="Logo" class="footer-logo" />
                     <p>The mission of GhostRunner, LLC is to provide our customers with the most satisfying sports simulation experience possible.  Our games are played in real time, on virtually any mobile device.  Our customers create and manage favorite teams - filled with favorite players -  against their friends and colleagues... and finish the game ready to play again.</p>
                     <div class="footer-socials">
-                        <a href="#" title="facebook"><i class="fa fa-facebook"></i></a>
-                        <a href="#" title="twitter"><i class="fa fa-twitter"></i></a>
-                        <a href="#" title="google plus"><i class="fa fa-google-plus"></i></a>
-                        <a href="#" title="instagram"><i class="fa fa-instagram"></i></a>
-                        <a href="#" title="pinterest"><i class="fa fa-pinterest"></i></a>
-                        <a href="#" title="dribbble"><i class="fa fa-dribbble"></i></a>
+                        <a href="https://www.facebook.com/" title="facebook"><i class="fa fa-facebook"></i></a>
+                        <a href="https://www.twitter.com/" title="twitter"><i class="fa fa-twitter"></i></a>
+                        <a href="https://plus.google.com/" title="google plus"><i class="fa fa-google-plus"></i></a>
+                        <a href="https://www.instagram.com" title="instagram"><i class="fa fa-instagram"></i></a>
+                        <a href="https://in.pinterest.com/" title="pinterest"><i class="fa fa-pinterest"></i></a>
+                        <a href="https://dribbble.com/" title="dribbble"><i class="fa fa-dribbble"></i></a>
                     </div>
                 </div>
 

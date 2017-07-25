@@ -719,7 +719,27 @@ img.parallax-slider.loaded, .ie img.parallax-slider, .ie9 img.parallax-slider {
 		height:auto;
 		color:#FFF;
 		padding:0px;
+                position:relative;
 	}
+        
+        .defensive{
+            background:yellow;
+            margin:5px;
+            height:50px;
+            width:100%;
+            text-align:center;
+        }
+        span.nav_logo_one {
+            position: absolute;
+            left: -88px;
+        }
+        span.nav_logo_two {
+            position: relative;
+            margin-left: 280px;
+        }
+
+        
+        
 	#header .navbar > .container .navbar-brand { margin:0px; }
 		#header .navbar-brand img { height:40px; }
 #header .navbar-brand>a { margin-left:185px; }
