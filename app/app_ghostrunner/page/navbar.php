@@ -5,8 +5,8 @@
 
                 <div class="navbar-brand">
                 	<a href="index.php">
-						<span class="nav_logo_one"><img src="images/mbb_ball_long.png" align="left" /></span>
-						<span class="nav_logo_two"><img src="images/banner.png" alt="Logo" /></span>
+						<span class="nav_logo_one"><img src="images/banner.png" align="left" /></span>
+						<span class="nav_logo_two"><img src="images/MatchUp_Baseball.png" alt="Logo" /></span>
                 	</a> <!-- site logo -->
                 </div>
                 <ul class="nav navbar-nav">
