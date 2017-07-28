@@ -285,6 +285,7 @@ define([
         },
 
         onAbandonedByOponnent: function() {
+            debugger;
             this.publicController.getChoiceController().showConfirmation({
                 message: 'Game abandoned by oponnent.',
                 confirm: 'ok'
@@ -404,7 +405,19 @@ define([
                 }.bind(this));
             return $def;
         },
-
+        
+        AfterRefreshGame: function(){
+            var gameUUID=appCache.get('gameUUID');
+            var $def = $.Deferred();
+            this.publicController.getChoiceController().showConfirmation({
+                message: 'refresh Game?',
+                confirm: 'ok'
+            }).then(function() {
+                //this.publicController.getStateController().refreshStatus(gameUUID);
+                 $def.resolve();
+            }.bind(this));
+     
+        },
     });
 
     return new ModalsController();

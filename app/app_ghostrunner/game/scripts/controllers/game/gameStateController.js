@@ -39,8 +39,10 @@ define([
                     this.publicController.getGameController().hideLoader();
                     this.publicController.getBrokerController().removeUrlGameUUID();
                     if (status === 'nocontent') {
+                       
                         def.reject();
                     } else {
+                       
                         var gameModel = this.getGameModel();
                         if (!gameModel) {
                             gameModel = new GameModel(game);
@@ -245,9 +247,9 @@ define([
                 }
             }).then(function(state){
                 // Checking //
-                 if(moveEnum == 'SWING_AWAY' && state.thisUser.state == 'MAKE_YOUR_MOVE')
-                 {
-                    //need to implement 
+                 if(moveEnum == 'SWING_AWAY' && state.thisUser.state == "MAKE_YOUR_MOVE")
+                 {         
+                         this.getGameStatus(state.gameUUID);
                  }
                  else
                  {

@@ -59,8 +59,7 @@ define([
         },
         backInGame: function( gameUUID , state) {
             this.publicController.getStateController().refreshStatus(gameUUID);            
-            this.publicController.getGameController().switchToGame();
-            
+            this.publicController.getGameController().switchToGame();  
         }
     });
 

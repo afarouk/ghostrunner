@@ -5,7 +5,7 @@
 define([
     ], function(){
     var SignalsManager = Mn.Object.extend({
-		onMessage: function(message) {
+	onMessage: function(message) {
             switch (message.signal) {
                 case 'Undefined':
                     break;
@@ -51,6 +51,7 @@ define([
                     break;
 
                 case 'GAME_ABANDONED':
+                    debugger;
                     this.publicController.getModalsController().onAbandonedByOponnent();
                     break;
 
@@ -95,7 +96,7 @@ define([
                     break;
 
                 case 'REFRESH_STATE':
-                    this.publicController.getStateController().refreshStatus();
+                    this.publicController.getModalsController().AfterRefreshGame();
                     break;
 
                 default:
