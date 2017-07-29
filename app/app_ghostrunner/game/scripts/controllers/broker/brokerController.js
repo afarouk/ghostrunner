@@ -359,6 +359,7 @@ define([
                 player = {
                     playerId: playerModel.get('playerId'),
                     seasonId: playerModel.get('seasonId'),
+                    leagueId: playerModel.get('leagueId'),
                     position: playerModel.get('position').enumText,
                 };
 
@@ -523,10 +524,10 @@ define([
             this.invitationDef = $.Deferred();
             return this.invitationDef;
         },
-        
+
         retrivePinchHit: function(){
              this.publicController.getGameController().setPinchHitter();
-             
+
              this.publicController.getpinchHitterController().retrivePinchHit(this.view);
 					},
     });

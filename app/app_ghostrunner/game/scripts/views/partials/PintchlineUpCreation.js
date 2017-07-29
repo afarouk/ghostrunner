@@ -43,7 +43,7 @@ define([
 				headings: this.options.headings,
                 flag:true
 			});
-            
+
             this.availableplayers = new LineUpPlayersList({
 				collection: this.options.availableplayers,
 				lineUp: this.lineUp,
@@ -65,10 +65,11 @@ define([
 		},
 		onLineUpChanged: function(checked, model) {
 			var playerId = model.get('playerId'),
-				seasonId = model.get('seasonId');
+				seasonId = model.get('seasonId'),
+				leagueId = model.get('leagueId');
 
 			if (!checked) {
-				var forRemove = this.lineUp.findWhere({playerId: playerId, seasonId: seasonId});
+				var forRemove = this.lineUp.findWhere({playerId: playerId, seasonId: seasonId, leagueId:leagueId });
 				this.lineUp.remove(forRemove);
 			} else {
 				this.lineUp.add(model);
@@ -107,32 +108,36 @@ define([
 		},
 		onSave: function() {
             var obj = {};
-            var OldseasonId='',OldplayerId='',NewseasonId='',Newposition='',NewplayerId='';
-            
+            var oldLeagueId='',oldSeasonId='',oldPlayerId='', newSeasonId='', newPosition='', newPlayerId='';
+
              $('.CurrentPlayers').each(function () {
                 if (!this.checked) {
-                        OldseasonId= $(this).attr('OldseasonId');
-                        OldplayerId = $(this).attr('OldplayerId'); 
+                        oldLeagueId= $(this).attr('oldLeagueId');
+												oldSeasonId= $(this).attr('oldSeasonId');
+                        oldPlayerId = $(this).attr('oldPlayerId');
                 }
             });
-            
-            
+
+
             $('.AvailablePlayers').each(function(){
                 if(this.checked){
-                  NewseasonId =  $(this).attr('NewseasonId');
-                  NewplayerId =  $(this).attr('NewplayerId');
-                  Newposition =  $(this).attr('Newposition');
+									newLeagueId =  $(this).attr('newLeagueId');
+                  newSeasonId =  $(this).attr('newSeasonId');
+                  newPlayerId =  $(this).attr('newPlayerId');
+                  newPosition =  $(this).attr('newPosition');
                 }
             });
-            
+
             obj = {
-                OldseasonId : OldseasonId,
-                OldplayerId : OldplayerId,
-                NewseasonId : NewseasonId,
-                NewplayerId : NewplayerId,
-                Newposition : Newposition
+				  			oldLeagueId : oldLeagueId,
+                oldSeasonId : oldSeasonId,
+                oldPlayerId : oldPlayerId,
+								newLeagueId : newLeagueId,
+                newSeasonId : newSeasonId,
+                newPlayerId : newPlayerId,
+                newPosition : newPosition
             }
-             this.trigger('lineUp:save',obj);          
+             this.trigger('lineUp:save',obj);
 	 }
         });
 	  return LineUpCreationView;

@@ -62,7 +62,8 @@ define([
             var players = team.map(function(model) {
                     return {
                         playerId: model.get('playerId'),
-                        seasonId: model.get('seasonId')
+                        seasonId: model.get('seasonId'),
+                        leagueId: model.get('leagueId')
                     };
                 }),
                 teamData = {
@@ -119,6 +120,7 @@ define([
                     return {
                         playerId: model.get('playerId'),
                         seasonId: model.get('seasonId'),
+                        leagueId: model.get('leagueId'),
                         position: model.get('position').enumText,
                         type: model.get('type').enumText,
                         role: model.get('role').enumText,
@@ -133,7 +135,7 @@ define([
             if (accept) {
                 this.publicController.getModalsController().onSelectRole()
                     .then(function(role){
-                       this.publicController.getStateController().onInvitationAccepted(lineUpData, role); 
+                       this.publicController.getStateController().onInvitationAccepted(lineUpData, role);
                     }.bind(this));
             } else {
                 service.selectLineUp(lineUpData)

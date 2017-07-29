@@ -56,10 +56,11 @@ define([
 		},
 		onLineUpChanged: function(checked, model) {
 			var playerId = model.get('playerId'),
-				seasonId = model.get('seasonId');
+				seasonId = model.get('seasonId'),
+				leagueId = model.get('leagueId');
 
 			if (!checked) {
-				var forRemove = this.lineUp.findWhere({playerId: playerId, seasonId: seasonId});
+				var forRemove = this.lineUp.findWhere({playerId: playerId, seasonId: seasonId, leagueId:leagueId });
 				this.lineUp.remove(forRemove);
 			} else {
 				this.lineUp.add(model);

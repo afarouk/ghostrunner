@@ -43,18 +43,19 @@ define([
                         return undefined;
 					}
 				}
-			}.bind(this)); 
+			}.bind(this));
                return  {
                 flag:flag,
 				properties:values,
 				positions: this.model.get('positions'),
+			        	leagueId : this.model.get('leagueId'),
                 seasonId : this.model.get('seasonId'),
                 playerId : this.model.get('playerId'),
-                Position : this.model.get('position')
+                position : this.model.get('position')
 			};
 		}
 	});
-    
+
 	var LineUpPlayersListView = Mn.CompositeView.extend({
 		template: tableTmpl,
 		className: 'lineUp-players',
@@ -64,13 +65,13 @@ define([
 		childViewOptions: function() {
 			return this.options;
 		},
-        
+
 		serializeData: function() {
 			return {
 				headings: this.options.headings,
                 flag:this.options.flag
 			};
-            
+
 		},
 		onChildviewSelectionChanged: function(view, e) {
 			var checked = $(e.currentTarget).is(':checked'),
@@ -116,7 +117,7 @@ define([
 				} else {
 					if (allow) {
 						this.checkIfEnable(view);
-                        
+
 					} else {
 						$checkbox.attr('disabled', true);
 					}
@@ -125,6 +126,5 @@ define([
 		}
 	});
 	return LineUpPlayersListView;
-    
-});
 
+});

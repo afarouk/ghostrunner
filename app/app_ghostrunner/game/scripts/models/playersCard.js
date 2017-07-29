@@ -110,6 +110,7 @@ define([
             },
             playerId: 1,
             seasonId: 1,
+            leagueId: 1,
             cost: 23,
             quarter: 3,
         },
@@ -169,7 +170,7 @@ define([
                     }
                 });
             });
-            fieldingRecords.seasonsSum['Fld%'] /= fieldingRecords.seasons.length; //not sure that it is 
+            fieldingRecords.seasonsSum['Fld%'] /= fieldingRecords.seasons.length; //not sure that it is
             fieldingRecords.seasonsSum['RF/G'] /= fieldingRecords.seasons.length; //proper calculation method
             console.log(this.toJSON());
         }

@@ -22,6 +22,7 @@ define([
 			service.retrievePlayerCard({
 				playerId: player.playerId,
 				seasonId: player.seasonId,
+				leagueId: player.leagueId,
 				position: player.position.enumText
 			}).then(function(card) {
 				this.publicController.getChoiceController().showPlayersCard(card);

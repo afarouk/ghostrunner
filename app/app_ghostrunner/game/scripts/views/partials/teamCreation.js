@@ -65,10 +65,11 @@ define([
 		},
 		onTeamChanged: function(checked, model) {
 			var playerId = model.get('playerId'),
-				seasonId = model.get('seasonId');
+				seasonId = model.get('seasonId'),
+				leagueId = model.get('leagueId');
 
 			if (!checked) {
-				var forRemove = this.team.findWhere({playerId: playerId, seasonId: seasonId});
+				var forRemove = this.team.findWhere({playerId: playerId, seasonId: seasonId, leagueId:leagueId});
 				this.team.remove(forRemove);
 			} else {
 				this.team.add(model);

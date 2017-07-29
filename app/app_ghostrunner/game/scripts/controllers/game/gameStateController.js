@@ -39,10 +39,10 @@ define([
                     this.publicController.getGameController().hideLoader();
                     this.publicController.getBrokerController().removeUrlGameUUID();
                     if (status === 'nocontent') {
-                       
+
                         def.reject();
                     } else {
-                       
+
                         var gameModel = this.getGameModel();
                         if (!gameModel) {
                             gameModel = new GameModel(game);
@@ -148,6 +148,7 @@ define([
                 player = {
                     playerId: playerModel.get('playerId'),
                     seasonId: playerModel.get('seasonId'),
+                    leagueId: playerModel.get('leagueId'),
                     position: playerModel.get('position').enumText,
                 };
             service.selectStarter({
@@ -248,7 +249,7 @@ define([
             }).then(function(state){
                 // Checking //
                  if(moveEnum == 'SWING_AWAY' && state.thisUser.state == "MAKE_YOUR_MOVE")
-                 {         
+                 {
                          this.getGameStatus(state.gameUUID);
                  }
                  else
@@ -345,8 +346,8 @@ define([
                     $(window).trigger('ghostrunner.afterLogout');
                 }.bind(this))
         },
-        
-        
+
+
     });
 
     return new GameStateController();
