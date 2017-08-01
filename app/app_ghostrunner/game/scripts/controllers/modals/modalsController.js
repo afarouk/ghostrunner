@@ -10,7 +10,7 @@ define([
     //We need it for show modal dialogs
     var ModalsController = Mn.Object.extend({
         //create/show/hide logic
-		create: function(layout, region) {
+    create: function(layout, region) {
             this.view = new ModalsLayoutView();
             layout.showChildView( region, this.view );
         },
@@ -285,7 +285,6 @@ define([
         },
 
         onAbandonedByOponnent: function() {
-            debugger;
             this.publicController.getChoiceController().showConfirmation({
                 message: 'Game abandoned by oponnent.',
                 confirm: 'ok'
@@ -406,17 +405,32 @@ define([
             return $def;
         },
         
-        AfterRefreshGame: function(){
-            var gameUUID=appCache.get('gameUUID');
-            var $def = $.Deferred();
+        AfterRefreshGame: function(gameUUID){   
             this.publicController.getChoiceController().showConfirmation({
-                message: 'refresh Game?',
+                message: 'Refresh Game?',
                 confirm: 'ok'
             }).then(function() {
-                //this.publicController.getStateController().refreshStatus(gameUUID);
-                 $def.resolve();
+              //this.publicController.getGameController().switchToBroker();
+              this.publicController.getStateController().refreshStatus(gameUUID);
             }.bind(this));
-     
+        },
+        
+        ApiErrorPopup: function(xhr){
+            var message;
+            if(xhr.responseJSON.error.message)
+            {
+                message = xhr.responseJSON.error.message + " .";
+            }
+            else
+            {
+                 message = "Something went wrong. ";
+            }
+            this.publicController.getChoiceController().showConfirmation({
+                message: message,
+                confirm: 'ok'
+            }).then(function() {
+                /////   /////
+            }.bind(this));
         },
     });
 

@@ -96,7 +96,7 @@ define([
                     break;
 
                 case 'REFRESH_STATE':
-                    this.publicController.getModalsController().AfterRefreshGame();
+                    this.publicController.getModalsController().AfterRefreshGame(message.gameUUID);
                     break;
 
                 default:
