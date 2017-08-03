@@ -360,6 +360,7 @@ define([
                     playerId: playerModel.get('playerId'),
                     seasonId: playerModel.get('seasonId'),
                     leagueId: playerModel.get('leagueId'),
+                    playerRoleId: playerModel.get('playerRoleId'),
                     position: playerModel.get('position').enumText,
                 };
 

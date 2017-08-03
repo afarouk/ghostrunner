@@ -111,6 +111,7 @@ define([
             playerId: 1,
             seasonId: 1,
             leagueId: 1,
+            playerRoleId:1,
             cost: 23,
             quarter: 3,
         },

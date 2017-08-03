@@ -63,7 +63,8 @@ define([
                     return {
                         playerId: model.get('playerId'),
                         seasonId: model.get('seasonId'),
-                        leagueId: model.get('leagueId')
+                        leagueId: model.get('leagueId'),
+                        playerRoleId : model.get'playerRoleId')
                     };
                 }),
                 teamData = {
@@ -121,6 +122,7 @@ define([
                         playerId: model.get('playerId'),
                         seasonId: model.get('seasonId'),
                         leagueId: model.get('leagueId'),
+                        playerRoleId: model.get('playerRoleId'),
                         position: model.get('position').enumText,
                         type: model.get('type').enumText,
                         role: model.get('role').enumText,

@@ -19,7 +19,7 @@ define([
                     }
                 }.bind(this), function(xhr){
                     this.publicController.getGameController().hideLoader();
-                    this.publicController.getModalsController().ApiErrorPopup(xhr);                   
+                    this.publicController.getModalsController().ApiErrorPopup(xhr);
                 }.bind(this));
         },
 
@@ -159,6 +159,7 @@ define([
                     playerId: playerModel.get('playerId'),
                     seasonId: playerModel.get('seasonId'),
                     leagueId: playerModel.get('leagueId'),
+                    playerRoleId:playerModel.get('playerRoleId'),
                     position: playerModel.get('position').enumText,
                 };
             service.selectStarter({
@@ -266,7 +267,7 @@ define([
                 }
             }).then(function(state){
                  if((moveEnum == 'SWING_AWAY' ||moveEnum == 'BUNT_ATTEMPT' || moveEnum == 'STEAL_BASE' || moveEnum == 'HIT_N_RUN_ATTEMP' || moveEnum == 'PITCH_TO_BATTER' || moveEnum == 'INTENTIONAL_WALK')&& state.thisUser.state == "MAKE_YOUR_MOVE")
-                 {   
+                 {
                     this.refreshStatus(state.gameUUID);
                  }
                  else

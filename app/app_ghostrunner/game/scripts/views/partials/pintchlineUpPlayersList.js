@@ -48,6 +48,7 @@ define([
                 flag:flag,
 				properties:values,
 				positions: this.model.get('positions'),
+								playerRoleId : this.model.get('playerRoleId'),
 			        	leagueId : this.model.get('leagueId'),
                 seasonId : this.model.get('seasonId'),
                 playerId : this.model.get('playerId'),

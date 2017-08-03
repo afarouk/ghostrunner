@@ -66,10 +66,11 @@ define([
 		onLineUpChanged: function(checked, model) {
 			var playerId = model.get('playerId'),
 				seasonId = model.get('seasonId'),
-				leagueId = model.get('leagueId');
+				leagueId = model.get('leagueId'),
+				playerRoleId=model.get('playerRoleId');
 
 			if (!checked) {
-				var forRemove = this.lineUp.findWhere({playerId: playerId, seasonId: seasonId, leagueId:leagueId });
+				var forRemove = this.lineUp.findWhere({playerId: playerId, seasonId: seasonId, leagueId:leagueId ,playerRoleId:playerRoleId});
 				this.lineUp.remove(forRemove);
 			} else {
 				this.lineUp.add(model);
@@ -108,10 +109,11 @@ define([
 		},
 		onSave: function() {
             var obj = {};
-            var oldLeagueId='',oldSeasonId='',oldPlayerId='', newSeasonId='', newPosition='', newPlayerId='';
+            var oldPlayerRoleId='', oldLeagueId='',oldSeasonId='',oldPlayerId='',newPlayerRoleId='',newLeagueId='', newSeasonId='', newPosition='', newPlayerId='';
 
              $('.CurrentPlayers').each(function () {
                 if (!this.checked) {
+      									oldPlayerRoleId= $(this).attr('oldPlayerRoleId');
                         oldLeagueId= $(this).attr('oldLeagueId');
 												oldSeasonId= $(this).attr('oldSeasonId');
                         oldPlayerId = $(this).attr('oldPlayerId');
@@ -121,6 +123,7 @@ define([
 
             $('.AvailablePlayers').each(function(){
                 if(this.checked){
+									newPlayerRoleId =  $(this).attr('newPlayerRoleId');
 									newLeagueId =  $(this).attr('newLeagueId');
                   newSeasonId =  $(this).attr('newSeasonId');
                   newPlayerId =  $(this).attr('newPlayerId');
@@ -129,9 +132,11 @@ define([
             });
 
             obj = {
+								oldPlayerRoleId:oldPlayerRoleId,
 				  			oldLeagueId : oldLeagueId,
                 oldSeasonId : oldSeasonId,
                 oldPlayerId : oldPlayerId,
+								newPlayerRoleId:newPlayerRoleId,
 								newLeagueId : newLeagueId,
                 newSeasonId : newSeasonId,
                 newPlayerId : newPlayerId,

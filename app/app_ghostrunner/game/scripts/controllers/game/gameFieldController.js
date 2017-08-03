@@ -23,6 +23,7 @@ define([
 				playerId: player.playerId,
 				seasonId: player.seasonId,
 				leagueId: player.leagueId,
+				playerRoleId: player.playerRoleId,
 				position: player.position.enumText
 			}).then(function(card) {
 				this.publicController.getChoiceController().showPlayersCard(card);

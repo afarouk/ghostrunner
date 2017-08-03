@@ -23,7 +23,7 @@ _.each(properties, function(prop){ %>
 	</select>
 </td>
 <td class="with-checkbox">
-	<input type="checkbox" class="CurrentPlayers" oldLeagueId="<%= leagueId %>" oldSeasonId="<%= seasonId %>" oldPlayerId="<%= playerId %>" name="select-player" checked />
+	<input type="checkbox" class="CurrentPlayers" oldPlayerRoleId="<%= playerRoleId %>" oldLeagueId="<%= leagueId %>" oldSeasonId="<%= seasonId %>" oldPlayerId="<%= playerId %>" name="select-player" checked />
 </td>
 <%
 }
@@ -52,7 +52,7 @@ else
 	</select>
 </td>
 <td class="with-checkbox">
-	<input type="radio" class="AvailablePlayers"  newLeagueId="<%= leagueId %>" newSeasonId="<%= seasonId %>" newPlayerId="<%= playerId %>" newPosition="<%= Position.enumText %>" name="select-player"/>
+	<input type="radio" class="AvailablePlayers"  newPlayerRoleId="<%= playerRoleId %>"  newLeagueId="<%= leagueId %>" newSeasonId="<%= seasonId %>" newPlayerId="<%= playerId %>" newPosition="<%= Position.enumText %>" name="select-player"/>
 </td>
 
 <%
