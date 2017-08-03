@@ -64,7 +64,7 @@ define([
                         playerId: model.get('playerId'),
                         seasonId: model.get('seasonId'),
                         leagueId: model.get('leagueId'),
-                        playerRoleId : model.get'playerRoleId')
+                        playerRoleId : model.get('playerRoleId')
                     };
                 }),
                 teamData = {
