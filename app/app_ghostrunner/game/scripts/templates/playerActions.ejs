@@ -2,7 +2,7 @@
 	<span class="team-role"><%= displayText %></span>
 	<div class="actions-buttons">
 		<% _.each(buttons, function(button) { %>
-			<button type="button" data-type="interface-btn" data-move="<%= button.gameMove %>" class="btn move" <% if (!button.enabled) { %>disabled<% } %>><%= button.displayText %></button>
+			<button type="button" data-type="interface-btn" data-move="<%= button.gameMove %>" class="btn move" <% if (!button.enabled) { %>disabled<% }if(button.buttonType == 'LINEUP_ACTION'){%> style="background:#000;" <%} %>><%= button.displayText%></button>
 		<% }); %>
 	</div>
 </div>

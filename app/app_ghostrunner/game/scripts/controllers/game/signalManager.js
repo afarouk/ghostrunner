@@ -6,6 +6,7 @@ define([
     ], function(){
     var SignalsManager = Mn.Object.extend({
 	onMessage: function(message) {
+            this.check = false;
             switch (message.signal) {
                 case 'Undefined':
                     break;
@@ -51,7 +52,6 @@ define([
                     break;
 
                 case 'GAME_ABANDONED':
-                    debugger;
                     this.publicController.getModalsController().onAbandonedByOponnent();
                     break;
 
@@ -92,11 +92,21 @@ define([
                     break;
 
                 case 'SHOW_MESSAGE':
-
                     break;
 
                 case 'REFRESH_STATE':
-                    this.publicController.getModalsController().AfterRefreshGame(message.gameUUID);
+                    this.publicController.getStateController().refreshStatus(message.gameUUID);
+                    if(this.check == false)
+                    {
+                        
+                        this.check = true;
+                        var test = this.publicController.getModalsController().RefreshGamePopup();
+                        if(test)
+                        {
+                           this.check = false;
+                        }
+                        
+                    }
                     break;
 
                 default:

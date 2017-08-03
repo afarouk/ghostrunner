@@ -405,14 +405,15 @@ define([
             return $def;
         },
         
-        AfterRefreshGame: function(gameUUID){   
+         RefreshGamePopup: function(){  
+             var $def = $.Deferred();
             this.publicController.getChoiceController().showConfirmation({
-                message: 'Refresh Game?',
+              message: ' Game Updated ',
                 confirm: 'ok'
             }).then(function() {
-              //this.publicController.getGameController().switchToBroker();
-              this.publicController.getStateController().refreshStatus(gameUUID);
+              $def.resolve();
             }.bind(this));
+             return $def;
         },
         
         ApiErrorPopup: function(xhr){
