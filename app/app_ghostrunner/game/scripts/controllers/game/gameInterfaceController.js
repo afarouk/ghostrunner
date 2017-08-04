@@ -10,14 +10,18 @@ define([
 		create: function(layout, region) {
 			this.view = new GameInterfaceView();
 			layout.showChildView( region, this.view );
-			this.showLoader();
+			//this.showLoader();
 		},
         showLoader: function(type) {
-            this.view.triggerMethod('showLoader', type);
+            this.view.triggerMethod('showLoader', type);  
+            //this.view.ui.loader.show();
         },
+        
         hideLoader: function() {
-            this.view.triggerMethod('hideLoader');
+          this.view.triggerMethod('hideLoader');
+          //this.view.ui.loader.hide();
         }
+
     });
 
     return new GameInterfaceController();

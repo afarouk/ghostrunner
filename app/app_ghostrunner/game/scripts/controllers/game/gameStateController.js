@@ -19,7 +19,7 @@ define([
                     }
                 }.bind(this), function(xhr){
                     this.publicController.getGameController().hideLoader();
-                    this.publicController.getModalsController().ApiErrorPopup(xhr);
+                    this.publicController.getModalsController().apiErrorPopup(xhr);
                 }.bind(this));
         },
 
@@ -28,7 +28,7 @@ define([
                 .then(function(state){
                     this.updateGameModel(state);
                 }.bind(this),function(xhr){
-                    this.publicController.getModalsController().ApiErrorPopup(xhr);
+                    this.publicController.getModalsController().apiErrorPopup(xhr);
                 }.bind(this));
         },
 
@@ -56,7 +56,7 @@ define([
                     //TODO manage User not in game warning or other error
                     this.publicController.getGameController().hideLoader();
                     console.log('waiting on get game error...');
-                    this.publicController.getModalsController().ApiErrorPopup(xhr);
+                    this.publicController.getModalsController().apiErrorPopup(xhr);
                     this.publicController.getBrokerController().removeUrlGameUUID();
                 }.bind(this));
             return def;
@@ -84,7 +84,7 @@ define([
                 .then(function(game){
                     this.updateGameModel(game);
                 }.bind(this),function(xhr){
-                    this.publicController.getModalsController().ApiErrorPopup(xhr);
+                    this.publicController.getModalsController().apiErrorPopup(xhr);
                 }.bind(this));
         },
 
@@ -93,7 +93,7 @@ define([
                 .then(function(game){
                     this.refreshStatus(gameUUID);
                 }.bind(this),function(xhr){
-                    this.publicController.getModalsController().ApiErrorPopup(xhr);
+                    this.publicController.getModalsController().apiErrorPopup(xhr);
                 }.bind(this));
         },
 
@@ -123,7 +123,7 @@ define([
                 }.bind(this), function(xhr){
                     //on error
                     this.publicController.getGameController().hideLoader();
-                    this.publicController.getModalsController().ApiErrorPopup(xhr);
+                    this.publicController.getModalsController().apiErrorPopup(xhr);
                 }.bind(this));
         },
 
@@ -143,7 +143,7 @@ define([
                     this.updateGameModel(result);
                 }.bind(this), function(err){
                     onInvitationSent(false, err);
-                    this.publicController.getModalsController().ApiErrorPopup(err);
+                    this.publicController.getModalsController().apiErrorPopup(err);
                 }.bind(this));
         },
 
@@ -173,7 +173,7 @@ define([
                 this.updateGameModel(state);
             }.bind(this), function(xhr) {
                 //on error
-                this.publicController.getModalsController().ApiErrorPopup(xhr);
+                this.publicController.getModalsController().apiErrorPopup(xhr);
             }.bind(this));
         },
 
@@ -190,7 +190,7 @@ define([
                                 this.onPayloadMsgBeforeRefresh(message);
                             }
                             .bind(this), function(xhr){
-                                this.publicController.getModalsController().ApiErrorPopup(xhr);
+                                this.publicController.getModalsController().apiErrorPopup(xhr);
                                 this.publicController.getGameController().hideLoader();
                             }.bind(this));
                     }.bind(this), function(){
@@ -209,7 +209,7 @@ define([
                         this.refreshStatus(message.gameUUID);
                     }.bind(this), function(xhr){
                         //do nothing
-                        this.publicController.getModalsController().ApiErrorPopup(xhr);
+                        this.publicController.getModalsController().apiErrorPopup(xhr);
                     }.bind(this));
             } else {
                 this.refreshStatus(message.gameUUID);
@@ -225,7 +225,7 @@ define([
                 this.updateGameModel(state);
             }.bind(this), function(err){
                 //on error
-                this.publicController.getModalsController().ApiErrorPopup(err);
+                this.publicController.getModalsController().apiErrorPopup(err);
             }.bind(this));
         },
 
@@ -244,7 +244,7 @@ define([
                             //TODO select players for game (team)
                             this.startGame(gameUUID, role);
                         }.bind(this),function(xhr){
-                            this.publicController.getModalsController().ApiErrorPopup(xhr);
+                            this.publicController.getModalsController().apiErrorPopup(xhr);
                     }.bind(this));
                 }.bind(this));
             }
@@ -254,11 +254,12 @@ define([
             service.rejectInvitation(game).then(function(){
                 this.publicController.getBrokerController().reRender();
             }.bind(this),function(xhr){
-                this.publicController.getModalsController().ApiErrorPopup(xhr);
+                this.publicController.getModalsController().apiErrorPopup(xhr);
             }.bind(this));
         },
 
         onPlayerMove: function(moveEnum) {
+           
             service.makeMove({
                 payload: {
                     'actionType':1, //I left that fields, because
@@ -266,6 +267,8 @@ define([
                     'gameMove': moveEnum
                 }
             }).then(function(state){
+                
+                 this.publicController.getModalsController().buttonPopup();
                  if((moveEnum == 'SWING_AWAY' ||moveEnum == 'BUNT_ATTEMPT' || moveEnum == 'STEAL_BASE' || moveEnum == 'HIT_N_RUN_ATTEMP' || moveEnum == 'PITCH_TO_BATTER' || moveEnum == 'INTENTIONAL_WALK')&& state.thisUser.state == "MAKE_YOUR_MOVE")
                  {
                     this.refreshStatus(state.gameUUID);
@@ -275,7 +278,8 @@ define([
                    this.checkForSecondaryMove(state, true);
                  }
             }.bind(this),function(xhr){
-                this.publicController.getModalsController().ApiErrorPopup(xhr);
+                //this.publicController.getGameController().hideLoader();
+                this.publicController.getModalsController().apiErrorPopup(xhr);
             }.bind(this));
         },
 
@@ -300,7 +304,7 @@ define([
             }).then(function(state){
                 this.updateGameModel(state);
             }.bind(this),function(xhr){
-                this.publicController.getModalsController().ApiErrorPopup(xhr);
+                this.publicController.getModalsController().apiErrorPopup(xhr);
             }.bind(this));
         },
 
@@ -318,7 +322,7 @@ define([
                     $def.resolve();
                 }.bind(this), function(err){
                     $def.reject();
-                    this.publicController.getModalsController().ApiErrorPopup(err);
+                    this.publicController.getModalsController().apiErrorPopup(err);
                 }.bind(this));
             return $def;
         },
@@ -331,7 +335,7 @@ define([
                 }
                 .bind(this), function(err){
                     this.publicController.getGameController().hideLoader();
-                    this.publicController.getModalsController().ApiErrorPopup(err);
+                    this.publicController.getModalsController().apiErrorPopup(err);
                 }.bind(this));
         },
 
@@ -355,7 +359,7 @@ define([
                     this.publicController.getGameController().destroy();
                     $(window).trigger('ghostrunner.afterLogout');
                 }.bind(this),function(xhr){
-                     this.publicController.getModalsController().ApiErrorPopup(err);
+                     this.publicController.getModalsController().apiErrorPopup(err);
                 }.bind(this))
         },
 

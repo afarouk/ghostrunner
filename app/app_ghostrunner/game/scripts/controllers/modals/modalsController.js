@@ -405,18 +405,18 @@ define([
             return $def;
         },
         
-         RefreshGamePopup: function(){  
+         refreshGamePopup: function(){  
              var $def = $.Deferred();
             this.publicController.getChoiceController().showConfirmation({
               message: ' Game Updated ',
-                confirm: 'ok'
+              confirm: 'ok'
             }).then(function() {
               $def.resolve();
             }.bind(this));
              return $def;
         },
         
-        ApiErrorPopup: function(xhr){
+        apiErrorPopup: function(xhr){
             var message;
             if(xhr.responseJSON.error.message)
             {
@@ -431,6 +431,17 @@ define([
                 confirm: 'ok'
             }).then(function() {
                 /////   /////
+            }.bind(this));
+        },
+        
+        
+        buttonPopup: function(){  
+             var $def = $.Deferred();
+            this.publicController.getChoiceController().showConfirmation({
+              message: ' Move done ',
+              confirm: 'ok'
+            }).then(function() {
+              $def.resolve();
             }.bind(this));
         },
     });
