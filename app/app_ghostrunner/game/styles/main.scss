@@ -25,7 +25,7 @@
     .game_canvas_wrap {
         transition: .6s;
         -webkit-transition: .6s;
-        background-image:url("./images/please_login.png");
+        background-image:url("./images/sandy_mil_dodger.png");
         background-repeat: repeat-x;
         background-size: 100% 100%;
         width: calc(100vw/1.6);
@@ -66,7 +66,7 @@
             }
         }
     }
-    
+
     .blog_content_left{
         top: 0;
         left: 0;
@@ -93,7 +93,7 @@
         margin-left: 10px;
         margin-right: 15px;
      }
-    
+
     @media screen and (min-width: 1120px) {
         .game_right_wrap {
             height: calc(62.5vw / 1.6);
