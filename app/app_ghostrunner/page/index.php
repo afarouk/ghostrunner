@@ -88,11 +88,14 @@ window.pageName = 'INDEX';
                         <form method="post" action="#" class="affa-form-contact" id="sendMessage">
                             <div class="submit-status"></div> <!-- submit status -->
                             <div class="row">
-                                <div class="col-md-6">
-                                    <input type="text" name="name" placeholder="Your Name">
+                                <div class="col-md-4">
+                                    <input type="text" name="name" placeholder="[Name]">
                                 </div>
-                                <div class="col-md-6">
-                                    <input type="text" name="email" placeholder="Email Address *">
+                                <div class="col-md-5">
+                                    <input type="text" name="email" placeholder="[Email Address *]">
+                                </div>
+                                <div class="col-md-3">
+                                    <input type="text" name="promocode" placeholder="[Code]">
                                 </div>
                             </div>
                             <input type="text" name="subject" placeholder="Subject">
