@@ -60,7 +60,7 @@ define([
         //         service.deleteLineUp(this.selectedTeam.get('teamUUID'), lineUp.lineUpId)
         //             .then(this.afterLineUpRemoved.bind(this, lineUpName));
         //     }.bind(this), function() {
-                
+
         //     }.bind(this));
         // },
 
@@ -114,7 +114,7 @@ define([
                 this.onPauseGame(game.gameUUID);
             }.bind(this));
         },
-        
+
         //invitation
         onInvitationReceived: function(gameModel) {
             var other = gameModel.get('otherUser').user.userName,
@@ -127,7 +127,7 @@ define([
             }).then(function(){
 
                 this.onInvitationConfirmed(gameModel);
-                
+
             }.bind(this), function(type) {
                 if (type === 'reject') {
                     this.publicController.getStateController().onInvitationRejected(gameModel);
@@ -158,8 +158,8 @@ define([
                 }.bind(this));
             return $def;
         },
-        
-        
+
+
 
 
         onOtherPlayerLineUp: function(gameModel) {
@@ -169,7 +169,8 @@ define([
                 player = otherLineUp.players[0].displayText;
 
             this.publicController.getChoiceController().showConfirmation({
-                message: 'Opponent created lineup ' + lineUpName + ' and selected ' + player + ' player',
+                message: 'Opponent selected ' + player + ' as starter',
+                //message: 'Opponent created lineup ' + lineUpName + ' and selected ' + player + ' player',
                 confirm: 'ok'
             }).then(function() {
                 def.resolve()
@@ -393,7 +394,7 @@ define([
             }.bind(this));
             return $def;
         },
-        
+
         afterSaveRequest: function() {
             var $def = $.Deferred();
             this.publicController.getChoiceController().showConfirmation({
@@ -404,8 +405,8 @@ define([
                 }.bind(this));
             return $def;
         },
-        
-         refreshGamePopup: function(){  
+
+         refreshGamePopup: function(){
              var $def = $.Deferred();
             this.publicController.getChoiceController().showConfirmation({
               message: ' Game Updated ',
@@ -415,7 +416,7 @@ define([
             }.bind(this));
              return $def;
         },
-        
+
         apiErrorPopup: function(xhr){
             var message;
             if(xhr.responseJSON.error.message)
@@ -433,9 +434,9 @@ define([
                 /////   /////
             }.bind(this));
         },
-        
-        
-        buttonPopup: function(){  
+
+
+        buttonPopup: function(){
              var $def = $.Deferred();
             this.publicController.getChoiceController().showConfirmation({
               message: ' Move done ',
