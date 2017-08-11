@@ -84,7 +84,7 @@ define([
         getPlayerActionsController: function() {
             return playerActionsController;
         },
-        getpinchHitterController: function() {
+        getPinchHitterController: function() {
             return pinchHitterController;
         },
         destroyGame: function() {

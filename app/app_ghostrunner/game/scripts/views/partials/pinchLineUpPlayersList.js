@@ -3,8 +3,8 @@
 'use strict';
 
 define([
-	'ejs!../../templates/partials/pintchlineUpFielder.ejs',
-	'ejs!../../templates/partials/pintchlineUpTable.ejs',
+	'ejs!../../templates/partials/pinchLineUpFielder.ejs',
+	'ejs!../../templates/partials/pinchLineUpTable.ejs',
 	], function(fielderTmpl, tableTmpl){
 	var LineUpFielderView = Mn.View.extend({
 		tagName: 'tr',

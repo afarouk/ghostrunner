@@ -276,18 +276,16 @@ define([
             return gateway.sendRequest('retrievePinchHitterChoices', params);
         },
         
-        setPinchHitter: function(payload)
-        {
-             var params ={};
-            
-             var user = appCache.get('user');                       
+        setPinchHitter: function(payload) {
+            var params ={};
+        
+            var user = appCache.get('user');                       
                 params = {
-                       UID: user.get('uid'),
-                       payload: payload
-                    };
+                    UID: user.get('uid'),
+                    payload: payload
+                };
 
             return gateway.sendRequest('setPinchHitter', params);
-            
         }
         
     });

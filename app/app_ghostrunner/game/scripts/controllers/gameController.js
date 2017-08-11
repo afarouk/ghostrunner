@@ -39,17 +39,13 @@ define([
             this.publicController.getBrokerController().reRender();
         },
         
-        
         setPinchHitter: function() {
             this.appState = 'BROKER';
             this.appLayout.getRegion('game').$el.removeClass('active');
             this.appLayout.getRegion('broker').$el.addClass('active');
             this.publicController.getBrokerController().reRender();
-            
         },
-        
-        
-        
+
         showLoader: function(type) {
             if (this.appState === 'GAME') {
                 this.publicController.getInterfaceController().showLoader(type);

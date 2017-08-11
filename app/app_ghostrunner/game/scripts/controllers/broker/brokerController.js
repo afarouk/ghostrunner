@@ -510,8 +510,13 @@ define([
             this.teamConfirm = undefined;
             this.confirm = undefined;
             this.invitationDef = null;
-            //TODO maybe return to previous step
-            //and same when team created
+            
+            //Return to game if game running
+            //TODO should be tested in different cases
+            var game = appCache.get('game');
+            if (game && game.get('gameUUID')) {
+                this.publicController.getGameController().switchToGame();
+            }
         },
 
         onTeamConfirm: function() {
@@ -527,10 +532,10 @@ define([
         },
 
         retrivePinchHit: function(){
-             this.publicController.getGameController().setPinchHitter();
+            this.publicController.getGameController().setPinchHitter();
 
-             this.publicController.getpinchHitterController().retrivePinchHit(this.view);
-					},
+            this.publicController.getPinchHitterController().retrivePinchHit(this.view);
+		},
     });
 
     return new BrokerController();

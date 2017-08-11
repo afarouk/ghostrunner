@@ -6,19 +6,18 @@ define([
     '../../appCache',
     '../../APIGateway/gameService',
     '../../views/partials/teamCreation',
-    '../../views/partials/PintchlineUpCreation',
+    '../../views/partials/pinchLineUpCreation',
     '../../views/partials/selectCandidate',
     '../../models/playersCollection'
-    ], function(appCache, service, TeamCreationView, PintchlineUpCreation, SelectCandidateView, PlayersCollection){
+    ], function(appCache, service, TeamCreationView, PinchLineUpCreation, SelectCandidateView, PlayersCollection){
     var pinchHitterController = Mn.Object.extend({
 
         retrivePinchHit:function(layout, accept){
-
             var game = appCache.get('game'),
                 lineUp = new Backbone.Model(appCache.get('thisLineUp'));
             service.retrievePinchHitterChoices(lineUp)
                 .then(function(players){
-                 this.onShapeLineUp(players, lineUp, accept);
+                    this.onShapeLineUp(players, lineUp, accept);
                 }.bind(this));
             this.layout = layout;
         },
@@ -32,34 +31,34 @@ define([
                     lineUp: lineUp,
                     headings: players.lineUpHeadings
                 },
-            lineUpCreation = new PintchlineUpCreation(createData);
+            lineUpCreation = new PinchLineUpCreation(createData);
             this.layout.$el.addClass('creation-state');
             this.layout.showChildView('creation', lineUpCreation);
-            this.listenTo(lineUpCreation, 'lineUp:save', this.onLineUpSave.bind(this,lineUp,accept));
+            this.listenTo(lineUpCreation, 'lineUp:save', this.onLineUpSave.bind(this,lineUp, accept));
         },
 
-        onLineUpSave: function(slf,lineUp,obj){
-            var game = appCache.get('game');
-            var obj = {
-                oldPlayerId : obj.oldplayerId,
-                oldSeasonId : obj.oldseasonId ,
-                oldLeagueId : obj.oldLeagueId ,
-                oldPlayerRoleId : obj.oldPlayerRoleId ,
-                newPlayerId : obj.newplayerId,
-                newSeasonId : obj.newseasonId ,
-                newLeagueId : obj.newLeagueId ,
-                newPlayerRoleId : obj.newPlayerRoleId ,
+        onLineUpSave: function(lineUp, accept, playersParams){
+            var game = appCache.get('game'),
+                params = {
+                oldPlayerId : playersParams.oldplayerId,
+                oldSeasonId : playersParams.oldseasonId,
+                oldLeagueId : playersParams.oldLeagueId,
+                oldPlayerRoleId : playersParams.oldPlayerRoleId,
+                newPlayerId : playersParams.newplayerId,
+                newSeasonId : playersParams.newseasonId,
+                newLeagueId : playersParams.newLeagueId,
+                newPlayerRoleId : playersParams.newPlayerRoleId,
                 newPosition : "UNDEFINED",
                 teamId      : this.players.teamId,
                 lineupId    : this.players.lineupId,
                 gameUUID    : game.get('gameUUID')
             };
-           service.setPinchHitter(obj).then(function(result){
-               this.publicController.getModalsController().afterSaveRequest().then(function(){
-               this.backInGame( obj.gameUUID , result.state);
-               }.bind(this))
-            }.bind(this));
 
+            service.setPinchHitter(params).then(function(result){
+                this.publicController.getModalsController().afterSaveRequest().then(function(){
+                    this.backInGame( params.gameUUID , result.state);
+                }.bind(this));
+            }.bind(this));
         },
         backInGame: function( gameUUID , state) {
             this.publicController.getStateController().refreshStatus(gameUUID);

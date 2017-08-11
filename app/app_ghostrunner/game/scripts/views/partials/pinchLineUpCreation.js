@@ -3,8 +3,8 @@
 'use strict';
 
 define([
-	'ejs!../../templates/partials/PintchlineUpCreation.ejs',
-	'./pintchlineUpPlayersList'
+	'ejs!../../templates/partials/pinchLineUpCreation.ejs',
+	'./pinchlineUpPlayersList'
 	], function(template, LineUpPlayersList){
 	var LineUpCreationView = Mn.View.extend({
 		template: template,
@@ -108,42 +108,51 @@ define([
             }
 		},
 		onSave: function() {
-            var obj = {};
-            var oldPlayerRoleId='', oldLeagueId='',oldSeasonId='',oldPlayerId='',newPlayerRoleId='',newLeagueId='', newSeasonId='', newPosition='', newPlayerId='';
+            var playersParams = {},
+            	oldPlayerRoleId = '',
+            	oldLeagueId = '',
+            	oldSeasonId = '',
+            	oldPlayerId = '',
+            	newPlayerRoleId = '',
+            	newLeagueId = '',
+            	newSeasonId = '',
+            	newPosition = '',
+            	newPlayerId = '';
 
-             $('.CurrentPlayers').each(function () {
+            $('.CurrentPlayers').each(function () {
                 if (!this.checked) {
-      									oldPlayerRoleId= $(this).attr('oldPlayerRoleId');
-                        oldLeagueId= $(this).attr('oldLeagueId');
-												oldSeasonId= $(this).attr('oldSeasonId');
-                        oldPlayerId = $(this).attr('oldPlayerId');
+      				oldPlayerRoleId= $(this).attr('oldPlayerRoleId');
+                    oldLeagueId= $(this).attr('oldLeagueId');
+					oldSeasonId= $(this).attr('oldSeasonId');
+                    oldPlayerId = $(this).attr('oldPlayerId');
                 }
             });
 
 
             $('.AvailablePlayers').each(function(){
                 if(this.checked){
-									newPlayerRoleId =  $(this).attr('newPlayerRoleId');
-									newLeagueId =  $(this).attr('newLeagueId');
-                  newSeasonId =  $(this).attr('newSeasonId');
-                  newPlayerId =  $(this).attr('newPlayerId');
-                  newPosition =  $(this).attr('newPosition');
+					newPlayerRoleId =  $(this).attr('newPlayerRoleId');
+					newLeagueId =  $(this).attr('newLeagueId');
+                	newSeasonId =  $(this).attr('newSeasonId');
+                	newPlayerId =  $(this).attr('newPlayerId');
+                	newPosition =  $(this).attr('newPosition');
                 }
             });
 
-            obj = {
-								oldPlayerRoleId:oldPlayerRoleId,
-				  			oldLeagueId : oldLeagueId,
+            playersParams = {
+				oldPlayerRoleId : oldPlayerRoleId,
+				oldLeagueId : oldLeagueId,
                 oldSeasonId : oldSeasonId,
                 oldPlayerId : oldPlayerId,
-								newPlayerRoleId:newPlayerRoleId,
-								newLeagueId : newLeagueId,
+				newPlayerRoleId : newPlayerRoleId,
+				newLeagueId : newLeagueId,
                 newSeasonId : newSeasonId,
                 newPlayerId : newPlayerId,
                 newPosition : newPosition
             }
-             this.trigger('lineUp:save',obj);
-	 }
-        });
-	  return LineUpCreationView;
+            this.trigger('lineUp:save', playersParams);
+    	}
     });
+
+	return LineUpCreationView;
+});
