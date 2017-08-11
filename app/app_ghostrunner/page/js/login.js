@@ -563,12 +563,14 @@
             var Email = $('input[name="email"]').val();
             var Subject = $('input[name="subject"]').val();
             var Message = $('#textarea').val();
+            var promocode = $('input[name="promocode"]').val();
            this.sendRequest(this.SendContactUsEmail,{
                payload:{
                    name:Name,
                    email:Email,
                    subject:Subject,
-                   message:Message
+                   message:Message,
+                   code:promocode,
            } }).then(function(response){
                alert(response.explanation);
                $("#sendMessage")[0].reset();
