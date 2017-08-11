@@ -22,7 +22,7 @@
         SendContactUsEmail:['POST','/gaming/sendContactUsEmail'],
 	
         
-		init: function() {
+	    init: function() {
             var params = this.parseQueryString(window.location.search),UID;
 			this.listenLogin();
 			this.listenRegister();
@@ -437,8 +437,8 @@
                         displayText:body.val(),
                         isAnonymous: false,
                         subType:2,
-                        categories:[topic.val()],
-                        hashTags:[tags.val()] 
+                        categories:null,
+                        hashTags:null
                     };
                    this.createBlog(data).then(function(response) {
                         alert("Blog created Successfully");
