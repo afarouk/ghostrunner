@@ -143,4 +143,22 @@
             margin: auto;
         }
     }
+    #heading{
+        background:yellow; 
+        margin:5px;
+        height:50px;
+    }
+    
+    #heading h4{
+        padding-left:15px;
+        line-height:50px;
+        padding-right:15px;
+    }
+    .players-list-container{
+        border-bottom:none;
+    }
+    .players-list-Availableplayers{
+        margin-top:0px;
+        border-top:none;
+    }
 }

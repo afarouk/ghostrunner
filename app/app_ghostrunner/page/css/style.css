@@ -1,5 +1,21 @@
+Skip to content
+Features
+Business
+Explore
+Marketplace
+Pricing
+This repository
+Search
+Sign in or Sign up
+ Watch 4  Star 0  Fork 0 afarouk/ghostrunner
+ Code  Issues 0  Pull requests 0  Projects 0 Insights 
+Branch: master Find file Copy pathghostrunner/app/app_ghostrunner/page/css/style.css
+46dafd3  3 days ago
+@pradyutAqb pradyutAqb Blog screen update
+3 contributors @pradyutAqb @afarouk @rrepaka
+RawBlameHistory     
+Executable File  2241 lines (2065 sloc)  68.4 KB
 /* #Table of Contents
-
 1. Site Styles
 2. Header
 3. Navigation
@@ -2237,4 +2253,7 @@ button#delete_blog {
    float:right;
    width:200px;
    height:100px
+}
+.blog_content_right{
+	min-width:270px;
 }
