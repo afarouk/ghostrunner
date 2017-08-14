@@ -43,7 +43,7 @@ window.pageName = 'BLOG';
                           </div>
                         </div>
 
-                        <div class="form-group">
+                        <!-- <div class="form-group">
                           <label class="control-label col-sm-2" for="Topics">*Topics</label>
                           <div class="col-sm-10">
                             <input type="text" class="form-control" id="topics"  name="Topics">
@@ -54,8 +54,8 @@ window.pageName = 'BLOG';
                           <label class="control-label col-sm-2" for="tags">*Tags</label>
                           <div class="col-sm-10">
                             <input type="text" class="form-control" id="tags"  name="Tags">
-                          </div>
-                        </div>
+                          </div >
+                        </div> -->
 
                         <div class="form-group">
                             <label class="control-label col-sm-2" for="Add Picture">Add Picture</label>
@@ -77,14 +77,16 @@ window.pageName = 'BLOG';
                   </form>
                 </div>
 
-                <div id="blog_show" class="blog_content_right">
+                <div id="blog_show" class="blog_content_right" style="min-width:270px">
                     <div id="right_content" class="blog_right_content">
                         <div id="top_button">
                             <button type="button" class="btn btn-danger pull-left" id="refresh" >Refresh</button>
                             <button type="button" class="btn btn-danger pull-right" id="delete_blog">Delete</button>
                         </div>
                         <div id="blog_view_container" class="blog_view_container">
-                             <h4 align="center" >Talkin' Baseball with JimmyG</h4>
+                            <img id="heading_image" src="images/talkin_banner_pic.png">
+                            <h4 align="left" >Talkin' Baseball</br> with JimmyG</h4>
+                            <br/><br/>
                         <h4 id="header_blog_view"></h4>
 
                         <div id="nav_picture"><img id="blog_picture" src=""></div>
@@ -117,4 +119,3 @@ window.pageName = 'BLOG';
 <?php
     require_once("footer.php");
 ?>
-

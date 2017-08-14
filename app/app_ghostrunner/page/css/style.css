@@ -2230,3 +2230,11 @@ button#delete_blog {
 #left_content{
     display:none;
 }
+
+#heading_image{
+   float:right;
+   margin-top:8px;
+   float:right;
+   width:200px;
+   height:100px
+}
