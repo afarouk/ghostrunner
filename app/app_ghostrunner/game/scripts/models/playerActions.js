@@ -37,7 +37,8 @@ define([
         		userAction = this.roles[role];
         	if (userAction) {
         		userAction.buttons = buttons;
-        		this.set(userAction);
+        		this.set(userAction, {silent:true});
+                this.trigger('change');
         	}
         }
     });

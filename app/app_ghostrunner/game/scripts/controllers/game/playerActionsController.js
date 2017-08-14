@@ -23,12 +23,25 @@ define([
         updateRole: function() {
             this.model.updateRole();
         },
-        onAction: function(move) {
+        onAction: function(action) {
             this.publicController.getGameController().showLoader();
-            if (move == 'PINCH_HIT') {
-                 this.publicController.getBrokerController().retrivePinchHit();
-            } else {
-                this.publicController.getStateController().onPlayerMove(move);
+            switch (action) {
+                case 'LINEUP_EDIT':
+                    this.publicController.getStateController().onLineUpEditStart(action);
+                    break;
+                case 'LINEUP_DONE':
+                    this.publicController.getStateController().onLineUpEditDone(action);
+                    break;
+                //Should edit lineUp cases be different? 
+                case 'PINCH_HIT':
+                case 'PINCH_RUN':
+                case 'DEFENSIVE_SUBSTITUTION':
+                case 'RELIEF_PITCHER':
+                    this.publicController.getBrokerController().retrivePinchHit();
+                    break;
+                default:
+                    this.publicController.getStateController().onPlayerMove(action);
+                    break
             }
         }
     });

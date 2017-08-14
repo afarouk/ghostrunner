@@ -283,6 +283,21 @@ define([
             }.bind(this));
         },
 
+        onLineUpEditStart: function(actionEnum) {
+            service.startLineupEditing().then(function(state){
+                this.updateGameModel(state);
+            }.bind(this),function(xhr){
+                this.publicController.getModalsController().apiErrorPopup(xhr);
+            }.bind(this));
+        },
+        onLineUpEditDone: function(actionEnum) {
+            service.stopLineupEditing().then(function(state){
+                this.updateGameModel(state);
+            }.bind(this),function(xhr){
+                this.publicController.getModalsController().apiErrorPopup(xhr);
+            }.bind(this));
+        },
+
         checkForSecondaryMove: function(state, update) {
             var events = state.thisUser.events;
             if (_.isEmpty(events)) {

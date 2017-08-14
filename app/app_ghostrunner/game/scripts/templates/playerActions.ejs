@@ -1,9 +1,22 @@
 <div class="actions-available">
 	<span class="team-role"><%= displayText %></span>
 	<div class="actions-buttons">
-		<% _.each(buttons, function(button) { %>
-			<button type="button" data-type="interface-btn" data-move="<%= button.gameMove %>" class="btn move" <% if (!button.enabled) { %>disabled<% }if(button.buttonType == 'LINEUP_ACTION'){%> style="background:#000;" <%} %>><%= button.displayText%></button>
-		<% }); %>
+		<div class="player-actions-block">
+			<% _.each(playerActions, function(button) { %>
+				<button type="button" data-type="interface-btn" data-move="<%= button.gameMove %>" class="btn move" <% if (!button.enabled || editStarted) { %>disabled<% } %> ><%= button.displayText%></button>
+			<% }); %>
+		</div>
+		<div class="lineUp-actions-block">
+			<div class="edit-buttons edit-top-buttons">
+				<button type="button" data-type="interface-btn" data-move="LINEUP_EDIT" class="btn move edit" <% if (editStarted) { %>disabled<% } %> >START</button>
+				<button type="button" data-type="interface-btn" data-move="LINEUP_DONE" class="btn move edit" <% if (!editStarted) { %>disabled<% } %> >DONE</button>
+			</div>
+			<div class="edit-buttons edit-bottom-buttons">
+				<% _.each(lineUpActions, function(button) { %>
+					<button type="button" data-type="interface-btn" data-move="<%= button.gameMove %>" class="btn move dark" <% if (!button.enabled || !editStarted) { %>disabled<% } %> ><%= button.displayText%></button>
+				<% }); %>
+			</div>
+		</div>
 	</div>
 </div>
 

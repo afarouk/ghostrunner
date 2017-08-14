@@ -286,6 +286,28 @@ define([
                 };
 
             return gateway.sendRequest('setPinchHitter', params);
+        },
+
+        startLineupEditing: function() {
+            var user = appCache.get('user'),
+                game = appCache.get('game'),
+                params = {
+                    UID: user.get('uid'),
+                    gameUUID: game.get('gameUUID')
+                };
+
+            return gateway.sendRequest('startLineupEditing', params);
+        },
+
+        stopLineupEditing: function() {
+            var user = appCache.get('user'),
+                game = appCache.get('game'),
+                params = {
+                    UID: user.get('uid'),
+                    gameUUID: game.get('gameUUID')
+                };
+
+            return gateway.sendRequest('stopLineupEditing', params);
         }
         
     });

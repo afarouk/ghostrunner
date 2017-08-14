@@ -40,7 +40,9 @@ module.exports = {
             getAvailablePlayers: ['GET', '/gaming/getAvailablePlayers'],
             retrievePlayerCard: ['GET', '/gaming/retrievePlayerCard'],
             retrievePinchHitterChoices: ['GET', '/gaming/retrievePinchHitterChoices'],
-            setPinchHitter:['POST', '/gaming/setPinchHitter']
+            setPinchHitter: ['POST', '/gaming/setPinchHitter'],
+            startLineupEditing: ['PUT', '/gaming/startLineupEditing'],
+            stopLineupEditing: ['PUT', '/gaming/stopLineupEditing']
         };
     }
 };
