@@ -406,15 +406,15 @@ define([
             return $def;
         },
 
-         refreshGamePopup: function(){
-             var $def = $.Deferred();
+        refreshGamePopup: function(){
+            var $def = $.Deferred();
             this.publicController.getChoiceController().showConfirmation({
-              message: ' Game Updated ',
+              message: 'Game Updated',
               confirm: 'ok'
             }).then(function() {
               $def.resolve();
             }.bind(this));
-             return $def;
+            return $def;
         },
 
         apiErrorPopup: function(xhr){

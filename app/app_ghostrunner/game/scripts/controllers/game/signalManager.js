@@ -96,16 +96,12 @@ define([
 
                 case 'REFRESH_STATE':
                     this.publicController.getStateController().refreshStatus(message.gameUUID);
-                    if(this.check == false)
-                    {
-                        
+                    if(this.check == false) {    
                         this.check = true;
-                        var test = this.publicController.getModalsController().RefreshGamePopup();
-                        if(test)
-                        {
+                        var test = this.publicController.getModalsController().refreshGamePopup();
+                        if(test) {
                            this.check = false;
                         }
-                        
                     }
                     break;
 

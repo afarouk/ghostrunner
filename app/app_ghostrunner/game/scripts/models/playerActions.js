@@ -37,6 +37,7 @@ define([
         		userAction = this.roles[role];
         	if (userAction) {
         		userAction.buttons = buttons;
+                //must call update always
         		this.set(userAction, {silent:true});
                 this.trigger('change');
         	}
