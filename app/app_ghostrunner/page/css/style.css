@@ -1,5 +1,5 @@
-/* #Table of Contents
 
+/* #Table of Contents
 1. Site Styles
 2. Header
 3. Navigation
@@ -2237,4 +2237,7 @@ button#delete_blog {
    float:right;
    width:200px;
    height:100px
+}
+.blog_content_right{
+	min-width:270px;
 }

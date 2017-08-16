@@ -17,22 +17,22 @@ window.pageName = 'BLOG';
 
         <!-- #navigation end -->
      <!-- .header-content -->
-        <div class="header-content" style="background:gray";>
+        <div class="header-content">
             <div class="header-content-wrapper">
-            	<div id="blog_edit" class="blog_content_left" style="border:2px solid #000">
+            	<div id="blog_edit" class="blog_content_left">
                     <form class="form-horizontal" id="left_content" action="javascript:void(0)" method="post">
 
                         <div class="form-group">
                           <label class="control-label col-sm-2" for="Title">*Title</label>
                           <div class="col-sm-10" >
-                            <input type="text" class="form-control" id="title"  name="title" style="border:2px solid #000">
+                            <input type="text" class="form-control" id="title"  name="title">
                           </div>
                         </div>
 
                         <div class="form-group">
                           <label class="control-label col-sm-2" for="Body">*Body</label>
                           <div class="col-sm-10" >
-                            <textarea class="form-control" id="body" rows="5" style="border:2px solid #000"></textarea>
+                            <textarea class="form-control" id="body" rows="5"></textarea>
                           </div>
                         </div>
 
@@ -77,7 +77,7 @@ window.pageName = 'BLOG';
                   </form>
                 </div>
 
-                <div id="blog_show" class="blog_content_right" style="min-width:270px">
+                <div id="blog_show" class="blog_content_right">
                     <div id="right_content" class="blog_right_content">
                         <div id="top_button">
                             <button type="button" class="btn btn-danger pull-left" id="refresh" >Refresh</button>
