@@ -41,18 +41,17 @@ define([
 				collection: this.options.players,
 				lineUp: this.lineUp,
 				headings: this.options.headings,
-                flag:true
+                flag: true
 			});
 
             this.availableplayers = new LineUpPlayersList({
 				collection: this.options.availableplayers,
 				lineUp: this.lineUp,
-				headings:this.options.headings,
-                flag:false
+				headings: this.options.headings,
+                flag: false
 			});
 			this.showChildView('players', this.lineUpPlayersList);
             this.showChildView('availableplayers', this.availableplayers);
-			//this.listenTo(this.lineUpPlayersList, 'lineUp:changed', //this.onLineUpChanged.bind(this));
 		},
 		onNameChanged: function() {
 			var name = this.ui.name.val();
@@ -108,7 +107,7 @@ define([
             }
 		},
 		onSave: function() {
-            var playersParams = {},
+            var playersParams,
             	oldPlayerRoleId = '',
             	oldLeagueId = '',
             	oldSeasonId = '',

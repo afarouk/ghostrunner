@@ -512,9 +512,8 @@ define([
             this.invitationDef = null;
             
             //Return to game if game running
-            //TODO should be tested in different cases
             var game = appCache.get('game');
-            if (game && game.get('gameUUID') && game.get('status') === 'RUNNING') {
+            if (game && game.get('gameUUID') && game.get('state') === 'RUNNING') {
                 this.publicController.getGameController().switchToGame();
             }
         },

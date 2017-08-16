@@ -6,7 +6,6 @@ define([
     ], function(){
     var SignalsManager = Mn.Object.extend({
 	onMessage: function(message) {
-            this.check = false;
             switch (message.signal) {
                 case 'Undefined':
                     break;
@@ -100,13 +99,8 @@ define([
 
                 case 'REFRESH_STATE':
                     this.publicController.getStateController().refreshStatus(message.gameUUID);
-                    if(this.check == false) {    
-                        this.check = true;
-                        var test = this.publicController.getModalsController().refreshGamePopup();
-                        if(test) {
-                           this.check = false;
-                        }
-                    }
+                    this.publicController.getModalsController().refreshGamePopup(); // Earlier it worked different way:
+                                                                                    //we had asked player confirmation to refresh
                     break;
 
                 default:

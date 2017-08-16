@@ -24,7 +24,7 @@ define([
 		serializeData: function() {
 			var props = this.model.get('properties'),
 				headings = this.options.headings,
-				values = [];
+				values;
 			values = _.map(headings, function(heading){
 				var index = heading.index;
 				if (index === 0) {

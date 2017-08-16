@@ -24,7 +24,7 @@ define([
 			var props = this.model.get('properties'),
 				headings = this.options.headings,
                 flag = this.options.flag,
-				values = [] ;
+				values;
 			values = _.map(headings, function(heading){
 				var index = heading.index;
 				if (index === 0) {
@@ -44,12 +44,13 @@ define([
 					}
 				}
 			}.bind(this));
-               return  {
-                flag:flag,
-				properties:values,
+			
+            return  {
+                flag: flag,
+				properties: values,
 				positions: this.model.get('positions'),
-								playerRoleId : this.model.get('playerRoleId'),
-			        	leagueId : this.model.get('leagueId'),
+				playerRoleId : this.model.get('playerRoleId'),
+			    leagueId : this.model.get('leagueId'),
                 seasonId : this.model.get('seasonId'),
                 playerId : this.model.get('playerId'),
                 position : this.model.get('position')
@@ -110,7 +111,7 @@ define([
 			    model.set('pitcherRole', role);
 		},
 		onPlayersSelectionAllow: function(allow) {
-        this.children.each(function(view) {
+        	this.children.each(function(view) {
 				var $checkbox = view.ui.select,
 					isChecked = $checkbox.is(':checked');
 				if (isChecked) {

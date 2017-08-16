@@ -36,8 +36,8 @@ define([
 			};
 		},
 		onRender: function() {
-                    var name = this.ui.name.val();
-                    this.lineUpName = name;
+            var name = this.ui.name.val();
+            this.lineUpName = name;
 			this.lineUpPlayersList = new LineUpPlayersList({
 				collection: this.options.players,
 				lineUp: this.lineUp,

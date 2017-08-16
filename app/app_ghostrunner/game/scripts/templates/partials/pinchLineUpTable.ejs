@@ -1,7 +1,6 @@
 <table>
-    
 	<thead>
-		<tr <% if(!flag){ %> style="visibility:hidden" <%} %> ><% _.each(headings, function(heading){ %>
+		<tr class="<% if(!flag) { %>vs-hidden<% } %>" ><% _.each(headings, function(heading){ %>
 			<td><%= heading.displayText %></td>
 		<% }) %>
 		<td class="select position">Pos</td>

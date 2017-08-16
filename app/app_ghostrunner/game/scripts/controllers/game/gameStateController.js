@@ -258,7 +258,6 @@ define([
         },
 
         onPlayerMove: function(moveEnum) {
-           
             service.makeMove({
                 payload: {
                     'actionType': 1, //I left that fields, because
@@ -266,19 +265,25 @@ define([
                     'gameMove': moveEnum
                 }
             }).then(function(state){
-                
-                 this.publicController.getModalsController().buttonPopup();
-                 if((moveEnum == 'SWING_AWAY' ||moveEnum == 'BUNT_ATTEMPT' || moveEnum == 'STEAL_BASE' || moveEnum == 'HIT_N_RUN_ATTEMP' || moveEnum == 'PITCH_TO_BATTER' || moveEnum == 'INTENTIONAL_WALK')&& state.thisUser.state == "MAKE_YOUR_MOVE")
-                 {
+                this.publicController.getModalsController().buttonPopup();
+                if (this.onCheckMoveConditions(moveEnum, state)) { // <-- check move conditions
                     this.refreshStatus(state.gameUUID);
-                 }
-                 else
-                 {
-                   this.checkForSecondaryMove(state, true);
-                 }
+                } else {
+                    this.checkForSecondaryMove(state, true);
+                }
             }.bind(this),function(xhr){
                 this.publicController.getModalsController().apiErrorPopup(xhr);
             }.bind(this));
+        },
+        onCheckMoveConditions: function(moveEnum, state) {
+            //was splited because could be long
+            return (moveEnum === 'SWING_AWAY' || 
+                    moveEnum === 'BUNT_ATTEMPT' || 
+                    moveEnum === 'STEAL_BASE' || 
+                    moveEnum === 'HIT_N_RUN_ATTEMP' || 
+                    moveEnum === 'PITCH_TO_BATTER' || 
+                    moveEnum === 'INTENTIONAL_WALK') && 
+                    state.thisUser.state === "MAKE_YOUR_MOVE";
         },
 
         onLineUpEditStart: function() {
