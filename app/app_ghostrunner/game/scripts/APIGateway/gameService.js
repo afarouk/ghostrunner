@@ -218,7 +218,6 @@ define([
                     teamUUID: teamUUID,
                     gameUUID: gameUUID
                 };
-                console.log("DEBUG DEBUG : Found gameUUID as:"+gameUUID);
             if (pitcher) params.type = 'PITCHER';
             return gateway.sendRequest('retrieveAvailableTeamPlayers', params);
         },
