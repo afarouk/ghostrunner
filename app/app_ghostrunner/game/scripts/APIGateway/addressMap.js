@@ -29,6 +29,7 @@ module.exports = {
             getTeams: ['GET', '/gaming/getMyTeams'],
             retrieveAvailablePlayers: ['GET', '/gaming/retrieveAvailablePlayers'],
             retrieveTeamPlayers: ['GET', '/gaming/retrieveTeamPlayers'],
+            retrieveAvailableTeamPlayers: ['GET', '/gaming/retrieveAvailableTeamPlayers'],
             retrieveLineUpPlayers: ['GET', '/gaming/retrieveLineUpPlayers'],
             createTeam: ['POST', '/gaming/createTeam'],
             createLineUp: ['POST', '/gaming/createLineUp'],

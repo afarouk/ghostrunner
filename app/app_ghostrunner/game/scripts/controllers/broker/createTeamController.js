@@ -35,9 +35,10 @@ define([
             this.layout = layout;
         },
         lineUpShape: function(layout, accept) {
+          console.log(" DEBUG DEBUG lineUpShape() called");
             var game = appCache.get('game'),
                 lineUp = new Backbone.Model(game.get('thisLineUp'));
-            service.retrieveTeamPlayers(lineUp)
+            service.retrieveAvailableTeamPlayers(lineUp)
                 .then(function(players){
                     this.onShapeLineUp(players, lineUp, accept);
                 }.bind(this));

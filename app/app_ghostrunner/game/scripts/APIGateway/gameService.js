@@ -167,7 +167,7 @@ define([
             params = params || {};
             params.UID = user.get('uid');
             if(game){
-             params.gameUUID = game.get('gameUUID');   
+             params.gameUUID = game.get('gameUUID');
             }
             return gateway.sendRequest('abandonGame',params);
         },
@@ -207,6 +207,20 @@ define([
                 params.UID = user.get('uid');
             }
             return gateway.sendRequest('retrieveTeamPlayers', params);
+        },
+
+        retrieveAvailableTeamPlayers: function(team, pitcher) {
+            var teamUUID = team.get('teamUUID'),
+                userId = appCache.get('user').get('uid'),
+                gameUUID=appCache.get('game').get('gameUUID'),
+                params = {
+                    UID:userId,
+                    teamUUID: teamUUID,
+                    gameUUID: gameUUID
+                };
+                console.log("DEBUG DEBUG : Found gameUUID as:"+gameUUID);
+            if (pitcher) params.type = 'PITCHER';
+            return gateway.sendRequest('retrieveAvailableTeamPlayers', params);
         },
 
         retrieveLineUpPlayers: function(team, lineUp) {
@@ -263,7 +277,7 @@ define([
             params.UID = user.get('uid');
             return gateway.sendRequest('retrievePlayerCard', params);
         },
-        
+
         retrievePinchHitterChoices: function() {
             var params ={};
             var user = appCache.get('user'),
@@ -275,11 +289,11 @@ define([
                 params = params || {};
             return gateway.sendRequest('retrievePinchHitterChoices', params);
         },
-        
+
         setPinchHitter: function(payload) {
             var params ={};
-        
-            var user = appCache.get('user');                       
+
+            var user = appCache.get('user');
                 params = {
                     UID: user.get('uid'),
                     payload: payload
@@ -309,7 +323,7 @@ define([
 
             return gateway.sendRequest('stopLineupEditing', params);
         },
-        
+
         forfeitLineupEditing: function() {
             var user = appCache.get('user'),
                 game = appCache.get('game'),
@@ -320,7 +334,7 @@ define([
 
             return gateway.sendRequest('forfeitLineupEditing', params);
         }
-        
+
     });
     return new GameService();
 });
