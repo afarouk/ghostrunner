@@ -210,12 +210,10 @@ define([
         },
 
         retrieveAvailableTeamPlayers: function(team, pitcher) {
-            var teamUUID = team.get('teamUUID'),
-                userId = appCache.get('user').get('uid'),
+            var userId = appCache.get('user').get('uid'),
                 gameUUID=appCache.get('game').get('gameUUID'),
                 params = {
                     UID:userId,
-                    teamUUID: teamUUID,
                     gameUUID: gameUUID
                 };
             if (pitcher) params.type = 'PITCHER';
