@@ -115,7 +115,7 @@ define([
             this.listenTo(lineUpCreation, 'lineUp:save', this.onLineUpSave.bind(this, lineUp, accept));
         },
         onLineUpSave: function(lineUp, accept) {
-            lineUp.remove(lineUp.at(0), {silent: true}); //remove starter
+            // lineUp.remove(lineUp.at(0), {silent: true}); //remove starter
             var game = appCache.get('game'),
                 players = lineUp.map(function(model) {
                     return {

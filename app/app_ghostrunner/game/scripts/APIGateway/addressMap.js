@@ -42,7 +42,8 @@ module.exports = {
             retrievePinchHitterChoices: ['GET', '/gaming/retrievePinchHitterChoices'],
             setPinchHitter: ['POST', '/gaming/setPinchHitter'],
             startLineupEditing: ['PUT', '/gaming/startLineupEditing'],
-            stopLineupEditing: ['PUT', '/gaming/stopLineupEditing']
+            stopLineupEditing: ['PUT', '/gaming/stopLineupEditing'],
+            forfeitLineupEditing: ['PUT', '/gaming/forfeitLineupEditing']
         };
     }
 };

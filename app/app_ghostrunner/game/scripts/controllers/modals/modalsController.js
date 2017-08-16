@@ -159,9 +159,6 @@ define([
             return $def;
         },
 
-
-
-
         onOtherPlayerLineUp: function(gameModel) {
             var def = $.Deferred(),
                 otherLineUp = gameModel.get('otherLineUp'),
@@ -425,7 +422,7 @@ define([
             }
             else
             {
-                 message = "Something went wrong. ";
+                message = "Something went wrong. ";
             }
             this.publicController.getChoiceController().showConfirmation({
                 message: message,
@@ -435,16 +432,36 @@ define([
             }.bind(this));
         },
 
-
         buttonPopup: function(){
-             var $def = $.Deferred();
+            var $def = $.Deferred();
             this.publicController.getChoiceController().showConfirmation({
-              message: ' Move done ',
-              confirm: 'ok'
+                message: ' Move done ',
+                confirm: 'ok'
             }).then(function() {
-              $def.resolve();
+                $def.resolve();
             }.bind(this));
         },
+
+        onLineUpEditConfirmation: function() {
+            this.publicController.getChoiceController().showConfirmation({
+                message: 'Edit your lineup?',
+                cancel: 'cancel',
+                confirm: 'confirm'
+            }).then(function(){
+                this.onLineUpEditConfirmed();
+            }.bind(this), function() {
+                this.onLineUpEditRejected();
+            }.bind(this));
+        },
+
+        onLineUpEditConfirmed: function() {
+            // this.publicController.getGameController().showLoader();
+            this.publicController.getStateController().onLineUpEditStart();
+        },
+
+        onLineUpEditRejected: function() {
+            this.publicController.getStateController().onLineUpEditReject();
+        }
     });
 
     return new ModalsController();

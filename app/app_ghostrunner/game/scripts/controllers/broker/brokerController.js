@@ -514,7 +514,7 @@ define([
             //Return to game if game running
             //TODO should be tested in different cases
             var game = appCache.get('game');
-            if (game && game.get('gameUUID')) {
+            if (game && game.get('gameUUID') && game.get('status') === 'RUNNING') {
                 this.publicController.getGameController().switchToGame();
             }
         },

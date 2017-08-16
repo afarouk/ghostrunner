@@ -241,7 +241,6 @@ define([
                 }).then(function() {
                     this.publicController.getModalsController().onSelectRole()
                         .then(function(role) {
-                            //TODO select players for game (team)
                             this.startGame(gameUUID, role);
                         }.bind(this),function(xhr){
                             this.publicController.getModalsController().apiErrorPopup(xhr);
@@ -262,8 +261,8 @@ define([
            
             service.makeMove({
                 payload: {
-                    'actionType':1, //I left that fields, because
-                    'actionDetail':'some string', //It can be necessary in a future
+                    'actionType': 1, //I left that fields, because
+                    'actionDetail': 'some string', //It can be necessary in a future
                     'gameMove': moveEnum
                 }
             }).then(function(state){
@@ -278,20 +277,27 @@ define([
                    this.checkForSecondaryMove(state, true);
                  }
             }.bind(this),function(xhr){
-                //this.publicController.getGameController().hideLoader();
                 this.publicController.getModalsController().apiErrorPopup(xhr);
             }.bind(this));
         },
 
-        onLineUpEditStart: function(actionEnum) {
+        onLineUpEditStart: function() {
             service.startLineupEditing().then(function(state){
                 this.updateGameModel(state);
             }.bind(this),function(xhr){
                 this.publicController.getModalsController().apiErrorPopup(xhr);
             }.bind(this));
         },
-        onLineUpEditDone: function(actionEnum) {
+        onLineUpEditDone: function() {
             service.stopLineupEditing().then(function(state){
+                this.updateGameModel(state);
+            }.bind(this),function(xhr){
+                this.publicController.getModalsController().apiErrorPopup(xhr);
+            }.bind(this));
+        },
+
+        onLineUpEditReject: function() {
+            service.forfeitLineupEditing().then(function(state){
                 this.updateGameModel(state);
             }.bind(this),function(xhr){
                 this.publicController.getModalsController().apiErrorPopup(xhr);

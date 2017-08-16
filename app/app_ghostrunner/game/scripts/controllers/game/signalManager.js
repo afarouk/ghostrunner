@@ -39,6 +39,10 @@ define([
                     this.publicController.getStateController().beforeRefreshStatus(message);
                     break;
 
+                case 'LINEUP_EDITED':
+                    this.publicController.getModalsController().onLineUpEditConfirmation(message.gameUUID);
+                    break;
+
                 case 'INVITATION_ACCEPTED':
                     this.publicController.getStateController().refreshStatus(message.gameUUID);
                     break;

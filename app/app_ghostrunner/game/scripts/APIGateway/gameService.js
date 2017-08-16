@@ -308,6 +308,17 @@ define([
                 };
 
             return gateway.sendRequest('stopLineupEditing', params);
+        },
+        
+        forfeitLineupEditing: function() {
+            var user = appCache.get('user'),
+                game = appCache.get('game'),
+                params = {
+                    UID: user.get('uid'),
+                    gameUUID: game.get('gameUUID')
+                };
+
+            return gateway.sendRequest('forfeitLineupEditing', params);
         }
         
     });
