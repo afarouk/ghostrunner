@@ -16,11 +16,31 @@ define([
                     this.publicController.getGameController().hideLoader();
                     if (response.games.length > 0) {
                         this.publicController.getModalsController().onRuningGamePresented(response.games[0]);
+                    } else {
+                        this.checkIfInvitationsAreAvailable();
                     }
                 }.bind(this), function(xhr){
                     this.publicController.getGameController().hideLoader();
                     this.publicController.getModalsController().apiErrorPopup(xhr);
                 }.bind(this));
+        },
+
+        checkIfInvitationsAreAvailable: function() {
+            this.publicController.getGameController().showLoader();
+            service.getMyInvitations()
+                .then(function(response){
+                    this.publicController.getGameController().hideLoader();
+                    if( response.games.length > 0 ){
+                       this.checkIfShowInvitationNeeded(response.games);
+                    }
+                }.bind(this), function(xhr){
+                    this.hideLoader();
+                    this.publicController.getModalsController().apiErrorPopup(xhr);
+                }.bind(this));
+        },
+
+        checkIfShowInvitationNeeded: function(games) {
+            this.publicController.getModalsController().onReceivedInvitationPresented(games);
         },
 
         startGame: function(gameUUID, role) {

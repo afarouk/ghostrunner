@@ -132,6 +132,17 @@ define([
             }.bind(this));
         },
 
+        onReceivedInvitationPresented: function(game) {
+            this.publicController.getChoiceController().showConfirmation({
+                message: 'You have received an invitation. Please, check it.',
+                confirm: 'Ok'
+            }).then(function(){
+                //TODO maybe open invitations selector or answer to first available iinvitation
+                //as idea we could show circle with nubmer of available invittations as on communitiexpress
+                // or something similar
+            }.bind(this));
+        },
+
         //invitation
         onInvitationReceived: function(gameModel) {
             var other = gameModel.get('otherUser').user.userName,
