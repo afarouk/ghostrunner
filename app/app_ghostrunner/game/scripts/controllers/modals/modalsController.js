@@ -35,7 +35,10 @@ define([
                 confirm: 'confirm'
             }).then(function(){
                 service.deleteTeam(teamUUID)
-                    .then(this.afterTeamRemoved.bind(this, teamName, $def));
+                    .then(this.afterTeamRemoved.bind(this, teamName, $def), function(xhr){
+                        this.publicController.getGameController().hideLoader();
+                        this.publicController.getModalsController().apiErrorPopup(xhr);
+                    }.bind(this));
             }.bind(this), function() {
                 $def.reject();
             }.bind(this));
@@ -74,10 +77,24 @@ define([
         //     console.log('team removed');
         // },
 
-        onMessageFromAnotherUser: function() {
+        onMessageFromAnotherUserPause: function() {
             var $def = $.Deferred();
             this.publicController.getChoiceController().showConfirmation({
                 message: 'Message received regarding other game.<br>Pause game and answer?',
+                cancel: 'cancel',
+                confirm: 'next'
+            }).then(function(){
+                $def.resolve();
+            }.bind(this), function() {
+                $def.reject();
+            }.bind(this));
+            return $def;
+        },
+
+        onMessageFromAnotherUserSwitch: function() {
+            var $def = $.Deferred();
+            this.publicController.getChoiceController().showConfirmation({
+                message: 'Message received regarding other game.<br>Switch and answer?',
                 cancel: 'cancel',
                 confirm: 'next'
             }).then(function(){
@@ -125,12 +142,12 @@ define([
                 reject: 'no',
                 confirm: 'yes'
             }).then(function(){
-
                 this.onInvitationConfirmed(gameModel);
-
             }.bind(this), function(type) {
                 if (type === 'reject') {
                     this.publicController.getStateController().onInvitationRejected(gameModel);
+                } else {
+                    this.publicController.getStateController().killGame();
                 }
             }.bind(this));
             console.log('invitation received');
@@ -152,6 +169,28 @@ define([
             var $def = $.Deferred();
             this.publicController.getChoiceController().showConfirmation({
                     message: 'Invitation sent to ' + userName,
+                    confirm: 'ok'
+                }).then(function() {
+                    $def.resolve();
+                }.bind(this));
+            return $def;
+        },
+
+        afterStarterSelected: function() {
+            var $def = $.Deferred();
+            this.publicController.getChoiceController().showConfirmation({
+                    message: 'Sterter selection sent',
+                    confirm: 'ok'
+                }).then(function() {
+                    $def.resolve();
+                }.bind(this));
+            return $def;
+        },
+
+        afterLineUpSelected: function() {
+            var $def = $.Deferred();
+            this.publicController.getChoiceController().showConfirmation({
+                    message: 'Lineup selection sent',
                     confirm: 'ok'
                 }).then(function() {
                     $def.resolve();
@@ -274,8 +313,9 @@ define([
                     this.publicController.getGameController().switchToBroker();
                     this.publicController.getStateController().refreshStatus();
                 }
-                .bind(this), function(err){
+                .bind(this), function(xhr){
                     this.publicController.getGameController().hideLoader();
+                    this.publicController.getModalsController().apiErrorPopup(xhr);
                 }.bind(this));
             }.bind(this), function() {
                 //todo
@@ -297,7 +337,8 @@ define([
                 message: message.payload,
                 confirm: 'ok'
             }).then(function() {
-                this.publicController.getStateController().refreshStatus();
+                this.publicController.getStateController().killGame();
+                this.publicController.getBrokerController().reRender();
             }.bind(this));
         },
 
@@ -335,8 +376,9 @@ define([
                     this.publicController.getGameController().switchToBroker();
                     this.publicController.getStateController().refreshStatus();
                 }
-                .bind(this), function(err){
+                .bind(this), function(xhr){
                     this.publicController.getGameController().hideLoader();
+                    this.publicController.getModalsController().apiErrorPopup(xhr);
                 }.bind(this));
             }.bind(this), function() {
                 //todo

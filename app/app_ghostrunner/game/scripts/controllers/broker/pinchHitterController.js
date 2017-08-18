@@ -18,6 +18,8 @@ define([
             service.retrievePinchHitterChoices(lineUp)
                 .then(function(players){
                     this.onShapeLineUp(players, lineUp, accept);
+                }.bind(this), function(xhr){
+                    this.publicController.getModalsController().apiErrorPopup(xhr);
                 }.bind(this));
             this.layout = layout;
         },
@@ -57,6 +59,8 @@ define([
             service.setPinchHitter(params).then(function(result){
                 this.publicController.getModalsController().afterSaveRequest().then(function(){
                     this.backInGame( params.gameUUID , result.state);
+                }.bind(this), function(xhr){
+                    this.publicController.getModalsController().apiErrorPopup(xhr);
                 }.bind(this));
             }.bind(this));
         },

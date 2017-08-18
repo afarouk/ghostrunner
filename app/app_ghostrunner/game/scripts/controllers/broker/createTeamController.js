@@ -17,6 +17,9 @@ define([
             service.retrieveAvailablePlayers()
                 .then(function(players){
                     this.onCreateTeam(players);
+                }.bind(this), function(xhr){
+                    this.publicController.getBrokerController().hideLoader();
+                    this.publicController.getModalsController().apiErrorPopup(xhr);
                 }.bind(this));
             this.layout = layout;
         },
@@ -24,6 +27,9 @@ define([
             service.retrieveTeamPlayers(team)
                 .then(function(players){
                     this.onEditTeam(players, team);
+                }.bind(this), function(xhr){
+                    this.publicController.getBrokerController().hideLoader();
+                    this.publicController.getModalsController().apiErrorPopup(xhr);
                 }.bind(this));
             this.layout = layout;
         },
@@ -31,6 +37,9 @@ define([
             service.retrieveTeamPlayers(team, 'PITCHER')
                 .then(function(players){
                     this.onSelectCandidate(players, team);
+                }.bind(this), function(xhr){
+                    this.publicController.getBrokerController().hideLoader();
+                    this.publicController.getModalsController().apiErrorPopup(xhr);
                 }.bind(this));
             this.layout = layout;
         },
@@ -40,6 +49,9 @@ define([
             service.retrieveAvailableTeamPlayers(lineUp)
                 .then(function(players){
                     this.onShapeLineUp(players, lineUp, accept);
+                }.bind(this), function(xhr){
+                    this.publicController.getBrokerController().hideLoader();
+                    this.publicController.getModalsController().apiErrorPopup(xhr);
                 }.bind(this));
             this.layout = layout;
         },
@@ -75,6 +87,9 @@ define([
             service.createTeam(teamData)
                 .then(function(){
                     this.onReturnToTeamSelection();
+                }.bind(this), function(xhr){
+                    this.publicController.getBrokerController().hideLoader();
+                    this.publicController.getModalsController().apiErrorPopup(xhr);
                 }.bind(this));
         },
 
@@ -142,7 +157,14 @@ define([
             } else {
                 service.selectLineUp(lineUpData)
                     .then(function(){
-                        this.layout.trigger('cancel');//temporary
+                        this.publicController.getStateController().killGame();
+                        this.publicController.getModalsController().afterLineUpSelected()
+                            .then(function(){
+                                this.layout.trigger('cancel');//temporary
+                            }.bind(this));
+                    }.bind(this), function(xhr){
+                        this.publicController.getBrokerController().hideLoader();
+                        this.publicController.getModalsController().apiErrorPopup(xhr);
                     }.bind(this));
             }
         }

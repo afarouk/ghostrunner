@@ -27,7 +27,9 @@ define([
 				position: player.position.enumText
 			}).then(function(card) {
 				this.publicController.getChoiceController().showPlayersCard(card);
-			}.bind(this));
+			}.bind(this), function(xhr){
+                this.publicController.getModalsController().apiErrorPopup(xhr);
+            }.bind(this));
 		},
 		onGameModelChange: function(gameModel) {
 			this.view.model.set(gameModel.getBaseballFieldModel())

@@ -112,16 +112,9 @@ define([
             delete credentials.callback;
             service.selectStarterAndInvite(credentials)
                 .then(function(result){
-                    var gameModel = this.getGameModel();
-                    if (!gameModel) {
-                        gameModel = new GameModel(result);
-                    } else {
-                        gameModel.set('gameUUID', result.gameUUID);
-                    }
                     onInvitationSent(true, result);
-                    this.updateGameModel(result);
+                    this.killGame();
                 }.bind(this), function(xhr){
-                    //on error
                     this.publicController.getGameController().hideLoader();
                     this.publicController.getModalsController().apiErrorPopup(xhr);
                 }.bind(this));
@@ -132,15 +125,8 @@ define([
             delete credentials.callback;
             service.selectStarterAndInviteAndRegister(credentials)
                 .then(function(result){
-                    var gameModel = this.getGameModel();
-                    if (!gameModel) {
-                        gameModel = new GameModel(result);
-                    } else {
-                        gameModel.set('gameUUID', result.gameUUID);
-                    }
-
                     onInvitationSent(true, result);
-                    this.updateGameModel(result);
+                    this.killGame();
                 }.bind(this), function(err){
                     onInvitationSent(false, err);
                     this.publicController.getModalsController().apiErrorPopup(err);
@@ -169,10 +155,12 @@ define([
                 lineUpDisplayText: lineUpName,
                 player: player
             }).then(function(state) {
-                this.publicController.getBrokerController().reRender();
-                this.updateGameModel(state);
+                this.killGame();
+                this.publicController.getModalsController().afterStarterSelected()
+                    .then(function(){
+                        this.publicController.getBrokerController().reRender();
+                    }.bind(this));
             }.bind(this), function(xhr) {
-                //on error
                 this.publicController.getModalsController().apiErrorPopup(xhr);
             }.bind(this));
         },
@@ -181,21 +169,32 @@ define([
             var gameUUID = message.gameUUID,
                 gameModel = this.getGameModel();
             if (gameModel && gameModel.get('gameUUID') !== gameUUID) {
-                this.publicController.getModalsController().onMessageFromAnotherUser()
-                    .then(function(){
-                        this.onPauseGame(gameModel.get('gameUUID'))
-                            .then(function(status){
-                                this.publicController.getGameController().hideLoader();
-                                this.publicController.getGameController().switchToBroker();
-                                this.onPayloadMsgBeforeRefresh(message);
-                            }
-                            .bind(this), function(xhr){
-                                this.publicController.getModalsController().apiErrorPopup(xhr);
-                                this.publicController.getGameController().hideLoader();
-                            }.bind(this));
-                    }.bind(this), function(){
-                        //ignore message
-                    }.bind(this));
+                if (gameModel.get('state') === 'RUNNING') {
+                    this.publicController.getModalsController().onMessageFromAnotherUserPause()
+                        .then(function(){
+                            this.onPauseGame(gameModel.get('gameUUID'))
+                                .then(function(status){
+                                    this.publicController.getGameController().hideLoader();
+                                    this.publicController.getGameController().switchToBroker();
+                                    this.onPayloadMsgBeforeRefresh(message);
+                                }
+                                .bind(this), function(xhr){
+                                    this.publicController.getModalsController().apiErrorPopup(xhr);
+                                    this.publicController.getGameController().hideLoader();
+                                }.bind(this));
+                        }.bind(this), function(){
+                            //ignore message
+                        }.bind(this));
+                    } else {
+                        this.publicController.getModalsController().onMessageFromAnotherUserSwitch()
+                        .then(function(){
+                            this.publicController.getGameController().hideLoader();
+                            this.publicController.getGameController().switchToBroker();
+                            this.onPayloadMsgBeforeRefresh(message);
+                        }.bind(this), function(){
+                            //ignore message
+                        }.bind(this));
+                    }
             } else {
                 this.onPayloadMsgBeforeRefresh(message);
             }
@@ -221,10 +220,12 @@ define([
                 preferredRole: role,
                 payload: lineUpData
             }).then(function(state){
-                this.publicController.getBrokerController().reRender();
-                this.updateGameModel(state);
+                this.killGame();
+                this.publicController.getModalsController().afterLineUpSelected()
+                    .then(function(){
+                        this.publicController.getBrokerController().reRender();
+                    }.bind(this));
             }.bind(this), function(err){
-                //on error
                 this.publicController.getModalsController().apiErrorPopup(err);
             }.bind(this));
         },
@@ -251,6 +252,7 @@ define([
 
         onInvitationRejected: function(game) {
             service.rejectInvitation(game).then(function(){
+                this.killGame();
                 this.publicController.getBrokerController().reRender();
             }.bind(this),function(xhr){
                 this.publicController.getModalsController().apiErrorPopup(xhr);

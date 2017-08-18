@@ -187,8 +187,9 @@ define([
                         } else {
                             this.showEmptyList('No users are present.');
                         }
-                    }.bind(this), function(err){
-                        //TODO error
+                    }.bind(this), function(xhr){
+                        this.hideLoader();
+                        this.publicController.getModalsController().apiErrorPopup(xhr);
                     }.bind(this));
             }
         },
@@ -258,8 +259,9 @@ define([
                     .then(function(response){
                         this.hideLoader();
                         this.showMyTeamsList(response);
-                    }.bind(this), function(err){
-
+                    }.bind(this), function(xhr){
+                        this.hideLoader();
+                        this.publicController.getModalsController().apiErrorPopup(xhr);
                     }.bind(this));
             }
         },
@@ -286,8 +288,9 @@ define([
                     .then(function(response){
                         this.hideLoader();
                         this.showTeamsList(response);
-                    }.bind(this), function(err){
-
+                    }.bind(this), function(xhr){
+                        this.hideLoader();
+                        this.publicController.getModalsController().apiErrorPopup(xhr);
                     }.bind(this));
             }
         },
@@ -433,8 +436,9 @@ define([
                         } else {
                             this.showEmptyList('No invitations outstanding.');
                         }
-                    }.bind(this), function(err){
-                        //TODO error
+                    }.bind(this), function(xhr){
+                        this.hideLoader();
+                        this.publicController.getModalsController().apiErrorPopup(xhr);
                     }.bind(this));
             }
         },
@@ -459,8 +463,9 @@ define([
                         } else {
                             this.showEmptyList('No active or paused games.');
                         }
-                    }.bind(this), function(err){
-                        //TODO error
+                    }.bind(this), function(xhr){
+                        this.hideLoader();
+                        this.publicController.getModalsController().apiErrorPopup(xhr);
                     }.bind(this));
             }
         },
@@ -515,6 +520,8 @@ define([
             var game = appCache.get('game');
             if (game && game.get('gameUUID') && game.get('state') === 'RUNNING') {
                 this.publicController.getGameController().switchToGame();
+            } else {
+                this.publicController.getStateController().killGame();
             }
         },
 
