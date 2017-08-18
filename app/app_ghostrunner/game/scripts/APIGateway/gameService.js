@@ -330,6 +330,18 @@ define([
                 };
 
             return gateway.sendRequest('forfeitLineupEditing', params);
+        },
+
+        setShowTossAnimation: function(show) {
+            var user = appCache.get('user'),
+                game = appCache.get('game'),
+                params = {
+                    UID: user.get('uid'),
+                    gameUUID: game.get('gameUUID'),
+                    showTossAnimation: show
+                };
+
+            return gateway.sendRequest('setShowTossAnimation', params);
         }
 
     });

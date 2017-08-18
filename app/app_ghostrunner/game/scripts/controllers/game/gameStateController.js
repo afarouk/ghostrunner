@@ -257,6 +257,14 @@ define([
             }.bind(this));
         },
 
+        setShowTossAnimation: function(gameModel, show) {
+            service.setShowTossAnimation(show).then(function(state){
+                gameModel.set('showTossAnimation', show, {silent: true});
+            }.bind(this),function(xhr){
+                this.publicController.getModalsController().apiErrorPopup(xhr);
+            }.bind(this));
+        },
+
         onPlayerMove: function(moveEnum) {
             service.makeMove({
                 payload: {

@@ -23,9 +23,16 @@ define([
         },
         switchToGame: function() {
             if (this.appState === 'GAME') return;
-            var gameModel = appCache.get('game');
+            var gameModel = appCache.get('game'),
+                showTossAnimation = gameModel.get('showTossAnimation');
             this.appState = 'GAME';
-            this.appLayout.renderGame(gameModel.get('showTossAnimation'));
+            this.appLayout.renderGame(showTossAnimation);
+
+            //show toss animation only first time but we could set it true if we need
+            if (showTossAnimation) {
+                this.publicController.getStateController().setShowTossAnimation(gameModel, false);
+            }
+
             this.appLayout.getRegion('game').$el.addClass('active');
             this.appLayout.getRegion('broker').$el.removeClass('active');
         },

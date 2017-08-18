@@ -44,7 +44,8 @@ module.exports = {
             setPinchHitter: ['POST', '/gaming/setPinchHitter'],
             startLineupEditing: ['PUT', '/gaming/startLineupEditing'],
             stopLineupEditing: ['PUT', '/gaming/stopLineupEditing'],
-            forfeitLineupEditing: ['PUT', '/gaming/forfeitLineupEditing']
+            forfeitLineupEditing: ['PUT', '/gaming/forfeitLineupEditing'],
+            setShowTossAnimation: ['PUT', '/gaming/setShowTossAnimation'],
         };
     }
 };
