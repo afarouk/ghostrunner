@@ -40,7 +40,20 @@ define([
         },
 
         checkIfShowInvitationNeeded: function(games) {
-            this.publicController.getModalsController().onReceivedInvitationPresented(games);
+            //TODO should check if invitation in proper state
+            //and then show popup
+            var invite = _.find(games, function(game){
+                if (!game.initiator) {
+                    if (game.state === 'STARTER' || game.state === 'LINEUP') { //I am not sure what satates should be here
+                        return game;
+                    }
+                } else {
+                    //TODO check cases
+                }
+            });
+            if (invite) {
+                this.publicController.getModalsController().onReceivedInvitationPresented(invite);
+            }
         },
 
         startGame: function(gameUUID, role) {
