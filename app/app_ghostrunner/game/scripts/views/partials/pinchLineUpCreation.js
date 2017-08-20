@@ -4,7 +4,8 @@
 
 define([
 	'ejs!../../templates/partials/pinchLineUpCreation.ejs',
-	'./pinchlineUpPlayersList'
+	'ejs!../../templates/partials/pinchLineUpFielder.ejs',
+	'ejs!../../templates/partials/pinchLineUpTable.ejs'
 	], function(template, LineUpPlayersList){
 	var LineUpCreationView = Mn.View.extend({
 		template: template,

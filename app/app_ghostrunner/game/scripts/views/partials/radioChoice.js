@@ -3,7 +3,7 @@
 'use strict';
 
 define([
-	'ejs!../../templates/partials/RadioChoice.ejs'
+	'ejs!../../templates/partials/radioChoice.ejs'
 	], function(template){
 	var RadioChoiceView = Mn.View.extend({
 		className: 'radio-choice',
@@ -19,7 +19,7 @@ define([
 		initialize: function (options) {
 		},
 		onRender: function() {
-			
+
 		},
 		onRadioChecked: function() {
 			this.ui.send.attr('disabled', false);

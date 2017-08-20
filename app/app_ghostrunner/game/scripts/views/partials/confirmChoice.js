@@ -3,7 +3,7 @@
 'use strict';
 
 define([
-	'ejs!../../templates/partials/ConfirmChoice.ejs'
+	'ejs!../../templates/partials/confirmChoice.ejs'
 	], function(template){
 	var ConfirmChoiceView = Mn.View.extend({
 		className: 'confirm-choice',
@@ -15,7 +15,7 @@ define([
 
 		},
 		onRender: function() {
-			
+
 		},
 		onButtonClicked: function (e) {
 			var $target = $(e.currentTarget),
