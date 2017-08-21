@@ -40,7 +40,7 @@ define([
         },
 
         checkIfShowInvitationNeeded: function(games) {
-            var invite = _.find(games, function(game){
+            var invites = _.filter(games, function(game){
                 if (!game.initiator) {
                     if (game.state === 'STARTER_INVITING' || game.state === 'LINEUP') {
                         return game;
@@ -51,8 +51,9 @@ define([
                     }
                 }
             });
-            if (invite) {
-                this.publicController.getModalsController().onReceivedInvitationPresented(invite);
+            if (invites && invites.length > 0) {
+                this.publicController.getBrokerController().showInvitesNumber(invites.length);
+                this.publicController.getModalsController().onReceivedInvitationPresented(invites);
             }
         },
 

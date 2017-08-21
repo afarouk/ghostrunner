@@ -132,9 +132,12 @@ define([
             }.bind(this));
         },
 
-        onReceivedInvitationPresented: function(game) {
+        onReceivedInvitationPresented: function(invites) {
+            var message = invites.length > 1 ? 
+                'You have received invitations. Please, check them.' : 
+                'You have received an invitation. Please, check it.';
             this.publicController.getChoiceController().showConfirmation({
-                message: 'You have received an invitation. Please, check it.',
+                message: message,
                 confirm: 'Ok'
             }).then(function(){
                 //TODO maybe open invitations selector or answer to first available iinvitation

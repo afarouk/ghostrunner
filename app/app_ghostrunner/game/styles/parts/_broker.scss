@@ -624,6 +624,29 @@
                 button.inactive {
                     pointer-events: none;
                 }
+
+                button.my-invites-btn {
+                    position: relative;
+                    .invites-number {
+                        position: absolute;
+                        top: 0;
+                        right: 0;
+                        margin-top: -4px;
+                        margin-right: -6px;
+                        border-radius: 50%;
+                        background-color: red;
+                        padding: 0 3px;
+                        border: 1px solid white;
+                        font-size: 12px;
+                        font-weight: 600;
+                        -webkit-font-smoothing: auto;
+                        visibility: hidden;
+
+                        &.shown {
+                            visibility: visible;
+                        }
+                    }
+                }
             }
 
             .broker-list {
@@ -805,6 +828,7 @@
                     }
                     button.confirm-btn {
                         display: block;
+                        max-width: 100px;
                     }
                     button.cancel-btn {
                         display: none;

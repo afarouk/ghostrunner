@@ -21,6 +21,7 @@ define([
 			invite: '[name="invite"]',
 			byemail: '[name="byemail"]',
 			my_invites: '[name="my_invites"]',
+			my_invites_number: '[name="my_invites_number"]',
 			my_games: '[name="my_games"]',
 			createTeam: '[name="create-team"]',
 			teamConfirm: '[name="team-confirm"]',
@@ -37,6 +38,9 @@ define([
 			'click @ui.createTeam': 'team:create',
 			'click @ui.teamConfirm': 'team:confirm',
 			'click @ui.confirm': 'confirm'
+		},
+		onShowInvitesNumber: function(number) {
+			this.ui.my_invites_number.addClass('shown').text(number);
 		}
 	});
 	return MainBrokerView;

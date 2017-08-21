@@ -542,6 +542,10 @@ define([
 
             this.publicController.getPinchHitterController().retrivePinchHit(this.view);
 		},
+
+        showInvitesNumber: function(number) {
+            this.view.triggerMethod('showInvitesNumber', number);
+        }
     });
 
     return new BrokerController();
