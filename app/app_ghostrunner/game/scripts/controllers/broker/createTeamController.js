@@ -34,7 +34,7 @@ define([
             this.layout = layout;
         },
         selectCandidate: function(layout, team) {
-            service.retrieveTeamPlayers(team, 'PITCHER')
+            service.retrieveTeamPlayers(team, 'STARTER')
                 .then(function(players){
                     this.onSelectCandidate(players, team);
                 }.bind(this), function(xhr){

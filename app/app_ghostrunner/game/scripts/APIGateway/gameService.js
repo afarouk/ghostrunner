@@ -196,27 +196,27 @@ define([
             return gateway.sendRequest('retrieveAvailablePlayers', params);
         },
 
-        retrieveTeamPlayers: function(team, pitcher) {
+        retrieveTeamPlayers: function(team, playerType) {
             var teamUUID = team.get('teamUUID'),
                 user = appCache.get('user'),
                 params = {
                     teamUUID: teamUUID
                 };
-            if (pitcher) params.type = 'PITCHER';
+            if (playerType) params.type = playerType;
             if (team.get('type').enumText === 'PRIVATE') {
                 params.UID = user.get('uid');
             }
             return gateway.sendRequest('retrieveTeamPlayers', params);
         },
 
-        retrieveAvailableTeamPlayers: function(team, pitcher) {
+        retrieveAvailableTeamPlayers: function(team, playerType) {
             var userId = appCache.get('user').get('uid'),
                 gameUUID=appCache.get('game').get('gameUUID'),
                 params = {
                     UID:userId,
                     gameUUID: gameUUID
                 };
-            if (pitcher) params.type = 'PITCHER';
+            if (playerType) params.type = playerType;
             return gateway.sendRequest('retrieveAvailableTeamPlayers', params);
         },
 
