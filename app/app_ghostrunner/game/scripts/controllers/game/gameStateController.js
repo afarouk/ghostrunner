@@ -40,15 +40,15 @@ define([
         },
 
         checkIfShowInvitationNeeded: function(games) {
-            //TODO should check if invitation in proper state
-            //and then show popup
             var invite = _.find(games, function(game){
                 if (!game.initiator) {
-                    if (game.state === 'STARTER' || game.state === 'LINEUP') { //I am not sure what satates should be here
+                    if (game.state === 'STARTER_INVITING' || game.state === 'LINEUP') {
                         return game;
                     }
                 } else {
-                    //TODO check cases
+                    if (game.state === 'STARTERS' || game.state === 'LINEUPS_ACCEPTED') {
+                        return game;
+                    }
                 }
             });
             if (invite) {
