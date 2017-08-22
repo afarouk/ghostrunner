@@ -14,7 +14,7 @@
             <div class="row">
 
                 <div class="col-sm-4 widget"> <!-- 1 -->
-                	<img src="images/logo.png" alt="Logo" class="footer-logo" />
+                	<img src="images/GhostRunner.png" alt="Logo" class="footer-logo" />
                     <p>The mission of GhostRunner, LLC is to provide our customers with the most satisfying sports simulation experience possible.  Our games are played in real time, on virtually any mobile device.  Our customers create and manage favorite teams - filled with favorite players -  against their friends and colleagues... and finish the game ready to play again.</p>
                     <div class="footer-socials">
                         <a href="https://www.facebook.com/" title="facebook"><i class="fa fa-facebook"></i></a>
@@ -62,7 +62,7 @@
 
         <div class="footer-copyright">
         	<div class="container">
-                <p>&copy; 2016 Copyrights by <a href="http://affapress.com" target="_blank">GhostRunner, LLC</a> - All rights reserved.</p>
+                <p>&copy; 2016  <a href="http://affapress.com" target="_blank">GhostRunner, LLC</a> - All rights reserved.</p>
             </div>
         </div>
 
