@@ -84,8 +84,10 @@ window.pageName = 'BLOG';
                             <button type="button" class="btn btn-danger pull-right" id="delete_blog">Delete</button>
                         </div>
                         <div id="blog_view_container" class="blog_view_container">
-                            <img id="heading_image" src="images/talkin_banner_pic.png">
-                            <h4 align="left" >Talkin' Baseball</br> with JimmyG</h4>
+                            <div class="image_bg">
+                                <h4 align="right" >Talkin' Baseball</br> with JimmyG</h4></div>
+<!--                            <img id="heading_image" src="images/talkin_banner_pic.png">
+                            <h4 align="left" >Talkin' Baseball</br> with JimmyG</h4>-->
                             <br/><br/>
                         <h4 id="header_blog_view"></h4>
 

@@ -24,12 +24,12 @@
         
 	    init: function() {
             var params = this.parseQueryString(window.location.search),UID;
-			this.listenLogin();
-			this.listenRegister();
-            this.listenContact();
-            if(window.pageName == 'BLOG'){ 
-            this.listenBlog();
-            this.checkingBlog();  
+			 this.listenLogin();
+			 this.listenRegister();
+                         this.listenContact();
+            if(window.pageName == 'BLOG' || window.pageName == 'INDEX'){ 
+                this.checkingBlog();  
+                this.listenBlog();
             }
                     
             if(params && params.UID){
@@ -108,9 +108,14 @@
         
         listenContact: function() {
 			$('input[name="submit"]').click(function(){
+                            var Response =  grecaptcha.getResponse();
+                            if(Response.length>0) {   
 				this.SendMessage();
+                            }else {       
+                        alert("Invalid Captcha");
+                        $('#sendMessage')[0].reset();
+                } 
 	    	}.bind(this));
-            
 		},
         
         listenRegister: function() {
@@ -520,7 +525,8 @@
             }
         },
         
-        retriveBlog: function(preId,nxtId){
+        retriveBlog: function(preId,nxtId) {
+            
             preId = preId !=null ? preId : 0 ;
             nxtId = nxtId !=null ? nxtId : 0 ;
             $('#blog_btn_next').attr('navId','');
@@ -558,7 +564,8 @@
 	            });
         },
         
-        SendMessage: function(){
+        SendMessage: function() {
+            
             var Name = $('input[name="name"]').val();
             var Email = $('input[name="email"]').val();
             var Subject = $('input[name="subject"]').val();
@@ -574,7 +581,7 @@
            } }).then(function(response){
                alert(response.explanation);
                $("#sendMessage")[0].reset();
-            }.bind(this));
+            }.bind(this)); 
         },
         sendRequest: function(request, options) {
             var payload = options.payload ? JSON.stringify(options.payload) : '',

@@ -1,6 +1,7 @@
 <?php
    require_once("header.php");
 ?>
+<script src='https://www.google.com/recaptcha/api.js' async defer ></script>
 <script type="application/javascript">
 
 window.pageName = 'INDEX';
@@ -24,7 +25,23 @@ window.pageName = 'INDEX';
                 </div>
                 -->
             	<div id="game-layout" class="game_canvas_wrap" ></div>
-            	<div id="game_right_layout" class="game_right_wrap" ></div>
+                <div id="game_right_layout" class="game_right_wrap" >
+                    <div id="right_content" class="blog_right_content">
+                        
+                        <div id="blog_view_container" class="blog_view_container">
+                            
+                        <h4 id="header_blog_view"></h4>
+
+                        <div id="nav_picture"><img id="blog_picture" src=""></div>
+
+                        <p id="main_blog_view" ></p>
+                        </div>
+                        <div id="bottom_button_grp" class="bottom_button_grp">
+                        <button type="button" class="btn btn-info next_prev_btn" id="blog_btn_prev" >&lt;Prev</button>
+                        <button type="button" class="btn btn-info pull-right next_prev_btn" id="blog_btn_next">Next&gt;</button>
+                            </div>
+                </div>
+                </div>
             </div>
 
         </div>
@@ -100,6 +117,8 @@ window.pageName = 'INDEX';
                             </div>
                             <input type="text" name="subject" placeholder="Subject">
                             <textarea name="message" placeholder="Message *" id="textarea"></textarea>
+                            <div class="g-recaptcha" data-theme ="dark" data-sitekey="6LfJtS0UAAAAABs4-RYVQPzXOV8yTj0heSrtfqMg"></div>
+                            <br>
                             <input type="submit" name="submit" value="Send Message">
                         </form>
                     </div>

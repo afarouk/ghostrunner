@@ -741,7 +741,7 @@ img.parallax-slider.loaded, .ie img.parallax-slider, .ie9 img.parallax-slider {
 
 
 	#header .navbar > .container .navbar-brand { margin:0px; }
-		#header .navbar-brand img { height:40px; }
+		#header .navbar-brand img { height:50px; }
 #header .navbar-brand>a { margin-left:185px; }
 #header .nav {
 	overflow:hidden;
@@ -2240,4 +2240,9 @@ button#delete_blog {
 }
 .blog_content_right{
 	min-width:270px;
+}
+.image_bg {
+    background-image: url("../images/new_banner.png");
+    background-repeat:no-repeat;
+    background-position:left;
 }
