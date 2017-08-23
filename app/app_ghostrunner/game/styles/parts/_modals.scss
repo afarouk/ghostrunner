@@ -25,6 +25,13 @@
                     color: $text;
                 }
 
+                .starter-player {
+                    color: blue;
+                    font-size: 21px;
+                    text-decoration: underline;
+                    cursor: pointer;
+                }
+
                 .buttons-block {
                     justify-content: center;
                     display: flex;

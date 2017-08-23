@@ -545,6 +545,31 @@ define([
 
         showInvitesNumber: function(number) {
             this.view.triggerMethod('showInvitesNumber', number);
+        },
+
+        onPlayerCardShow: function() {
+            //show opponent starter players card
+            var gameModel = appCache.get('game'),
+                otherLineUp = gameModel.get('otherLineUp'),
+                player = otherLineUp.players[0];
+            service.retrievePlayerCard({
+                playerId: player.playerId,
+                seasonId: player.seasonId,
+                leagueId: player.leagueId,
+                playerRoleId: player.playerRoleId,
+                position: player.position.enumText
+            }).then(function(card) {
+                this.publicController.getChoiceController().showPlayersCard(card)
+                    .then(function() {
+                        if (gameModel.get('thisUser').initiator) {
+                            this.publicController.getModalsController().beforeLineUpShape(gameModel);
+                        } else {
+                            this.publicController.getModalsController().onInvitationConfirmed(gameModel);
+                        }
+                    }.bind(this));
+            }.bind(this), function(xhr){
+                this.publicController.getModalsController().apiErrorPopup(xhr);
+            }.bind(this));
         }
     });
 

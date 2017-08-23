@@ -75,7 +75,11 @@ define([
                     break;
 
                 case 'GAME_OVER':
-                    this.publicController.getModalsController().onGameOver();
+                    //Temporary solution for game over popup.
+                    //Make move done popup logic smarter
+                    setTimeout(function(){
+                        this.publicController.getModalsController().onGameOver();
+                    }.bind(this), 300);
                     break;
 
                 case 'YOU_WON':

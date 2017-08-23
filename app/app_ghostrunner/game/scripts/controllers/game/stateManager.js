@@ -41,10 +41,12 @@ define([
 
                 case 'STARTER_SELECTED':
                     if (thisUser.initiator && otherUser.state === 'STARTER_SELECTED') {
-                        this.publicController.getBrokerController().lineUpShape();
+                        this.publicController.getModalsController().beforeLineUpShape(gameModel);
+                        // this.publicController.getBrokerController().lineUpShape();
                     }
                     if (otherUser.state === 'LINEUP_SELECTED') {
-                        this.publicController.getBrokerController().lineUpShape('accept');
+                        this.publicController.getModalsController().onInitiatorsLineUpWasSelected(gameModel);
+                        // this.publicController.getBrokerController().lineUpShape('accept');
                     }
                     break;
 

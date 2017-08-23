@@ -8,8 +8,12 @@ define([
 	var ConfirmChoiceView = Mn.View.extend({
 		className: 'confirm-choice',
 		template: template,
+		ui: {
+			action: '[name="action"]'
+		},
 		events: {
-			'click button': 'onButtonClicked'
+			'click button': 'onButtonClicked',
+			'click @ui.action': 'onAction'
 		},
 		initialize: function (options) {
 
@@ -21,6 +25,9 @@ define([
 			var $target = $(e.currentTarget),
 				action = $target.data('action');
 			this.model.get('callback')(action);
+		},
+		onAction: function() {
+			this.trigger('player:card');
 		}
 	});
 	return ConfirmChoiceView;

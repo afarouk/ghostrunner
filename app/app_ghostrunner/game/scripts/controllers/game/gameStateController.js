@@ -235,18 +235,18 @@ define([
         },
 
         onPayloadMsgBeforeRefresh: function(message) {
-            if (message.signal === 'STARTER_SELECTED' ||
-                message.signal === 'LINEUP_SELECTED') {
-                this.publicController.getModalsController().onPayloadMessage(message)
-                    .then(function() {
-                        this.refreshStatus(message.gameUUID);
-                    }.bind(this), function(xhr){
-                        //do nothing
-                        this.publicController.getModalsController().apiErrorPopup(xhr);
-                    }.bind(this));
-            } else {
+            // if (message.signal === 'STARTER_SELECTED' ||
+            console.log(message.payload);
+            // if (message.signal === 'LINEUP_SELECTED') {
+            //     this.publicController.getModalsController().onPayloadMessage(message)
+            //         .then(function() {
+            //             this.refreshStatus(message.gameUUID);
+            //         }.bind(this), function(xhr){
+            //             //do nothing
+            //         }.bind(this));
+            // } else {
                 this.refreshStatus(message.gameUUID);
-            }
+            // }
         },
 
         onInvitationAccepted: function(lineUpData, role) {

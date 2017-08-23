@@ -16,8 +16,16 @@ define([
             this.confirmView = new ConfirmChoiceView({
                 model: model
             });
+            
+            //listen on opponent players link click for card showing
+            this.listenTo(this.confirmView, 'player:card', this.onPlayerCardShow.bind(this));
+
             this.onClose = this.publicController.getModalsController().show(this.confirmView);
             return def;
+        },
+
+        onPlayerCardShow: function() {
+            this.publicController.getBrokerController().onPlayerCardShow();
         },
 
         getConfirmModel: function(def, options) {
@@ -92,17 +100,20 @@ define([
         },
 
         showPlayersCard: function(card) {
-            var cardModel = new PlayersCardModel(card),
+            var def = $.Deferred(),
+                cardModel = new PlayersCardModel(card),
                 callback = function () {
                     this.onClose();
                     this.cardView.destroy();
                     this.cardView = null;
+                    def.resolve();
                 }.bind(this);
             cardModel.set('callback', callback);
             this.cardView = new PlayersCardView({
                 model: cardModel
             });
             this.onClose = this.publicController.getModalsController().show(this.cardView);
+            return def;
         }
 
     });

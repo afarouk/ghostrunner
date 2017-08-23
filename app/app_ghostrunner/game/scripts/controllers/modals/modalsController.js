@@ -167,9 +167,19 @@ define([
             console.log('invitation received');
         },
 
-        onInvitationConfirmed: function(gameModel) {
+        beforeLineUpShape: function(gameModel) {
+            //when user is initiator also show opponent starter selection info and players card
             this.publicController.getGameController().switchToBroker();
             this.onOtherPlayerLineUp(gameModel)
+                .then(function(){
+                    return this.publicController.getBrokerController().lineUpShape();
+                }.bind(this));
+        },
+
+        onInvitationConfirmed: function(gameModel) {
+            //when user isn't initiator show opponent starter selection info and players card
+            this.publicController.getGameController().switchToBroker();
+            this.onOtherPlayerLineUp(gameModel, 'select')
                 .then(function(){
                     return this.publicController
                         .getBrokerController().switchToLineUpState()
@@ -212,21 +222,38 @@ define([
             return $def;
         },
 
-        onOtherPlayerLineUp: function(gameModel) {
-            var def = $.Deferred(),
+        onInitiatorsLineUpWasSelected: function() {
+            var $def = $.Deferred();
+            this.publicController.getChoiceController().showConfirmation({
+                    message: 'Inviter has selected his line up. <br>Please, select yours.',
+                    cancel: 'cancel',
+                    confirm: 'next'
+                }).then(function() {
+                    this.publicController.getBrokerController().lineUpShape('accept');
+                    $def.resolve();
+                }.bind(this), function() {
+                    $def.reject();
+                }.bind(this));
+            return $def;
+        },
+
+        onOtherPlayerLineUp: function(gameModel, select) {
+            var $def = $.Deferred(),
                 otherLineUp = gameModel.get('otherLineUp'),
                 lineUpName = otherLineUp.displayText,
-                player = otherLineUp.players[0].displayText;
-
+                selectMessage = select ? '<br>Please, select yours.' : '<br>Please, select your line up.',
+                player = '<a class="starter-player" name="action">' + otherLineUp.players[0].displayText + '</a>';
             this.publicController.getChoiceController().showConfirmation({
-                message: 'Opponent selected ' + player + ' as starter',
-                //message: 'Opponent created lineup ' + lineUpName + ' and selected ' + player + ' player',
+                message: 'Opponent selected ' + player + ' as starter.' + selectMessage,
+                cancel: 'cancel',
                 confirm: 'ok'
             }).then(function() {
-                def.resolve()
+                $def.resolve()
+            }.bind(this), function() {
+                $def.reject();
             }.bind(this));
 
-            return def;
+            return $def;
         },
 
         onSelectRole: function() {
