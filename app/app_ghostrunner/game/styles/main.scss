@@ -111,10 +111,10 @@
 
     &.full_screen_game {
         position: relative;
-        margin: 72px 0 0 0;
+        margin: 0; /* prev 72px 0 0 0*/
         width: calc(100vw - 15px);
         height: calc((100vw - 15px) / 1.6);
-        max-height: calc(100vh - 70px);
+        max-height: 100vh ; /*prev calc(100vh - 70px);*/
 
         .game_canvas_wrap {
             width: 100%;
@@ -128,6 +128,11 @@
             z-index: 999 !important;
             -webkit-transition: .6s;
             transition: .6s;
+
+            /*added new rule for full screen*/
+            max-height: calc(100vh - 5px);
+            max-width: calc((100vh - 5px) * 1.6 );
+            /*.............*/
 
             .expand-button {
                 // left: calc(100vw - 50px);
