@@ -1,3 +1,4 @@
+/*global define*/
 'use strict';
 
 //require styles
@@ -35,4 +36,14 @@ require('./js/jquery.fancybox-media');
 require('./js/parallax.min');
 require('./js/html5imageupload.js');
 require('./js/script');
-require('./js/login');
+
+define([
+	'./js/login',
+	'./js/blog'
+	], function(login, blog){
+
+	$(document).ready( function() {
+		login.init();
+		blog.init();
+	});
+});
