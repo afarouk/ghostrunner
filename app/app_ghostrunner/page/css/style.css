@@ -2146,9 +2146,9 @@ a.header-content-tabs{
 
 .blog_view_container{
     width: 100%;
-    overflow: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
     margin: 0 auto;
-
 }
 
 
@@ -2198,13 +2198,19 @@ p#main_blog_view{
     font-size: 14px;
     margin-top: 10px;
 }
-.blog_view_container{
+.blog_view_container {
     padding: 10px;
     border: 1px solid #DDD;
     overflow-y: scroll;
     height: 84%;
     min-height: 84%;
 }
+
+.game-page-header .blog_view_container {
+	height: 92%;
+    min-height: 92%;
+}
+
 .blog_right_content{
    height: 100%;
 }

@@ -8,7 +8,7 @@ window.pageName = 'BLOG';
 
 </script>
  <!-- #header -->
-   <header  id="header">
+   <header  id="header" class="blog-page-header">
         <!-- #navigation -->
         <?php
             include_once("navbar.php");

@@ -95,12 +95,25 @@
         margin-right: 15px;
      }
 
-    @media screen and (min-width: 1120px) {
+    @media (max-width: 1250px) {
+        .game_right_wrap {
+            width: 0;
+            opacity: 0;
+            right: 0;
+            position: absolute;
+            margin: auto;
+            transition: .6s;
+        }
+    }
+
+    @media screen and (min-width: 1250px) {
         .game_right_wrap {
             height: calc(62.5vw / 1.6);
             background-color: #f0f0f0;
             position: relative;
             width: 35.5%;
+            min-width: 350px;
+            max-width: 420px;
             -webkit-transition: .6s;
             transition: .6s;
             min-height: 550px;

@@ -8,7 +8,7 @@ window.pageName = 'INDEX';
 
 </script>
      <!-- #header -->
-    <header  id="header">
+    <header  id="header" class="game-page-header">
 
         <!-- #navigation -->
        <?php
@@ -33,7 +33,6 @@ window.pageName = 'INDEX';
                             <div class="image_bg">
                                 <h4 align="right" >Talkin' Baseball</br> with JimmyG</h4>
                             </div>
-                            <br/><br/>
                             
                             <h4 id="header_blog_view"></h4>
 
