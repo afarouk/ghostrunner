@@ -29,18 +29,25 @@ window.pageName = 'INDEX';
                     <div id="right_content" class="blog_right_content">
                         
                         <div id="blog_view_container" class="blog_view_container">
-                            
-                        <h4 id="header_blog_view"></h4>
 
-                        <div id="nav_picture"><img id="blog_picture" src=""></div>
-
-                        <p id="main_blog_view" ></p>
-                        </div>
-                        <div id="bottom_button_grp" class="bottom_button_grp">
-                        <button type="button" class="btn btn-info next_prev_btn" id="blog_btn_prev" >&lt;Prev</button>
-                        <button type="button" class="btn btn-info pull-right next_prev_btn" id="blog_btn_next">Next&gt;</button>
+                            <div class="image_bg">
+                                <h4 align="right" >Talkin' Baseball</br> with JimmyG</h4>
                             </div>
-                </div>
+                            <br/><br/>
+                            
+                            <h4 id="header_blog_view"></h4>
+
+                            <div id="nav_picture">
+                                <img id="blog_picture" src="">
+                            </div>
+
+                            <p id="main_blog_view" ></p>
+                            </div>
+                            <div id="bottom_button_grp" class="bottom_button_grp">
+                            <button type="button" class="btn btn-info next_prev_btn" id="blog_btn_prev" >&lt;Prev</button>
+                            <button type="button" class="btn btn-info pull-right next_prev_btn" id="blog_btn_next">Next&gt;</button>
+                        </div>
+                    </div>
                 </div>
             </div>
 
