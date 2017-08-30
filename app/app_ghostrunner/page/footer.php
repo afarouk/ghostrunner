@@ -92,6 +92,8 @@
                             <input type="password" value="" name="pass" autocomplete="off" style="width: 100%;" class="transparent_input">
                         </p>
 
+                        <span id="error_dv"></span>
+
                         <p style="width:100%;text-align:right !important;margin-bottom: 0px !important;"><a style="text-decoration:none;font-weight:bold;color: #4493AF;" href="javascript:void(0)">Forgot Password?</a>
                         </p>
                     </form>

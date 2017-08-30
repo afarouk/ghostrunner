@@ -76,6 +76,10 @@
         },
 
 		listenLogin: function() {
+            $('#signin input').on('click',function(){
+                $('#error_dv').hide();
+                $('#success_dv').hide();
+            });
 			$('.login-btn').on('click', function(){
 				if (this.logged) {
 					this.logoutUser();
@@ -108,12 +112,12 @@
         
         listenContact: function() {
 			$('input[name="submit"]').click(function(){
-                            var Response =  grecaptcha.getResponse();
-                            if(Response.length>0) {   
-				this.SendMessage();
-                            }else {       
-                        alert("Invalid Captcha");
-                        $('#sendMessage')[0].reset();
+                var Response =  grecaptcha.getResponse();
+                if(Response.length>0) {   
+				    this.SendMessage();
+                }else {       
+                    alert("Invalid Captcha");
+                    $('#sendMessage')[0].reset();
                 } 
 	    	}.bind(this));
 		},
@@ -240,9 +244,14 @@
             $('#error_dv').show();
 		},
         
-        showLoginError: function() {
-			//TODO show login error
-			console.log('login error');
+        showLoginError: function(jqXHR) {
+            var message;
+            if(jqXHR.responseJSON.error.message) {
+                message = '* ' + jqXHR.responseJSON.error.message + '.';
+            } else {
+                message = '* Something went wrong.';
+            }
+            this.showError(message);
 		},
 
 		onLoginSuccess: function(response) {
@@ -288,7 +297,7 @@
                     $('#signin').modal('hide');
                 }.bind(this), function(jqXHR) {
 	                if( jqXHR.status === 400 ) {
-	                    this.showLoginError();
+	                    this.showLoginError(jqXHR);
 	                }
             }.bind(this));
         },
