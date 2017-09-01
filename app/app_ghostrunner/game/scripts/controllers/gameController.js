@@ -106,6 +106,10 @@ define([
         getSocketRefresh: function(){
             var gameUUID = appCache.get('gameUUID');
             this.publicController.getStateController().refreshStatus(gameUUID);
+        },
+
+        killSocket: function() {
+            service.killSocket();
         }
     });
 

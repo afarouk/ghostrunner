@@ -46,6 +46,9 @@ module.exports = {
             stopLineupEditing: ['PUT', '/gaming/stopLineupEditing'],
             forfeitLineupEditing: ['PUT', '/gaming/forfeitLineupEditing'],
             setShowTossAnimation: ['PUT', '/gaming/setShowTossAnimation'],
+
+            /*debug*/
+            killSocket: ['GET', '/gaming/killSocket'],
         };
     }
 };

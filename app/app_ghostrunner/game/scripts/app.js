@@ -17,5 +17,10 @@ define([
 	Mn.Object.prototype.publicController = publicController;
 	Mn.View.prototype.publicController = publicController;
 
+	/*debug*/
+	window.killSocket = function() {
+		publicController.getGameController().killSocket();
+	};
+
 	return App;
 });

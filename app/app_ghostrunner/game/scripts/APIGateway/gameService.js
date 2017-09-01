@@ -342,7 +342,17 @@ define([
                 };
 
             return gateway.sendRequest('setShowTossAnimation', params);
-        }
+        },
+
+        /*debug*/
+        killSocket: function() {
+            var user = appCache.get('user'),
+                params = {
+                    UID: user.get('uid')
+                };
+
+            return gateway.sendRequest('killSocket', params);
+        },
 
     });
     return new GameService();
