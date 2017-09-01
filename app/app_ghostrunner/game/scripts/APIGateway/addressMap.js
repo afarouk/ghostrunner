@@ -40,8 +40,19 @@ module.exports = {
             getPoll: ['GET', '/gaming'],
             getAvailablePlayers: ['GET', '/gaming/getAvailablePlayers'],
             retrievePlayerCard: ['GET', '/gaming/retrievePlayerCard'],
+
             retrievePinchHitterChoices: ['GET', '/gaming/retrievePinchHitterChoices'],
             setPinchHitter: ['POST', '/gaming/setPinchHitter'],
+
+            retrievePinchRunnerChoices: ['GET', '/gaming/retrievePinchRunnerChoices'],
+            setPinchRunner: ['POST', '/gaming/setPinchRunner'],
+
+            retrieveDefenseSubstitutionChoices: ['GET', '/gaming/retrieveDefenseSubstitutionChoices'],
+            setDefenseSubstitution: ['POST', '/gaming/setDefenseSubstitution'],
+
+            retrieveReliefPitcherChoices: ['GET', '/gaming/retrieveReliefPitcherChoices'],
+            setReliefPitcher: ['POST', '/gaming/setReliefPitcher'],
+
             startLineupEditing: ['PUT', '/gaming/startLineupEditing'],
             stopLineupEditing: ['PUT', '/gaming/stopLineupEditing'],
             forfeitLineupEditing: ['PUT', '/gaming/forfeitLineupEditing'],

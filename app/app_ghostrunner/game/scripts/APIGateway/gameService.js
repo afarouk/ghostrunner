@@ -275,6 +275,8 @@ define([
             return gateway.sendRequest('retrievePlayerCard', params);
         },
 
+        //...............
+
         retrievePinchHitterChoices: function() {
             var params ={};
             var user = appCache.get('user'),
@@ -288,16 +290,18 @@ define([
         },
 
         setPinchHitter: function(payload) {
-            var params ={};
-
-            var user = appCache.get('user');
+            var user = appCache.get('user'),
+                game = appCache.get('game'),
                 params = {
                     UID: user.get('uid'),
+                    gameUUID: game.get('gameUUID'),
                     payload: payload
                 };
 
             return gateway.sendRequest('setPinchHitter', params);
         },
+
+        //..........................
 
         startLineupEditing: function() {
             var user = appCache.get('user'),

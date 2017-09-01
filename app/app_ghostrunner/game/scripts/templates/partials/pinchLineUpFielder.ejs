@@ -1,30 +1,28 @@
-<%
-if(flag)
-    {
-_.each(properties, function(prop){ %>
-	<% if (prop) { %>
-		<td class="<%= prop.className %>"><%= prop.displayValue %></td>
-	<% } %>
-<% }) %>
-<td class="with-select">
-	<select name="player-position" disabled class="position">
-		<option value>---</option>
-		<% _.each(positions, function(position) { %>
-			<option value="<%= position.enumText %>"><%= position.displayText %></option>
-		<% }) %>
-	</select>
-</td>
-<td class="with-select">
-	<select name="batting-order" disabled class="batting">
-		<option  selected value>---</option>
-		<% for (var index = 1; index <=9; index++) { %>
-			<option value="<%= index %>">BO:<%= index %></option>
+<% if(flag) {
+	_.each(properties, function(prop){ %>
+		<% if (prop) { %>
+			<td class="<%= prop.className %>"><%= prop.displayValue %></td>
 		<% } %>
-	</select>
-</td>
-<td class="with-checkbox">
-	<input type="checkbox" class="CurrentPlayers" oldPlayerRoleId="<%= playerRoleId %>" oldLeagueId="<%= leagueId %>" oldSeasonId="<%= seasonId %>" oldPlayerId="<%= playerId %>" name="select-player" checked />
-</td>
+	<% }) %>
+	<td class="with-select">
+		<select name="player-position" class="position" disabled>
+			<% _.each(positions, function(position) { %>
+				<option value="<%= position.enumText %>" <% if (position.enumText === currentPosition.enumText) { %>selected<% } %> ><%= position.displayText %></option>
+			<% }) %>
+		</select>
+	</td>
+	<td class="with-select">
+		<select name="batting-order" class="batting" disabled>
+			<% for (var index = 1; index <=9; index++) { %>
+				<option value="<%= index %>" <% if (index == battingOrder) { %>selected<% } %> >BO:<%= index %></option>
+			<% } %>
+		</select>
+	</td>
+	<% if (!onePlayer) { %>
+		<td class="with-checkbox">
+			<input type="radio" name="old-player" class="select-player" />
+		</td>
+	<% } %>
 <% } else { %>
 	<%_.each(properties, function(prop){ %>
 		<% if (prop) { %>
@@ -33,21 +31,19 @@ _.each(properties, function(prop){ %>
 	<% }) %>
 	<td class="with-select">
 		<select name="player-position"  class="position">
-			<option value>---</option>
 			<% _.each(positions, function(position){ %>
-				<option value="<%= position.enumText %>"><%= position.displayText %></option>
+				<option value="<%= position.enumText %>" <% if (position.enumText === currentPosition.enumText) { %>selected<% } %> ><%= position.displayText %></option>
 			<% }) %>
 		</select>
 	</td>
 	<td class="with-select">
-		<select name="batting-order" disabled class="batting">
-			<option  selected value>---</option>
+		<select name="batting-order" class="batting" disabled>
 			<% for (var index = 1; index <=9; index++) { %>
-				<option value="<%= index %>">BO:<%= index %></option>
+				<option value="<%= index %>" <% if (index == battingOrder) { %>selected<% } %> >BO:<%= index %></option>
 			<% } %>
 		</select>
 	</td>
 	<td class="with-checkbox">
-		<input type="radio" class="AvailablePlayers"  newPlayerRoleId="<%= playerRoleId %>"  newLeagueId="<%= leagueId %>" newSeasonId="<%= seasonId %>" newPlayerId="<%= playerId %>" newPosition="<%= position.enumText %>" name="select-player"/>
+		<input type="radio" name="new-player" class="select-player" />
 	</td>
 <% } %>

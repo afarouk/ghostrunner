@@ -319,18 +319,27 @@
                                                 color: $players-black;
                                                 border-radius: 0;
                                                 -webkit-border-radius: 0px;
+                                                cursor: pointer;
                                                 &.position {
                                                     background-color: #00b0f0;
+                                                    &:disabled {
+                                                        opacity: 0.7;
+                                                        cursor: not-allowed;
+                                                    }
                                                 }
                                                 &.batting {
                                                     background-color: #ffe699;
+                                                    &:disabled {
+                                                        opacity: 0.7;
+                                                        cursor: not-allowed;
+                                                    }
                                                 }
                                             }
                                         }
 
                                         &.with-checkbox {
                                             input {
-                                                
+                                                cursor: pointer;
                                             }
                                         }
                                     }
@@ -559,18 +568,27 @@
                                                 color: $players-black;
                                                 border-radius: 0;
                                                 -webkit-border-radius: 0px;
+                                                cursor: pointer;
                                                 &.position {
                                                     background-color: #00b0f0;
+                                                    &:disabled {
+                                                        opacity: 0.7;
+                                                        cursor: not-allowed;
+                                                    }
                                                 }
                                                 &.batting {
                                                     background-color: #ffe699;
+                                                    &:disabled {
+                                                        opacity: 0.7;
+                                                        cursor: not-allowed;
+                                                    }
                                                 }
                                             }
                                         }
 
                                         &.with-checkbox {
                                             input {
-                                                
+                                                cursor: pointer;
                                             }
                                         }
                                     }
