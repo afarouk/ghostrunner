@@ -537,10 +537,10 @@ define([
             return this.invitationDef;
         },
 
-        retrivePinchHit: function(){
-            this.publicController.getGameController().setPinchHitter();
+        playerReplacementMode: function(action){
+            this.publicController.getGameController().setPlayerReplacementState();
 
-            this.publicController.getPinchHitterController().retrivePinchHit(this.view);
+            this.publicController.getPlayerReplacementController().managePlayerReplacement(this.view, action);
 		},
 
         showInvitesNumber: function(number) {

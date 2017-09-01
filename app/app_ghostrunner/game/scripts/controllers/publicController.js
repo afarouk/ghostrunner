@@ -22,12 +22,12 @@ define([
     './game/gameInterfaceController',
     './game/informationTableController', //shows table with game scores, current players info, etc
     './game/playerActionsController', //show buttons related on role
-    './broker/pinchHitterController'
+    './broker/playerReplacementController'
     ], function( pageController, gameController, urlController, chatController, 
         modalsController, choiceController, brokerController, createTeamController,
         stateController , stateManager, signalManager, socketController, 
         fieldController,interfaceController, informationTableController, 
-        playerActionsController,pinchHitterController) {
+        playerActionsController, playerReplacementController) {
     var PublicController = Mn.Object.extend({
         //base
         getPageController: function() {
@@ -84,8 +84,8 @@ define([
         getPlayerActionsController: function() {
             return playerActionsController;
         },
-        getPinchHitterController: function() {
-            return pinchHitterController;
+        getPlayerReplacementController: function() {
+            return playerReplacementController;
         },
         destroyGame: function() {
             //destroy all controllers

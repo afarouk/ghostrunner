@@ -46,7 +46,7 @@ define([
             this.publicController.getBrokerController().reRender();
         },
         
-        setPinchHitter: function() {
+        setPlayerReplacementState: function() {
             this.appState = 'BROKER';
             this.appLayout.getRegion('game').$el.removeClass('active');
             this.appLayout.getRegion('broker').$el.addClass('active');

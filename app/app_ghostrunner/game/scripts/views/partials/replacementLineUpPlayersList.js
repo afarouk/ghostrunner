@@ -3,8 +3,8 @@
 'use strict';
 
 define([
-	'ejs!../../templates/partials/pinchLineUpFielder.ejs',
-	'ejs!../../templates/partials/pinchLineUpTable.ejs',
+	'ejs!../../templates/partials/replacementLineUpFielder.ejs',
+	'ejs!../../templates/partials/replacementLineUpTable.ejs',
 	], function(fielderTmpl, tableTmpl){
 	var LineUpFielderView = Mn.View.extend({
 		tagName: 'tr',
@@ -79,14 +79,13 @@ define([
 			this.trigger('selection:changed', view.model);
 		},
         onChildviewPositionChanged: function(view, e) {
-                var $target = $(e.currentTarget),
-                    model = view.model,
-                    selected = $target.find(':selected').val(),
-                    positions = model.get('positions'),
-                    position = _.findWhere(positions, {enumText: selected});
-                model.set('position', position);
-                debugger;
-                this.checkIfEnable(view, model);
+            var $target = $(e.currentTarget),
+                model = view.model,
+                selected = $target.find(':selected').val(),
+                positions = model.get('positions'),
+                position = _.findWhere(positions, {enumText: selected});
+            model.set('position', position);
+            this.checkIfEnable(view, model);
         },
 		checkIfEnable: function(view) {
 			var model = view.model;
@@ -100,7 +99,7 @@ define([
 				selected = $target.find(':selected').val(),
 				roles = model.get('pitcherRoles'),
 				role = _.findWhere(roles, {enumText: selected});
-			    model.set('pitcherRole', role);
+			model.set('pitcherRole', role);
 		}
 	});
 	return LineUpPlayersListView;

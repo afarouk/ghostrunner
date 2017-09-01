@@ -3,10 +3,10 @@
 'use strict';
 
 define([
-	'ejs!../../templates/partials/pinchLineUpCreation.ejs',
-	'./pinchLineUpPlayersList'
+	'ejs!../../templates/partials/lineUpReplacement.ejs',
+	'./replacementLineUpPlayersList'
 	], function(template, LineUpPlayersList){
-	var LineUpCreationView = Mn.View.extend({
+	var LineUpReplacementView = Mn.View.extend({
 		template: template,
 		tagName: 'section',
 		className: 'create-lineUp',
@@ -83,5 +83,5 @@ define([
     	}
     });
 
-	return LineUpCreationView;
+	return LineUpReplacementView;
 });

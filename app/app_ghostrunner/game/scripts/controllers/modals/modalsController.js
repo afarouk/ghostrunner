@@ -10,13 +10,14 @@ define([
     //We need it for show modal dialogs
     var ModalsController = Mn.Object.extend({
         //create/show/hide logic
-    create: function(layout, region) {
+        create: function(layout, region) {
             this.view = new ModalsLayoutView();
             layout.showChildView( region, this.view );
         },
 
         show: function(view) {
             $('#modals').show();
+            if (!this.view.getRegion('container')) alert(0);
             this.view.showChildView('container', view);
             this.view.getRegion('container').$el.show();
             return this.hide.bind(this);

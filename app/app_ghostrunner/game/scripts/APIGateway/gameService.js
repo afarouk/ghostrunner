@@ -278,7 +278,7 @@ define([
         //...............
 
         retrievePinchHitterChoices: function() {
-            var params ={};
+            var params = {};
             var user = appCache.get('user'),
                 game = appCache.get('game'),
                 team = Cookie.get('Team');
@@ -299,6 +299,78 @@ define([
                 };
 
             return gateway.sendRequest('setPinchHitter', params);
+        },
+
+        retrievePinchRunnerChoices: function() {
+            var params = {};
+            var user = appCache.get('user'),
+                game = appCache.get('game'),
+                team = Cookie.get('Team');
+                params.UID = user.get('uid');
+                if(team) params.teamUUID = team;
+                if (game) params.gameUUID = game.get('gameUUID');
+                params = params || {};
+            return gateway.sendRequest('retrievePinchRunnerChoices', params);
+        },
+
+        setPinchRunner: function(payload) {
+            var user = appCache.get('user'),
+                game = appCache.get('game'),
+                params = {
+                    UID: user.get('uid'),
+                    gameUUID: game.get('gameUUID'),
+                    payload: payload
+                };
+
+            return gateway.sendRequest('setPinchRunner', params);
+        },
+
+        retrieveDefensiveSubstitutionChoices: function() {
+            var params = {};
+            var user = appCache.get('user'),
+                game = appCache.get('game'),
+                team = Cookie.get('Team');
+                params.UID = user.get('uid');
+                if(team) params.teamUUID = team;
+                if (game) params.gameUUID = game.get('gameUUID');
+                params = params || {};
+            return gateway.sendRequest('retrieveDefensiveSubstitutionChoices', params);
+        },
+
+        setDefensiveSubstitution: function(payload) {
+            var user = appCache.get('user'),
+                game = appCache.get('game'),
+                params = {
+                    UID: user.get('uid'),
+                    gameUUID: game.get('gameUUID'),
+                    payload: payload
+                };
+
+            return gateway.sendRequest('setDefensiveSubstitution', params);
+        },
+
+        retrieveReliefPitcherChoices: function() {
+            var params = {};
+            var user = appCache.get('user'),
+                game = appCache.get('game'),
+                team = Cookie.get('Team');
+                params.UID = user.get('uid');
+                if(team) params.teamUUID = team;
+                if (game) params.gameUUID = game.get('gameUUID');
+                params = params || {};
+            return gateway.sendRequest('retrieveReliefPitcherChoices', params);
+        },
+
+        setReliefPitcher: function(payload) {
+            var user = appCache.get('user'),
+                game = appCache.get('game'),
+                params = {
+                    UID: user.get('uid'),
+                    gameUUID: game.get('gameUUID'),
+                    payload: payload
+                };
+
+            return gateway.sendRequest('setReliefPitcher', params);
         },
 
         //..........................

@@ -10,6 +10,7 @@ define([
 
     var GameStateController = Mn.Object.extend({
         onGameStart: function() {
+            this.disconnectLocked = false;
             this.publicController.getGameController().showLoader();
             service.getMyRunningGame()
                 .then(function(response){
@@ -382,6 +383,7 @@ define([
             this.killGame();
             this.publicController.getGameController().destroy();
             this.App.destroy();
+            this.disconnectLocked = true;
         },
 
         onPauseGame: function(gameUUID) {
@@ -434,7 +436,10 @@ define([
         },
 
         onDestroy: function() {
-            if (this.disconnectLocked) return;
+            if (this.disconnectLocked) {
+                this.disconnectLocked = false;
+                return;
+            }
             var user = appCache.get('user');
             this.killGame();
             this.publicController.getModalsController().onConnectionLost()

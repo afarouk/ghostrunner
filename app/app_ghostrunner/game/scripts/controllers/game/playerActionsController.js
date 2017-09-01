@@ -32,12 +32,11 @@ define([
                 case 'LINEUP_DONE':
                     this.publicController.getStateController().onLineUpEditDone(action);
                     break;
-                //Should edit lineUp cases be different? 
                 case 'PINCH_HIT':
                 case 'PINCH_RUN':
                 case 'DEFENSIVE_SUBSTITUTION':
                 case 'RELIEF_PITCHER':
-                    this.publicController.getBrokerController().retrivePinchHit();
+                    this.publicController.getBrokerController().playerReplacementMode(action);
                     break;
                 default:
                     this.publicController.getStateController().onPlayerMove(action);
