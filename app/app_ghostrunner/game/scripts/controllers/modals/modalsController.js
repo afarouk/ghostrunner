@@ -134,8 +134,8 @@ define([
         },
 
         onReceivedInvitationPresented: function(invites) {
-            var message = invites.length > 1 ? 
-                'You have received invitations. Please, check them.' : 
+            var message = invites.length > 1 ?
+                'You have received invitations. Please, check them.' :
                 'You have received an invitation. Please, check it.';
             this.publicController.getChoiceController().showConfirmation({
                 message: message,
@@ -268,11 +268,11 @@ define([
                     },
                     {
                         action: 'OFFENSE',
-                        displayText: 'OFFENSE'
+                        displayText: 'AWAY'
                     },
                     {
                         action: 'DEFENSE',
-                        displayText: 'DEFENSE'
+                        displayText: 'HOME'
                     }
                 ]
             }).then(function(role){
