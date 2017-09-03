@@ -152,7 +152,7 @@ define([
             var other = gameModel.get('otherUser').user.userName,
                 gameName = gameModel.get('displayText');
             this.publicController.getChoiceController().showConfirmation({
-                message: other + ' sent you invitation to '+ gameName + '<br> accept invitation?',
+                message: other + ' has invited you to a game. <br> Accept invitation?',
                 cancel: 'cancel',
                 reject: 'no',
                 confirm: 'yes'
@@ -204,7 +204,7 @@ define([
         afterStarterSelected: function() {
             var $def = $.Deferred();
             this.publicController.getChoiceController().showConfirmation({
-                    message: 'Sterter selection sent',
+                    message: 'Starter selection sent',
                     confirm: 'ok'
                 }).then(function() {
                     $def.resolve();
