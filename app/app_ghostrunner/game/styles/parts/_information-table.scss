@@ -124,7 +124,7 @@
 				    				color: yellow;
 				    			}
 				    			&.level-5 {
-				    				color: green;
+				    				color: #8af78a;
 				    			}
 				    		}
 
@@ -233,7 +233,7 @@
 								    text-overflow: ellipsis;
 								    white-space: nowrap;
 								    position: relative;
-								    
+
 								    img {
 								    	width: 14px;
 									    position: absolute;
@@ -285,10 +285,10 @@
 	    							tr {
 	    								background-color: black;
 	    								th {
-	    									&:first-child { 
+	    									&:first-child {
 											    width: 100px;
 											}
-											&:last-child { 
+											&:last-child {
 											    padding-right: 12px;
 											}
     										padding-left: 12px;
@@ -304,10 +304,10 @@
 	    						.game-stats-body {
 	    							tr {
 	    								td {
-	    									&:first-child { 
+	    									&:first-child {
 											    width: 100px;
 											}
-											&:last-child { 
+											&:last-child {
 											    padding-right: 12px;
 											}
     										padding-left: 12px;
@@ -399,7 +399,7 @@
 		    justify-content: space-between;
 		    transition: .8s;
 		    opacity: 1;
-		    
+
 			.team-role {
 		    	color: $text;
 		        font-weight: 500;
