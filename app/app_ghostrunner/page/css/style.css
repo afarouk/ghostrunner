@@ -2256,7 +2256,7 @@ button#delete_blog {
 
 
 #right_content{
-    display:none;
+    display: block;
 }
 
 #left_content{
