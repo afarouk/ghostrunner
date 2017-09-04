@@ -77,7 +77,8 @@ define([
 				this.trigger('team:selected', view.model);
 			} else {
 				if (view.model.get('newTeam')) {
-					this.trigger('team:selected', view.model);
+					//here create new team trigger V
+					// this.trigger('team:selected', view.model);
 				}
 			}
 		},

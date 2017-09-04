@@ -296,7 +296,7 @@ define([
 
         setShowTossAnimation: function(gameModel, show) {
             service.setShowTossAnimation(show).then(function(state){
-                gameModel.set('showTossAnimation', show, {silent: true});
+                gameModel.get('thisUser').showTossAnimation = show;
             }.bind(this),function(xhr){
                 this.publicController.getModalsController().apiErrorPopup(xhr);
             }.bind(this));

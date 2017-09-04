@@ -24,7 +24,7 @@ define([
         switchToGame: function() {
             if (this.appState === 'GAME') return;
             var gameModel = appCache.get('game'),
-                showTossAnimation = gameModel.get('showTossAnimation');
+                showTossAnimation = gameModel.get('thisUser').showTossAnimation;
             this.appState = 'GAME';
             this.appLayout.renderGame(showTossAnimation);
 
