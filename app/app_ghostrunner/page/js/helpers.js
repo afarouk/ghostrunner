@@ -31,7 +31,7 @@ var helpers = function() {
                 return bb;
             }
         },
-        
+
         parseQueryString: function(qs) {
             if (!qs) return;
             var result = {};
@@ -62,7 +62,7 @@ var helpers = function() {
                 method = request[0];
 
             delete options.payload;
-            
+
             return $.ajax({
                 type: method,
                 url: (options ? url + '?' + $.param(options) : url),
@@ -70,6 +70,20 @@ var helpers = function() {
                 contentType: 'application/json',
                 processData: false,
                 timeout: 10000
+            }).fail(function (jqXHR, textStatus, errorThrown) {
+              /*
+               AF: I have added this 'fail' method to handle communication failure
+               or internet failure where the client is unable to reach the
+               server. Note that in such a case, where the server is down,
+               textStatus="error" and errorThrown="".
+               You can use this artifact to pop up a message saying
+               "Unable to reach game server", "OK" or reimplement it in your
+               own way. The objective is to inform the user when the internet
+               is down or disconnected. During game we don't worry about this
+               because the socket takes care of it. But before the socket is
+               opened, during login, this handler is needed. 
+               */
+              console.log("helpers.js::sendRequest() textStatus:"+textStatus+", errorThrown:"+errorThrown);
             });
         },
 
