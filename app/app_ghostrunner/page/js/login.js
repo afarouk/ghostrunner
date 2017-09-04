@@ -67,8 +67,8 @@ define([
 
     	listenLogin: function() {
             $('#signin input').on('click',function(){
-                $('#error_dv').hide();
-                $('#success_dv').hide();
+                $('.error_dv').hide();
+                $('.success_dv').hide();
             });
     		$('.login-btn').on('click', function(){
     			if (this.logged) {
@@ -114,20 +114,20 @@ define([
         
         listenRegister: function() {
             $('#signup input').on('click',function(){
-                $('#error_dv').hide();
-                $('#success_dv').hide();
+                $('.error_dv').hide();
+                $('.success_dv').hide();
             });
         	$('#signup .register').on('click', function(){
         		var username = $('#signup [name="userName"]').val(),
         			password = $('#signup [name="userPassword"]').val(),
                     cpass    = $('#signup [name="userConfirmPassword"]').val();
                 if(username.trim()==""){
-                    $('#error_dv').text('Please enter your username or email.');
-                    $('#error_dv').show();
+                    $('.error_dv').text('Please enter your username or email.');
+                    $('.error_dv').show();
                     return false;
                 }else if(password.trim()!=cpass.trim()){
-                    $('#error_dv').text('Confirm password not matched.');
-                    $('#error_dv').show();
+                    $('.error_dv').text('Confirm password not matched.');
+                    $('.error_dv').show();
                     return false;
                 }else{
                    this.onRegister(username, password); 
@@ -230,8 +230,8 @@ define([
     	},
         
     	showError: function(message) {
-    		$('#error_dv').text(message);
-            $('#error_dv').show();
+    		$('.error_dv').text(message);
+            $('.error_dv').show();
     	},
         
         showLoginError: function(jqXHR) {
@@ -268,6 +268,9 @@ define([
             this.logged = false;
             $('.show_userName').text('');
             this.updateLoginButton();
+            // if (this.logged) {
+            //     this.logoutUser(Cookie.get('cmxUID'));
+            // }
         },
 
     	//TODO temporary for testing

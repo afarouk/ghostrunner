@@ -83,7 +83,13 @@ var helpers = function() {
                because the socket takes care of it. But before the socket is
                opened, during login, this handler is needed. 
                */
-              console.log("helpers.js::sendRequest() textStatus:"+textStatus+", errorThrown:"+errorThrown);
+                if (jqXHR.status !== 400) {
+                    console.log("helpers.js::sendRequest() textStatus:"+textStatus+", errorThrown:"+errorThrown);
+                    var message = jqXHR.status === 0 ? 'Connection lost.' : 'Internal Server Error.';
+                    $('.modal[role="dialog"]').modal('hide');
+                    $('#error-msg .message-text').text(message);
+                    $('#error-msg').modal().css('padding-right', '130px');
+                }
             });
         },
 
@@ -94,12 +100,11 @@ var helpers = function() {
             if (params && params.server) {
                 server = params.server;
             }
-            if(server=='localhost:8080'){
+            if (server=='localhost:8080') {
                 return server ? 'http://' + server + '/apptsvc/rest' : this.apiRoot;
-            }else{
+            } else {
                 return server ? 'https://' + server + '/apptsvc/rest' : this.apiRoot;
             }
-
         }
 
     };

@@ -449,6 +449,7 @@ define([
                 }.bind(this), function(){
                     this.publicController.getGameController().stop(user.get('uid'));
                     $(window).trigger('ghostrunner.afterLogout');
+                    this.publicController.getPageController().setLoggedFalse();
                 }.bind(this))
         },
     });

@@ -17,7 +17,6 @@ define([
 
         show: function(view) {
             $('#modals').show();
-            if (!this.view.getRegion('container')) alert(0);
             this.view.showChildView('container', view);
             this.view.getRegion('container').$el.show();
             return this.hide.bind(this);

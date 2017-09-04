@@ -92,7 +92,7 @@
                             <input type="password" value="" name="pass" autocomplete="off" style="width: 100%;" class="transparent_input">
                         </p>
 
-                        <span id="error_dv"></span>
+                        <span class="error_dv"></span>
 
                         <p style="width:100%;text-align:right !important;margin-bottom: 0px !important;"><a style="text-decoration:none;font-weight:bold;color: #4493AF;" href="javascript:void(0)">Forgot Password?</a>
                         </p>
@@ -136,8 +136,8 @@
                             <input type="checkbox" name="show_pass" id="show_password">
                             <label class="small_label" style="">Show Password</label>
                         </p>
-                        <span id="error_dv"></span>
-                        <span id="success_dv"></span>
+                        <span class="error_dv"></span>
+                        <span class="success_dv"></span>
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -147,6 +147,31 @@
         </div>
     </div>
     <!--signup modal-->
+
+    <!-- #signin modal -->
+    <div class="modal fade" id="error-msg" role="dialog" style="padding-right: 130px!important;">
+        <div class="modal-dialog modal-sm">
+        <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h3 class="modal-title" style="font-size: 24px;">Error</h3>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="message-text">
+                            Connection lost.
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" style="margin-top: 15px !important;" data-dismiss="modal" class="login border-btn" value="Ok">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- #signin end-->
+
     <!--[if lt IE 8]>
     	<div class="browser-notice">
             <div class="container">
