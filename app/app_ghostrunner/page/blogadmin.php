@@ -66,14 +66,16 @@ window.pageName = 'BLOG';
                           </div>
                      </div>
 
-                        <div class="form-group">
+                    <div id="error-message" class="form-group error-message">
+                      <span class="message-text"></span>
+                    </div>
+
+                      <div class="form-group">
                           <div class="col-sm-offset-2 col-sm-10">
                             <button id="blog_post_btn" type="button" class="btn  pull-right">Post</button>
                             <button type="button" id="blog_cancel_btn" class="btn btn-default   pull-right">Cancel</button>
-
-
-                            </div>
-                        </div>
+                          </div>
+                      </div>
                   </form>
                 </div>
 
@@ -98,7 +100,7 @@ window.pageName = 'BLOG';
                         <div id="bottom_button_grp" class="bottom_button_grp">
                         <button type="button" class="btn btn-info next_prev_btn" id="blog_btn_prev" >&lt;Prev</button>
                         <button type="button" class="btn btn-info pull-right next_prev_btn" id="blog_btn_next">Next&gt;</button>
-                            </div>
+                    </div>
                 </div>
                 </div>
             </div>

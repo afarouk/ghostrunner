@@ -95,9 +95,11 @@ define([
         		}
         	}.bind(this));
             
-            FB.getLoginStatus(function (response) {
-                        this.facebookStatus = response.status;
-                   }.bind(this), true);
+            if(typeof FB !== 'undefined') {
+                FB.getLoginStatus(function (response) {
+                    this.facebookStatus = response.status;
+               }.bind(this), true);
+            }
             
             $('#signin .login-facebook').on('click', function(){
                 this.facebookLoginStatus(this.facebookStatus);
@@ -299,12 +301,14 @@ define([
     	},
 
         onAfterLogout: function() {
+            // var UID = Cookie.get('cmxUID');
+            // h().sendRequest(this.logoutRequest, {
+            //     UID: UID
+            // })
             this.logged = false;
             $('.show_userName').text('');
             this.updateLoginButton();
-            // if (this.logged) {
-            //     this.logoutUser(Cookie.get('cmxUID'));
-            // }
+            $("#left_content").css("display","none");
         },
 
     	//TODO temporary for testing

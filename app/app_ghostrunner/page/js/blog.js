@@ -60,11 +60,15 @@ define([
             
             $('#delete_blog').on('click',function(){
                 h().sendRequest(this.DeleteEntry, {UID:Cookie.get('cmxUID'),blogUUID:$('#delete_blog').attr('bloguuid')}).then(function(response){
-                    alert("Blog Entry Deleted Successfully");
+                    this.showPopup('Blog Entry Deleted Successfully.');
                     this.retriveBlog(null,null);
                 }.bind(this),function(){
-                    alert("Error");
+                    // this.showPopup(err.error.message, 'error');
                 })
+            }.bind(this));
+
+            $('#blog_edit .form-group .form-control').on('keydown', function(){
+                this.hideError();
             }.bind(this));
             
             $("#blog_post_btn").on("click",function(){
@@ -79,21 +83,21 @@ define([
                 topic = $("#topics");
                 tags = $("#tags");
                 
-            if(title.val()==""){
-                alert("Title should not be empty.");
-                title.focus();
+            if(title.val() === ''){
+                this.showError('Title should not be empty.');
+                title.focus().addClass('error');
                 return false;
-            } else if(body.val() =="") {
-                    alert("Body should not be empty.");
-                    body.focus();
-                    return false;
-            } else if(topic.val() ==""){
-                alert("Topic should not be empty.");
-                topic.focus();
+            } else if(body.val() === '') {
+                this.showError('Body should not be empty.');
+                body.focus().addClass('error');
                 return false;
-            } else if(tags.val()==""){
-                alert("Tags should not be empty.");
-                tags.focus();
+            } else if(topic.val() === ''){
+                this.showError('Topic should not be empty.');
+                topic.focus().addClass('error');
+                return false;
+            } else if(tags.val() === ''){
+                this.showError('Tags should not be empty.');
+                tags.focus().addClass('error');
                  return false;
             } else {
                 var d = new Date();
@@ -116,7 +120,7 @@ define([
                         hashTags:null
                     };
                    this.createBlog(data).then(function(response) {
-                        alert("Blog created Successfully");
+                        this.showPopup('Blog created Successfully.');
                         this.retriveBlog(null,null);
                         this.blogReset();
                     }.bind(this)); 
@@ -218,9 +222,37 @@ define([
                     message:Message,
                     code:promocode,
             } }).then(function(response){
-                alert(response.explanation);
+                this.showPopup(response.explanation);
                 $("#sendMessage")[0].reset();
             }.bind(this)); 
+        },
+
+        showError: function(message) {
+            var $el = $('#error-message');
+            $el.find('.message-text').text('* ' + message);
+            $el.show();
+        },
+        hideError: function() {
+            var $el = $('#error-message');
+            $el.find('.message-text').text('');
+            $el.hide();
+            $('#blog_edit .form-group .form-control').removeClass('error');
+        },
+
+        showPopup: function(message, type) {
+            var $el;
+            if (type === 'error') {
+                $el = $('#error-msg');
+            } else {
+                $el = $('#info-msg');
+            }
+            $el.find('.message-text').text(message);
+            $el.modal()
+                .off('shown.bs.modal')
+                .on('shown.bs.modal', function() {
+                    //focuses on modals ok button
+                    $(this).find('input').focus();
+            });
         }
     };
 

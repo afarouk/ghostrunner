@@ -2097,12 +2097,21 @@ a.header-content-tabs{
     padding: 15px 15px 5px 15px !important;
 }
 
+#info-msg.modal,
 #error-msg.modal {
 	background-color: rgba(0, 0, 0, 0.4);
 }
+#info-msg.modal .modal-dialog,
 #error-msg.modal .modal-dialog {
 	padding-top: 200px;
 	padding-right: 130px;
+}
+#info-msg.modal .modal-dialog .modal-content {
+	/*background: #ce8878;*/
+	padding: 15px;
+	/*box-shadow: 5px 4px 10px 5px #7b4639;*/
+	margin: 0 50px;
+	width: 320px;
 }
 #error-msg.modal .modal-dialog .modal-content {
 	background: #ce8878;
@@ -2111,9 +2120,11 @@ a.header-content-tabs{
 	margin: 0 50px;
 	width: 320px;
 }
+#info-msg.modal .modal-dialog .modal-content .modal-footer,
 #error-msg.modal .modal-dialog .modal-content .modal-footer {
 	text-align: center;
 }
+#info-msg.modal .modal-dialog .modal-content .modal-footer input,
 #error-msg.modal .modal-dialog .modal-content .modal-footer input {
 	width: 100px;
 }
@@ -2193,6 +2204,20 @@ form.form-horizontal {
     margin: auto;
     margin-top: 12px;
     padding:20px;
+}
+form.form-horizontal textarea {
+	max-width: 100%;
+	max-height: 200px;
+}
+form.form-horizontal .form-control.error {
+	border: 1px solid red;
+}
+form.form-horizontal .error-message {
+	float: right;
+    margin-right: 0px;
+    margin-bottom: 8px;
+    color: red;
+    display: none;
 }
 
 #title,#body,#link,#topics,#tags{

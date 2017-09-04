@@ -9,7 +9,11 @@ define([
             $( document ).ajaxStart(function() {
                 var onLine = window.navigator.onLine;
                 if (onLine === false && this.logged) {
-                    this.publicController.getStateController().onDestroy();
+                    if (window.pageName != 'BLOG') {
+                        this.publicController.getStateController().onDestroy();
+                    } else {
+                        $(window).trigger('ghostrunner.afterLogout');
+                    }
                 }
             }.bind(this));
         },
@@ -20,13 +24,13 @@ define([
         onSignin: function(e, user) {
             this.logged = true;
             this.publicController.getUrlController().checkOptions();
-            if(window.pageName != 'BLOG'){                
+            if(window.pageName != 'BLOG') {              
                 this.publicController.getGameController().start(user);
             }
         },
         onSignout: function(e, UID) {
-            this.logged = false;
-            if(window.pageName != 'BLOG'){                
+            this.logged = false; 
+            if(window.pageName != 'BLOG') {              
                 this.publicController.getGameController().stop(UID);
             }
         },

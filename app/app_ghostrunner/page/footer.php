@@ -148,7 +148,31 @@
     </div>
     <!--signup modal-->
 
-    <!-- #signin modal -->
+    <!-- #info-msg modal -->
+    <div class="modal fade" id="info-msg" role="dialog" style="padding-right: 130px!important;">
+        <div class="modal-dialog modal-sm">
+        <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h3 class="modal-title" style="font-size: 24px;">Message</h3>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="message-text">
+                            <!-- text message here -->
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" style="margin-top: 15px !important;" data-dismiss="modal" class="login border-btn" value="Ok">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- #info-msg end-->
+
+    <!-- #error-msg modal -->
     <div class="modal fade" id="error-msg" role="dialog" style="padding-right: 130px!important;">
         <div class="modal-dialog modal-sm">
         <!-- Modal content-->
@@ -160,7 +184,7 @@
                 <div class="modal-body">
                     <form>
                         <div class="message-text">
-                            Connection lost.
+                            <!-- text message here -->
                         </div>
                     </form>
                 </div>
@@ -170,7 +194,7 @@
             </div>
         </div>
     </div>
-    <!-- #signin end-->
+    <!-- #error-msg end-->
 
     <!--[if lt IE 8]>
     	<div class="browser-notice">
