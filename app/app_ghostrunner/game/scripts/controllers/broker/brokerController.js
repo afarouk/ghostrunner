@@ -189,6 +189,7 @@ define([
                         }
                     }.bind(this), function(xhr){
                         this.hideLoader();
+                        this.switchBrokerState('invite', false);
                         this.publicController.getModalsController().apiErrorPopup(xhr);
                     }.bind(this));
             }
@@ -261,6 +262,7 @@ define([
                         this.showMyTeamsList(response);
                     }.bind(this), function(xhr){
                         this.hideLoader();
+                        this.switchBrokerState('my_teams', false);
                         this.publicController.getModalsController().apiErrorPopup(xhr);
                     }.bind(this));
             }
@@ -290,6 +292,8 @@ define([
                         this.showTeamsList(response);
                     }.bind(this), function(xhr){
                         this.hideLoader();
+                        this.switchBrokerState('teams', false);
+                        this.reRender();
                         this.publicController.getModalsController().apiErrorPopup(xhr);
                     }.bind(this));
             }
@@ -438,6 +442,7 @@ define([
                         }
                     }.bind(this), function(xhr){
                         this.hideLoader();
+                        this.switchBrokerState('invites', false);
                         this.publicController.getModalsController().apiErrorPopup(xhr);
                     }.bind(this));
             }
@@ -470,6 +475,7 @@ define([
                         }
                     }.bind(this), function(xhr){
                         this.hideLoader();
+                        this.switchBrokerState('games', false);
                         this.publicController.getModalsController().apiErrorPopup(xhr);
                     }.bind(this));
             }
