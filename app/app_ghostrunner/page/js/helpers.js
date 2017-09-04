@@ -88,6 +88,12 @@ var helpers = function() {
                     var message = jqXHR.status === 0 ? 'Connection lost.' : 'Internal Server Error.';
                     $('.modal[role="dialog"]').modal('hide');
                     $('#error-msg .message-text').text(message);
+                    $('#error-msg').modal()
+                        .off('shown.bs.modal')
+                        .on('shown.bs.modal', function() {
+                            //focuses on modals ok button
+                            $(this).find('input').focus();
+                    });
                 }
             });
         },

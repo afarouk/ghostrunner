@@ -65,6 +65,21 @@ define([
                 });
         },
 
+        listenModalEnterPress: function() {
+            //here [this] is modal dialog el
+            var $login = $(this).find('[name="login"]');
+            $login.focus();
+            $(this).find('[name="pass"]')
+                .off('keypress')
+                .on('keypress', function(e){
+                    if(e.keyCode == 13){
+                        $login.focus();
+                        $login.click();
+                    }
+            });
+            //login focused and detect if enter presser on pass field
+        },
+
     	listenLogin: function() {
             $('#signin input').on('click',function(){
                 $('.error_dv').hide();
@@ -74,7 +89,9 @@ define([
     			if (this.logged) {
     				this.logoutUser();
     			} else {
-        			$('#signin').modal();
+        			$('#signin').modal()
+                        .off('shown.bs.modal')
+                        .on('shown.bs.modal', this.listenModalEnterPress);
         		}
         	}.bind(this));
             
@@ -86,9 +103,14 @@ define([
                 this.facebookLoginStatus(this.facebookStatus);
         	}.bind(this));
             
-            $('.register_btn').on('click', function(){
+            $('.register_btn').on('click', function() {
     			$('#signin').modal('hide');
-    			$('#signup').modal();
+    			$('#signup').modal()
+                    .off('shown.bs.modal')
+                    .on('shown.bs.modal', function() {
+                        //focuses on register new member
+                        $(this).find('[name="userName"]').focus();
+                    });
         	}.bind(this));
             
         	$('#signin .login').on('click', function(){
@@ -96,6 +118,18 @@ define([
         			password = $('#signin [name="pass"]').val();
         		this.onSignin(username, password);
         	}.bind(this));
+
+            $('.modal').on('keydown', function(e) {
+                //locks tab on login popup
+                if (e.keyCode == 9) {
+                    var $target = $(e.target);
+                    if ($target.is('[name="login"]')) {
+                        $(this).find('[name="user"]').focus();
+                        e.preventDefault();
+                        return false;
+                    }
+                }
+            });
             
             $(window).on('ghostrunner.afterLogout', this.onAfterLogout.bind(this));
     	},
