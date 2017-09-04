@@ -10,7 +10,7 @@ define([
 		className: 'my-game',
 		template: template,
 		triggers: {
-			'click': 'player:selected'
+			'click': 'game:selected'
 		},
 		initialize: function() {
 			
@@ -23,7 +23,8 @@ define([
 		initialize: function (options) {
 		},
 		childView: GameView,
-		onChildviewPlayerSelected: function(view) {
+		onChildviewGameSelected: function(view) {
+			if (!view.model.get('actionable')) return;
 			this.children.each(function(childView) {
 				if (childView === view) {
 					childView.$el.addClass('selected');

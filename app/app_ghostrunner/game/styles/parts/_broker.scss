@@ -747,6 +747,17 @@
                                 }
                             }
 
+                            &.my-game {
+                                padding: 0;
+                                div {
+                                    cursor: not-allowed;
+                                    padding: 5px 10px;
+                                    &.actionable {
+                                        cursor: pointer;
+                                    }
+                                }
+                            }
+
                             &.team.selected,
                             &.available-user.selected,
                             &.invitation-by-email.selected,

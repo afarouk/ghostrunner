@@ -114,13 +114,13 @@ define([
                         this.hideLeft();
                         this.confirm = 'invites';
                         this.view.$el.find('.broker-list.right-list')
-                            .addClass('shown invites-active')
-                            .removeClass('presented games-active without-buttons');
+                            .addClass('shown presented invites-active')
+                            .removeClass('games-active without-buttons');
                         this.view.ui.confirm.attr('disabled', true);
                     } else {
                         this.confirm = undefined;
                         this.view.$el.find('.broker-list.right-list')
-                            .removeClass('shown invites-active');
+                            .removeClass('shown presented invites-active');
                         this.destroyCurrentView();
                     }
                     break;
@@ -447,6 +447,11 @@ define([
                 collection: new Backbone.Collection(response.games)
             });
             this.view.showChildView('rightList', invitesList);
+            this.listenTo(invitesList, 'invitation:selected', this.onSelectInvitation.bind(this));
+        },
+        onSelectInvitation: function(invitation) {
+            this.selectedGame = invitation;
+            this.view.ui.confirm.attr('disabled', false);
         },
         //games
         onGetGames: function() {
@@ -496,6 +501,7 @@ define([
                 case 'invite':
                     this.confirmUser();
                     break;
+                case 'invites':
                 case 'games':
                     this.confirmGame();
                     break;

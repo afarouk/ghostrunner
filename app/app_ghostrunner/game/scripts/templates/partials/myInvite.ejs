@@ -1,2 +1,3 @@
-Game against <%= opponentUserName %>(<%= state %>)
+<div class="<% if(actionable) { %>actionable<% } %>">Game against <%= opponentUserName %>(<%= state %>)
 <% if(initiator) { %><i class="fa fa-info-circle initiator" aria-hidden="true"></i><% } %>
+</div>
