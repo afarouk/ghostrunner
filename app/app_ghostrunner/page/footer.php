@@ -13,10 +13,10 @@
                 	<img src="images/GhostRunner.png" alt="Logo" class="footer-logo" />
                     <p>The mission of GhostRunner, LLC is to provide our customers with the most satisfying sports simulation experience possible.  Our games are played in real time, on virtually any mobile device.  Our customers create and manage favorite teams - filled with favorite players -  against their friends and colleagues... and finish the game ready to play again.</p>
                     <div class="footer-socials">
-                        <a href="https://www.facebook.com/" title="facebook"><i class="fa fa-facebook"></i></a>
-                        <a href="https://www.twitter.com/" title="twitter"><i class="fa fa-twitter"></i></a>
+                        <a href="https://www.facebook.com/MatchUp-Baseball-1578099465845665/" title="facebook"><i class="fa fa-facebook"></i></a>
+                        <a href="https://twitter.com/mbbjimmyg?lang=en" title="twitter"><i class="fa fa-twitter"></i></a>
                         <a href="https://plus.google.com/" title="google plus"><i class="fa fa-google-plus"></i></a>
-                        <a href="https://www.instagram.com" title="instagram"><i class="fa fa-instagram"></i></a>
+                        <a href="https://www.instagram.com/mbbjimmyg/?hl=en" title="instagram"><i class="fa fa-instagram"></i></a>
                         <a href="https://in.pinterest.com/" title="pinterest"><i class="fa fa-pinterest"></i></a>
                         <a href="https://dribbble.com/" title="dribbble"><i class="fa fa-dribbble"></i></a>
                     </div>
@@ -43,11 +43,11 @@
                     <!--<p>123 Main Street Cottage<br>Long Branch City, P.O Box 65148<br>(00) 123-4567890 / (00) 123-4567890<br><a href="#">www.ghostrunner.com</a><br><a href="#">support@ghostrunner.com</a></p>-->
 
                     <p>Jim Gustafson "JimmyG" can be reached by:<br/>
-                        Instagram (#baseballdailyaffirmation) - search mbbjimmyg<br/>
-                        Twitter - @mbbjimmyg<br/>
-                        Facebook - MatchUp Baseball<br/>
-                        Email - jimmyg@ghostrunner.net<br/>
-                        webpage - www.ghostrunner.net</p>
+                       Instagram (#baseballdailyaffirmation) -  <a href="https://www.instagram.com/mbbjimmyg/?hl=en">search mbbjimmyg</a><br/>
+                       Twitter - <a href="https://twitter.com/mbbjimmyg?lang=en">@mbbjimmyg</a><br/>
+                       Facebook -  <a href="https://www.facebook.com/MatchUp-Baseball-1578099465845665/">MatchUp Baseball</a><br/>
+                        Email -   <a href="mailto:jimmyg@ghostrunner.net">jimmyg@ghostrunner.net</a><br/>
+                        webpage - <a href="http://www.ghostrunner.net" target="_blank">www.ghostrunner.net</a></p>
                 </div>
 
             </div>
