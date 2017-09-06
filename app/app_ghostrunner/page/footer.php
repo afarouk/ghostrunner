@@ -1,12 +1,8 @@
 <!-- #footer -->
-
-    <!--  #Test Page Start  -->
-         <div id="test" class="wrap-container8040">
-
-        <!-- .container -->
-
+<!--  #Test Page Start  -->
+<div id="test" class="wrap-container8040">
+<!-- .container -->
     <footer id="footer">
-
         <!-- .container -->
         <div class="container padding-bottom20">
 
@@ -56,7 +52,6 @@
 
             </div>
             <!-- .row end -->
-
         </div>
         <!-- .container end -->
 
@@ -82,7 +77,6 @@
                 </div>
                 <div class="modal-body">
                     <form>
-
                         <p>
                             <label class="small_label" style="">Username / Email</label>
                             <input type="text" value="" name="user" autocomplete="off" style="width: 100%;" class="transparent_input">
@@ -195,6 +189,12 @@
         </div>
     </div>
     <!-- #error-msg end-->
+
+    <!-- #loader cover -->
+    <div class="loader-cover" id="loader">
+        <div class="loader-image"></div>
+    </div>
+    <!-- end of loader cover -->
 
     <!--[if lt IE 8]>
     	<div class="browser-notice">

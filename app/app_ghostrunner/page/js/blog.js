@@ -19,7 +19,7 @@ define([
             }
         },
 
-        createBlog: function(data){
+        createBlog: function(data) {
             var UID=Cookie.get('cmxUID');
             var option = {
                 url : this.BlogRequest[1] + '?UID='+UID,
@@ -58,20 +58,21 @@ define([
                 this.retriveBlog(prev , null);
             }.bind(this));
             
-            $('#delete_blog').on('click',function(){
-                h().sendRequest(this.DeleteEntry, {UID:Cookie.get('cmxUID'),blogUUID:$('#delete_blog').attr('bloguuid')}).then(function(response){
-                    this.showPopup('Blog Entry Deleted Successfully.');
-                    this.retriveBlog(null,null);
-                }.bind(this),function(){
-                    // this.showPopup(err.error.message, 'error');
-                })
+            $('#delete_blog').on('click',function() {
+                h().sendRequest(this.DeleteEntry, {UID:Cookie.get('cmxUID'), blogUUID: $('#delete_blog').attr('bloguuid')})
+                    .then(function(response){
+                        this.showPopup('Blog Entry Deleted Successfully.');
+                        this.retriveBlog(null,null);
+                    }.bind(this), function() {
+                        // this.showPopup(err.error.message, 'error');
+                    });
             }.bind(this));
 
             $('#blog_edit .form-group .form-control').on('keydown', function(){
                 this.hideError();
             }.bind(this));
             
-            $("#blog_post_btn").on("click",function(){
+            $('#blog_post_btn').on('click', function() {
                 var title = '';
                 var body  = '';
                 var link  = '';
@@ -83,53 +84,58 @@ define([
                 topic = $("#topics");
                 tags = $("#tags");
                 
-            if(title.val() === ''){
-                this.showError('Title should not be empty.');
-                title.focus().addClass('error');
-                return false;
-            } else if(body.val() === '') {
-                this.showError('Body should not be empty.');
-                body.focus().addClass('error');
-                return false;
-            } else if(topic.val() === ''){
-                this.showError('Topic should not be empty.');
-                topic.focus().addClass('error');
-                return false;
-            } else if(tags.val() === ''){
-                this.showError('Tags should not be empty.');
-                tags.focus().addClass('error');
-                 return false;
-            } else {
-                var d = new Date();
-                var curr_date = d.getDate();
-                var curr_month = d.getMonth() + 1;
-                curr_month = curr_month<10 ? '0'+curr_month : curr_month;
-                var curr_year = d.getFullYear();
-                var h = d.getHours();
-                var m = d.getMinutes();
-                var s = d.getSeconds();
-                var fulldate = curr_year+'-'+curr_month+'-'+curr_date+' '+h+':'+m+':'+s;
-                var data ={
-                        activationDate: fulldate,
-                        expirationDate: fulldate,
-                        contestName:title.val(),
-                        displayText:body.val(),
-                        isAnonymous: false,
-                        subType:2,
-                        categories:null,
-                        hashTags:null
-                    };
-                   this.createBlog(data).then(function(response) {
-                        this.showPopup('Blog created Successfully.');
-                        this.retriveBlog(null,null);
-                        this.blogReset();
-                    }.bind(this)); 
+                if(title.val() === '') {
+                    this.showError('Title should not be empty.');
+                    title.focus().addClass('error');
+                    return false;
+                } else if(body.val() === '') {
+                    this.showError('Body should not be empty.');
+                    body.focus().addClass('error');
+                    return false;
+                } else if(topic.val() === '') {
+                    this.showError('Topic should not be empty.');
+                    topic.focus().addClass('error');
+                    return false;
+                } else if(tags.val() === '') {
+                    this.showError('Tags should not be empty.');
+                    tags.focus().addClass('error');
+                    return false;
+                } else {
+                    var d = new Date();
+                    var curr_date = d.getDate();
+                    var curr_month = d.getMonth() + 1;
+                    curr_month = curr_month < 10 ? '0' + curr_month : curr_month;
+                    var curr_year = d.getFullYear();
+                    var hours = d.getHours();
+                    var minutes = d.getMinutes();
+                    var seconds = d.getSeconds();
+                    var fulldate = curr_year + '-' + curr_month + '-' + curr_date + ' ' + hours + ':' + minutes + ':' + seconds;
+                    var data = {
+                            activationDate: fulldate,
+                            expirationDate: fulldate,
+                            contestName: title.val(),
+                            displayText: body.val(),
+                            isAnonymous: false,
+                            subType: 2,
+                            categories: null,
+                            hashTags: null
+                        };
+
+                    h().showLoader();
+                    this.createBlog(data)
+                        .then(function(response) {
+                            h().hideLoader();
+                            this.showPopup('Blog created Successfully.');
+                            this.retriveBlog(null,null);
+                            this.blogReset();
+                        }.bind(this)); 
                 }
-            }.bind(this));  
-                $("#blog_cancel_btn").on('click',function(){
-                     this.blogReset();
-                }.bind(this));
-            },
+            }.bind(this));
+
+            $('#blog_cancel_btn').on('click', function() {
+                this.blogReset();
+            }.bind(this));
+        },
         
         onSaveImage: function(image) {
             this.file = h().dataURLtoBlob(image.data);
@@ -150,7 +156,7 @@ define([
                 formData.append('image', this.file,this.fileName);    
             }
             
-            if(data){
+            if (data) {
                 formData.append('data', data);    
             }
             return $.ajax({
@@ -181,19 +187,19 @@ define([
             $('#blog_picture').attr('src','');
             $('#main_blog_view').html('');
             $('#delete_blog').attr('bloguuid','');
-            h().sendRequest(this.retrieveBlogRequest, {previousId:preId,nextId:nxtId})
+            h().sendRequest(this.retrieveBlogRequest, {previousId: preId, nextId: nxtId})
                 .then(function (response) {
-                    if (response.hasNext===true) {
+                    if (response.hasNext === true) {
                            $('#blog_btn_next').attr('disabled',false); 
-                        }else{
-                           $('#blog_btn_next').attr('disabled',true); 
-                        }
-                        if(response.hasPrevious===true){
-                           $('#blog_btn_prev').attr('disabled',false); 
-                        }else{
-                           $('#blog_btn_prev').attr('disabled',true);
-                        }
-                    if (response && response.entries.length>0) {
+                    } else {
+                       $('#blog_btn_next').attr('disabled',true); 
+                    }
+                    if (response.hasPrevious === true) {
+                       $('#blog_btn_prev').attr('disabled',false); 
+                    } else {
+                       $('#blog_btn_prev').attr('disabled',true);
+                    }
+                    if (response && response.entries.length > 0) {
                         $('#blog_btn_next').attr('navId',response.previousId);
                         $('#blog_btn_prev').attr('navId',response.nextId);
                         $('#delete_blog').attr('bloguuid',response.entries[0].uuid);
@@ -201,7 +207,7 @@ define([
                         $('#blog_picture').attr('src',response.entries[0].img_url);
                         $('#main_blog_view').html(response.entries[0].body);
                     } else {
-                        $('#delete_blog').attr('disabled',true);  
+                        $('#delete_blog').attr('disabled', true);  
                     }
                 }.bind(this), function onRequestError (error) {
                    console.log(error);
@@ -214,14 +220,16 @@ define([
             var Subject = $('input[name="subject"]').val();
             var Message = $('#textarea').val();
             var promocode = $('input[name="promocode"]').val();
+
             h().sendRequest(this.SendContactUsEmail, {
-                payload:{
-                    name:Name,
-                    email:Email,
-                    subject:Subject,
-                    message:Message,
-                    code:promocode,
-            } }).then(function(response){
+                payload: {
+                    name: Name,
+                    email: Email,
+                    subject: Subject,
+                    message: Message,
+                    code: promocode
+                }
+            }).then(function(response){
                 this.showPopup(response.explanation);
                 $("#sendMessage")[0].reset();
             }.bind(this)); 

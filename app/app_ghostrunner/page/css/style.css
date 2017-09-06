@@ -2132,6 +2132,32 @@ a.header-content-tabs{
 	font-size: 20px;
 }
 
+#loader.loader-cover {
+	display: none;
+}
+
+#loader.loader-cover.shown {
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background-color: rgba(0,0,0,0.3);
+	z-index: 9999;
+	display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#loader.loader-cover .loader-image {
+	position: absolute;
+    bottom: 0;
+    top: -100px;
+    left: 0;
+    right: 0;
+    margin: auto;
+    background: url('../images/loader.svg') no-repeat center;
+}
+
 .transparent_input{
     height:40px !important;
 }

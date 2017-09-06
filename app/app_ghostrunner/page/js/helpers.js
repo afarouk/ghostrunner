@@ -63,6 +63,8 @@ var helpers = function() {
 
             delete options.payload;
 
+            this.showLoader();
+
             return $.ajax({
                 type: method,
                 url: (options ? url + '?' + $.param(options) : url),
@@ -70,7 +72,9 @@ var helpers = function() {
                 contentType: 'application/json',
                 processData: false,
                 timeout: 10000
-            }).fail(function (jqXHR, textStatus, errorThrown) {
+            }).done(function(){
+                this.hideLoader();
+            }.bind(this)).fail(function (jqXHR, textStatus, errorThrown) {
               /*
                AF: I have added this 'fail' method to handle communication failure
                or internet failure where the client is unable to reach the
@@ -83,6 +87,7 @@ var helpers = function() {
                because the socket takes care of it. But before the socket is
                opened, during login, this handler is needed. 
                */
+                this.hideLoader();
                 if (jqXHR.status !== 400) {
                     console.log("helpers.js::sendRequest() textStatus:"+textStatus+", errorThrown:"+errorThrown);
                     var message = jqXHR.status === 0 ? 'Connection lost.' : 'Internal Server Error.';
@@ -95,7 +100,7 @@ var helpers = function() {
                             $(this).find('input').focus();
                     });
                 }
-            });
+            }.bind(this));
         },
 
         getAPIRoot: function() {
@@ -110,8 +115,13 @@ var helpers = function() {
             } else {
                 return server ? 'https://' + server + '/apptsvc/rest' : this.apiRoot;
             }
+        },
+        showLoader: function() {
+            $('#loader').addClass('shown');
+        },
+        hideLoader: function() {
+            $('#loader').removeClass('shown');
         }
-
     };
 };
 
