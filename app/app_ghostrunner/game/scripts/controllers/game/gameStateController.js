@@ -43,7 +43,7 @@ define([
         checkIfShowInvitationNeeded: function(games) {
             var invites = _.filter(games, function(game){
                 if (!game.initiator) {
-                    if (game.state === 'STARTER_INVITING' || game.state === 'STARTER_LINEUP') {
+                    if (game.state === 'STARTER_INVITING' || game.state === 'LINEUP_STARTER') {
                         return game;
                     }
                 } else {

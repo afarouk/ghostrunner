@@ -131,15 +131,11 @@ define([
                 case 'STARTER_STARTER':
                     break;
 
-                case 'STARTER_LINEUP':
+                case 'LINEUP_STARTER':
                     break;
 
                 case 'LINEUP_LINEUP':
                     this.publicController.getStateController().afterGameWasAccepted(gameModel);
-                    break;
-
-                case 'STARTING':
-                    this.publicController.getGameController().switchToGame();
                     break;
 
                 case 'RUNNING':
