@@ -126,16 +126,15 @@ define([
                     break;
 
                 case 'STARTER_INVITING':
-                    
                     break;
 
-                case 'STARTERS':
+                case 'STARTER_STARTER':
                     break;
 
-                case 'LINEUP':
+                case 'STARTER_LINEUP':
                     break;
 
-                case 'LINEUPS_ACCEPTED':
+                case 'LINEUP_LINEUP':
                     this.publicController.getStateController().afterGameWasAccepted(gameModel);
                     break;
 

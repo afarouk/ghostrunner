@@ -43,11 +43,11 @@ define([
         checkIfShowInvitationNeeded: function(games) {
             var invites = _.filter(games, function(game){
                 if (!game.initiator) {
-                    if (game.state === 'STARTER_INVITING' || game.state === 'LINEUP') {
+                    if (game.state === 'STARTER_INVITING' || game.state === 'STARTER_LINEUP') {
                         return game;
                     }
                 } else {
-                    if (game.state === 'STARTERS' || game.state === 'LINEUPS_ACCEPTED') {
+                    if (game.state === 'STARTER_STARTER' || game.state === 'LINEUP_LINEUP') {
                         return game;
                     }
                 }
@@ -322,12 +322,12 @@ define([
         },
         onCheckMoveConditions: function(moveEnum, state) {
             //was splited because could be long
-            return (moveEnum === 'SWING_AWAY' || 
-                    moveEnum === 'BUNT_ATTEMPT' || 
-                    moveEnum === 'STEAL_BASE' || 
-                    moveEnum === 'HIT_N_RUN_ATTEMP' || 
-                    moveEnum === 'PITCH_TO_BATTER' || 
-                    moveEnum === 'INTENTIONAL_WALK') && 
+            return (moveEnum === 'SWING_AWAY' ||
+                    moveEnum === 'BUNT_ATTEMPT' ||
+                    moveEnum === 'STEAL_BASE' ||
+                    moveEnum === 'HIT_N_RUN_ATTEMP' ||
+                    moveEnum === 'PITCH_TO_BATTER' ||
+                    moveEnum === 'INTENTIONAL_WALK') &&
                     state.thisUser.state === "MAKE_YOUR_MOVE";
         },
 
