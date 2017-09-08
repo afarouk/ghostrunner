@@ -125,7 +125,7 @@ define([
                 case 'UNDEFINED':
                     break;
 
-                case 'STARTER_INVITING':
+                case 'STARTER_INVITED':
                     break;
 
                 case 'STARTER_STARTER':
@@ -157,6 +157,7 @@ define([
                 case 'REJECTED':
                     this.publicController.getGameController().switchToBroker();
                     break;
+
                 case 'REFRESH_GAME':
                      this.publicController.getGameController().getSocketRefresh();
                      break;

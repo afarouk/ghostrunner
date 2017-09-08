@@ -2,7 +2,7 @@
   <label for="gameSelectChoice"><%= message %></label>
   <select class="form-control" id="gameSelectChoice">
     <% _.each(list, function(games){
-     if(games.state == 'RUNNING' || games.state == 'STARTER_INVITING' || games.state == 'LINEUP_LINEUP' || games.state == 'PAUSED'){ %>
+     if(games.state == 'RUNNING' || games.state == 'STARTER_INVITED' || games.state == 'LINEUP_LINEUP' || games.state == 'PAUSED'){ %>
 		<option value="<%= games.gameUUID %>">You VS <%= games.opponentUserName %> (<%= games.state %>)</option>
 	<% }}) %>
   </select>
