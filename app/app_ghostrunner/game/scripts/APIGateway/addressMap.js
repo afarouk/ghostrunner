@@ -21,7 +21,7 @@ module.exports = {
             selectStarterAndInviteAndRegister: ['PUT', '/gaming/selectStarterAndInviteAndRegister'],
         	getAvailableUsers: ['GET', '/gaming/getAvailableUsers'],
             selectStarter: ['PUT', '/gaming/selectStarter'],
-            selectLineUp: ['PUT', '/gaming/selectLineUp'],
+            selectRemainingLineUp: ['PUT', '/gaming/selectRemainingLineUp'],
         	abandonGame: ['PUT', '/gaming/abandonGame'],
             getMyRunningGame: ['GET', '/gaming/getMyRunningGame'],
             getMyInvitations: ['GET', '/gaming/getMyInvitations'],

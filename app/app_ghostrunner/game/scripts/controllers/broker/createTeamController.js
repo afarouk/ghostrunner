@@ -155,7 +155,7 @@ define([
                        this.publicController.getStateController().onInvitationAccepted(lineUpData, role);
                     }.bind(this));
             } else {
-                service.selectLineUp(lineUpData)
+                service.selectRemainingLineUp(lineUpData)
                     .then(function(){
                         this.publicController.getStateController().killGame();
                         this.publicController.getModalsController().afterLineUpSelected()

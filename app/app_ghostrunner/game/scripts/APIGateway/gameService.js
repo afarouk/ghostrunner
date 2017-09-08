@@ -129,13 +129,13 @@ define([
             if (game) params.payload.gameUUID = game.get('gameUUID');
             return gateway.sendRequest('selectStarter', params);
         },
-        selectLineUp: function(payload) {
+        selectRemainingLineUp: function(payload) {
             var user = appCache.get('user'),
                 params = {
                     UID: user.get('uid'),
                     payload: payload
                 };
-            return gateway.sendRequest('selectLineUp', params);
+            return gateway.sendRequest('selectRemainingLineUp', params);
         },
         getAvailableUsers: function(params) {
             var user = appCache.get('user');
