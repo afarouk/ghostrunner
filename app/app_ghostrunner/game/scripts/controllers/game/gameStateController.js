@@ -43,7 +43,7 @@ define([
         checkIfShowInvitationNeeded: function(games) {
             var invites = _.filter(games, function(game){
                 if (!game.initiator) {
-                    if (game.state === 'STARTER_INVITING' || game.state === 'LINEUP_STARTER') {
+                    if (game.state === 'STARTER_INVITED' || game.state === 'LINEUP_STARTER') {
                         return game;
                     }
                 } else {
@@ -251,7 +251,7 @@ define([
         },
 
         onInvitationAccepted: function(lineUpData, role) {
-            service.selectLineUpAndAccept({
+            service.selectRemainingLineUpAndAccept({
                 preferredRole: role,
                 payload: lineUpData
             }).then(function(state){

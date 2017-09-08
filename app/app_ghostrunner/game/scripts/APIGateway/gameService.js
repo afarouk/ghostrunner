@@ -88,12 +88,12 @@ define([
             params.UID = user.get('uid');
             return gateway.sendRequest('retrieveInvitation', params);
         },
-        selectLineUpAndAccept: function(params) {
+        selectRemainingLineUpAndAccept: function(params) {
             var user = appCache.get('user'),
                 game = appCache.get('game');
             params = params || {};
             params.UID = user.get('uid');
-            return gateway.sendRequest('selectLineUpAndAccept', params);
+            return gateway.sendRequest('selectRemainingLineUpAndAccept', params);
         },
         rejectInvitation: function(game) {
             var user = appCache.get('user'),

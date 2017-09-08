@@ -16,7 +16,7 @@ module.exports = {
             updateGamePresence: ['PUT', '/gaming/updateGamePresence'],
         	retrieveInvitation: ['GET', '/gaming/retrieveInvitation'],
             rejectInvitation: ['PUT', '/gaming/rejectInvitation'],
-        	selectLineUpAndAccept: ['PUT', '/gaming/selectLineUpAndAccept'],
+        	selectRemainingLineUpAndAccept: ['PUT', '/gaming/selectRemainingLineUpAndAccept'],
         	selectStarterAndInvite: ['PUT', '/gaming/selectStarterAndInvite'],
             selectStarterAndInviteAndRegister: ['PUT', '/gaming/selectStarterAndInviteAndRegister'],
         	getAvailableUsers: ['GET', '/gaming/getAvailableUsers'],
