@@ -46,6 +46,9 @@ define([
         lineUpShape: function(layout, accept) {
             var game = appCache.get('game'),
                 lineUp = new Backbone.Model(game.get('thisLineUp'));
+                
+            //!!!TODO manage case with LINEUP_INVITED state
+
             service.retrieveAvailableTeamPlayers(lineUp)
                 .then(function(players){
                     this.onShapeLineUp(players, lineUp, accept);

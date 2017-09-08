@@ -43,11 +43,14 @@ define([
         checkIfShowInvitationNeeded: function(games) {
             var invites = _.filter(games, function(game){
                 if (!game.initiator) {
-                    if (game.state === 'STARTER_INVITED' || game.state === 'LINEUP_STARTER') {
+                    if (game.state === 'STARTER_INVITED' || 
+                        game.state === 'LINEUP_STARTER' ||
+                        game.state === 'LINEUP_INVITED') {
                         return game;
                     }
                 } else {
-                    if (game.state === 'STARTER_STARTER' || game.state === 'LINEUP_LINEUP') {
+                    if (game.state === 'STARTER_STARTER' || 
+                        game.state === 'LINEUP_LINEUP') {
                         return game;
                     }
                 }
@@ -167,6 +170,36 @@ define([
                     this.publicController.getModalsController().apiErrorPopup(err);
                 }.bind(this));
         },
+
+        //user lineup secection invitation scenario
+        onSendInvitationWithUserLineup: function(credentials) {
+            var onInvitationSent = credentials.callback;
+            delete credentials.callback;
+            service.selectLineupAndInvite(credentials)
+                .then(function(result){
+                    onInvitationSent(true, result);
+                    this.killGame();
+                }.bind(this), function(xhr){
+                    this.publicController.getGameController().hideLoader();
+                    this.publicController.getModalsController().apiErrorPopup(xhr);
+                }.bind(this));
+        },
+
+        onSendInvitationByEmailWithUserLineup: function(credentials) {
+            var onInvitationSent = credentials.callback;
+            delete credentials.callback;
+            service.selectLineupAndInviteAndRegister(credentials)
+                .then(function(result){
+                    if (result) { //TODO check 204 result
+                        onInvitationSent(true, result);
+                    }
+                    this.killGame();
+                }.bind(this), function(err){
+                    onInvitationSent(false, err);
+                    this.publicController.getModalsController().apiErrorPopup(err);
+                }.bind(this));
+        },
+        //............
 
         onRetrieveInvitation: function(message) {
             this.beforeRefreshStatus(message);

@@ -19,6 +19,8 @@ define([
 		events: {
 			'paste input': 'validateCredentials',
 			'change input': 'validateCredentials',
+			'keydown': 'onCheckEnter',
+			'blur input': 'validateCredentials',
 			'click': 'onEmailClicked'
 		},
 		triggers: {
@@ -26,6 +28,13 @@ define([
 		},
 		onEmailClicked: function() {
 			this.ui.email.focus();
+		},
+		onCheckEnter: function(e) {
+			if (e.keyCode === 13) {
+				this.validateCredentials();
+			} else {
+				return true;
+			}
 		},
 		validateCredentials: function() {
 			setTimeout(function(){

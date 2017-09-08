@@ -180,12 +180,8 @@ define([
             //when user isn't initiator show opponent starter selection info and players card
             this.publicController.getGameController().switchToBroker();
             this.onOtherPlayerLineUp(gameModel, 'select')
-                .then(function(){
-                    return this.publicController
-                        .getBrokerController().switchToLineUpState()
-                            .then(function(team, lineUpName, playerModel) {
-                                this.publicController.getStateController().afterCandidateSelected(team, lineUpName, playerModel);
-                            }.bind(this));
+                .then(function() {
+                    this.publicController.getStateManager().manageInvitationScenarios(gameModel.get('state'));
                 }.bind(this));
         },
 

@@ -209,14 +209,13 @@ define([
             return gateway.sendRequest('retrieveTeamPlayers', params);
         },
 
-        retrieveAvailableTeamPlayers: function(team, playerType) {
+        retrieveAvailableTeamPlayers: function() {
             var userId = appCache.get('user').get('uid'),
                 gameUUID=appCache.get('game').get('gameUUID'),
                 params = {
                     UID:userId,
                     gameUUID: gameUUID
                 };
-            if (playerType) params.type = playerType;
             return gateway.sendRequest('retrieveAvailableTeamPlayers', params);
         },
 
@@ -419,6 +418,41 @@ define([
 
             return gateway.sendRequest('setShowTossAnimation', params);
         },
+
+        //.........new
+        //[GET]..../getMyLineups?UID=...
+        getMyLineups: function() {
+            var user = appCache.get('user'),
+                params = {
+                    UID: user.get('uid')
+                };
+
+            return gateway.sendRequest('getMyLineups', params);    
+        },
+
+        selectLineupAndInvite: function(payload) {
+            var user = appCache.get('user'),
+                params = {
+                    UID: user.get('uid'),
+                    payload: payload
+                };
+
+            return gateway.sendRequest('selectLineupAndInvite', params);
+        },
+        selectLineupAndInviteAndRegister: function(payload) {
+            var user = appCache.get('user'),
+                params = {
+                    UID: user.get('uid'),
+                    payload: payload
+                };
+
+            return gateway.sendRequest('selectLineupAndInviteAndRegister', params);
+        },
+        //[PUT] ..../gaming/selectLineupAndInvite?UID=...
+        //[PUT] ..../gaming/selectLineupAndInviteAndRegister?UID=...
+        //[PUT] ..../selectLineupAndAccept?UID=...&preferredRole=OFFENSE|DEFENSE.... 
+        //[PUT] ..../createLineupAndAccept?UID=...&preferredRole=OFFENSE|DEFENSE.... 
+        //...........
 
         /*debug*/
         killSocket: function() {

@@ -6,17 +6,19 @@ define([
     '../../appCache',
     '../../views/mainBroker',
     '../../views/partials/teamsList',
+    '../../views/partials/lineupsList',
     '../../views/partials/usersList',
     '../../views/partials/gamesList',
     '../../views/partials/invitesList',
     '../../views/partials/emptyList',
     '../../APIGateway/gameService'
-    ], function(appCache, MainBrokerView, TeamsList, UsersList, GamesList, InvitesList, EmptyListView, service){
+    ], function(appCache, MainBrokerView, TeamsList, LineupsList, UsersList, GamesList, InvitesList, EmptyListView, service){
     var BrokerController = Mn.Object.extend({
         create: function(layout, region) {
             this.view = new MainBrokerView();
             layout.showChildView( region, this.view );
             this.listenTo(this.view, 'getTeams', this.onGetMyTeams.bind(this));
+            this.listenTo(this.view, 'getLineups', this.onGetMyLineups.bind(this));
             this.listenTo(this.view, 'getUsers', this.onGetUsers.bind(this));
             this.listenTo(this.view, 'getInvites', this.onGetInvites.bind(this));
             this.listenTo(this.view, 'getGames', this.onGetGames.bind(this));
@@ -50,11 +52,11 @@ define([
             appCache.remove('urlGameUUID');
         },
         //empty list
-        showEmptyList: function(message) {
+        showEmptyList: function(where, message) {
             var emptyList = new EmptyListView({
                 model: new Backbone.Model({message: message})
             });
-            this.view.showChildView('rightList', emptyList);
+            this.view.showChildView(where, emptyList);
         },
         destroyCurrentView: function() {
             var currentView = this.view.getRegion('rightList').currentView ||
@@ -70,7 +72,7 @@ define([
                         this.hideRight();
                         this.confirm = 'invite';
                         this.view.$el.find('.broker-list.left-list')
-                            .addClass('shown presented').removeClass('my-teams without-buttons');
+                            .addClass('shown presented').removeClass('my-teams my-invites without-buttons');
                         this.view.ui.confirm.attr('disabled', true);
                     } else {
                         this.view.$el.find('.broker-list.left-list')
@@ -85,9 +87,11 @@ define([
                         this.confirm = 'teams';
                         this.view.$el.find('.broker-list.left-list')
                             .addClass('shown presented my-teams')
-                            .removeClass('without-buttons');
+                            .removeClass('my-lineups without-buttons');
                         this.view.ui.teams.attr('disabled', false)
                             .addClass('inactive');
+                        this.view.ui.lineups.removeClass('inactive');
+                        this.view.ui.confirm.attr('disabled', true);
                     } else {
                         this.view.$el.find('.broker-list.left-list')
                             .removeClass('shown presented');
@@ -100,7 +104,41 @@ define([
                         this.hideRight();
                         this.confirm = 'my_teams';
                         this.view.$el.find('.broker-list.left-list')
-                            .addClass('shown presented my-teams without-buttons');
+                            .addClass('shown presented my-teams without-buttons')
+                            .removeClass('my-lineups');
+                        this.view.ui.teams.attr('disabled', false);
+                    } else {
+                        this.view.$el.find('.broker-list.left-list')
+                            .removeClass('shown presented without-buttons');
+                        this.confirm = undefined;
+                        this.destroyCurrentView();
+                    }
+                    break;
+                case 'lineups':
+                    if (show) {
+                        this.hideRight();
+                        this.confirm = 'lineups';
+                        this.view.$el.find('.broker-list.left-list')
+                            .addClass('shown presented my-lineups')
+                            .removeClass('my-teams without-buttons');
+                        this.view.ui.lineups.attr('disabled', false)
+                            .addClass('inactive');
+                        this.view.ui.teams.removeClass('inactive');
+                        this.view.ui.confirm.attr('disabled', true);
+                    } else {
+                        this.view.$el.find('.broker-list.left-list')
+                            .removeClass('shown presented');
+                        this.confirm = undefined;
+                        this.destroyCurrentView();
+                    }
+                    break;
+                case 'my_lineups':
+                    if (show) {
+                        this.hideRight();
+                        this.confirm = 'my_lineups';
+                        this.view.$el.find('.broker-list.left-list')
+                            .addClass('shown presented my-lineups without-buttons')
+                            .removeClass('my-teams');
                         this.view.ui.teams.attr('disabled', false);
                     } else {
                         this.view.$el.find('.broker-list.left-list')
@@ -139,7 +177,7 @@ define([
                         this.destroyCurrentView();
                     }
                     break;
-                case 'lineUp':
+                case 'lineUpSelection':
                     this.view.ui.invite.attr('disabled', true);
                     this.view.ui.confirm.attr('disabled', true);
                     this.view.ui.rightBroker.addClass('team-state');
@@ -185,7 +223,7 @@ define([
                         if (response.count > 0) {
                             this.showUsersList(response);
                         } else {
-                            this.showEmptyList('No users are present.');
+                            this.showEmptyList('leftList', 'No users are present.');
                         }
                     }.bind(this), function(xhr){
                         this.hideLoader();
@@ -251,15 +289,19 @@ define([
         },
         //teams
         onGetMyTeams: function() {
-            if (this.confirm === 'my_teams') {
-                this.switchBrokerState('my_teams', false);
+            var switchToState = 'my_teams';
+            if (this.confirm === switchToState) {
+                this.switchBrokerState(switchToState, false);
             } else {
-                this.switchBrokerState('my_teams', true);
+                if (this.confirm === 'lineups') {
+                    switchToState = 'teams';
+                }
+                this.switchBrokerState(switchToState, true);
                 this.showLoader();
                 service.getTeams()
                     .then(function(response){
                         this.hideLoader();
-                        this.showMyTeamsList(response);
+                        this.showMyTeamsList(switchToState, response);
                     }.bind(this), function(xhr){
                         this.hideLoader();
                         this.switchBrokerState('my_teams', false);
@@ -267,13 +309,13 @@ define([
                     }.bind(this));
             }
         },
-        showMyTeamsList: function(response) {
+        showMyTeamsList: function(switchToState, response) {
             var collection = new Backbone.Collection(response.teams),
                 teamsList;
             collection.add({newTeam: true});
             teamsList = new TeamsList({
                 collection: collection,
-                my_teams: true
+                state: switchToState
             });
             this.view.showChildView('leftList', teamsList);
             //team
@@ -398,6 +440,7 @@ define([
             }
         },
 
+        //standard selection scenario
         afterLineUpSelected: function(selectedTeam) {
             var teamId = selectedTeam.get('teamId'),
                 teamType = selectedTeam.get('type').enumText,
@@ -423,6 +466,74 @@ define([
                 this.reRender();
             }
         },
+        //my lineups
+        onGetMyLineups: function() {
+            var switchToState = 'my_lineups';
+            if (this.confirm === switchToState) {
+                this.switchBrokerState(switchToState, false);
+            } else {
+                if (this.confirm === 'teams') {
+                    switchToState = 'lineups'
+                }
+                this.switchBrokerState(switchToState, true);
+                this.showLoader();
+                service.getMyLineups()
+                    .then(function(response){
+                        this.hideLoader();
+                        if( response.lineups.length > 0 ){
+                            this.showMyLineupsList(switchToState, response);
+                        } else {
+                            this.showEmptyList('leftList', 'No your lineups presented.');
+                        }
+                    }.bind(this), function(xhr){
+                        this.hideLoader();
+                        this.switchBrokerState('my_lineups', false);
+                        this.reRender();
+                        this.publicController.getModalsController().apiErrorPopup(xhr);
+                    }.bind(this));
+            }
+        },
+
+        showMyLineupsList: function(switchToState, response) {
+            var collection = new Backbone.Collection(response.lineups),
+                lineupsList;
+            lineupsList = new LineupsList({
+                collection: collection,
+                state: switchToState
+            });
+            this.view.showChildView('leftList', lineupsList);
+            //lineups
+            this.listenTo(lineupsList, 'lineup:selected', this.onSelectLineup.bind(this));
+        },
+
+        onSelectLineup: function(lineup) {
+            this.selectedLineup = lineup;
+            this.view.ui.confirm.attr('disabled', false);
+        },
+
+        //user lineup selection scenario
+        onLineupSelected: function() {
+            var lineupId = this.selectedLineup.get('lineUpId'),
+                teamId = this.selectedLineup.get('teamId');
+
+            if (this.selectedUser.get('byEmail')) {
+                this.publicController.getStateController().onSendInvitationByEmailWithUserLineup({
+                    callback: this.credentials.callback,
+                    email: this.credentials.email,
+                    teamId: teamId,
+                    lineupId: lineupId
+                });
+            } else {
+                var inviteeUID = this.selectedUser.get('uid');
+                this.publicController.getStateController().onSendInvitationWithUserLineup({
+                    callback: this.afterInvitationSent.bind(this),
+                    inviteeUID: inviteeUID,
+                    teamId: teamId,
+                    lineupId: lineupId
+                });
+                this.reRender();
+            }
+        },
 
         // Right part
         //invites
@@ -438,7 +549,7 @@ define([
                         if( response.games.length > 0 ){
                             this.showInvitesList(response);
                         } else {
-                            this.showEmptyList('No invitations outstanding.');
+                            this.showEmptyList('rightList', 'No invitations outstanding.');
                         }
                     }.bind(this), function(xhr){
                         this.hideLoader();
@@ -471,7 +582,7 @@ define([
                         if( response.games.length > 0 ){
                             this.showGamesList(response);
                         } else {
-                            this.showEmptyList('No active or paused games.');
+                            this.showEmptyList('rightList', 'No active or paused games.');
                         }
                     }.bind(this), function(xhr){
                         this.hideLoader();
@@ -516,6 +627,11 @@ define([
                         this.selectCandidate();
                     }
                     break;
+                case 'lineups':
+                    if (this.invitationDef) {
+                        this.onLineupSelected();
+                    }
+                    break;
                 default:
                     break;
             }
@@ -544,7 +660,7 @@ define([
         },
 
         switchToLineUpState: function() {
-            this.switchBrokerState('lineUp', true);
+            this.switchBrokerState('lineUpSelection', true);
             this.invitationDef = $.Deferred();
             return this.invitationDef;
         },

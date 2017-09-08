@@ -54,6 +54,10 @@ define([
 
                     break;
 
+                case 'LINEUP_INVITED':
+
+                    break;
+
                 case 'INVITATON_ACCEPTED':
 
                     break;
@@ -164,7 +168,23 @@ define([
                 default:
                     break;
             }
-        }
+        },
+
+        manageInvitationScenarios: function(state) {
+            if (state === 'LINEUP_INVITED') {
+                return this.publicController
+                    .getBrokerController().switchToLineUpState(state)
+                        .then(function() {
+                            return this.publicController.getBrokerController().lineUpShape();
+                        }.bind(this));
+            } else {
+                return this.publicController
+                    .getBrokerController().switchToLineUpState()
+                        .then(function(team, lineUpName, playerModel) {
+                            this.publicController.getStateController().afterCandidateSelected(team, lineUpName, playerModel);
+                        }.bind(this));
+            }
+        },
     });
 
     return new StatesManager();

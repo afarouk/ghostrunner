@@ -65,7 +65,7 @@ define([
 			}
 		},
 		onChildviewTeamSelected: function(view) {
-			if (!this.options.my_teams) {
+			if (this.options.state !== 'my_teams') {
 				this.children.each(function(childView) {
 					if (childView === view) {
 						childView.$el.addClass('selected');

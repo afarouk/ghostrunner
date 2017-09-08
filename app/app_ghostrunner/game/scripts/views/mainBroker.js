@@ -17,6 +17,7 @@ define([
 			leftBroker: '.left-broker',
 			rightBroker: '.right-broker',
 			teams: '[name="teams"]',
+			lineups: '[name="lineups"]',
 			cancel: '[name="cancel"]',
 			invite: '[name="invite"]',
 			byemail: '[name="byemail"]',
@@ -29,6 +30,7 @@ define([
 			loader: '#broker-loader'
 		},
 		triggers: {
+			'click @ui.lineups': 'getLineups',
 			'click @ui.teams': 'getTeams',
 			'click @ui.cancel': 'cancel',
 			'click @ui.invite': 'getUsers',

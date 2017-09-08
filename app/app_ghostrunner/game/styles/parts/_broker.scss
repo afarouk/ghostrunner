@@ -877,6 +877,7 @@
                         }
                     }
 
+                    &.my-lineups,
                     &.my-teams {
                         button.confirm-btn {
                             display: block;
@@ -900,7 +901,10 @@
                     margin-left: 245px;
                 }
                 &.shown.my-teams .list-container:before {
-                    margin-left: 210px;
+                    margin-left: 160px;
+                }
+                &.shown.my-lineups .list-container:before {
+                    margin-left: 350px;
                 }
             }
         }

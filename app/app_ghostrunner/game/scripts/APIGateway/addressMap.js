@@ -6,27 +6,44 @@ module.exports = {
         return {
             getGameUser: ['GET', '/gaming/getGameUser'],
         	getGame: ['GET', '/gaming/getGame'],
-        	makeMove: ['POST', '/gaming/makeMove'],
-            makeSecondaryMove: ['POST', '/gaming/makeSecondaryMove'],
             startGame: ['PUT', '/gaming/startGame'],
             refresh: ['GET', '/gaming/refresh'],
             notifyOpponentOfGameResumption: ['PUT', '/gaming/notifyOpponentOfGameResumption'],
             pauseGame: ['PUT', '/gaming/pauseGame'],
             unPauseGame: ['PUT', '/gaming/unPauseGame'],
-            updateGamePresence: ['PUT', '/gaming/updateGamePresence'],
+            abandonGame: ['PUT', '/gaming/abandonGame'],
+
+            makeMove: ['POST', '/gaming/makeMove'],
+            makeSecondaryMove: ['POST', '/gaming/makeSecondaryMove'],
+            setShowTossAnimation: ['PUT', '/gaming/setShowTossAnimation'],
+            getBaseballFieldPositions: ['GET', '/gaming/getBaseballFieldPositions'],
+            retrievePlayerCard: ['GET', '/gaming/retrievePlayerCard'],
+
         	retrieveInvitation: ['GET', '/gaming/retrieveInvitation'],
             rejectInvitation: ['PUT', '/gaming/rejectInvitation'],
         	selectRemainingLineUpAndAccept: ['PUT', '/gaming/selectRemainingLineUpAndAccept'],
         	selectStarterAndInvite: ['PUT', '/gaming/selectStarterAndInvite'],
             selectStarterAndInviteAndRegister: ['PUT', '/gaming/selectStarterAndInviteAndRegister'],
+
+
         	getAvailableUsers: ['GET', '/gaming/getAvailableUsers'],
             selectStarter: ['PUT', '/gaming/selectStarter'],
             selectRemainingLineUp: ['PUT', '/gaming/selectRemainingLineUp'],
-        	abandonGame: ['PUT', '/gaming/abandonGame'],
+
             getMyRunningGame: ['GET', '/gaming/getMyRunningGame'],
             getMyInvitations: ['GET', '/gaming/getMyInvitations'],
         	getMyGames: ['GET', '/gaming/getMyGames'],
             getTeams: ['GET', '/gaming/getMyTeams'],
+
+            /*new scenarios*/
+            getMyLineups: ['GET', '/gaming/getMyLineups'],
+            selectLineupAndInvite: ['PUT', '/gaming/selectLineupAndInvite'],
+            selectLineupAndInviteAndRegister: ['PUT', '/gaming/selectLineupAndInviteAndRegister'],
+            selectLineupAndAccept: ['PUT', '/gaming/selectLineupAndAccept'],
+            createLineupAndAccept: ['PUT', '/gaming/createLineupAndAccept'],
+            //............
+
+            getAvailablePlayers: ['GET', '/gaming/getAvailablePlayers'],
             retrieveAvailablePlayers: ['GET', '/gaming/retrieveAvailablePlayers'],
             retrieveTeamPlayers: ['GET', '/gaming/retrieveTeamPlayers'],
             retrieveAvailableTeamPlayers: ['GET', '/gaming/retrieveAvailableTeamPlayers'],
@@ -35,11 +52,7 @@ module.exports = {
             createLineUp: ['POST', '/gaming/createLineUp'],
             deleteTeam: ['DELETE', '/gaming/deleteTeam'],
             deleteLineUp: ['DELETE', '/gaming/deleteLineUp'],
-            getBaseballFieldPositions: ['GET', '/gaming/getBaseballFieldPositions'],
-            getMessage: ['GET', '/gaming/getMessage'],
-            getPoll: ['GET', '/gaming'],
-            getAvailablePlayers: ['GET', '/gaming/getAvailablePlayers'],
-            retrievePlayerCard: ['GET', '/gaming/retrievePlayerCard'],
+
             //player replacement
             retrievePinchHitterChoices: ['GET', '/gaming/retrievePinchHitterChoices'],
             setPinchHitter: ['POST', '/gaming/setPinchHitter'],
@@ -53,7 +66,10 @@ module.exports = {
             startLineupEditing: ['PUT', '/gaming/startLineupEditing'],
             stopLineupEditing: ['PUT', '/gaming/stopLineupEditing'],
             forfeitLineupEditing: ['PUT', '/gaming/forfeitLineupEditing'],
-            setShowTossAnimation: ['PUT', '/gaming/setShowTossAnimation'],
+
+            updateGamePresence: ['PUT', '/gaming/updateGamePresence'],
+            getMessage: ['GET', '/gaming/getMessage'],
+            getPoll: ['GET', '/gaming'],
 
             /*debug*/
             killSocket: ['GET', '/gaming/killSocket'],
