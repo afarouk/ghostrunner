@@ -199,6 +199,46 @@ define([
                     this.publicController.getModalsController().apiErrorPopup(err);
                 }.bind(this));
         },
+
+        onSelectLineupAndAccept: function(lineUpData, role) {
+            service.selectLineupAndAccept({
+                preferredRole: role,
+                payload: lineUpData
+            }).then(function(state) {
+                this.killGame();
+                this.publicController.getModalsController().afterLineUpSelected()
+                    .then(function() {
+                        this.publicController.getBrokerController().reRender();
+                    }.bind(this));
+            }.bind(this), function(err){
+                this.publicController.getModalsController().apiErrorPopup(err);
+            }.bind(this));
+        },
+        onCreateLineupAndAccept: function(lineUpData, role) {
+            service.createLineupAndAccept({
+                preferredRole: role,
+                payload: lineUpData
+            }).then(function(state) {
+                this.killGame();
+                this.publicController.getModalsController().afterLineUpSelected()
+                    .then(function() {
+                        this.publicController.getBrokerController().reRender();
+                    }.bind(this));
+            }.bind(this), function(err){
+                this.publicController.getModalsController().apiErrorPopup(err);
+            }.bind(this));
+        },
+
+        onSelectRemainingLineUpAndStart: function(lineUpData, role) {
+            service.selectRemainingLineUpAndStart({
+                preferredRole: role,
+                payload: lineUpData
+            }).then(function(state){
+                this.updateGameModel(state);
+            }.bind(this),function(xhr){
+                this.publicController.getModalsController().apiErrorPopup(xhr);
+            }.bind(this));
+        },
         //............
 
         onRetrieveInvitation: function(message) {
@@ -311,9 +351,7 @@ define([
                     this.publicController.getModalsController().onSelectRole()
                         .then(function(role) {
                             this.startGame(gameUUID, role);
-                        }.bind(this),function(xhr){
-                            this.publicController.getModalsController().apiErrorPopup(xhr);
-                    }.bind(this));
+                        }.bind(this));
                 }.bind(this));
             }
         },

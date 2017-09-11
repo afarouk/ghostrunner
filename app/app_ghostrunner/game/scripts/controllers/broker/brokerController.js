@@ -385,11 +385,15 @@ define([
             this.invitationDef = null;
         },
 
-        lineUpShape: function(accept) {
+        lineUpShape: function(accept, starterPlayer) {
             console.log('switch to broker');
             this.publicController.getGameController().switchToBroker();
             this.view.$el.addClass('creation-state');
-            this.publicController.getCreateTeamController().lineUpShape(this.view, accept);
+            if (starterPlayer) {
+                this.publicController.getCreateTeamController().lineUpFullShape(this.view, accept, this.selectedTeam, starterPlayer);
+            } else {
+                this.publicController.getCreateTeamController().lineUpShape(this.view, accept);
+            }
         },
 
         onRemoveTeam: function(model) {
@@ -513,25 +517,38 @@ define([
 
         //user lineup selection scenario
         onLineupSelected: function() {
-            var lineupId = this.selectedLineup.get('lineUpId'),
+            var game = appCache.get('game'),
+                lineupId = this.selectedLineup.get('lineUpId'),
                 teamId = this.selectedLineup.get('teamId');
 
-            if (this.selectedUser.get('byEmail')) {
-                this.publicController.getStateController().onSendInvitationByEmailWithUserLineup({
-                    callback: this.credentials.callback,
-                    email: this.credentials.email,
-                    teamId: teamId,
-                    lineupId: lineupId
-                });
+            if (game) {
+                //on after invitation accepted
+                this.publicController.getModalsController().onSelectRole()
+                    .then(function(role) {
+                        this.publicController.getStateController().onSelectLineupAndAccept({
+                            teamId: teamId,
+                            lineupId: lineupId
+                        }, role);
+                    }.bind(this));
             } else {
-                var inviteeUID = this.selectedUser.get('uid');
-                this.publicController.getStateController().onSendInvitationWithUserLineup({
-                    callback: this.afterInvitationSent.bind(this),
-                    inviteeUID: inviteeUID,
-                    teamId: teamId,
-                    lineupId: lineupId
-                });
-                this.reRender();
+                //on user invitation step
+                if (this.selectedUser.get('byEmail')) {
+                    this.publicController.getStateController().onSendInvitationByEmailWithUserLineup({
+                        callback: this.credentials.callback,
+                        email: this.credentials.email,
+                        teamId: teamId,
+                        lineupId: lineupId
+                    });
+                } else {
+                    var inviteeUID = this.selectedUser.get('uid');
+                    this.publicController.getStateController().onSendInvitationWithUserLineup({
+                        callback: this.afterInvitationSent.bind(this),
+                        inviteeUID: inviteeUID,
+                        teamId: teamId,
+                        lineupId: lineupId
+                    });
+                    this.reRender();
+                }
             }
         },
 

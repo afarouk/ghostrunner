@@ -174,8 +174,8 @@ define([
             if (state === 'LINEUP_INVITED') {
                 return this.publicController
                     .getBrokerController().switchToLineUpState(state)
-                        .then(function() {
-                            return this.publicController.getBrokerController().lineUpShape();
+                        .then(function(team, lineUpName, starterPlayer) {
+                            return this.publicController.getBrokerController().lineUpShape(undefined, starterPlayer);
                         }.bind(this));
             } else {
                 return this.publicController

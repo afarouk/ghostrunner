@@ -448,6 +448,32 @@ define([
 
             return gateway.sendRequest('selectLineupAndInviteAndRegister', params);
         },
+
+        selectLineupAndAccept: function(params) {
+            var user = appCache.get('user'),
+                game = appCache.get('game');
+            params = params || {};
+            params.UID = user.get('uid');
+            params.payload.gameUUID = game.get('gameUUID');
+            return gateway.sendRequest('selectLineupAndAccept', params);
+        },
+
+        createLineupAndAccept: function(params) {
+            var user = appCache.get('user'),
+                game = appCache.get('game');
+            params = params || {};
+            params.UID = user.get('uid');
+            params.gameUUID = game.get('gameUUID');
+            return gateway.sendRequest('createLineupAndAccept', params);
+        },
+
+        selectRemainingLineUpAndStart: function(params) {
+            var user = appCache.get('user'),
+                game = appCache.get('game');
+            params = params || {};
+            params.UID = user.get('uid');
+            return gateway.sendRequest('selectRemainingLineUpAndStart', params);
+        },
         //[PUT] ..../gaming/selectLineupAndInvite?UID=...
         //[PUT] ..../gaming/selectLineupAndInviteAndRegister?UID=...
         //[PUT] ..../selectLineupAndAccept?UID=...&preferredRole=OFFENSE|DEFENSE.... 

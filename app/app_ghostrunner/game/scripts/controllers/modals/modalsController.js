@@ -360,12 +360,13 @@ define([
         },
 
         onAbandonedByOponnent: function() {
+            this.publicController.getStateController().killGame();
+            this.publicController.getGameController().switchToBroker();
             this.publicController.getChoiceController().showConfirmation({
                 message: 'Game abandoned by oponnent.',
                 confirm: 'ok'
             }).then(function() {
-                this.publicController.getGameController().switchToBroker();
-                this.publicController.getStateController().refreshStatus();
+                //now nothing
             }.bind(this));
         },
 
@@ -495,19 +496,16 @@ define([
 
         apiErrorPopup: function(xhr){
             var message;
-            if(xhr.responseJSON.error.message)
-            {
+            if(xhr.responseJSON.error.message) {
                 message = xhr.responseJSON.error.message + " .";
-            }
-            else
-            {
+            } else {
                 message = "Something went wrong. ";
             }
             this.publicController.getChoiceController().showConfirmation({
                 message: message,
                 confirm: 'ok'
             }).then(function() {
-                /////   /////
+                this.publicController.getBrokerController().onCancel(); //check if works in all cases
             }.bind(this));
         },
 
