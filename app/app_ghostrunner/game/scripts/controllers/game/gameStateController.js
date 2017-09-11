@@ -145,6 +145,45 @@ define([
             }
         },
 
+        beforeRefreshStatus: function(message) {
+            var gameUUID = message.gameUUID,
+                gameModel = this.getGameModel();
+            if (gameModel && gameModel.get('gameUUID') !== gameUUID) {
+                if (gameModel.get('state') === 'RUNNING') {
+                    this.publicController.getModalsController().onMessageFromAnotherUserPause()
+                        .then(function(){
+                            this.onPauseGame(gameModel.get('gameUUID'))
+                                .then(function(status){
+                                    this.publicController.getGameController().hideLoader();
+                                    this.publicController.getGameController().switchToBroker();
+                                    this.onPayloadMsgBeforeRefresh(message);
+                                }
+                                .bind(this), function(xhr){
+                                    this.publicController.getModalsController().apiErrorPopup(xhr);
+                                    this.publicController.getGameController().hideLoader();
+                                }.bind(this));
+                        }.bind(this), function(){
+                            //ignore message
+                        }.bind(this));
+                    } else {
+                        this.publicController.getModalsController().onMessageFromAnotherUserSwitch()
+                        .then(function(){
+                            this.publicController.getGameController().hideLoader();
+                            this.publicController.getGameController().switchToBroker();
+                            this.onPayloadMsgBeforeRefresh(message);
+                        }.bind(this), function(){
+                            //ignore message
+                        }.bind(this));
+                    }
+            } else {
+                this.onPayloadMsgBeforeRefresh(message);
+            }
+        },
+
+        onPayloadMsgBeforeRefresh: function(message) {      
+            this.refreshStatus(message.gameUUID);
+        },
+
         onSendInvitation: function(credentials) {
             var onInvitationSent = credentials.callback;
             delete credentials.callback;
@@ -171,7 +210,6 @@ define([
                 }.bind(this));
         },
 
-        //user lineup secection invitation scenario
         onSendInvitationWithUserLineup: function(credentials) {
             var onInvitationSent = credentials.callback;
             delete credentials.callback;
@@ -239,7 +277,6 @@ define([
                 this.publicController.getModalsController().apiErrorPopup(xhr);
             }.bind(this));
         },
-        //............
 
         onRetrieveInvitation: function(message) {
             this.beforeRefreshStatus(message);
@@ -271,56 +308,6 @@ define([
             }.bind(this), function(xhr) {
                 this.publicController.getModalsController().apiErrorPopup(xhr);
             }.bind(this));
-        },
-
-        beforeRefreshStatus: function(message) {
-            var gameUUID = message.gameUUID,
-                gameModel = this.getGameModel();
-            if (gameModel && gameModel.get('gameUUID') !== gameUUID) {
-                if (gameModel.get('state') === 'RUNNING') {
-                    this.publicController.getModalsController().onMessageFromAnotherUserPause()
-                        .then(function(){
-                            this.onPauseGame(gameModel.get('gameUUID'))
-                                .then(function(status){
-                                    this.publicController.getGameController().hideLoader();
-                                    this.publicController.getGameController().switchToBroker();
-                                    this.onPayloadMsgBeforeRefresh(message);
-                                }
-                                .bind(this), function(xhr){
-                                    this.publicController.getModalsController().apiErrorPopup(xhr);
-                                    this.publicController.getGameController().hideLoader();
-                                }.bind(this));
-                        }.bind(this), function(){
-                            //ignore message
-                        }.bind(this));
-                    } else {
-                        this.publicController.getModalsController().onMessageFromAnotherUserSwitch()
-                        .then(function(){
-                            this.publicController.getGameController().hideLoader();
-                            this.publicController.getGameController().switchToBroker();
-                            this.onPayloadMsgBeforeRefresh(message);
-                        }.bind(this), function(){
-                            //ignore message
-                        }.bind(this));
-                    }
-            } else {
-                this.onPayloadMsgBeforeRefresh(message);
-            }
-        },
-
-        onPayloadMsgBeforeRefresh: function(message) {
-            // if (message.signal === 'STARTER_SELECTED' ||
-            console.log(message.payload);
-            // if (message.signal === 'LINEUP_SELECTED') {
-            //     this.publicController.getModalsController().onPayloadMessage(message)
-            //         .then(function() {
-            //             this.refreshStatus(message.gameUUID);
-            //         }.bind(this), function(xhr){
-            //             //do nothing
-            //         }.bind(this));
-            // } else {
-                this.refreshStatus(message.gameUUID);
-            // }
         },
 
         onInvitationAccepted: function(lineUpData, role) {
@@ -392,7 +379,6 @@ define([
             }.bind(this));
         },
         onCheckMoveConditions: function(moveEnum, state) {
-            //was splited because could be long
             return (moveEnum === 'SWING_AWAY' ||
                     moveEnum === 'BUNT_ATTEMPT' ||
                     moveEnum === 'STEAL_BASE' ||

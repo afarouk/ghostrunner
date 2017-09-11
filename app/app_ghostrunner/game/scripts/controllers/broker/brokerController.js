@@ -67,6 +67,7 @@ define([
         },
         switchBrokerState: function(state, show) {
             switch(state) {
+                //on invite user
                 case 'invite':
                     if (show) {
                         this.hideRight();
@@ -82,6 +83,7 @@ define([
                     }
                     break;
                 case 'teams':
+                    //on select team while invitation cycle
                     if (show) {
                         this.hideRight();
                         this.confirm = 'teams';
@@ -100,6 +102,7 @@ define([
                     }
                     break;
                 case 'my_teams':
+                    //show teams list by clickin btn
                     if (show) {
                         this.hideRight();
                         this.confirm = 'my_teams';
@@ -115,6 +118,7 @@ define([
                     }
                     break;
                 case 'lineups':
+                    //on select predefined lineup while invitation cycle
                     if (show) {
                         this.hideRight();
                         this.confirm = 'lineups';
@@ -133,6 +137,7 @@ define([
                     }
                     break;
                 case 'my_lineups':
+                    //show lineups list by clickin btn
                     if (show) {
                         this.hideRight();
                         this.confirm = 'my_lineups';
@@ -148,6 +153,7 @@ define([
                     }
                     break;
                 case 'invites':
+                    //show current invitations list
                     if (show) {
                         this.hideLeft();
                         this.confirm = 'invites';
@@ -163,6 +169,7 @@ define([
                     }
                     break;
                 case 'games':
+                    //show available games list 
                     if (show) {
                         this.hideLeft();
                         this.confirm = 'games';
@@ -178,6 +185,7 @@ define([
                     }
                     break;
                 case 'lineUpSelection':
+                    //for switch state to teams
                     this.view.ui.invite.attr('disabled', true);
                     this.view.ui.confirm.attr('disabled', true);
                     this.view.ui.rightBroker.addClass('team-state');
@@ -389,6 +397,9 @@ define([
             console.log('switch to broker');
             this.publicController.getGameController().switchToBroker();
             this.view.$el.addClass('creation-state');
+            //manage standard invitation scenarion (starter -> then lineup)
+            // or full lineup with starter creation 
+            // and role selection 
             if (starterPlayer) {
                 this.publicController.getCreateTeamController().lineUpFullShape(this.view, accept, this.selectedTeam, starterPlayer);
             } else {
@@ -522,7 +533,7 @@ define([
                 teamId = this.selectedLineup.get('teamId');
 
             if (game) {
-                //on after invitation accepted
+                //after invitation accepted
                 this.publicController.getModalsController().onSelectRole()
                     .then(function(role) {
                         this.publicController.getStateController().onSelectLineupAndAccept({
@@ -629,7 +640,7 @@ define([
             this.selectedGame = game;
             this.view.ui.confirm.attr('disabled', false);
         },
-        //confirm
+        //manage what was confirmed
         onConfirm: function() {
             switch (this.confirm) {
                 case 'invite':

@@ -125,7 +125,7 @@ define([
                 message: 'You have a running game with ' + game.opponentUserName + '.<br>Restart the game?',
                 cancel: 'cancel',
                 confirm: 'yes'
-            }).then(function(){
+            }).then(function() {
                 this.publicController.getStateController().refreshStatus(game.gameUUID);
             }.bind(this), function() {
                 this.onPauseGame(game.gameUUID);
@@ -181,6 +181,7 @@ define([
             this.publicController.getGameController().switchToBroker();
             this.onOtherPlayerLineUp(gameModel, 'select')
                 .then(function() {
+                    //manage two scenarios: standard and with initiator by predefined lineup
                     this.publicController.getStateManager().manageInvitationScenarios(gameModel.get('state'));
                 }.bind(this));
         },

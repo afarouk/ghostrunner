@@ -171,13 +171,16 @@ define([
         },
 
         manageInvitationScenarios: function(state) {
-            if (state === 'LINEUP_INVITED') {
+            if (state === 'LINEUP_INVITED') { //after invitation with predefined lineup received
+                //select candidate
                 return this.publicController
                     .getBrokerController().switchToLineUpState(state)
                         .then(function(team, lineUpName, starterPlayer) {
+                            //then shape lineup
                             return this.publicController.getBrokerController().lineUpShape(undefined, starterPlayer);
                         }.bind(this));
             } else {
+                //select candidate
                 return this.publicController
                     .getBrokerController().switchToLineUpState()
                         .then(function(team, lineUpName, playerModel) {

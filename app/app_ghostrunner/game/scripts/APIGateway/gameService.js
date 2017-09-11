@@ -419,8 +419,6 @@ define([
             return gateway.sendRequest('setShowTossAnimation', params);
         },
 
-        //.........new
-        //[GET]..../getMyLineups?UID=...
         getMyLineups: function() {
             var user = appCache.get('user'),
                 params = {
@@ -474,11 +472,6 @@ define([
             params.UID = user.get('uid');
             return gateway.sendRequest('selectRemainingLineUpAndStart', params);
         },
-        //[PUT] ..../gaming/selectLineupAndInvite?UID=...
-        //[PUT] ..../gaming/selectLineupAndInviteAndRegister?UID=...
-        //[PUT] ..../selectLineupAndAccept?UID=...&preferredRole=OFFENSE|DEFENSE.... 
-        //[PUT] ..../createLineupAndAccept?UID=...&preferredRole=OFFENSE|DEFENSE.... 
-        //...........
 
         /*debug*/
         killSocket: function() {

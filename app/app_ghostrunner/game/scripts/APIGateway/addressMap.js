@@ -35,14 +35,12 @@ module.exports = {
         	getMyGames: ['GET', '/gaming/getMyGames'],
             getTeams: ['GET', '/gaming/getMyTeams'],
 
-            /*new scenarios*/
             getMyLineups: ['GET', '/gaming/getMyLineups'],
             selectLineupAndInvite: ['PUT', '/gaming/selectLineupAndInvite'],
             selectLineupAndInviteAndRegister: ['PUT', '/gaming/selectLineupAndInviteAndRegister'],
             selectLineupAndAccept: ['PUT', '/gaming/selectLineupAndAccept'],
             createLineupAndAccept: ['PUT', '/gaming/createLineupAndAccept'],
             selectRemainingLineUpAndStart: ['PUT', '/gaming/selectRemainingLineUpAndStart'], //???
-            //............
 
             getAvailablePlayers: ['GET', '/gaming/getAvailablePlayers'],
             retrieveAvailablePlayers: ['GET', '/gaming/retrieveAvailablePlayers'],

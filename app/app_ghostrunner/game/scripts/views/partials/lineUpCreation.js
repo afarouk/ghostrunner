@@ -24,6 +24,7 @@ define([
 			'click @ui.save': 'onSave'
 		},
 		lineUpName: '',
+		maxPlayers: 8,
 		initialize: function(options) {
 			this.lineUp = options.lineUp;
 			this.lineUp.on('change add remove', this.checkIfSaveAllowed, this);
@@ -70,14 +71,14 @@ define([
 		},
 		showCountWarning: function() {
 			this.publicController.getChoiceController().showConfirmation({
-                message: 'Count should be less than 10.',
+                message: 'Count should be less than ' + (this.maxPlayers + 1) + '.',
                 confirm: 'ok'
             });
 		},
 		checkCount: function() {
 			var count  = this.lineUp.length;
 			this.ui.count.text(count);
-			if (count > 9) {
+			if (count > this.maxPlayers) {
 				this.ui.count.css('color', 'red');
 				this.lineUpPlayersList.triggerMethod('players:selection:allow', false);
 				this.showCountWarning();

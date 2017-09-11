@@ -134,7 +134,7 @@ define([
                 createData = {
                     players: (new PlayersCollection()).getLineUps(players.players),
                     lineUp: lineUp,
-                    teamName: 'test name',
+                    teamName: starterLineUp.get('displayText'),
                     lineUpName: starterLineUp.get('displayText'),
                     headings: players.lineUpHeadings,
                 },
@@ -160,7 +160,6 @@ define([
             this.listenTo(lineUpCreation, 'lineUp:save', this.onFullLineUpSave.bind(this, team, starterPlayer, lineUp, accept));
         },
         onLineUpSave: function(lineUp, accept) {
-            // lineUp.remove(lineUp.at(0), {silent: true}); //remove starter
             var game = appCache.get('game'),
                 players = lineUp.map(function(model) {
                     return {
@@ -197,7 +196,7 @@ define([
                             this.publicController.getStateController().killGame();
                             this.publicController.getModalsController().afterLineUpSelected()
                                 .then(function(){
-                                    this.layout.trigger('cancel');//temporary
+                                    this.layout.trigger('cancel');
                                 }.bind(this));
                         }.bind(this), function(xhr){
                             this.publicController.getBrokerController().hideLoader();
@@ -207,7 +206,6 @@ define([
             }
         },
         onFullLineUpSave: function(team, starterPlayer, lineUp, accept) {
-            // lineUp.remove(lineUp.at(0), {silent: true}); //remove starter
             lineUp.add(starterPlayer, {at: 0, silent: true});
             var game = appCache.get('game'),
                 players = lineUp.map(function(model) {
