@@ -89,7 +89,10 @@ define([
         },
 		checkIfEnable: function(view) {
 			var model = view.model;
+
 			if (model.get('position').enumText !== 'UNDEFINED' && model.get('battingOrder')) {
+				view.ui.select.attr('disabled', false);
+			} else {
 				view.ui.select.attr('disabled', true);
 			}
 		},

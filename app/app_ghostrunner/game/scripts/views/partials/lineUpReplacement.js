@@ -12,7 +12,7 @@ define([
 		className: 'create-lineUp',
 		regions: {
 			players: '.players-list-container',
-            availableplayers: '.players-list-Availableplayers'
+            availablePlayers: '.players-list-availablePlayers'
 		},
 		ui: {
 			save: '[name="save"]'
@@ -38,16 +38,16 @@ define([
 				this.oldPlayer = this.options.players.at(0);
 			}
 
-            this.availableplayers = new LineUpPlayersList({
-				collection: this.options.availableplayers,
+            this.availablePlayers = new LineUpPlayersList({
+				collection: this.options.availablePlayers,
 				headings: this.options.headings,
                 flag: false
 			});
 
 			this.listenTo(this.lineUpPlayersList, 'selection:changed', this.onSelectionChanged.bind(this, 'old'));
-			this.listenTo(this.availableplayers, 'selection:changed', this.onSelectionChanged.bind(this, 'new'));
+			this.listenTo(this.availablePlayers, 'selection:changed', this.onSelectionChanged.bind(this, 'new'));
 			this.showChildView('players', this.lineUpPlayersList);
-            this.showChildView('availableplayers', this.availableplayers);
+            this.showChildView('availablePlayers', this.availablePlayers);
 		},
 		onSelectionChanged: function(whichList, model) {
 			if (whichList === 'old') {

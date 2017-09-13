@@ -82,7 +82,7 @@ define([
             this.players = players;
             var replaceData = {
                     players: (new PlayersCollection()).getLineUps(current),
-                    availableplayers: (new PlayersCollection()).getAvailablePlayers(players.availablePlayers),
+                    availablePlayers: (new PlayersCollection()).getAvailablePlayers(players.availablePlayers),
                     headings: players.lineUpHeadings,
                     title: title
                 },

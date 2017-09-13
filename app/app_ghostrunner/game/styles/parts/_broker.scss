@@ -67,6 +67,14 @@
                         align-items: baseline;
                         font-size: 14px;
 
+                        .replace-msg {
+                            font-size: 16px;
+                            color: $text-black;
+                            padding: 15px;
+                            text-align: center;
+                            line-height: 50px;
+                        }
+
                         .block {
                             padding: 0 10px;
 
@@ -132,7 +140,7 @@
                             display: flex;
                             flex-direction: column;
                             color: white;
-                            font-size: 16px;
+                            font-size: 14px;
                             font-weight: $broker-fw-tab;
 
                             tr {
@@ -267,7 +275,7 @@
                         padding: 0 5px;
                         table {
                             width: 100%;
-                            font-size: 13px;
+                            font-size: 12px;
                             font-weight: $broker-fw-tab;
                             text-align: center;
                             border-collapse: separate;
@@ -315,7 +323,7 @@
                                             select {
                                                 height: 25px;
                                                 width: 60px;
-                                                font-size: 13px;
+                                                font-size: 12px;
                                                 font-weight: $broker-fw-sel;
                                                 color: $players-black;
                                                 border-radius: 0;
@@ -349,7 +357,7 @@
                         }
                     }
                 }
-                 .players-list-Availableplayers {
+                 .players-list-availablePlayers {
                     margin-top: 20px;
                     overflow-y: auto;
                     border: 1px solid white;
@@ -381,7 +389,7 @@
                             display: flex;
                             flex-direction: column;
                             color: white;
-                            font-size: 16px;
+                            font-size: 14px;
                             font-weight: $broker-fw-tab;
 
                             tr {
@@ -516,7 +524,7 @@
                         padding: 0 5px;
                         table {
                             width: 100%;
-                            font-size: 13px;
+                            font-size: 12px;
                             font-weight: $broker-fw-tab;
                             text-align: center;
                             border-collapse: separate;
@@ -564,7 +572,7 @@
                                             select {
                                                 height: 25px;
                                                 width: 60px;
-                                                font-size: 13px;
+                                                font-size: 12px;
                                                 font-weight: $broker-fw-sel;
                                                 color: $players-black;
                                                 border-radius: 0;
@@ -640,6 +648,12 @@
                 flex-direction: row;
                 min-width: 300px;
 
+                button {
+                    font-weight: $broker-fw-btn;
+                    font-size: 13px;
+                    padding: 15px 20px;
+                }
+
                 button.inactive {
                     pointer-events: none;
                 }
@@ -675,6 +689,7 @@
                 
                 .list-container {
                     max-height: 300px;
+                    max-width: 360px;
                     overflow-y: auto;
 
                     &::-webkit-scrollbar {
@@ -690,7 +705,7 @@
                         list-style: none;
                         color: $text;
                         font-weight: normal;
-                        font-size: 16px;
+                        font-size: 14px;
                         padding: 0;
 
                         li:nth-child(even) {
@@ -849,6 +864,8 @@
                     right: 0;
                     position: relative;
                     margin: auto;
+                    padding: 15px 20px;
+                    font-size: 13px;
                     display: none;
                 }
 
@@ -891,21 +908,21 @@
 
                 &.shown .list-container:before {
                     content: "";
-                            border-style: solid;
-                            border-width: 20px 20px 20px 20px;
-                            border-color: $tab-arrow-border;
-                            position: absolute;
-                            top: 50px;
+                    border-style: solid;
+                    border-width: 20px 20px 20px 20px;
+                    border-color: $tab-arrow-border;
+                    position: absolute;
+                    top: 38px;
                 }
 
                 &.shown.invites-active .list-container:before {
-                    margin-left: 245px;
+                    margin-left: 190px;
                 }
                 &.shown.my-teams .list-container:before {
-                    margin-left: 160px;
+                    margin-left: 125px;
                 }
                 &.shown.my-lineups .list-container:before {
-                    margin-left: 350px;
+                    margin-left: 280px;
                 }
             }
         }
