@@ -25,6 +25,7 @@ define([
             this.listenTo(this.view, 'confirm', this.onConfirm.bind(this));
             this.listenTo(this.view, 'cancel', this.onCancel.bind(this));
             this.listenTo(this.view, 'team:confirm', this.onTeamConfirm.bind(this));
+            this.listenTo(this.view, 'brokerClicked', this.onBrokerClicked.bind(this));
             this.checkGameUrlUUID();
         },
         reRender: function () {
@@ -64,6 +65,18 @@ define([
             if (currentView) {
                 currentView.destroy();
             }
+        },
+
+        onBrokerClicked: function() {
+            //close some menus on broker area click
+            if (this.confirm === 'invite' ||
+                this.confirm === 'my_teams' ||
+                this.confirm === 'my_lineups' ||
+                this.confirm === 'games' ||
+                this.confirm === 'invites') {
+                this.switchBrokerState(this.confirm, false);
+            }
+            return true;
         },
         switchBrokerState: function(state, show) {
             switch(state) {
@@ -197,7 +210,10 @@ define([
             }
         },
         hideLeft: function() {
-            if (this.confirm === 'invite' || this.confirm === 'teams') {
+            if (this.confirm === 'invite' || 
+                this.confirm === 'my_teams' || 
+                this.confirm === 'my_lineups') {
+
                 this.confirm = undefined;
                 this.view.$el.find('.broker-list.left-list').removeClass('shown presented');
                 this.destroyCurrentView();

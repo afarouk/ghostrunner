@@ -24,6 +24,7 @@ define([
 			'click @ui.save': 'onSave'
 		},
 		lineUpName: '',
+		minPlayers: 8, //change min players count here
 		maxPlayers: 8,
 		initialize: function(options) {
 			this.lineUp = options.lineUp;
@@ -82,6 +83,8 @@ define([
 				this.ui.count.css('color', 'red');
 				this.lineUpPlayersList.triggerMethod('players:selection:allow', false);
 				this.showCountWarning();
+				return false;
+			} else if (count < this.minPlayers) {
 				return false;
 			} else {
 				this.ui.count.css('color', '#71ff61');

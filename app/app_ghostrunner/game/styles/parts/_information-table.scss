@@ -32,22 +32,18 @@
 				    background: $tables-back;
 				    justify-content: space-between;
 				    z-index: 1;
-                                    .menu-btn.abandon_btn{
-                                        font-size: 12px;
+
+				    .menu-btn.pause_btn,
+                    .menu-btn.abandon_btn {
+                        font-size: 12px;
 					    padding: 5px 14px;
 					    height: 20px;
 					    background-color: #576996 !important;
 					    border-radius: 2px;
-					    font-weight: 600;
-					    visibility: none;
-                                    }
+					    font-weight: $game-fw-btn;
+					    visibility: visible;
+                    }
 				    .menu-btn.pause_btn {
-				        font-size: 12px;
-					    padding: 5px 14px;
-					    height: 20px;
-					    background-color: #576996 !important;
-					    border-radius: 2px;
-					    font-weight: 600;
 					    visibility: hidden;
 				    }
 	    		}
@@ -79,7 +75,7 @@
 			        }
 
 			        .status-text {
-			            font-weight: 600;
+			            font-weight: $game-fw-txt;
 			            color: $text;
 			            font-size: 12px;
 			        }
@@ -98,19 +94,19 @@
 				    .player-role,
 				    .player-year {
 					    font-size: 12px;
-					    font-weight: 600;
+					    font-weight: $game-fw-txt;
 					    line-height: 20px;
 					}
 					.player-name {
 					    font-size: 14px;
-					    font-weight: 600;
+					    font-weight: $game-fw-txt;
 					}
 
 				    .player-skills-container {
 				    	display: flex;
 				    	flex-direction: column;
 				    	font-size: 12px;
-    					font-weight: 600;
+    					font-weight: $game-fw-txt;
     					line-height: 20px;
     					width: 85%;
 
@@ -145,7 +141,7 @@
 								}
 								.stamina-text {
 									font-size: 10px;
-									font-weight: 600;
+									font-weight: $game-fw-txt;
 								}
 							}
 				    	}
@@ -183,7 +179,7 @@
 			    			padding-left: 10px;
     						text-align: left;
     						font-size: 13px;
-    						font-weight: 600;
+    						font-weight: $game-fw-txt;
 
 			    			.user-name {
 			    				color: white;
@@ -220,7 +216,7 @@
 				    	}
 				    	.team-info-body {
 				    		font-size: 11px;
-    						font-weight: 600;
+    						font-weight: $game-fw-tab;
 				    		tr {
     							td:first-child {
     								padding-left: 5px;
@@ -272,7 +268,7 @@
 	    			.game-table-left {
 	    				.game-statistic {
 	    					table {
-	    						font-weight: 600;
+	    						font-weight: $game-fw-tab;
 	    						.game-name {
 	    							text-align: center;
 	    							padding: 5px;
@@ -365,7 +361,7 @@
 	    				color: $gray;
 
 	    				&.first {
-	    					font-weight: 600;
+	    					font-weight: $game-fw-txt;
     						font-size: 16px;
     						color: $text;
 	    				}
@@ -434,7 +430,7 @@
 
 		        button {
 		            font-size: 10px;
-				    font-weight: 600;
+				    font-weight: $game-fw-btn;
 				    padding: 4px 5px;
 				    margin: 0 0 0 5px;
 

@@ -73,6 +73,7 @@
                             label {
                                 background-color: rgba(0,0,0,0.4);
                                 padding: 3px 5px;
+                                font-weight: $broker-fw-tab;
 
                                 &[name="team-name"] {
                                     background-color: rgba(84, 177, 89, 0.5);
@@ -93,7 +94,7 @@
                             .count {
                                 font-size: 15px;
                                 color: #71ff61;
-                                font-weight: 600;
+                                font-weight: $broker-fw-txt;
                             }
                         }
                     }
@@ -132,7 +133,7 @@
                             flex-direction: column;
                             color: white;
                             font-size: 16px;
-                            font-weight: 600;
+                            font-weight: $broker-fw-tab;
 
                             tr {
                                 width: 100%;
@@ -221,7 +222,7 @@
                                             width: 80px;
                                             height: 25px;
                                             color: white;
-                                            font-weight: 600;
+                                            font-weight: $broker-fw-sel;
 
                                             &[name="bo"] {
                                                 background-color: rgba(239, 215, 132, 0.86);
@@ -267,7 +268,7 @@
                         table {
                             width: 100%;
                             font-size: 13px;
-                            font-weight: 600;
+                            font-weight: $broker-fw-tab;
                             text-align: center;
                             border-collapse: separate;
                             border-spacing: 0px 2px;
@@ -315,7 +316,7 @@
                                                 height: 25px;
                                                 width: 60px;
                                                 font-size: 13px;
-                                                font-weight: 600;
+                                                font-weight: $broker-fw-sel;
                                                 color: $players-black;
                                                 border-radius: 0;
                                                 -webkit-border-radius: 0px;
@@ -381,7 +382,7 @@
                             flex-direction: column;
                             color: white;
                             font-size: 16px;
-                            font-weight: 600;
+                            font-weight: $broker-fw-tab;
 
                             tr {
                                 width: 100%;
@@ -470,7 +471,7 @@
                                             width: 80px;
                                             height: 25px;
                                             color: white;
-                                            font-weight: 600;
+                                            font-weight: $broker-fw-sel;
 
                                             &[name="bo"] {
                                                 background-color: rgba(239, 215, 132, 0.86);
@@ -516,7 +517,7 @@
                         table {
                             width: 100%;
                             font-size: 13px;
-                            font-weight: 600;
+                            font-weight: $broker-fw-tab;
                             text-align: center;
                             border-collapse: separate;
                             border-spacing: 0px 2px;
@@ -564,7 +565,7 @@
                                                 height: 25px;
                                                 width: 60px;
                                                 font-size: 13px;
-                                                font-weight: 600;
+                                                font-weight: $broker-fw-sel;
                                                 color: $players-black;
                                                 border-radius: 0;
                                                 -webkit-border-radius: 0px;
@@ -629,7 +630,7 @@
                         span {
                             font-size: 18px;
                             margin-top: 8px;
-                            font-weight: 600;
+                            font-weight: $broker-fw-txt;
                         }
                     }
                 }
@@ -656,7 +657,7 @@
                         padding: 0 3px;
                         border: 1px solid white;
                         font-size: 12px;
-                        font-weight: 600;
+                        font-weight: $broker-fw-count;
                         -webkit-font-smoothing: auto;
                         visibility: hidden;
 

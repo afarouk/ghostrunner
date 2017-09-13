@@ -29,6 +29,9 @@ define([
 			confirm: '[name="confirm"]',
 			loader: '#broker-loader'
 		},
+		events: {
+			'click': 'onBrokerClicked'
+		},
 		triggers: {
 			'click @ui.lineups': 'getLineups',
 			'click @ui.teams': 'getTeams',
@@ -43,6 +46,9 @@ define([
 		},
 		onShowInvitesNumber: function(number) {
 			this.ui.my_invites_number.addClass('shown').text(number);
+		},
+		onBrokerClicked: function() {
+			this.trigger('brokerClicked');
 		}
 	});
 	return MainBrokerView;
