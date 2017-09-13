@@ -69,7 +69,7 @@
 			<div class="game-statistic">
 				<table>
 					<caption class="game-name">
-						<span>American League Game</span>
+						<span><%= scoresTable.displayText %></span>
 					</caption>
 					<thead class="game-stats-head">
 						<tr>
@@ -132,22 +132,22 @@
 				<div class="status-row game-out">
 					<span>OUT:</span>
 					<div class="status-circle <% if (scoresTable.currentOuts > 0) { %>error<% } %>">
-						
+
 					</div>
 					<div class="status-circle <% if (scoresTable.currentOuts > 1) { %>error<% } %>">
-						
+
 					</div>
 				</div>
 				<div class="status-row game-h">
 					<span>H:</span>
 					<div class="status-circle <% if (scoresTable.currentHits) { %>success<% } %>">
-						
+
 					</div>
 				</div>
 				<div class="status-row game-e">
 					<span>E:</span>
 					<div class="status-circle <% if (scoresTable.currentErrors) { %>error<% } %>">
-						
+
 					</div>
 				</div>
 			</div>
