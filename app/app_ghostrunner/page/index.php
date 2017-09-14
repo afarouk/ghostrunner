@@ -78,7 +78,7 @@ window.pageName = 'INDEX';
                 <div class="col-md-6 col-lg-offset-1">
                 	<div class="margin-bottom20">
                         <p>GhostRunner, LLC is a sports simulation company.  Our first offering, MatchUp Baseball,  is THE BEST baseball game that you can play (short of an actual baseball game).  Managing your favorite team (or a collection of all-stars), you decide when you want your slugger to go for the fences against the opponent's hurler, when you want your contact hitter to go to the opposite field, and when you want your speedster to run wild.  Because MatchUp is played in real time on virtually any mobile device, you can smack talk your opponent when your players come through with a big hit, or when they turn a rally-killing double play.  Best of all, once you start playing MatchUp, you'll want to invite all of your friends to "match up" against you.
-                        <!--<p><strong>Sed ut perspiciatis</strong> unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.</p>-->
+                        
                     </div>
                 </div>
 
@@ -123,7 +123,7 @@ window.pageName = 'INDEX';
                             </div>
                             <input type="text" name="subject" placeholder="Subject">
                             <textarea name="message" placeholder="Message *" id="textarea"></textarea>
-                            <div class="g-recaptcha" data-theme ="dark" data-sitekey="6Lc6wi0UAAAAAGyTUKFUHwKhKf6iZfczTSERID5S"></div>
+                           <div class="g-recaptcha" data-theme ="dark" data-sitekey="6Lc6wi0UAAAAAGyTUKFUHwKhKf6iZfczTSERID5S"></div>
                             <br>
                             <input type="submit" name="submit" value="Send Message">
                         </form>
