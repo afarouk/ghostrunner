@@ -6,6 +6,7 @@ define([
     ], function(h){
     var loginManager = {
     	logged: false,
+        apiRoot: 'http://54.191.91.125/apptsvc/rest',
     	loginRequest: ['POST', '/gaming/login'],
     	registerRequest: ['POST', '/gaming/registerNewMember'],
         logoutRequest: ['GET', '/gaming/logout'],
@@ -20,7 +21,7 @@ define([
             var params = h().parseQueryString(window.location.search),UID;
     		this.listenLogin();
     		this.listenRegister();
-            this.listenContact();
+                this.listenContact();
 
             if (params && params.UID){
                 this.autoLoginByUID(params.UID);
@@ -138,14 +139,15 @@ define([
         
         listenContact: function() {
     		$('input[name="submit"]').click(function(){
-                var Response =  grecaptcha.getResponse();
-                if(Response.length>0) {   
+               //var Response =  grecaptcha.getResponse();
+                   // if(Response.length>0) {   
     			    this.SendMessage();
-                }else {       
-                    alert("Invalid Captcha");
-                    $('#sendMessage')[0].reset();
-                } 
+                //}else {       
+                    //alert("Invalid Captcha");
+                  ///$('#sendMessage')[0].reset();
+                //}
         	}.bind(this));
+               
     	},
         
         listenRegister: function() {
@@ -266,7 +268,7 @@ define([
     	},
         
     	showError: function(message) {
-    		$('.error_dv').text(message);
+    	    $('.error_dv').text(message);
             $('.error_dv').show();
     	},
         
@@ -349,6 +351,75 @@ define([
             }).then(this.onLogoutSuccess.bind(this, UID), 
                 this.onLogoutSuccess.bind(this, UID));
         },
+        
+         SendMessage: function(){
+            var Name = $('input[name="name"]').val();
+            var Email = $('input[name="email"]').val();
+            var Subject = $('input[name="subject"]').val();
+            var Message = $('#textarea').val();
+            var Code = $('input[name="promocode"]').val();
+           this.sendRequest(this.SendContactUsEmail,{
+               payload:{
+                   name:Name,
+                   email:Email,
+                   subject:Subject,
+                   message:Message,
+                   code   : Code
+           } }).then(function(response){
+               alert(response.explanation);
+               $("#sendMessage")[0].reset();
+            }.bind(this));
+        },
+        getAPIRoot: function() {
+        	var search = window.location.search,
+        		params = this.parseQueryString(search),
+        		server;
+        	if (params && params.server) {
+        		server = params.server;
+        	}
+		      if(server=='localhost:8080'){
+						return server ? 'http://' + server + '/apptsvc/rest' : this.apiRoot;
+		      }else{
+						return server ? 'https://' + server + '/apptsvc/rest' : this.apiRoot;
+					}
+
+        },
+
+        parseQueryString: function(qs) {
+            if (!qs) return;
+            var result = {};
+            var params = qs.replace('?', '').split('&');
+
+            _(params).each(function (param) {
+                var pair = param.split('=');
+                if (pair[1] === 'true' ) {
+                    pair[1] = true;
+                }
+                else if (pair[1] === 'false') {
+                    pair[1] = false;
+                }
+                result[pair[0]] = pair[1];
+            });
+
+            return result;
+        },
+        
+        sendRequest: function(request, options) {
+            var payload = options.payload ? JSON.stringify(options.payload) : '',
+            	url = this.getAPIRoot() + request[1],
+            	method = request[0];
+            delete options.payload;
+            console.log(options);
+            debugger;
+            return $.ajax({
+                type: method,
+                url: (options ? url + '?' + $.param(options) : url),
+                data: payload,
+                contentType: 'application/json',
+                processData: false,
+                timeout: 10000
+            });
+        }
     };
 
     return loginManager;
