@@ -5,7 +5,7 @@
 <% }) %>
 <td class="with-select">
 	<select name="player-position" class="position">
-		<option disabled selected value>---</option>
+		<option selected value>---</option>
 		<% _.each(positions, function(position){ %>
 			<option value="<%= position.enumText %>"><%= position.displayText %></option>
 		<% }) %>
@@ -13,8 +13,8 @@
 </td>
 <td class="with-select">
 	<select name="batting-order" class="batting">
-		<option disabled selected value>---</option>
-		<% for (var index = 1; index <=9; index++) { %>
+		<option selected value>---</option>
+		<% for (var index = 1; index <=8; index++) { %>
 			<option value="<%= index %>">BO:<%= index %></option>
 		<% } %>
 	</select>

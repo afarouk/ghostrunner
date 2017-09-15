@@ -779,7 +779,7 @@ span.nav_logo_two {
 #header .nav > li.menu-btn > a {
 	font-size:12px;
 	line-height:1;
-	font-weight:700;
+	font-weight:600;
 	text-transform:uppercase;
 	white-space:nowrap;
 	background-color:#fc603b !important;
@@ -1744,7 +1744,7 @@ span.nav_logo_two {
 
 }
 
-@media (max-width: 767px) {
+@media (max-width: 768px) {
 
 	.no-padding-top-xs { padding-top:0px !important; }
 	.no-padding-right-xs { padding-right:0px !important; }
@@ -2175,13 +2175,13 @@ a.header-content-tabs{
     transition: 1s;
     word-break: break-all;
 }
-@media (max-width: 767px) {
+@media (max-width: 768px) {
     .header-content-tab-wrap{
         max-width: 100%;
     }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 768px) {
     .header-content-tabs{
         font-size: 14px;
     }

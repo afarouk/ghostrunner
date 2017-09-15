@@ -4,7 +4,6 @@
 
 define([
 	'ejs!../../templates/partials/lineUpFielder.ejs',
-	// 'ejs!../../templates/partials/lineUpPitcher.ejs',
 	'ejs!../../templates/partials/lineUpTable.ejs',
 	], function(fielderTmpl, tableTmpl){
 	var LineUpFielderView = Mn.View.extend({
@@ -100,21 +99,66 @@ define([
 				model = view.model,
 				selected = $target.find(':selected').val(),
 				positions = model.get('positions'),
+				currentPosition = model.get('position').enumText ? model.get('position') : null,
 				position = _.findWhere(positions, {enumText: selected});
-			model.set('position', position);
+
+			if (position) {
+				model.set('position', position);
+			} else {
+				model.set('position', {
+					displayText: 'UU',
+					enumText: 'UNDEFINED',
+					id: 0
+				});
+			}
 			this.checkIfEnable(view, model);
+			this.children.each(function(childView) {
+				if (childView !== view) {
+					if (currentPosition) {
+						var option = childView.ui.position.find('option[value="' + currentPosition.enumText + '"]');
+						option.attr('disabled', false);
+					}
+					if (position) {
+						var option = childView.ui.position.find('option[value="' + position.enumText + '"]');
+						option.attr('disabled', true);
+					}
+
+				}
+			}.bind(this));
 		},
 		onChildviewBattingOrderChanged: function(view, e) {
 			var $target = $(e.currentTarget),
 				model = view.model,
+				currentOrder = model.get('battingOrder'),
 				selected = $target.find(':selected').val();
-			model.set('battingOrder', selected);
+
+			if (selected) {
+				model.set('battingOrder', selected);
+			} else if (currentOrder) {
+				model.set('battingOrder', 0);
+			}
 			this.checkIfEnable(view);
+			this.children.each(function(childView) {
+				if (childView !== view) {
+					if (currentOrder) {
+						var option = childView.ui.bo.find('option[value="' + currentOrder + '"]');
+						option.attr('disabled', false);
+					}
+					if (selected) {
+						var option = childView.ui.bo.find('option[value="' + selected + '"]');
+						option.attr('disabled', true);
+					}
+
+				}
+			}.bind(this));
 		},
 		checkIfEnable: function(view) {
 			var model = view.model;
 			if (model.get('position').enumText !== 'UNDEFINED' && model.get('battingOrder')) {
 				view.ui.select.attr('disabled', false);
+			} else {
+				view.ui.select.attr('checked', false).change();
+				view.ui.select.attr('disabled', true);
 			}
 		},
 		onChildviewPitcherRoleChanged: function(view, e) {

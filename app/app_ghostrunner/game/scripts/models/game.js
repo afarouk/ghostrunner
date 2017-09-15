@@ -15,6 +15,9 @@ define([
         },
         getBaseballFieldModel: function() {
             var baseballField = this.get('baseballField'),
+                thisUserRole = this.get('thisUser').role,
+                thisUserFieldSide = this.get('thisUser').fieldSide.enumText,
+                otherUserFieldSide = this.get('otherUser').fieldSide.enumText,
                 field = {
                     FIELD_P: null,
                     FIELD_C: null,
@@ -34,11 +37,25 @@ define([
                 };
             _.each(baseballField.defensePlayers, function(player){
                 var position = player.position.enumText;
-                field[position] = player;
+                if (position !== 'UNDEFINED') {
+                    field[position] = player;
+                    if (thisUserRole === 'DEFENSE') {
+                        field[position].fieldSide = thisUserFieldSide;
+                    } else {
+                        field[position].fieldSide = otherUserFieldSide;
+                    }
+                }
             });
             _.each(baseballField.offensePlayers, function(player){
                 var position = player.position.enumText;
-                field[position] = player;
+                if (position !== 'UNDEFINED') {
+                    field[position] = player;
+                    if (thisUserRole === 'OFFENSE') {
+                        field[position].fieldSide = thisUserFieldSide;
+                    } else {
+                        field[position].fieldSide = otherUserFieldSide;
+                    }
+                }
             });
             console.log(field);
             return new Backbone.Model(field);

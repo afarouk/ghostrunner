@@ -16,7 +16,7 @@
 
     		&.left-table,
 	    	&.right-table {
-	    		width: 210px;
+	    		width: 200px;
 	    		height: 420px;
 	    	}
 
@@ -84,7 +84,7 @@
 	    		.left-player-info,
 	    		.right-player-info {
 	    			background: $tables-back;
-				    height: 150px;
+				    height: 145px;
 				    margin-bottom: 2px;
 				    display: flex;
 				    flex-direction: column;
@@ -114,6 +114,7 @@
 				    		display: flex;
 				    		flex-direction: row;
 				    		justify-content: space-between;
+				    		line-height: 18px;
 
 				    		.skill-level {
 				    			&.level-4 {
@@ -222,8 +223,8 @@
     								padding-left: 5px;
 								    padding-right: 5px;
 								    text-align: left;
-								    line-height: 19px;
-								    max-width: 120px;
+								    line-height: 17px;
+								    max-width: 110px;
 								    display: table-cell;
 								    overflow: hidden;
 								    text-overflow: ellipsis;
@@ -238,7 +239,7 @@
     							}
     							td:last-child {
     								text-align: center;
-								    line-height: 19px;
+								    line-height: 17px;
 								    white-space: pre;
 								    font-weight: 900;
 								    color: #e1d77e;
@@ -285,11 +286,17 @@
 	    								th {
 	    									&:first-child {
 											    width: 100px;
+											    max-width: 100px;
+											    text-overflow: ellipsis;
+											    overflow: hidden;
+											    padding-left: 5px;
 											}
 											&:last-child {
-											    padding-right: 12px;
+											    padding-right: 5px;
 											}
-    										padding-left: 12px;
+											&:not(:first-child ) {
+												padding-left: 8px;
+											}
     										.ball {
     											img {
     												width: 20px;
@@ -304,11 +311,17 @@
 	    								td {
 	    									&:first-child {
 											    width: 100px;
+											    max-width: 100px;
+											    text-overflow: ellipsis;
+											    overflow: hidden;
+											    padding-left: 5px;
 											}
 											&:last-child {
-											    padding-right: 12px;
+											    padding-right: 5px;
 											}
-    										padding-left: 12px;
+    										&:not(:first-child ) {
+												padding-left: 10px;
+											}
 	    								}
 	    							}
 	    						}
@@ -321,12 +334,14 @@
 	    				.game-status {
 	    					display: flex;
 	    					flex-direction: column;
+	    					font-size: 13px;
+	    					padding-top: 2px;
 
 	    					.status-row {
 	    						justify-content: space-around;
 							    display: flex;
 							    flex-direction: row;
-							    padding: 6px;
+							    padding: 4px 1px 3px 3px;
 
 	    						.status-circle {
 	    							width: 15px;
@@ -334,7 +349,7 @@
 								    border-radius: 50%;
 								    border: 1px solid gray;
 								    background-color: $darkgray_t;
-								    margin: 5px;
+								    margin: 2px 3px;
 
 								    &.error {
 								    	// background-color: $error_b;

@@ -38,7 +38,7 @@
 				<span class="team-city"><%= leftTeam.city %></span>
 			</div>
 			<div class="team-status">
-				<% if (leftTeam.role === "OFFENSE") { %>
+				<% if (leftTeam.homeOrAway.enumText === "AWAY") { %>
 					<img src="./images/caps/offenseCap-135-dg.png" alt="">
 				<% } else {%>
 					<img src="./images/caps/defenseCap-135-dg.png" alt="">
@@ -211,7 +211,7 @@
 				<span class="team-city"><%= rightTeam.city %></span>
 			</div>
 			<div class="team-status">
-				<% if (rightTeam.role === "OFFENSE") { %>
+				<% if (rightTeam.homeOrAway.enumText === "AWAY") { %>
 					<img src="./images/caps/offenseCap-135-dg.png" alt="">
 				<% } else {%>
 					<img src="./images/caps/defenseCap-135-dg.png" alt="">

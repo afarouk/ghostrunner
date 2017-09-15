@@ -306,10 +306,10 @@ define([
                 message: 'Pause game?',
                 cancel: 'cancel',
                 confirm: 'confirm'
-            }).then(function(){
+            }).then(function() {
                 this.onPauseGame();
             }.bind(this), function() {
-                //
+                //now nothing
             }.bind(this));
         },
 
@@ -328,12 +328,13 @@ define([
         },
 
         onPausedByOponnent: function() {
+            this.publicController.getStateController().killGame();
+            this.publicController.getGameController().switchToBroker();
             this.publicController.getChoiceController().showConfirmation({
                 message: 'Game paused by oponnent.',
                 confirm: 'ok'
             }).then(function() {
-                this.publicController.getGameController().switchToBroker();
-                this.publicController.getStateController().refreshStatus();
+                //now nothing
             }.bind(this));
             console.log('invitation received');
         },
@@ -372,12 +373,13 @@ define([
         },
 
         onRejectedByOponnent: function(message) {
+            this.publicController.getStateController().killGame();
+            this.publicController.getBrokerController().reRender();
             this.publicController.getChoiceController().showConfirmation({
                 message: message.payload,
                 confirm: 'ok'
             }).then(function() {
-                this.publicController.getStateController().killGame();
-                this.publicController.getBrokerController().reRender();
+                //now nothing
             }.bind(this));
         },
 
@@ -392,12 +394,13 @@ define([
         },
 
         onGameOver: function() {
+            this.publicController.getStateController().killGame();
+            this.publicController.getGameController().switchToBroker();
             this.publicController.getChoiceController().showConfirmation({
                 message: 'Game over.',
                 confirm: 'ok'
             }).then(function() {
-                this.publicController.getGameController().switchToBroker();
-                this.publicController.getStateController().refreshStatus();
+                //now nothing
             }.bind(this));
             console.log('game over');
         },

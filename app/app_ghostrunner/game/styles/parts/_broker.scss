@@ -672,7 +672,8 @@
                         border: 1px solid white;
                         font-size: 12px;
                         font-weight: $broker-fw-count;
-                        -webkit-font-smoothing: auto;
+                        // -webkit-font-smoothing: antialiased;
+                        // -moz-osx-font-smoothing: auto;
                         visibility: hidden;
 
                         &.shown {
