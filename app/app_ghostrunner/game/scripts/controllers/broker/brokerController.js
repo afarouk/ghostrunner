@@ -182,7 +182,7 @@ define([
                     }
                     break;
                 case 'games':
-                    //show available games list 
+                    //show available games list
                     if (show) {
                         this.hideLeft();
                         this.confirm = 'games';
@@ -210,8 +210,8 @@ define([
             }
         },
         hideLeft: function() {
-            if (this.confirm === 'invite' || 
-                this.confirm === 'my_teams' || 
+            if (this.confirm === 'invite' ||
+                this.confirm === 'my_teams' ||
                 this.confirm === 'my_lineups') {
 
                 this.confirm = undefined;
@@ -414,8 +414,8 @@ define([
             this.publicController.getGameController().switchToBroker();
             this.view.$el.addClass('creation-state');
             //manage standard invitation scenarion (starter -> then lineup)
-            // or full lineup with starter creation 
-            // and role selection 
+            // or full lineup with starter creation
+            // and role selection
             if (starterPlayer) {
                 this.publicController.getCreateTeamController().lineUpFullShape(this.view, accept, this.selectedTeam, starterPlayer);
             } else {
@@ -514,7 +514,7 @@ define([
                         if( response.lineups.length > 0 ){
                             this.showMyLineupsList(switchToState, response);
                         } else {
-                            this.showEmptyList('leftList', 'No your lineups presented.');
+                            this.showEmptyList('leftList', 'No lineups created.');
                         }
                     }.bind(this), function(xhr){
                         this.hideLoader();
@@ -687,7 +687,7 @@ define([
             this.teamConfirm = undefined;
             this.confirm = undefined;
             this.invitationDef = null;
-            
+
             //Return to game if game running
             var game = appCache.get('game');
             if (game && game.get('gameUUID') && game.get('state') === 'RUNNING') {
