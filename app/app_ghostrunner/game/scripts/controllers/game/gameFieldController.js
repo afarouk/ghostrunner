@@ -1,7 +1,8 @@
 /*global define */
 
 'use strict';
-
+/*global define*/
+'use strict';
 define([
 	'../../appCache',
 	'../../APIGateway/gameService',
@@ -13,7 +14,6 @@ define([
 			this.view = new GameFieldView({
 				model: gameModel.getBaseballFieldModel()
 			});
-			gameModel.on('change', this.onGameModelChange.bind(this));
 			layout.showChildView( region, this.view );
 			this.listenTo(this.view, 'onPlayerCard', this.onPlayerCard.bind(this));
 			this.view.triggerMethod('initContext');
@@ -30,9 +30,6 @@ define([
 			}.bind(this), function(xhr){
                 this.publicController.getModalsController().apiErrorPopup(xhr);
             }.bind(this));
-		},
-		onGameModelChange: function(gameModel) {
-			this.view.model.set(gameModel.getBaseballFieldModel())
 		}
     });
 

@@ -8,11 +8,13 @@ define([
     var GameModel = Backbone.Model.extend({
         initialize: function() {
             appCache.set('game', this);
+            this.on('change', this.getBaseballFieldModel.bind(this));
         },
         kill: function() {
             appCache.remove('game');
             this.destroy();
         },
+        baseballFieldSingleton: null,
         getBaseballFieldModel: function() {
             var baseballField = this.get('baseballField'),
                 thisUserRole = this.get('thisUser').role,
@@ -58,7 +60,11 @@ define([
                 }
             });
             console.log(field);
-            return new Backbone.Model(field);
+            if (this.baseballFieldSingleton) {
+                return this.baseballFieldSingleton.set(field);
+            } else {
+                return this.baseballFieldSingleton = new Backbone.Model(field);
+            }
         }
     });
     return GameModel;

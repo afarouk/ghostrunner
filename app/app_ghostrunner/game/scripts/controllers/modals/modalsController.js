@@ -384,11 +384,12 @@ define([
         },
 
         onInningOver: function(gameUUID) {
+            this.publicController.getStateController().refreshStatus(gameUUID);
             this.publicController.getChoiceController().showConfirmation({
                 message: 'Inning over.',
                 confirm: 'ok'
             }).then(function() {
-                this.publicController.getStateController().refreshStatus(gameUUID);
+                //now nothing
             }.bind(this));
             console.log('inning over');
         },
