@@ -5,9 +5,11 @@
     width: 100%;
     height: 100%;
     animation: inactive-animation .8s forwards;
+    z-index: 0;
 
     &.active {
         animation: active-animation .8s forwards;
+        z-index: 3;
     }
 
     .main-broker {

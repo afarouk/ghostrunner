@@ -16,7 +16,8 @@ define([
                 .then(function(response){
                     this.publicController.getGameController().hideLoader();
                     if (response.games.length > 0) {
-                        this.publicController.getModalsController().onRuningGamePresented(response.games[0]);
+                        this.publicController.getModalsController()
+                            .onRuningGamePresented(response.games[0]);
                     } else {
                         this.checkIfInvitationsAreAvailable();
                     }

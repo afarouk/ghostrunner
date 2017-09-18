@@ -471,7 +471,7 @@ define([
                 confirm: 'confirm'
             }).then(function() {
                 $def.resolve();
-            }.bind(this), function(){
+            }.bind(this), function() {
                 $def.reject();
             }.bind(this));
             return $def;
@@ -537,7 +537,6 @@ define([
         },
 
         onLineUpEditConfirmed: function() {
-            // this.publicController.getGameController().showLoader();
             this.publicController.getStateController().onLineUpEditStart();
         },
 

@@ -1,5 +1,6 @@
 #game {
     height: 100%;
+    z-index: 0;
     
     .game-container {
         height: 100%;
@@ -189,6 +190,7 @@
     }
 
     &.active {
+        z-index: 1;
         .game-container {
             &:not(.fadeIn) {
                 .game-interraction {

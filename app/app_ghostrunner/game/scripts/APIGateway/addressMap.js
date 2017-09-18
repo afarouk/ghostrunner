@@ -4,7 +4,6 @@
 module.exports = {
     getAddressMap: function(){
         return {
-            getGameUser: ['GET', '/gaming/getGameUser'],
         	getGame: ['GET', '/gaming/getGame'],
             startGame: ['PUT', '/gaming/startGame'],
             refresh: ['GET', '/gaming/refresh'],
@@ -16,10 +15,8 @@ module.exports = {
             makeMove: ['POST', '/gaming/makeMove'],
             makeSecondaryMove: ['POST', '/gaming/makeSecondaryMove'],
             setShowTossAnimation: ['PUT', '/gaming/setShowTossAnimation'],
-            getBaseballFieldPositions: ['GET', '/gaming/getBaseballFieldPositions'],
             retrievePlayerCard: ['GET', '/gaming/retrievePlayerCard'],
 
-        	retrieveInvitation: ['GET', '/gaming/retrieveInvitation'],
             rejectInvitation: ['PUT', '/gaming/rejectInvitation'],
         	selectRemainingLineUpAndAccept: ['PUT', '/gaming/selectRemainingLineUpAndAccept'],
         	selectStarterAndInvite: ['PUT', '/gaming/selectStarterAndInvite'],
@@ -66,9 +63,8 @@ module.exports = {
             stopLineupEditing: ['PUT', '/gaming/stopLineupEditing'],
             forfeitLineupEditing: ['PUT', '/gaming/forfeitLineupEditing'],
 
-            updateGamePresence: ['PUT', '/gaming/updateGamePresence'],
-            getMessage: ['GET', '/gaming/getMessage'],
-            getPoll: ['GET', '/gaming'],
+            // getMessage: ['GET', '/gaming/getMessage'],
+            // getPoll: ['GET', '/gaming'],
 
             /*debug*/
             killSocket: ['GET', '/gaming/killSocket'],

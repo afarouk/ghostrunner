@@ -7,13 +7,6 @@ define([
     '../appCache'
     ], function(gateway, appCache){
     var GameService = Mn.Object.extend({
-        getGameUser: function() {
-            var user = appCache.get('user'),
-                params = {
-                    UID: user.get('uid')
-                };
-            return gateway.sendRequest('getGameUser', params);
-        },
         getGame: function(gameUUID) {
             var user = appCache.get('user'),
                 game = appCache.get('game'),
@@ -24,6 +17,7 @@ define([
             if (gameUUID) params.gameUUID = gameUUID;
             return gateway.sendRequest('getGame', params);
         },
+
         startGame: function(gameUUID, role) {
             var user = appCache.get('user'),
                 params = {
@@ -33,6 +27,7 @@ define([
                 };
             return gateway.sendRequest('startGame', params);
         },
+
         notifyOpponentOfGameResumption: function(gameUUID) {
             var user = appCache.get('user'),
                 game = appCache.get('game'),
@@ -45,6 +40,7 @@ define([
             }
             return gateway.sendRequest('notifyOpponentOfGameResumption', params);
         },
+
         pauseGame: function(gameUUID) {
             var user = appCache.get('user'),
                 game = appCache.get('game'),
@@ -57,6 +53,7 @@ define([
             }
             return gateway.sendRequest('pauseGame', params);
         },
+
         unPauseGame: function(gameUUID) {
             var user = appCache.get('user'),
                 game = appCache.get('game'),
@@ -67,6 +64,7 @@ define([
             if (game) params.gameUUID = game.get('gameUUID');
             return gateway.sendRequest('unPauseGame', params);
         },
+
         makeMove: function(params) {
             var user = appCache.get('user'),
                 game = appCache.get('game');
@@ -75,6 +73,7 @@ define([
             if (game) params.gameUUID = game.get('gameUUID');
             return gateway.sendRequest('makeMove', params);
         },
+
         makeSecondaryMove: function(params) {
             var user = appCache.get('user'),
                 game = appCache.get('game');
@@ -82,12 +81,7 @@ define([
             params.gameUUID = game.get('gameUUID');
             return gateway.sendRequest('makeSecondaryMove', params);
         },
-        retrieveInvitation: function(params) {
-            var user = appCache.get('user');
-            params = params || {};
-            params.UID = user.get('uid');
-            return gateway.sendRequest('retrieveInvitation', params);
-        },
+
         selectRemainingLineUpAndAccept: function(params) {
             var user = appCache.get('user'),
                 game = appCache.get('game');
@@ -95,6 +89,7 @@ define([
             params.UID = user.get('uid');
             return gateway.sendRequest('selectRemainingLineUpAndAccept', params);
         },
+
         rejectInvitation: function(game) {
             var user = appCache.get('user'),
                 params = {
@@ -103,6 +98,7 @@ define([
                 };
             return gateway.sendRequest('rejectInvitation', params);
         },
+
         selectStarterAndInvite: function(payload) {
             var user = appCache.get('user'),
                 params = {
@@ -111,6 +107,7 @@ define([
                 };
             return gateway.sendRequest('selectStarterAndInvite', params);
         },
+
         selectStarterAndInviteAndRegister: function(payload) {
             var user = appCache.get('user'),
                 params = {
@@ -119,6 +116,7 @@ define([
                 };
             return gateway.sendRequest('selectStarterAndInviteAndRegister', params);
         },
+
         selectStarter: function(payload) {
             var game = appCache.get('game'),
                 user = appCache.get('user'),
@@ -129,6 +127,7 @@ define([
             if (game) params.payload.gameUUID = game.get('gameUUID');
             return gateway.sendRequest('selectStarter', params);
         },
+
         selectRemainingLineUp: function(payload) {
             var user = appCache.get('user'),
                 params = {
@@ -137,30 +136,35 @@ define([
                 };
             return gateway.sendRequest('selectRemainingLineUp', params);
         },
+
         getAvailableUsers: function(params) {
             var user = appCache.get('user');
             params = params || {};
             params.UID = user.get('uid');
             return gateway.sendRequest('getAvailableUsers', params);
         },
+
         getMyInvitations: function(params) {
             var user = appCache.get('user');
             params = params || {};
             params.UID = user.get('uid');
             return gateway.sendRequest('getMyInvitations', params);
         },
+
         getMyGames: function(params) {
             var user = appCache.get('user');
             params = params || {};
             params.UID = user.get('uid');
             return gateway.sendRequest('getMyGames', params);
         },
+
         getMyRunningGame: function(params) {
             var user = appCache.get('user');
             params = params || {};
             params.UID = user.get('uid');
             return gateway.sendRequest('getMyRunningGame', params);
         },
+        
         abandonGame : function(){
             var user = appCache.get('user'),
                 game = appCache.get('game'),
@@ -170,14 +174,6 @@ define([
              params.gameUUID = game.get('gameUUID');
             }
             return gateway.sendRequest('abandonGame',params);
-        },
-
-        getBaseballFieldPositions: function() {
-            var user = appCache.get('user'),
-                params = {
-                    UID: user.get('uid')
-                };
-            return gateway.sendRequest('getBaseballFieldPositions', params);
         },
 
         getTeams: function() {
@@ -241,6 +237,7 @@ define([
                 };
             return gateway.sendRequest('createTeam', params);
         },
+
         createLineup: function(lineUpData, teamUUID) {
             var user = appCache.get('user'),
                 params = {
@@ -250,6 +247,7 @@ define([
                 };
             return gateway.sendRequest('createLineUp', params);
         },
+
         deleteTeam: function(teamUUID) {
             var user = appCache.get('user'),
                 params = {
@@ -258,6 +256,7 @@ define([
                 };
             return gateway.sendRequest('deleteTeam', params);
         },
+
         deleteLineUp: function(teamUUID, lineUpId) {
             var user = appCache.get('user'),
                 params = {
@@ -273,8 +272,6 @@ define([
             params.UID = user.get('uid');
             return gateway.sendRequest('retrievePlayerCard', params);
         },
-
-        //...............
 
         retrievePinchHitterChoices: function() {
             var params = {};
@@ -372,8 +369,6 @@ define([
             return gateway.sendRequest('setReliefPitcher', params);
         },
 
-        //..........................
-
         startLineupEditing: function() {
             var user = appCache.get('user'),
                 game = appCache.get('game'),
@@ -437,6 +432,7 @@ define([
 
             return gateway.sendRequest('selectLineupAndInvite', params);
         },
+
         selectLineupAndInviteAndRegister: function(payload) {
             var user = appCache.get('user'),
                 params = {
