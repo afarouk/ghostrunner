@@ -164,7 +164,7 @@ define([
             params.UID = user.get('uid');
             return gateway.sendRequest('getMyRunningGame', params);
         },
-        
+
         abandonGame : function(){
             var user = appCache.get('user'),
                 game = appCache.get('game'),
@@ -210,7 +210,8 @@ define([
                 gameUUID=appCache.get('game').get('gameUUID'),
                 params = {
                     UID:userId,
-                    gameUUID: gameUUID
+                    gameUUID: gameUUID,
+                    type:'FIELDER'
                 };
             return gateway.sendRequest('retrieveAvailableTeamPlayers', params);
         },
@@ -420,7 +421,7 @@ define([
                     UID: user.get('uid')
                 };
 
-            return gateway.sendRequest('getMyLineups', params);    
+            return gateway.sendRequest('getMyLineups', params);
         },
 
         selectLineupAndInvite: function(payload) {
