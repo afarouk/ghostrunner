@@ -409,8 +409,6 @@ define([
             	url = this.getAPIRoot() + request[1],
             	method = request[0];
             delete options.payload;
-            console.log(options);
-            debugger;
             return $.ajax({
                 type: method,
                 url: (options ? url + '?' + $.param(options) : url),
