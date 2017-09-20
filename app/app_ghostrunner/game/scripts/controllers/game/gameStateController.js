@@ -253,6 +253,35 @@ define([
                 this.publicController.getModalsController().apiErrorPopup(err);
             }.bind(this));
         },
+
+        onSelectRemainingLineUpById: function(lineUpData) {
+            service.selectRemainingLineUpById({
+                payload: lineUpData
+            }).then(function(state) {
+                this.killGame();
+                this.publicController.getModalsController().afterLineUpSelected()
+                    .then(function() {
+                        this.publicController.getBrokerController().reRender();
+                    }.bind(this));
+            }.bind(this), function(err){
+                this.publicController.getModalsController().apiErrorPopup(err);
+            }.bind(this));
+        },
+
+        onSelectRemainingLineUpByIdAndAccept: function(lineUpData) {
+            service.selectRemainingLineUpByIdAndAccept({
+                payload: lineUpData
+            }).then(function(state) {
+                this.killGame();
+                this.publicController.getModalsController().afterLineUpSelected()
+                    .then(function() {
+                        this.publicController.getBrokerController().reRender();
+                    }.bind(this));
+            }.bind(this), function(err){
+                this.publicController.getModalsController().apiErrorPopup(err);
+            }.bind(this));
+        },
+
         onCreateLineupAndAccept: function(lineUpData, role) {
             service.createLineupAndAccept({
                 preferredRole: role,

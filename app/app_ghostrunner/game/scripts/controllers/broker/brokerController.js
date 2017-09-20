@@ -419,13 +419,21 @@ define([
 
             if (game) {
                 //after invitation accepted
-                this.publicController.getModalsController().onSelectRole()
-                    .then(function(role) {
-                        this.publicController.getStateController().onSelectLineupAndAccept({
-                            teamId: teamId,
-                            lineupId: lineupId
-                        }, role);
-                    }.bind(this));
+                if (game.get('thisUser').initiator) {
+                    this.publicController.getStateController().onSelectRemainingLineUpById({
+                        teamId: teamId,
+                        lineupId: lineupId
+                    });
+                } else {
+                    this.publicController.getModalsController().onSelectRole()
+                        .then(function(role) {
+                            this.publicController.getStateController().onSelectRemainingLineUpByIdAndAccept({
+                                teamId: teamId,
+                                lineupId: lineupId,
+                                preferredRole: role
+                            });
+                        }.bind(this));
+                }
             } else {
                 //on user invitation step
                 if (this.selectedUser.get('byEmail')) {

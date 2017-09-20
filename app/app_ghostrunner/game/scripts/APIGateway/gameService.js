@@ -417,8 +417,10 @@ define([
 
         getMyLineups: function() {
             var user = appCache.get('user'),
+                game = appCache.get('game'),
                 params = {
-                    UID: user.get('uid')
+                    UID: user.get('uid'),
+                    gameUUID: game ? game.get('gameUUID') : null,
                 };
 
             return gateway.sendRequest('getMyLineups', params);
@@ -468,6 +470,24 @@ define([
             params = params || {};
             params.UID = user.get('uid');
             return gateway.sendRequest('selectRemainingLineUpAndStart', params);
+        },
+
+        selectRemainingLineUpById: function(params) {
+            var user = appCache.get('user'),
+                game = appCache.get('game');
+            params = params || {};
+            params.UID = user.get('uid');
+            params.payload.gameUUID = game.get('gameUUID');
+            return gateway.sendRequest('selectRemainingLineUpById', params);
+        },
+
+        selectRemainingLineUpByIdAndAccept: function(params) {
+            var user = appCache.get('user'),
+                game = appCache.get('game');
+            params = params || {};
+            params.UID = user.get('uid');
+            params.payload.gameUUID = game.get('gameUUID');
+            return gateway.sendRequest('selectRemainingLineUpByIdAndAccept', params);
         },
 
         /*debug*/

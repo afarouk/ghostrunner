@@ -37,7 +37,10 @@ module.exports = {
             selectLineupAndInviteAndRegister: ['PUT', '/gaming/selectLineupAndInviteAndRegister'],
             selectLineupAndAccept: ['PUT', '/gaming/selectLineupAndAccept'],
             createLineupAndAccept: ['PUT', '/gaming/createLineupAndAccept'],
-            selectRemainingLineUpAndStart: ['PUT', '/gaming/selectRemainingLineUpAndStart'], //???
+            selectRemainingLineUpAndStart: ['PUT', '/gaming/selectRemainingLineUpAndStart'],
+
+            selectRemainingLineUpById: ['PUT', '/gaming/selectRemainingLineUpById'],
+            selectRemainingLineUpByIdAndAccept: ['PUT', '/gaming/selectRemainingLineUpByIdAndAccept'],
 
             getAvailablePlayers: ['GET', '/gaming/getAvailablePlayers'],
             retrieveAvailablePlayers: ['GET', '/gaming/retrieveAvailablePlayers'],
