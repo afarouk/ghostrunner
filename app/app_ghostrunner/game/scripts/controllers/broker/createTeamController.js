@@ -57,19 +57,6 @@ define([
             this.layout = layout;
         },
 
-        lineUpFullShape: function(layout, accept, team, starterPlayer) {
-            var game = appCache.get('game');
-
-            service.retrieveTeamPlayers(team, 'FIELDER')
-                .then(function(players){
-                    this.onShapeFullLineUp(players, starterPlayer, accept, team);
-                }.bind(this), function(xhr){
-                    this.publicController.getBrokerController().hideLoader();
-                    this.publicController.getModalsController().apiErrorPopup(xhr);
-                }.bind(this));
-            this.layout = layout;
-        },
-
         onCreateTeam: function(players) {
             var team = new Backbone.Collection(),
                 createData = {
@@ -112,6 +99,10 @@ define([
             this.publicController.getBrokerController().onReturnToTeamSelection();
         },
 
+        onReturnToLineupSelection: function(accept) {
+            this.publicController.getBrokerController().onReturnToLineupSelection(accept);
+        },
+
         //select candidate
         onSelectCandidate: function(players, team) {
             var createData = {
@@ -126,8 +117,8 @@ define([
             this.listenTo(candidateSelection, 'lineUp:save', this.onCandidateSelected.bind(this));
             this.listenTo(candidateSelection, 'cancel', this.onReturnToTeamSelection.bind(this));
         },
-        onCandidateSelected: function(lineUpName, player) {
-            this.publicController.getBrokerController().onCandidateSelected(lineUpName, player);
+        onCandidateSelected: function(player) {
+            this.publicController.getBrokerController().onCandidateSelected(player);
         },
         onShapeLineUp: function(players, starterLineUp, accept) {
             var lineUp = new Backbone.Collection(),
@@ -143,22 +134,9 @@ define([
             this.layout.$el.addClass('creation-state');
             this.layout.showChildView('creation', lineUpCreation);
             this.listenTo(lineUpCreation, 'lineUp:save', this.onLineUpSave.bind(this, lineUp, accept));
+            this.listenTo(lineUpCreation, 'cancel', this.onReturnToLineupSelection.bind(this, accept));
         },
-        onShapeFullLineUp: function(players, starterPlayer, accept, team) {
-            var lineUp = new Backbone.Collection(),
-                createData = {
-                    players: (new PlayersCollection()).getLineUps(players.players),
-                    lineUp: lineUp,
-                    teamName: team.get('displayText'),
-                    lineUpName: '',
-                    headings: players.lineUpHeadings,
-                },
-                lineUpCreation = new LineUpCreationView(createData);
 
-            this.layout.$el.addClass('creation-state');
-            this.layout.showChildView('creation', lineUpCreation);
-            this.listenTo(lineUpCreation, 'lineUp:save', this.onFullLineUpSave.bind(this, team, starterPlayer, lineUp, accept));
-        },
         onLineUpSave: function(lineUp, accept) {
             var game = appCache.get('game'),
                 players = lineUp.map(function(model) {
@@ -179,57 +157,24 @@ define([
                     players: players
                 };
 
-            if (game.get('state') === 'STARTER_LINEUP') {
+            if (accept) {
                 this.publicController.getModalsController().onSelectRole()
                     .then(function(role){
-                       this.publicController.getStateController().onSelectRemainingLineUpAndStart(lineUpData, role);
+                       this.publicController.getStateController().onInvitationAccepted(lineUpData, role);
                     }.bind(this));
             } else {
-                if (accept) {
-                    this.publicController.getModalsController().onSelectRole()
-                        .then(function(role){
-                           this.publicController.getStateController().onInvitationAccepted(lineUpData, role);
-                        }.bind(this));
-                } else {
-                    service.selectRemainingLineUp(lineUpData)
-                        .then(function(){
-                            this.publicController.getStateController().killGame();
-                            this.publicController.getModalsController().afterLineUpSelected()
-                                .then(function(){
-                                    this.layout.trigger('cancel');
-                                }.bind(this));
-                        }.bind(this), function(xhr){
-                            this.publicController.getBrokerController().hideLoader();
-                            this.publicController.getModalsController().apiErrorPopup(xhr);
-                        }.bind(this));
-                }
+                service.selectRemainingLineUp(lineUpData)
+                    .then(function(){
+                        this.publicController.getStateController().killGame();
+                        this.publicController.getModalsController().afterLineUpSelected()
+                            .then(function(){
+                                this.layout.trigger('cancel');
+                            }.bind(this));
+                    }.bind(this), function(xhr){
+                        this.publicController.getBrokerController().hideLoader();
+                        this.publicController.getModalsController().apiErrorPopup(xhr);
+                    }.bind(this));
             }
-        },
-        onFullLineUpSave: function(team, starterPlayer, lineUp, accept) {
-            lineUp.add(starterPlayer, {at: 0, silent: true});
-            var game = appCache.get('game'),
-                players = lineUp.map(function(model) {
-                    return {
-                        playerId: model.get('playerId'),
-                        seasonId: model.get('seasonId'),
-                        leagueId: model.get('leagueId'),
-                        playerRoleId: model.get('playerRoleId'),
-                        position: model.get('position').enumText,
-                        type: model.get('type').enumText,
-                        role: model.get('role').enumText,
-                        battingOrder: model.get('battingOrder'),
-                        pitchingRole: model.get('pitcherRole').enumText
-                    };
-                }),
-                lineUpData = {
-                    // gameUUID: game.get('gameUUID'),
-                    teamUUID: team.get('teamUUID'),
-                    players: players
-                };
-            this.publicController.getModalsController().onSelectRole()
-                .then(function(role){
-                   this.publicController.getStateController().onCreateLineupAndAccept(lineUpData, role);
-                }.bind(this));
         }
     });
     return new CreateTeamController();

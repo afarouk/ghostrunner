@@ -20,8 +20,6 @@ define([
 			listContainer: '[name="list-container"]'
 		},
 		events: {
-			//'change @ui.name': 'onNameChanged',
-			//'keyup @ui.name': 'onNameChanged',
 			'click @ui.save': 'onSave'
 		},
 		triggers: {
@@ -35,41 +33,21 @@ define([
 		},
 		onRender: function() {
 			console.log('lineUp creation');
-                        this.ui.listContainer.removeClass('masked');
-                        var name = this.ui.name.val();
-                        this.lineUpName = name;
+            this.ui.listContainer.removeClass('masked');
 			this.playersList = new SelectCandidateList({
 				collection: this.options.players,
 				headings: this.options.headings
 			});
 			this.showChildView('players', this.playersList);
 			this.listenTo(this.playersList, 'player:selected', this.onPlayerSelected.bind(this));
-
-			//this.focusInput();
 		},
-		focusInput: function() {
-			setTimeout(function(){
-				this.ui.name.focus();
-			}.bind(this), 1);
-		},
-		onNameChanged: function() {
-			var name = this.ui.name.val();
-			console.log(name);
-			if (name.length > 1) { //TODO validation
-				this.lineUpName = name;
-				this.ui.listContainer.removeClass('masked');
-			} else {
-				this.lineUpName = '';
-				this.ui.listContainer.addClass('masked');
-			}
-			this.checkIfSaveAllowed();
-		},
+	
 		onPlayerSelected: function(model) {
 			this.selectedPlayer = model;
 			this.checkIfSaveAllowed();
 		},
 		checkIfSaveAllowed: function() {
-			if (this.selectedPlayer && this.lineUpName) {
+			if (this.selectedPlayer) {
 				this.ui.save.attr('disabled', false);
 				return true;
 			} else {
@@ -79,7 +57,7 @@ define([
 		},
 		onSave: function() {
 			if(this.checkIfSaveAllowed()) {
-				this.trigger('lineUp:save', this.lineUpName, this.selectedPlayer);
+				this.trigger('lineUp:save', this.selectedPlayer);
 			} else {
 				//todo prevent hack attr/ error msg???
 			}

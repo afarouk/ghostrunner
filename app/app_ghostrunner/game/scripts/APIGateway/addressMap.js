@@ -33,12 +33,7 @@ module.exports = {
             getTeams: ['GET', '/gaming/getMyTeams'],
 
             getMyLineups: ['GET', '/gaming/getMyLineups'],
-            selectLineupAndInvite: ['PUT', '/gaming/selectLineupAndInvite'],
-            selectLineupAndInviteAndRegister: ['PUT', '/gaming/selectLineupAndInviteAndRegister'],
-            selectLineupAndAccept: ['PUT', '/gaming/selectLineupAndAccept'],
             createLineupAndAccept: ['PUT', '/gaming/createLineupAndAccept'],
-            selectRemainingLineUpAndStart: ['PUT', '/gaming/selectRemainingLineUpAndStart'],
-
             selectRemainingLineUpById: ['PUT', '/gaming/selectRemainingLineUpById'],
             selectRemainingLineUpByIdAndAccept: ['PUT', '/gaming/selectRemainingLineUpByIdAndAccept'],
 

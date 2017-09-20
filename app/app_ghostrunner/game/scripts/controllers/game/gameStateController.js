@@ -297,22 +297,11 @@ define([
             }.bind(this));
         },
 
-        onSelectRemainingLineUpAndStart: function(lineUpData, role) {
-            service.selectRemainingLineUpAndStart({
-                preferredRole: role,
-                payload: lineUpData
-            }).then(function(state){
-                this.updateGameModel(state);
-            }.bind(this),function(xhr){
-                this.publicController.getModalsController().apiErrorPopup(xhr);
-            }.bind(this));
-        },
-
         onRetrieveInvitation: function(message) {
             this.beforeRefreshStatus(message);
         },
 
-        afterCandidateSelected: function(team, lineUpName, playerModel) {
+        afterCandidateSelected: function(team, playerModel) {
             var teamUUID = team.get('teamUUID'),
                 teamId = team.get('teamId'),
                 teamType = team.get('type').enumText,
@@ -327,7 +316,6 @@ define([
                 teamUUID: teamUUID,
                 teamId: teamId,
                 teamType: teamType,
-                lineUpDisplayText: lineUpName,
                 player: player
             }).then(function(state) {
                 this.killGame();

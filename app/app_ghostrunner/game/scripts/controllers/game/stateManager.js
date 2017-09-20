@@ -42,11 +42,9 @@ define([
                 case 'STARTER_SELECTED':
                     if (thisUser.initiator && otherUser.state === 'STARTER_SELECTED') {
                         this.publicController.getModalsController().beforeLineUpShape(gameModel);
-                        // this.publicController.getBrokerController().lineUpShape();
                     }
                     if (otherUser.state === 'LINEUP_SELECTED') {
                         this.publicController.getModalsController().onInitiatorsLineUpWasSelected(gameModel);
-                        // this.publicController.getBrokerController().lineUpShape('accept');
                     }
                     break;
 
@@ -69,7 +67,9 @@ define([
                 case 'MAKE_YOUR_MOVE':
                     this.publicController.getGameController().waitingForMove();
                     if (thisUser.substate === 'ASK_IF_EDIT_LINEUP') {
-                        this.publicController.getModalsController().onLineUpEditConfirmation();
+                        if (gameModel.get('state') === 'RUNNING') {
+                            this.publicController.getModalsController().onLineUpEditConfirmation();
+                        }
                     } else {
                         this.publicController.getStateController().checkForSecondaryMove(gameModel.toJSON(), false);
                     }
@@ -168,26 +168,7 @@ define([
                 default:
                     break;
             }
-        },
-
-        manageInvitationScenarios: function(state) {
-            if (state === 'LINEUP_INVITED') { //after invitation with predefined lineup received
-                //select candidate
-                return this.publicController
-                    .getBrokerController().switchToLineUpState(state)
-                        .then(function(team, lineUpName, starterPlayer) {
-                            //then shape lineup
-                            return this.publicController.getBrokerController().lineUpShape(undefined, starterPlayer);
-                        }.bind(this));
-            } else {
-                //select candidate
-                return this.publicController
-                    .getBrokerController().switchToStarterState()
-                        .then(function(team, lineUpName, playerModel) {
-                            this.publicController.getStateController().afterCandidateSelected(team, lineUpName, playerModel);
-                        }.bind(this));
-            }
-        },
+        }
     });
 
     return new StatesManager();

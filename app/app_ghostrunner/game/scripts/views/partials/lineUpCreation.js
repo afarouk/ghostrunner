@@ -16,15 +16,17 @@ define([
 		ui: {
 			name: '[name="lineUp-name"]',
 			count: '[name="count"]',
-			save: '[name="save"]'
+			save: '[name="save"]',
+			cancel: '[name="cancel"]'
 		},
 		events: {
-			//'change @ui.name': 'onNameChanged',
-			//'keyup @ui.name': 'onNameChanged',
 			'click @ui.save': 'onSave'
 		},
+		triggers: {
+			'click @ui.cancel': 'cancel'
+		},
 		lineUpName: '',
-		minPlayers: 1, //change min players count here
+		minPlayers: 8, //change min players count here
 		maxPlayers: 8,
 		initialize: function(options) {
 			this.lineUp = options.lineUp;
@@ -47,14 +49,6 @@ define([
 			});
 			this.showChildView('players', this.lineUpPlayersList);
 			this.listenTo(this.lineUpPlayersList, 'lineUp:changed', this.onLineUpChanged.bind(this));
-		},
-		onNameChanged: function() {
-			if (name.length > 1) { //TODO validation
-				this.lineUpName = name;
-			} else {
-				this.lineUpName = '';
-			}
-			this.checkIfSaveAllowed();
 		},
 		onLineUpChanged: function(checked, model) {
 			var playerId = model.get('playerId'),

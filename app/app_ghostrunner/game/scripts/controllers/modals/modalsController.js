@@ -181,8 +181,10 @@ define([
             this.publicController.getGameController().switchToBroker();
             this.onOtherPlayerLineUp(gameModel, 'select')
                 .then(function() {
-                    //manage two scenarios: standard and with initiator by predefined lineup
-                    this.publicController.getStateManager().manageInvitationScenarios(gameModel.get('state'));
+                    this.publicController.getBrokerController().switchToStarterState()
+                        .then(function(team, lineUpName, playerModel) {
+                            this.publicController.getStateController().afterCandidateSelected(team, lineUpName, playerModel);
+                        }.bind(this));
                 }.bind(this));
         },
 
@@ -374,6 +376,12 @@ define([
         },
 
         onRejectedByOponnent: function(message) {
+            var game = appCache.get('game');
+            if (game && game.get('gameUUID') !== message.gameUUID) {
+                //case when game is running and we received reject signal
+                console.log(message.payload);
+                return; //temporary solution
+            }
             this.publicController.getStateController().killGame();
             this.publicController.getBrokerController().reRender();
             this.publicController.getChoiceController().showConfirmation({

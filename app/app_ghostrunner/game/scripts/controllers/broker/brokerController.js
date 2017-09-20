@@ -106,8 +106,8 @@ define([
 
         confirmUser: function() {
             this.switchToStarterState()
-                .then(function(team, lineUpName, player){
-                    this.afterCandidateSelected(lineUpName, player);
+                .then(function(team, player){
+                    this.afterCandidateSelected(player);
                 }.bind(this));
         },
 
@@ -256,12 +256,20 @@ define([
             }
         },
 
+        onReturnToLineupSelection: function(accept) {
+            this.view.$el.removeClass('creation-state');
+            this.teamConfirm = undefined;
+            if (this.confirm === 'lineups') {
+                this.lineUpChoose(accept);
+            }
+        },
+
         selectCandidate: function() {
             this.publicController.getCreateTeamController().selectCandidate(this.view, this.selectedTeam);
         },
 
-        onCandidateSelected: function (lineUpName, player) {
-            this.invitationDef.resolve(this.selectedTeam, lineUpName, player);
+        onCandidateSelected: function (player) {
+            this.invitationDef.resolve(this.selectedTeam, player);
             this.invitationDef = null;
         },
 
@@ -277,18 +285,11 @@ define([
             this.invitationDef.resolve();
         },
 
-        lineUpShape: function(accept, starterPlayer) {
+        lineUpShape: function(accept) {
             console.log('switch to broker');
             this.publicController.getGameController().switchToBroker();
             this.view.$el.addClass('creation-state');
-            //manage standard invitation scenarion (starter -> then lineup)
-            // or full lineup with starter creation
-            // and role selection
-            if (starterPlayer) {
-                this.publicController.getCreateTeamController().lineUpFullShape(this.view, accept, this.selectedTeam, starterPlayer);
-            } else {
-                this.publicController.getCreateTeamController().lineUpShape(this.view, accept);
-            }
+            this.publicController.getCreateTeamController().lineUpShape(this.view, accept);
         },
 
         onRemoveTeam: function(model) {
@@ -300,7 +301,7 @@ define([
                 }.bind(this));
         },
 
-        afterCandidateSelected: function(lineUpName, playerModel) {
+        afterCandidateSelected: function(playerModel) {
             var teamUUID = this.selectedTeam.get('teamUUID'),
                 teamId = this.selectedTeam.get('teamId'),
                 teamType = this.selectedTeam.get('type').enumText,
@@ -320,7 +321,6 @@ define([
                     inviteeUID: null,
                     teamId: null,
                     teamType: teamType,
-                    lineUpDisplayText: lineUpName,
                     player: player
                 });
             } else {
@@ -332,7 +332,6 @@ define([
                     teamUUID: null,
                     teamId: teamId,
                     teamType: teamType,
-                    lineUpDisplayText: lineUpName,
                     player: player
                 });
                 this.reRender();
@@ -433,25 +432,6 @@ define([
                                 preferredRole: role
                             });
                         }.bind(this));
-                }
-            } else {
-                //on user invitation step
-                if (this.selectedUser.get('byEmail')) {
-                    this.publicController.getStateController().onSendInvitationByEmailWithUserLineup({
-                        callback: this.credentials.callback,
-                        email: this.credentials.email,
-                        teamId: teamId,
-                        lineupId: lineupId
-                    });
-                } else {
-                    var inviteeUID = this.selectedUser.get('uid');
-                    this.publicController.getStateController().onSendInvitationWithUserLineup({
-                        callback: this.afterInvitationSent.bind(this),
-                        inviteeUID: inviteeUID,
-                        teamId: teamId,
-                        lineupId: lineupId
-                    });
-                    this.reRender();
                 }
             }
         },
