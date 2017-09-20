@@ -172,7 +172,7 @@ define([
             this.publicController.getGameController().switchToBroker();
             this.onOtherPlayerLineUp(gameModel)
                 .then(function(){
-                    return this.publicController.getBrokerController().lineUpShape();
+                    return this.publicController.getBrokerController().lineUpChoose();
                 }.bind(this));
         },
 
@@ -226,7 +226,8 @@ define([
                     cancel: 'cancel',
                     confirm: 'next'
                 }).then(function() {
-                    this.publicController.getBrokerController().lineUpShape('accept');
+                    this.publicController.getBrokerController().lineUpChoose('accept');
+                    // this.publicController.getBrokerController().lineUpShape('accept');
                     $def.resolve();
                 }.bind(this), function() {
                     $def.reject();

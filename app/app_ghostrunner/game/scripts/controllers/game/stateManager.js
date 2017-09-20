@@ -182,7 +182,7 @@ define([
             } else {
                 //select candidate
                 return this.publicController
-                    .getBrokerController().switchToLineUpState()
+                    .getBrokerController().switchToStarterState()
                         .then(function(team, lineUpName, playerModel) {
                             this.publicController.getStateController().afterCandidateSelected(team, lineUpName, playerModel);
                         }.bind(this));

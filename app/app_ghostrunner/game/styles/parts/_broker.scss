@@ -618,6 +618,10 @@
                 display: none;
             }
 
+            .lineup-choose {
+                display: none;
+            }
+
             &.right-broker.team-state {
                 .broker-buttons {
                     display: none;
@@ -643,6 +647,18 @@
                             font-weight: $broker-fw-txt;
                         }
                     }
+                }
+            }
+
+            &.right-broker.lineup-state {
+                .broker-buttons {
+                    display: none;
+                }
+                .broker-list {
+                    display: none;
+                }
+                .lineup-choose {
+                    display: block;
                 }
             }
 

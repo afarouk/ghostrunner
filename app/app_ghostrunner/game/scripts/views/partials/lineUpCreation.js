@@ -24,7 +24,7 @@ define([
 			'click @ui.save': 'onSave'
 		},
 		lineUpName: '',
-		minPlayers: 8, //change min players count here
+		minPlayers: 1, //change min players count here
 		maxPlayers: 8,
 		initialize: function(options) {
 			this.lineUp = options.lineUp;

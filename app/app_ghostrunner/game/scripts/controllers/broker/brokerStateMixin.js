@@ -34,7 +34,7 @@ define([
                             .removeClass('my-lineups without-buttons');
                         this.view.ui.teams.attr('disabled', false)
                             .addClass('inactive');
-                        this.view.ui.lineups.removeClass('inactive');
+                        this.view.ui.lineups.attr('disabled', true);
                         this.view.ui.confirm.attr('disabled', true);
                     } else {
                         this.view.$el.find('.broker-list.left-list')
@@ -69,7 +69,7 @@ define([
                             .removeClass('my-teams without-buttons');
                         this.view.ui.lineups.attr('disabled', false)
                             .addClass('inactive');
-                        this.view.ui.teams.removeClass('inactive');
+                        this.view.ui.teams.attr('disabled', true);
                         this.view.ui.confirm.attr('disabled', true);
                     } else {
                         this.view.$el.find('.broker-list.left-list')
@@ -126,13 +126,22 @@ define([
                         this.destroyCurrentView();
                     }
                     break;
-                case 'lineUpSelection':
+                case 'starterSelection':
                     //for switch state to teams
                     this.view.ui.invite.attr('disabled', true);
                     this.view.ui.confirm.attr('disabled', true);
                     this.view.ui.rightBroker.addClass('team-state');
                     this.view.ui.cancel.attr('disabled', false);
                     this.onGetTeams();
+                    break;
+                case 'lineUpSelection':
+                    //for switch state to lineups
+                    this.view.ui.invite.attr('disabled', true);
+                    this.view.ui.confirm.attr('disabled', true);
+                    this.view.ui.rightBroker.addClass('lineup-state');
+                    this.view.ui.cancel.attr('disabled', false);
+                    this.confirm = 'beforeLineups';
+                    this.onGetMyLineups();
                     break;
                 default:
                     break;
@@ -225,6 +234,12 @@ define([
             this.view.ui.invite.attr('disabled', true);
             this.invitationDef.resolve(this.selectedTeam);
             this.invitationDef = null;
+        },
+
+        switchToStarterState: function() {
+            this.switchBrokerState('starterSelection', true);
+            this.invitationDef = $.Deferred();
+            return this.invitationDef;
         },
 
         switchToLineUpState: function() {

@@ -25,6 +25,7 @@ define([
 			my_invites_number: '[name="my_invites_number"]',
 			my_games: '[name="my_games"]',
 			createTeam: '[name="create-team"]',
+			createLineup: '[name="create_lineup"]',
 			teamConfirm: '[name="team-confirm"]',
 			confirm: '[name="confirm"]',
 			loader: '#broker-loader'
@@ -41,6 +42,7 @@ define([
 			'click @ui.my_invites': 'getInvites',
 			'click @ui.my_games': 'getGames',
 			'click @ui.createTeam': 'team:create',
+			'click @ui.createLineup': 'lineup:create',
 			'click @ui.teamConfirm': 'team:confirm',
 			'click @ui.confirm': 'confirm'
 		},

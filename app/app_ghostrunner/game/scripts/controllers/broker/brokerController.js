@@ -35,6 +35,7 @@ define([
             this.listenTo(this.view, 'confirm', this.onConfirm.bind(this));
             this.listenTo(this.view, 'cancel', this.onCancel.bind(this));
             this.listenTo(this.view, 'team:confirm', this.onTeamConfirm.bind(this));
+            this.listenTo(this.view, 'lineup:create', this.onLineupCreate.bind(this));
             this.listenTo(this.view, 'brokerClicked', this.onBrokerClicked.bind(this));
         },
         reRender: function () {
@@ -104,7 +105,7 @@ define([
         },
 
         confirmUser: function() {
-            this.switchToLineUpState()
+            this.switchToStarterState()
                 .then(function(team, lineUpName, player){
                     this.afterCandidateSelected(lineUpName, player);
                 }.bind(this));
@@ -264,6 +265,18 @@ define([
             this.invitationDef = null;
         },
 
+        lineUpChoose: function(accept) {
+            console.log('switch to broker');
+            this.publicController.getGameController().switchToBroker();
+            this.switchToLineUpState().then(function(){
+                this.publicController.getCreateTeamController().lineUpShape(this.view, accept);
+            }.bind(this));
+        },
+
+        onLineupCreate: function() {
+            this.invitationDef.resolve();
+        },
+
         lineUpShape: function(accept, starterPlayer) {
             console.log('switch to broker');
             this.publicController.getGameController().switchToBroker();
@@ -359,7 +372,7 @@ define([
             if (this.confirm === switchToState) {
                 this.switchBrokerState(switchToState, false);
             } else {
-                if (this.confirm === 'teams') {
+                if (this.confirm === 'beforeLineups') {
                     switchToState = 'lineups'
                 }
                 this.switchBrokerState(switchToState, true);
