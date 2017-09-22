@@ -156,8 +156,9 @@ define([
 			var model = view.model;
 			if (model.get('position').enumText !== 'UNDEFINED' && model.get('battingOrder')) {
 				view.ui.select.attr('disabled', false);
+				view.ui.select.prop('checked', true).change();
 			} else {
-				view.ui.select.attr('checked', false).change();
+				view.ui.select.prop('checked', false).change();
 				view.ui.select.attr('disabled', true);
 			}
 		},
