@@ -96,14 +96,9 @@ define([
         		}
         	}.bind(this));
             
-            if(typeof FB !== 'undefined') {
-                FB.getLoginStatus(function (response) {
-                    this.facebookStatus = response.status;
-               }.bind(this), true);
-            }
-            
-            $('#signin .login-facebook').on('click', function(){
-                this.facebookLoginStatus(this.facebookStatus);
+            $('#signin .login-facebook').on('click', function() {
+                $('.error_dv').hide();
+                this.onUserFacebookLogin();
         	}.bind(this));
             
             $('.register_btn').on('click', function() {
@@ -183,31 +178,48 @@ define([
         			
         	}.bind(this));
     	},
+
+        checkFacebookConnection: function() {
+            var def = $.Deferred();
+            if(typeof FB !== 'undefined') {
+                FB.getLoginStatus(function (response) {
+                    if (response.status === 'connected') {
+                        def.resolve();
+                    } else {
+                        def.reject();
+                    }
+               }.bind(this), true);
+            }
+
+            return def;
+        },
         
         onUserFacebookLogin: function() {
-    		this.facebookLoginStatus(this.facebookStatus)
+    		this.facebookLoginStatus()
                 .then(function(response){
                     if (response.success) {
                     	$('#signin').modal('hide');
                     } else {
                     	console.log(response.error);
+                        this.showError(response.error);
                     }
                 }.bind(this));
     	},
         
-        facebookLoginStatus: function(status) {
-            var def = $.Deferred()
-            if (status === 'connected') {
+        facebookLoginStatus: function() {
+            var def = $.Deferred();
+
+            this.checkFacebookConnection().then(function(){
                 this.getPublicProfile(def);
-            } else {
+            }.bind(this), function(){
                 FB.login(function(response) {
                     if (response.authResponse) {
                         this.getPublicProfile(def);
                     } else {
-                        def.resolve({error:'User cancelled login or did not fully authorize.'});
+                        def.resolve({error:'User cancelled Facebook login or did not fully authorize.'});
                     }
                 }.bind(this), { scope: 'email' });
-            }
+            }.bind(this));
             return $.when(def);
         },
         
@@ -300,6 +312,10 @@ define([
             $('.show_userName').text('');
     		$(window).trigger('ghostrunner.signout', UID);
     		this.updateLoginButton();
+
+            this.checkFacebookConnection().then(function(){
+                FB.logout();
+            }.bind(this));
     	},
 
         onAfterLogout: function() {
