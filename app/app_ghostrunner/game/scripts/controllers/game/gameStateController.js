@@ -44,13 +44,13 @@ define([
         checkIfShowInvitationNeeded: function(games) {
             var invites = _.filter(games, function(game){
                 if (!game.initiator) {
-                    if (game.state === 'STARTER_INVITED' || 
+                    if (game.state === 'STARTER_INVITED' ||
                         game.state === 'LINEUP_STARTER' ||
                         game.state === 'LINEUP_INVITED') {
                         return game;
                     }
                 } else {
-                    if (game.state === 'STARTER_STARTER' || 
+                    if (game.state === 'STARTER_STARTER' ||
                         game.state === 'LINEUP_LINEUP') {
                         return game;
                     }
@@ -181,7 +181,7 @@ define([
             }
         },
 
-        onPayloadMsgBeforeRefresh: function(message) {      
+        onPayloadMsgBeforeRefresh: function(message) {
             this.refreshStatus(message.gameUUID);
         },
 
@@ -434,7 +434,7 @@ define([
             if (_.isEmpty(events)) {
                 if (update) this.updateGameModel(state);
             } else {
-                var secondary = _.findWhere(events, {type: 'CHOICE_NEEDED'});
+                var secondary = _.findWhere(events, {type: 'SYSTEM_MOVE_CHOICE_NEEDED'});
                 if (secondary) {
                     this.publicController.getModalsController().onSecondaryMove(secondary);
                 } else {
