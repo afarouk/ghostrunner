@@ -1,3 +1,13 @@
+<?php
+    $serverName  = $_SERVER['SERVER_NAME'];
+    /* temporary facebook appId by is production or not */
+    /* facebook logout won't work on localhost probably */
+    $FacebookAppId = '774315829423417';
+    if ($serverName === 'ghostrunner.com') {
+        $FacebookAppId = '1967745540176798';
+    }
+    /*  ...  */
+?>
 <!DOCTYPE html>
 <!--[if lt IE 7]><html class="ie ie6" lang="en"><![endif]-->
 <!--[if IE 7]><html class="ie ie7" lang="en"><![endif]-->
@@ -52,13 +62,13 @@
     <script src="https://connect.facebook.net/en_US/sdk.js"></script>
     <!-- js for facebook login-->
     <script>
-    window.fbAsyncInit = function() {
+        window.fbAsyncInit = function() {
           FB.init({
-            appId      : '163685094028796',
+            appId      : '<?php echo $FacebookAppId ?>',
             cookie     : true,
             status     : true,
             xfbml      : true,
-            version    : 'v2.6'
+            version    : 'v2.10'
           });
         }
     </script>
