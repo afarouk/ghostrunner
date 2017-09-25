@@ -15,7 +15,7 @@ define([
                     break;
 
                 case 'YOUR_MOVE':
-                    this.publicController.getGameController().waitingForMove();
+                    this.publicController.getStateController().refreshStatus(message.gameUUID);
                     break;
 
                 case 'OPPONENT_OFFLINE':
