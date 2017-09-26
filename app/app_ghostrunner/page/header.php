@@ -3,7 +3,7 @@
     /* temporary facebook appId by is production or not */
     /* facebook logout won't work on localhost probably */
     $FacebookAppId = '774315829423417';
-    if ($serverName === 'ghostrunner.com') {
+    if ($serverName === 'ghostrunner.net') {
         $FacebookAppId = '1967745540176798';
     }
     /*  ...  */
