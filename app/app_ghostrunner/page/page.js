@@ -3,6 +3,7 @@
 
 //require styles
 require('./css/bootstrap.min.css');
+require('./css/jquery-ui-custom.min.css');
 require('./css/font-awesome.min.css');
 require('./css/slick.css');
 require('./css/slick-theme.css');
@@ -21,6 +22,7 @@ require('file?name=[name].[ext]!./navbar.php');
 //require scripts
 require('./js/jquery-1.11.3.min');
 require('./js/jquery-migrate-1.2.1.min');
+require('./js/jquery-ui-custom.min');
 require('./js/bootstrap.min');
 require('./js/jquery.easing.min');
 require('./js/smoothscroll');

@@ -496,3 +496,93 @@
         cursor: pointer;
     }
 }
+.chat-content {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    z-index: 99;
+    pointer-events: all;
+
+    .modal-content {
+        display: none;
+        background-color: rgba(0, 0, 0, 0.4);
+        border: 1px solid rgba(21, 196, 225, 0.75);
+        border-radius: 3px;
+        overflow: hidden;
+
+        .modal-header {
+            padding: 2px 5px 0!important;
+            background-color: rgba(71, 151, 139, 0.7);
+            border-bottom: 1px solid rgba(21, 196, 225, 0.75);
+            button {
+                color: $text!important;
+                opacity: 0.7;
+            }
+        }
+
+        .modal-body {
+            padding: 5px!important;
+            color: white;
+            font-size: 12px;
+            background-color: rgba(0, 0, 0, 0.75);
+
+            .chat-messages {
+                list-style: none;
+                padding: 0;
+
+                li {
+                    max-width: 320px;
+                    display: grid;
+                    grid-gap: 8px;
+                    grid-template-columns: 50px minmax(0px, 100px) 160px;
+                    margin-bottom: 2px;
+
+                    .time {
+                        // color: $text;
+                        color: rgb(138, 121, 155);
+                        width:70px;
+                    }
+
+                    .user {
+                        color: red;
+                        width: 100px;
+                    }
+
+                    &:nth-child(2n) {
+                        .user {
+                            color: yellow;
+                        }
+                    }
+
+                    .message {
+                        color: lightgray;
+                    }
+                }
+            }
+        }
+
+        .modal-footer {
+            padding: 2px 5px!important;
+            border-top: 1px solid rgba(21, 196, 225, 0.75);
+
+            input {
+                height: 20px;
+                width: calc(100% - 30px);
+                font-size: 12px;
+                min-width: 200px;
+                padding: 0 5px;
+                background-color: rgba(123, 152, 153, 0.73);
+                border: 1px solid rgba(21, 196, 225, 0.75);
+                border-radius: 2px;
+                color: white;
+            }
+
+            button {
+                height: 22px;
+                width: 25px;
+                padding: 0 5px 5px;
+                background-color: rgba(21, 196, 225, 0.75);
+            }
+        }
+    }
+}
