@@ -9,6 +9,9 @@ define([
 		create: function(layout, region) {
 			this.view = new ChatView();
 			layout.showChildView( region, this.view );
+		}, 
+		resetPosition: function() {
+			this.view.triggerMethod('resetPosition');
 		}
     });
 
