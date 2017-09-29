@@ -7,8 +7,6 @@ define([
     var SignalsManager = Mn.Object.extend({
 	onMessage: function(message) {
             switch (message.signal) {
-                case 'Undefined':
-                    break;
 
                 case 'FORCED_LOGOUT':
                     this.publicController.getStateController().onForceLogout();
