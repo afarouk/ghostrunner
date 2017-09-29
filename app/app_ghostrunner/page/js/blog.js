@@ -204,7 +204,11 @@ define([
                         $('#blog_btn_prev').attr('navId',response.nextId);
                         $('#delete_blog').attr('bloguuid',response.entries[0].uuid);
                         $('#header_blog_view').html(response.entries[0].title);
-                        $('#blog_picture').attr('src',response.entries[0].img_url);
+                        //don't show if no img
+                        if (response.entries[0].img_url) {
+                            $('#nav_picture').show();
+                            $('#blog_picture').attr('src',response.entries[0].img_url);
+                        }
                         //remove replace after ready on server 
                         response.entries[0].body = response.entries[0].body.replace('\n', '<br>');
                         //end of replace

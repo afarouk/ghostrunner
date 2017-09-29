@@ -2306,6 +2306,7 @@ p#main_blog_view {
 {
     text-align: center;
     max-height: 200px;
+    display: none;
 }
 #nav_picture>img
 {
