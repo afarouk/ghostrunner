@@ -126,16 +126,6 @@ define([
                     this.publicController.getModalsController().apiErrorPopup(xhr);
                 }.bind(this));
         },
-
-        notifyOpponentOfGameResumption: function(gameUUID) {
-            service.notifyOpponentOfGameResumption(gameUUID)
-                .then(function(game){
-                    this.refreshStatus(gameUUID);
-                }.bind(this),function(xhr){
-                    this.publicController.getModalsController().apiErrorPopup(xhr);
-                }.bind(this));
-        },
-
         onCheckRestart: function(gameUUID) {
             //if user already in this game don't show confirmation
             var gameModel = this.getGameModel();

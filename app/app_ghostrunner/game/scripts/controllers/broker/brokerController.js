@@ -13,8 +13,8 @@ define([
     '../../views/partials/invitesList',
     '../../views/partials/emptyList',
     '../../APIGateway/gameService'
-    ], function(appCache, brokerStateMixin, MainBrokerView, TeamsList, 
-                LineupsList, UsersList, GamesList, InvitesList, EmptyListView, 
+    ], function(appCache, brokerStateMixin, MainBrokerView, TeamsList,
+                LineupsList, UsersList, GamesList, InvitesList, EmptyListView,
                 service) {
     var BrokerController = Mn.Object.extend({
         initialize: function() {
@@ -499,7 +499,7 @@ define([
             var gameUUID = this.selectedGame.get('gameUUID'),
                 state = this.selectedGame.get('state');
             if (state === 'RUNNING') {
-                this.publicController.getStateController().notifyOpponentOfGameResumption(gameUUID);
+                /* do nothing */
             } else {
                 this.publicController.getStateController().refreshStatus(gameUUID);
             }
@@ -528,7 +528,7 @@ define([
             var gameModel = appCache.get('game'),
                 otherLineUp = gameModel.get('otherLineUp'),
                 player = otherLineUp.players[0];
-                
+
             service.retrievePlayerCard({
                 playerId: player.playerId,
                 seasonId: player.seasonId,

@@ -7,7 +7,6 @@ module.exports = {
         	getGame: ['GET', '/gaming/getGame'],
             startGame: ['PUT', '/gaming/startGame'],
             refresh: ['GET', '/gaming/refresh'],
-            notifyOpponentOfGameResumption: ['PUT', '/gaming/notifyOpponentOfGameResumption'],
             pauseGame: ['PUT', '/gaming/pauseGame'],
             unPauseGame: ['PUT', '/gaming/unPauseGame'],
             abandonGame: ['PUT', '/gaming/abandonGame'],
@@ -18,8 +17,8 @@ module.exports = {
             retrievePlayerCard: ['GET', '/gaming/retrievePlayerCard'],
 
             rejectInvitation: ['PUT', '/gaming/rejectInvitation'],
-        	selectRemainingLineUpAndAccept: ['PUT', '/gaming/selectRemainingLineUpAndAccept'],
-        	selectStarterAndInvite: ['PUT', '/gaming/selectStarterAndInvite'],
+        	  selectRemainingLineUpAndAccept: ['PUT', '/gaming/selectRemainingLineUpAndAccept'],
+        	  selectStarterAndInvite: ['PUT', '/gaming/selectStarterAndInvite'],
             selectStarterAndInviteAndRegister: ['PUT', '/gaming/selectStarterAndInviteAndRegister'],
 
 
