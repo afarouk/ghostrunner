@@ -888,6 +888,17 @@
                     display: none;
                 }
 
+                button.cancel-btn {
+                    display: none;
+                    background-color: $gray;
+                    margin-left: 0;
+                    &:hover {
+                        color: #333;
+                        background-color: $lightgray;
+                        border-color: #adadad;
+                    }
+                }
+
                 &.shown.presented {
 
                     .left-buttons {
@@ -896,16 +907,6 @@
                     button.confirm-btn {
                         display: block;
                         max-width: 100px;
-                    }
-                    button.cancel-btn {
-                        display: none;
-                        background-color: $gray;
-                        margin-left: 0;
-                        &:hover {
-                            color: #333;
-                            background-color: $lightgray;
-                            border-color: #adadad;
-                        }
                     }
 
                     &.without-buttons {
@@ -942,6 +943,17 @@
                 }
                 &.shown.my-lineups .list-container:before {
                     margin-left: 280px;
+                }
+
+                &.cancel {
+                    .left-buttons {
+                        display: flex;
+                        margin-right: auto;
+
+                        button.cancel-btn {
+                            display: block;
+                        }
+                    }
                 }
             }
         }

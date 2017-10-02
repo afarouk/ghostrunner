@@ -15,7 +15,7 @@ define([
                         this.confirm = 'invite';
                         this.view.$el.find('.broker-list.left-list')
                             .addClass('shown presented')
-                            .removeClass('my-teams my-invites without-buttons');
+                            .removeClass('my-teams my-invites without-buttons cancel');
                         this.view.ui.confirm.attr('disabled', true);
                     } else {
                         this.view.$el.find('.broker-list.left-list')
@@ -31,7 +31,7 @@ define([
                         this.confirm = 'teams';
                         this.view.$el.find('.broker-list.left-list')
                             .addClass('shown presented my-teams')
-                            .removeClass('my-lineups without-buttons');
+                            .removeClass('my-lineups without-buttons cancel');
                         this.view.ui.teams.attr('disabled', false)
                             .addClass('inactive');
                         this.view.ui.lineups.attr('disabled', true);
@@ -49,7 +49,7 @@ define([
                         this.hideRight();
                         this.confirm = 'my_teams';
                         this.view.$el.find('.broker-list.left-list')
-                            .addClass('shown presented my-teams without-buttons')
+                            .addClass('shown presented my-teams without-buttons cancel')
                             .removeClass('my-lineups');
                         this.view.ui.teams.attr('disabled', false);
                     } else {
@@ -66,14 +66,14 @@ define([
                         this.confirm = 'lineups';
                         this.view.$el.find('.broker-list.left-list')
                             .addClass('shown presented my-lineups')
-                            .removeClass('my-teams without-buttons');
+                            .removeClass('my-teams without-buttons cancel');
                         this.view.ui.lineups.attr('disabled', false)
                             .addClass('inactive');
                         this.view.ui.teams.attr('disabled', true);
                         this.view.ui.confirm.attr('disabled', true);
                     } else {
                         this.view.$el.find('.broker-list.left-list')
-                            .removeClass('shown presented');
+                            .removeClass('shown presented cancel');
                         this.confirm = undefined;
                         this.destroyCurrentView();
                     }
@@ -85,11 +85,11 @@ define([
                         this.confirm = 'my_lineups';
                         this.view.$el.find('.broker-list.left-list')
                             .addClass('shown presented my-lineups without-buttons')
-                            .removeClass('my-teams');
+                            .removeClass('my-teams cancel');
                         this.view.ui.teams.attr('disabled', false);
                     } else {
                         this.view.$el.find('.broker-list.left-list')
-                            .removeClass('shown presented without-buttons');
+                            .removeClass('shown presented without-buttons cancel');
                         this.confirm = undefined;
                         this.destroyCurrentView();
                     }
@@ -101,12 +101,12 @@ define([
                         this.confirm = 'invites';
                         this.view.$el.find('.broker-list.right-list')
                             .addClass('shown presented invites-active')
-                            .removeClass('games-active without-buttons');
+                            .removeClass('games-active without-buttons cancel');
                         this.view.ui.confirm.attr('disabled', true);
                     } else {
                         this.confirm = undefined;
                         this.view.$el.find('.broker-list.right-list')
-                            .removeClass('shown presented invites-active');
+                            .removeClass('shown presented invites-active cancel');
                         this.destroyCurrentView();
                     }
                     break;
@@ -167,7 +167,7 @@ define([
                 this.confirm === 'my_lineups') {
 
                 this.confirm = undefined;
-                this.view.$el.find('.broker-list.left-list').removeClass('shown presented');
+                this.view.$el.find('.broker-list.left-list').removeClass('shown presented cancel');
                 this.destroyCurrentView();
             }
         },
@@ -251,7 +251,8 @@ define([
         disableLineUps: function() {
             this.view.ui.lineups.attr('disabled', true);
             this.view.$el.find('.broker-list.left-list')
-                .removeClass('shown presented');
+                .removeClass('shown presented')
+                .addClass('cancel');
         },
 
         playerReplacementMode: function(action){

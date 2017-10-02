@@ -382,8 +382,11 @@ define([
                         if( response.lineups.length > 0 ){
                             this.showMyLineupsList(switchToState, response);
                         } else {
-                            // this.showEmptyList('leftList', 'No lineups created.');
-                            this.disableLineUps();
+                            if (switchToState === 'my_lineups') {
+                                this.showEmptyList('leftList', 'No lineups created.');
+                            } else {
+                                this.disableLineUps();
+                            }
                         }
                     }.bind(this), function(xhr){
                         this.hideLoader();
