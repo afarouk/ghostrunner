@@ -5,7 +5,16 @@
 define([
     ], function(){
     var SignalsManager = Mn.Object.extend({
-	onMessage: function(message) {
+
+	    onMessage: function(message) {
+            if (message.messageType === 'CHAT') {
+                this.onChatMessage(message);
+            } else {
+                this.onGameMessage(message);
+            }
+        },
+
+        onGameMessage: function(message) {
             switch (message.signal) {
 
                 case 'FORCED_LOGOUT':
@@ -108,7 +117,17 @@ define([
                 default:
                     break;
             }
-        }
+        },
+
+        onChatMessage: function(message) {
+            switch (message.signal) {
+                case '':
+                    break;
+                default:
+                    break;
+            }
+            this.publicController.getChatController().onChatSignal(message);
+        }       
     });
 
     return new SignalsManager();

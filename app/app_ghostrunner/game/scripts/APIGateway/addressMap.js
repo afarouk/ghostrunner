@@ -17,8 +17,8 @@ module.exports = {
             retrievePlayerCard: ['GET', '/gaming/retrievePlayerCard'],
 
             rejectInvitation: ['PUT', '/gaming/rejectInvitation'],
-        	  selectRemainingLineUpAndAccept: ['PUT', '/gaming/selectRemainingLineUpAndAccept'],
-        	  selectStarterAndInvite: ['PUT', '/gaming/selectStarterAndInvite'],
+        	selectRemainingLineUpAndAccept: ['PUT', '/gaming/selectRemainingLineUpAndAccept'],
+        	selectStarterAndInvite: ['PUT', '/gaming/selectStarterAndInvite'],
             selectStarterAndInviteAndRegister: ['PUT', '/gaming/selectStarterAndInviteAndRegister'],
 
 
@@ -62,6 +62,11 @@ module.exports = {
 
             // getMessage: ['GET', '/gaming/getMessage'],
             // getPoll: ['GET', '/gaming'],
+
+            /* chat */
+            getConversationBetweenUserUser: ['GET', '/gaming/getConversationBetweenUserUser'],
+            sendMessageFromUserToUser: ['POST', '/gaming/sendMessageFromUserToUser'],
+            markAsReadUser: ['PUT', '/gaming/markAsReadUser'],
 
             /*debug*/
             killSocket: ['GET', '/gaming/killSocket'],

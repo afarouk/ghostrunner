@@ -439,6 +439,21 @@ define([
             return gateway.sendRequest('selectRemainingLineUpByIdAndAccept', params);
         },
 
+        /* chat */
+        getConversationBetweenUsers: function(params) {
+            var user = appCache.get('user');
+            params = params || {};
+            params.UID = user.get('uid');
+            return gateway.sendRequest('getConversationBetweenUserUser', params);
+        },
+
+        sendMessageFromUserToUser: function(params) {
+            var user = appCache.get('user');
+            params = params || {};
+            params.UID = user.get('uid');
+            return gateway.sendRequest('sendMessageFromUserToUser', params);
+        },
+
         /*debug*/
         killSocket: function() {
             var user = appCache.get('user'),

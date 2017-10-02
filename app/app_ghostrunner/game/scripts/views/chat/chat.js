@@ -3,13 +3,17 @@
 'use strict';
 
 define([
-	'ejs!../templates/chat.ejs',
+	'ejs!../../templates/chat/chat.ejs',
 	], function(template){
 	var ChatView = Mn.View.extend({
 		template: template,
+		regions: {
+			modal: '#chat-modal'
+		},
 		ui: {
 			chatBtn: '[name="chat-btn"]',
-			messages: '[name="new_messages_number"]'
+			messages: '[name="new_messages_number"]',
+			modal: '#chat-modal'
 		},
 		events: {
 			'click @ui.chatBtn': 'clickChatBtn'
@@ -19,6 +23,10 @@ define([
 			if (this.messagesNumber > 0) {
 				this.ui.messages.addClass('shown');
 			}
+			this.trigger('chat:show', this);
+			this.ui.modal.draggable({
+				containment: $('#game-layout')
+			});
 		},
 		serializeData: function() {
 			//TODO use real data
@@ -28,25 +36,22 @@ define([
 			});
 		},
 		clickChatBtn: function() {
-			var $target = $('#chat-content .draggable');
-			$target.show('slow');
+			this.ui.modal.show('slow');
 			this.ui.chatBtn.hide();
-			$target.draggable({
-				containment: $('#game-layout')
-			}).find('.close').on('click', function() {
-				$target.hide('slow');
-				this.ui.chatBtn.show();
-			}.bind(this));
 
 			this.messagesNumber = 0;
-			this.render();
+		},
+		onChildviewChatClose: function() {
+			this.ui.modal.hide('slow');
+			this.ui.chatBtn.show();
+		},
+		onChildviewChatBack: function() {
+			this.trigger('chat:show', this);
 		},
 		onResetPosition: function() {
-			var $target = $('#chat-content .draggable');
-
 			setTimeout(function(){
 				//force reset position
-				$target
+				this.ui.modal
 					.hide('slow')
 					.css({
 						'top': 0,
