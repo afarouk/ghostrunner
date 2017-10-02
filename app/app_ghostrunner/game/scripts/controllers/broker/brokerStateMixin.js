@@ -248,6 +248,12 @@ define([
             return this.invitationDef;
         },
 
+        disableLineUps: function() {
+            this.view.ui.lineups.attr('disabled', true);
+            this.view.$el.find('.broker-list.left-list')
+                .removeClass('shown presented');
+        },
+
         playerReplacementMode: function(action){
             this.publicController.getGameController().setPlayerReplacementState();
 
