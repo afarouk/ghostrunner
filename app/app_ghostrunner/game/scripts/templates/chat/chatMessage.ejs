@@ -1,3 +1,17 @@
-<span class="user"><%= userName %>:</span>
-<span class="message"><%= messageBody %></span>
-<span class="time">08:20pm</span>
+<% if(withDate) { %>
+	<div class="date">
+		<div class="line"></div>
+		<span><%= date %></span>
+	</div>
+<% } %>
+<div class="message-container <% if (me) {%>me<% } %>">
+	<div class="user">
+		<div class="circle">
+			<span class="first-letter"><%= shortAuthorName %></span>
+		</div>
+	</div>
+	<div class="message">
+		<span class="message-text"><%= messageBody %></span>
+	</div>
+	<span class="time"><%= localTime %></span>
+</div>

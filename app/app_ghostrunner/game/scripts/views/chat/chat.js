@@ -13,7 +13,8 @@ define([
 		ui: {
 			chatBtn: '[name="chat-btn"]',
 			messages: '[name="new_messages_number"]',
-			modal: '#chat-modal'
+			modal: '.modal-content',
+			loader: '.chat-loader'
 		},
 		events: {
 			'click @ui.chatBtn': 'clickChatBtn'

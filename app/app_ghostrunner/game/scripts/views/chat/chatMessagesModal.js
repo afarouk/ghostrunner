@@ -14,6 +14,7 @@ define([
 		ui: {
 			close: 'button.close',
 			back: 'button.back',
+			messagesContainer: '[name="chat-messages"]',
 			message: '[name="message"]',
 			send: '[name="send"]',
 			input: '.message-input',
@@ -29,6 +30,8 @@ define([
 			'click @ui.back': 'chat:back',
 			'click @ui.send': 'chat:send'
 		},
+		initialize: function() {
+		},
 		serializeData: function() {
 			return {
 				otherUserName: this.options.otherUserName
@@ -39,9 +42,31 @@ define([
 		},
 		onShowMessages: function() {
 			var messages = new ChatMessagesView({
-				collection: this.options.collection
-			});
+					collection: this.options.collection
+				});
 			this.showChildView( 'messages', messages );
+		},
+
+		onScrollBottom: function() {
+			var $container = this.ui.messagesContainer,
+				$ul = $container.find('.chat-messages');
+
+			$container.scrollTop($ul.height());
+			this.ui.messagesContainer.bind('scroll', this.onScroll.bind(this));
+		},
+
+		onScroll: function() {
+			var $container = this.ui.messagesContainer;
+
+			//trigger only after scroll was stopped
+			if (this.chatTimeout) clearTimeout(this.chatTimeout)
+			this.chatTimeout = setTimeout(function() {
+				this.trigger('chat:scrolled');
+			}.bind(this), 1000);
+		},
+
+		onChildviewMarkAsRead: function(model) {
+			this.trigger('markAsRead', model);
 		},
 
 		//prepare behavior from it

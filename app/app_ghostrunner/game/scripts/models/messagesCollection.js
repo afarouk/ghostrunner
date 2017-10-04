@@ -1,0 +1,58 @@
+/*global define*/
+
+'use strict';
+
+define([
+    'moment',
+    '../appCache'
+    ], function(moment, appCache){
+    var previousModel,
+        UID;
+
+    var ChatMesssageModel = Backbone.Model.extend({
+        initialize: function(attrs, options) {
+            var authorName = this.get('authorName'),
+                authorNames = authorName.split(' '),
+                shortAuthorName = (authorNames[0][0] + (authorNames[1] ? authorNames[1][0] : '')).toUpperCase(),
+                timeStamp = this.get('timeStamp'),
+                utc = typeof timeStamp === 'number' ? timeStamp : timeStamp.replace(':UTC', ''),
+                localDate = moment.utc(utc).local(),
+                date = this.getDate(localDate),
+                localTime = localDate.format('LT');
+            this.set('date', date, {silent: true});
+            if (this.get('authorId') === UID) {
+                this.set('me', true, {silent: true});
+            } else {
+                this.set('me', false, {silent: true});
+            }
+            this.set('shortAuthorName', shortAuthorName, {silent: true});
+            console.log('date: ', date);
+            this.set('localTime', localTime);
+        },
+        getDate: function(localDate) {
+            return moment(localDate).calendar(null, {
+                lastWeek: 'dddd',
+                lastDay: '[Yesterday]',
+                sameDay: '[Today]',
+                sameElse: 'DD/MM/YYYY'
+            });
+        }
+    });
+    var ChatMessagesCollection = Backbone.Collection.extend({
+        initialize: function() {
+            var user = appCache.get('user');
+            UID = user.get('uid');
+        },
+        model: function(attrs, options) {
+            var model = new ChatMesssageModel(attrs, options);
+            if (!previousModel || previousModel.get('date') !== model.get('date')) {
+                model.set('withDate', true, {silent: true});
+            } else {
+                model.set('withDate', false, {silent: true});
+            }
+            previousModel = model;
+            return model;
+        },
+    });
+    return ChatMessagesCollection;
+});

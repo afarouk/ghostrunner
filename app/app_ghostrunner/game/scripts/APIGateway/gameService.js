@@ -454,6 +454,13 @@ define([
             return gateway.sendRequest('sendMessageFromUserToUser', params);
         },
 
+        markAsReadUser: function(params) {
+            var user = appCache.get('user');
+            params = params || {};
+            params.UID = user.get('uid');
+            return gateway.sendRequest('markAsReadUser', params);
+        },
+
         /*debug*/
         killSocket: function() {
             var user = appCache.get('user'),
