@@ -65,10 +65,6 @@ define([
 			}.bind(this), 1000);
 		},
 
-		onChildviewMarkAsRead: function(model) {
-			this.trigger('markAsRead', model);
-		},
-
 		//prepare behavior from it
 		onKeyPressed: function() {
 			setTimeout(function(){

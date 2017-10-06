@@ -1,7 +1,11 @@
 <div class="top">
-	<span class="user"><%= userName %></span>
+	<div class="user">
+		<span class="user-name"><%= userName %><div class="unread-count">
+			<span class="count"><%= unReadMessageCount %></span>
+		</div></span>
+	</div>
 	<span class="time">08:21pm</span>
 </div>
 <div class="bottom">
-	<span class="message">The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.</span>
+	<div class="message"><i class="fa fa-exclamation-circle unread-sign <% if (lastMessageState.enumText === 'UNREAD') { %>visible<% } %>" aria-hidden="true"></i><% if (lastMessage) { %><%= lastMessage %><% } else { %>No unread messages.<% } %></div>
 </div>

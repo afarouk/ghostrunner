@@ -15,6 +15,9 @@ define([
 		events: {
 			
 		},
+		modelEvents: {
+			'change': 'render'
+		},
 		triggers: {
 			'click': 'user:selected'
 		}

@@ -3,15 +3,16 @@
 	<span class="otherUser"><%= otherUserName %></span>
 	<button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 </div>
-<div class="modal-body" name="chat-messages">
-	<!-- chat messages view will be rendered here -->
-</div>
-<div class="modal-footer">
-	<!-- <textarea wrap="hard" class="message" type="text" rows="1" name="message" placeholder="Type something..." maxlength="255"></textarea> -->
-	<div class="message" name="message">
-		<textarea type="text" class="message-input" name="" required="required"></textarea>
-		<span class="placeholder">Type something...</span>
-		<span class="message-text"></span>
+<div class="modal-body">
+	<div class="messages-region" name="chat-messages">
+		<!-- chat messages view will be rendered here -->
 	</div>
-	<button type="button" name="send" class="btn btn-primary">↑</button>
+	<div class="type-message">
+		<div class="message" name="message">
+			<textarea type="text" class="message-input" name="" required="required"></textarea>
+			<span class="placeholder">Type something...</span>
+			<span class="message-text"></span>
+		</div>
+		<button type="button" name="send" class="btn btn-primary">↑</button>
+	</div>
 </div>

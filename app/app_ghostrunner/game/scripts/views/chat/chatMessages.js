@@ -27,13 +27,14 @@ define([
 			var me = this.model.get('authorId') === this.options.UID;
 			if (me) this.$el.addClass('me');
 		},
-		onCheckUnread: function() {
-			var position = this.$el.position();
-			//TODO check parent height (hardcoded 240)
-			if (position.top > 0 && position.top < 240) {
-				console.log(position);
-				console.log('mark as read');
-				this.trigger('markAsRead', this.model);
+		onCheckUnread: function($def) {
+			//check if message visible
+			var blockHeight = 240,
+				position = this.$el.position();
+			if (position.top > 0 && position.top < blockHeight) {
+				$def.resolve(this.model);
+			} else {
+				$def.resolve(false);
 			}
 		}
 	});

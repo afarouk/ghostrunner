@@ -66,7 +66,19 @@ define([
 		messageFromUser: function(users, message) {
 			//TODO update last message from user, count and time
 			//recalculate total
-			debugger;
+			var messageFrom = message.messageFromUserToUser,
+				autor = users.findWhere({
+					uid: messageFrom.authorId
+				}),
+				lastMessageState = autor.get('lastMessageState'),
+				unReadMessageCount = autor.get('unReadMessageCount');
+			autor.set({
+				lastMessage: messageFrom.messageBody,
+				timeStamp: messageFrom.timeStamp,
+				unReadMessageCount: ++unReadMessageCount
+			});
+			lastMessageState.enumText = 'UNREAD';
+			lastMessageState.displayText = 'UNREAD';
 		},
 		onUserSelected: function(model) {
 			var otherUserName = model.get('userName');
@@ -90,33 +102,66 @@ define([
 			this.view.showChildView( 'modal', modal );
 			this.listenTo(modal, 'chat:send', this.onMessageSend.bind(this, otherUserName, messages));
 			this.listenTo(modal, 'chat:scrolled', this.onChatScrolled.bind(this, messages));
-			this.listenTo(modal, 'markAsRead', this.onMarkAsRead.bind(this));
 			this.chatProxy.set(this.addMessage.bind(this, messages));
 			modal.triggerMethod('scrollBottom');
 		},
-		onMarkAsRead: function(model) {
-			service.markAsReadUser({
-				payload: {
+		onMarkAsRead: function(forMark) {
+			var payload,
+				idList;
+			idList = forMark.map(function(model){
+				return {
 					communicationId: model.get('communicationId'),
-    				messageId: model.get('messageId'),
-    				stateEnum : 'READ'
+					messageId: model.get('messageId')
 				}
+			});
+			if (forMark.length > 1) {
+				payload = {
+					idList: idList
+				};
+			} else {
+				payload = {
+					communicationId: idList[0].communicationId,
+    				messageId: idList[0].messageId,
+				};
+			}
+			service.markAsReadUser({
+				payload: payload
 			}).then(function(response){
-				model.get('state').enumText = 'READ';
+				forMark.forEach(function(model){
+					var state = model.get('state');
+					state.enumText = 'READ';
+					state.displayText = 'Read';
+				});
             }.bind(this), function(xhr){
                 this.publicController.getModalsController().apiErrorPopup(xhr);
             }.bind(this));
 		},
 		onChatScrolled: function(messages) {
+			var allDefs = [];
 			messages.each(function(model){
-				var unread = model.get('state').enumText === 'UNREAD';
+				var unread = model.get('state').enumText === 'UNREAD',
+					$def = $.Deferred();
 				if (unread) {
-					model.trigger('check:unread');
+					allDefs.push($def);
+					model.trigger('check:unread', $def);
 				}
 			});
+			//mark bunch of messages
+			$.when.apply(this, allDefs).done(function(){
+				var forMark = [];
+				for (var i = 0; i < arguments.length; i++) {
+					var model = arguments[i];
+					if (model) {
+						forMark.push(model);
+					};
+				}
+				//get from models
+				if (forMark.length) {
+					this.onMarkAsRead(forMark);
+				}
+			}.bind(this));
 		},
 		addMessage: function(messages, message) {
-			//TODO maybe scroll down in some cases ???
 			messages.add(message.messageFromUserToUser);
 		},
 		onMessageSend: function(otherUserName, messages, view) {
@@ -132,8 +177,8 @@ define([
 			}).then(function(response){
 				this.hideLoader();
                 messages.add(response);
-                //TODO scroll down after that ???
                 view.ui.input.val('').keydown();
+                view.triggerMethod('scrollBottom');
             }.bind(this), function(xhr){
             	this.hideLoader();
                 this.publicController.getModalsController().apiErrorPopup(xhr);
