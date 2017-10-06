@@ -4,8 +4,14 @@
 
 define([
 	'moment',
+	'ejs!../../templates/chat/no-messages.ejs',
 	'ejs!../../templates/chat/chatMessage.ejs'
-	], function(moment, template){
+	], function(moment, noMesssages, template){
+	var NoMessagesView = Mn.View.extend({
+		tagName: 'li',
+		className: 'no-messages',
+		template: noMesssages
+	});
 	var MessageView = Mn.View.extend({
 		tagName: 'li',
 		className: '',
@@ -41,7 +47,13 @@ define([
 	var ChatMessagesView = Mn.CollectionView.extend({
 		tagName: 'ul',
 		className: 'chat-messages',
-		childView: MessageView,
+		childView: function(model) {
+			if (model.get('type') === 'no-messages') {
+				return NoMessagesView;
+			} else {
+				return MessageView;
+			}
+		},
 		childViewOptions: function() {
 			return this.options;
 		},

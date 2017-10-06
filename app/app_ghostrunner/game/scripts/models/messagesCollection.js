@@ -11,6 +11,7 @@ define([
 
     var ChatMesssageModel = Backbone.Model.extend({
         initialize: function(attrs, options) {
+            if (attrs.type === 'no-messages') return;
             var authorName = this.get('authorName'),
                 authorNames = authorName.split(' '),
                 shortAuthorName = (authorNames[0][0] + (authorNames[1] ? authorNames[1][0] : '')).toUpperCase(),
@@ -39,9 +40,14 @@ define([
         }
     });
     var ChatMessagesCollection = Backbone.Collection.extend({
-        initialize: function() {
+        initialize: function(collection) {
             var user = appCache.get('user');
             UID = user.get('uid');
+            if (collection.length === 0) {
+                collection.push({type: 'no-messages'});
+            }
+            //check if doesn't have side effects
+            this.on('add', this.checkWhatAdded.bind(this));
         },
         model: function(attrs, options) {
             var model = new ChatMesssageModel(attrs, options);
@@ -53,6 +59,12 @@ define([
             previousModel = model;
             return model;
         },
+        checkWhatAdded: function(model, collection, flags) {
+            var toRemoveModel = collection.findWhere({type: 'no-messages'});
+            if (toRemoveModel) {
+                collection.remove(toRemoveModel);
+            }
+        }
     });
     return ChatMessagesCollection;
 });

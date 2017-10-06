@@ -19,11 +19,7 @@ define([
 		events: {
 			'click @ui.chatBtn': 'clickChatBtn'
 		},
-		messagesNumber: 2, //new messages
 		onRender: function() {
-			if (this.messagesNumber > 0) {
-				this.ui.messages.addClass('shown');
-			}
 			this.trigger('chat:show', this);
 			this.ui.modal.draggable({
 				containment: $('#game-layout')
@@ -35,6 +31,11 @@ define([
 			return _.extend({
 				messagesNumber: this.messagesNumber
 			});
+		},
+		onUpdateTotal: function(total) {
+			if (total > 0) {
+				this.ui.messages.text(total).addClass('shown');
+			}
 		},
 		clickChatBtn: function() {
 			this.ui.modal.show('slow');

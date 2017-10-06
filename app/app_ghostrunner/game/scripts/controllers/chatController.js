@@ -57,15 +57,23 @@ define([
 			//calculate total count, etc
 			var users = new Backbone.Collection(response.users),
 				modal = new ChatUsersModalView({
-				collection: users
-			});
+					collection: users
+				});
 			this.view.showChildView( 'modal', modal );
-			this.listenTo(modal, 'user:selected', this.onUserSelected.bind(this));
+			this.listenTo(modal, 'user:selected', this.onUserSelected.bind(this, users));
 			this.chatProxy.set(this.messageFromUser.bind(this, users));
+			this.updateUnreadTotal(users);
+		},
+		updateUnreadTotal: function(users, minus) {
+			//Test if updates properly
+			var total = users.reduce(function(sum, user){
+				return sum + user.get('unReadMessageCount');
+			}, 0);
+			total = total - ( minus || 0 );
+			this.view.triggerMethod('updateTotal', total);
 		},
 		messageFromUser: function(users, message) {
-			//TODO update last message from user, count and time
-			//recalculate total
+			//TODO update last message time (API doesn't send field)
 			var messageFrom = message.messageFromUserToUser,
 				autor = users.findWhere({
 					uid: messageFrom.authorId
@@ -79,8 +87,9 @@ define([
 			});
 			lastMessageState.enumText = 'UNREAD';
 			lastMessageState.displayText = 'UNREAD';
+			this.updateUnreadTotal(users);
 		},
-		onUserSelected: function(model) {
+		onUserSelected: function(users, model) {
 			var otherUserName = model.get('userName');
 			this.showLoader();
 			service.getConversationBetweenUsers({
@@ -88,24 +97,24 @@ define([
 			}).then(function(conversation){
 				this.hideLoader();
                 var messages = new MessagesCollection(conversation.messages);
-                this.createMessagesModal(otherUserName, messages);
+                this.createMessagesModal(users, otherUserName, messages);
             }.bind(this), function(xhr){
             	this.hideLoader();
                 this.publicController.getModalsController().apiErrorPopup(xhr);
             }.bind(this));
 		},
-		createMessagesModal: function(otherUserName, messages) {
+		createMessagesModal: function(users, otherUserName, messages) {
 			var modal = new ChatMessagesModalView({
 					otherUserName: otherUserName,
 					collection: messages
 				});
 			this.view.showChildView( 'modal', modal );
 			this.listenTo(modal, 'chat:send', this.onMessageSend.bind(this, otherUserName, messages));
-			this.listenTo(modal, 'chat:scrolled', this.onChatScrolled.bind(this, messages));
+			this.listenTo(modal, 'chat:scrolled', this.onChatScrolled.bind(this, users, messages));
 			this.chatProxy.set(this.addMessage.bind(this, messages));
 			modal.triggerMethod('scrollBottom');
 		},
-		onMarkAsRead: function(forMark) {
+		onMarkAsRead: function(users, forMark) {
 			var payload,
 				idList;
 			idList = forMark.map(function(model){
@@ -132,11 +141,12 @@ define([
 					state.enumText = 'READ';
 					state.displayText = 'Read';
 				});
+				this.updateUnreadTotal(users, forMark.length);
             }.bind(this), function(xhr){
                 this.publicController.getModalsController().apiErrorPopup(xhr);
             }.bind(this));
 		},
-		onChatScrolled: function(messages) {
+		onChatScrolled: function(users, messages) {
 			var allDefs = [];
 			messages.each(function(model){
 				var unread = model.get('state').enumText === 'UNREAD',
@@ -157,7 +167,7 @@ define([
 				}
 				//get from models
 				if (forMark.length) {
-					this.onMarkAsRead(forMark);
+					this.onMarkAsRead(users, forMark);
 				}
 			}.bind(this));
 		},

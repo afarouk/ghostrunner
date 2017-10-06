@@ -20,7 +20,7 @@
         margin-top: 0px;
         margin-right: -0px;
         border-radius: 50%;
-        background-color: red;
+        background-color: $warning;
         padding: 0 3px;
         border: 1px solid white;
         font-size: 10px;
@@ -115,6 +115,12 @@
                         grid-template-row: 20px 20px;
                         justify-items: start;
                         margin-bottom: 2px;
+
+                        &.no-messages {
+                            .empty {
+                                font-size: 18px;
+                            }
+                        }
 
                         .date {
                             text-align: center;
@@ -273,7 +279,7 @@
 
             .chat-users {
                 list-style: none;
-                padding: 0;
+                padding: 5px 0 0 0;
 
                 li {
                     max-width: 360px;
@@ -313,7 +319,7 @@
                                     color: white;
                                     font-size: 9px;
                                     border-radius: 50%;
-                                    background-color: $error_b;
+                                    background-color: $warning;
                                     position: absolute;
                                     top: -6px;
                                     right: -7px;
