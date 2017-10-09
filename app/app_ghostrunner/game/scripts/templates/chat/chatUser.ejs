@@ -4,7 +4,7 @@
 			<span class="count"><%= unReadMessageCount %></span>
 		</div></span>
 	</div>
-	<span class="time">08:21pm</span>
+	<span class="time"><%= date %></span>
 </div>
 <div class="bottom">
 	<div class="message"><i class="fa fa-exclamation-circle unread-sign <% if (lastMessageState.enumText === 'UNREAD') { %>visible<% } %>" aria-hidden="true"></i><% if (lastMessage) { %><%= lastMessage %><% } else { %>No unread messages.<% } %></div>

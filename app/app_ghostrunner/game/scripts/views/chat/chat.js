@@ -25,13 +25,6 @@ define([
 				containment: $('#game-layout')
 			});
 		},
-		serializeData: function() {
-			//TODO use real data
-			// play sound on message send/received
-			return _.extend({
-				messagesNumber: this.messagesNumber
-			});
-		},
 		onUpdateTotal: function(total) {
 			if (total > 0) {
 				this.ui.messages.text(total).addClass('shown');
@@ -40,8 +33,6 @@ define([
 		clickChatBtn: function() {
 			this.ui.modal.show('slow');
 			this.ui.chatBtn.hide();
-
-			this.messagesNumber = 0;
 		},
 		onChildviewChatClose: function() {
 			this.ui.modal.hide('slow');

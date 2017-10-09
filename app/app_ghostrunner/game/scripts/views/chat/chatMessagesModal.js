@@ -79,7 +79,7 @@ define([
 					this.ui.message.removeClass('long');
 				}
 				this.ui.message.css('height', lines * 20 + 'px');
-			}.bind(this), 0);
+			}.bind(this), 5);
 			return true;
 		}
 	});

@@ -8,9 +8,10 @@ define([
     '../views/chat/chat',
     '../views/chat/chatUsersModal',
     '../views/chat/chatMessagesModal',
-    '../models/messagesCollection',
+    '../models/usersCollection',
+    '../models/messagesCollection'
     ], function(appCache, service, 
-    	ChatView, ChatUsersModalView, ChatMessagesModalView, MessagesCollection){
+    	ChatView, ChatUsersModalView, ChatMessagesModalView, UsersCollection, MessagesCollection){
     var ChatController = Mn.Object.extend({
     	initialize: function() {
     		this.chatProxy = this._chatProxy();
@@ -53,9 +54,7 @@ define([
             }.bind(this));
 		},
 		createChatUsersModal: function(response) {
-			//TODO add counter also,
-			//calculate total count, etc
-			var users = new Backbone.Collection(response.users),
+			var users = new UsersCollection(response.users),
 				modal = new ChatUsersModalView({
 					collection: users
 				});
@@ -73,7 +72,6 @@ define([
 			this.view.triggerMethod('updateTotal', total);
 		},
 		messageFromUser: function(users, message) {
-			//TODO update last message time (API doesn't send field)
 			var messageFrom = message.messageFromUserToUser,
 				autor = users.findWhere({
 					uid: messageFrom.authorId
@@ -82,7 +80,7 @@ define([
 				unReadMessageCount = autor.get('unReadMessageCount');
 			autor.set({
 				lastMessage: messageFrom.messageBody,
-				timeStamp: messageFrom.timeStamp,
+				timeOfLastMessage: messageFrom.timeStamp,
 				unReadMessageCount: ++unReadMessageCount
 			});
 			lastMessageState.enumText = 'UNREAD';

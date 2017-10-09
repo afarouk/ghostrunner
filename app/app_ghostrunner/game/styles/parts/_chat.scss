@@ -72,7 +72,6 @@
             }
         }
 
-        /* TODO move input from footer to body and set max height for modal */
         .modal-body {
             padding: 0!important;
             color: white;
@@ -81,19 +80,12 @@
             display: flex;
             flex-direction: column;
             max-height: 267px;
-            overflow-y: auto;
-            &::-webkit-scrollbar {
-                background-color: rgba(114, 114, 175, 0.75);
-                width: 10px;
-                height: 10px;
-            }
-            &::-webkit-scrollbar-thumb {
-                background-color: rgba(83, 150, 126, 0.77);
-            }
+            overflow: hidden;
 
             .messages-region {
                 padding: 0 5px;
                 max-height: 240px;
+                overflow-x: hidden;
                 overflow-y: auto;
                 &::-webkit-scrollbar {
                     background-color: rgba(114, 114, 175, 0.75);
@@ -280,6 +272,16 @@
             .chat-users {
                 list-style: none;
                 padding: 5px 0 0 0;
+                margin: 0px;
+                overflow-y: auto;
+                &::-webkit-scrollbar {
+                    background-color: rgba(114, 114, 175, 0.75);
+                    width: 10px;
+                    height: 10px;
+                }
+                &::-webkit-scrollbar-thumb {
+                    background-color: rgba(83, 150, 126, 0.77);
+                }
 
                 li {
                     max-width: 360px;
@@ -372,6 +374,7 @@
                 display: grid;
                 grid-gap: 10px;
                 grid-template-columns: 330px 20px;
+                overflow: unset;
                 &:before,
                 &:after {
                     content: none;
