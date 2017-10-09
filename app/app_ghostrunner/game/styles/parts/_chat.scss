@@ -38,7 +38,7 @@
     position: absolute;
     bottom: 5px;
     right: 5px;
-    z-index: 99;
+    z-index: 9;
     pointer-events: all;
 
     .modal-content {
@@ -102,10 +102,6 @@
 
                     li {
                         max-width: 360px;
-                        display: grid;
-                        grid-gap: 2px;
-                        grid-template-row: 20px 20px;
-                        justify-items: start;
                         margin-bottom: 2px;
 
                         &.no-messages {
@@ -136,79 +132,27 @@
                         }
 
                         .message-container {
-                            display: grid;
-                            grid-gap: 8px;
-                            grid-template-columns: 40px 250px 50px;
-                            justify-items: start;
-
-                            &.me {
-                                justify-items: end;
-
-                                .user {
-                                    // display: none;
-                                    visibility: hidden;
-                                }
-                                .message {
-                                    text-align: right;
-                                    background-color: rgba(89, 146, 146, 0.82);
-                                    border-radius: 3px;
-                                    margin: 0 0 0 30px;
-
-                                    &:after {
-                                        content: '';
-                                        width: 0;
-                                        height: 0;
-                                        border-top: 4px solid transparent;
-                                        border-bottom: 4px solid transparent;
-                                        border-left: 4px solid rgba(89, 146, 146, 0.82);
-                                        position: absolute;
-                                        top: 4px;
-                                        right: -4px;
-                                    }
-                                    &:before {
-                                        content: none;
-                                    }
-                                }
-                            }
-
-                            &.admin {
-                                .user {
-                                    color: rgb(228, 228, 23);
-                                }
-                                .message {
-                                    background-color: rgba(204, 204, 34, 0.76);
-                                    border-radius: 3px;
-
-                                    &:before {
-                                        content: '';
-                                        width: 0;
-                                        height: 0;
-                                        border-top: 4px solid transparent;
-                                        border-bottom: 4px solid transparent;
-                                        border-right: 4px solid rgba(204, 204, 34, 0.76);
-                                        position: absolute;
-                                        top: 4px;
-                                        left: -4px;
-                                    }
-                                }
-                            }
+                            display: flex;
+                            width: 100%;
 
                             .time {
                                 color: rgb(138, 121, 155);
                                 width: 50px;
                                 font-size: 11px;
                                 text-align: right;
+                                flex: 0 0 60px;
                             }
 
                             .user {
                                 color: rgba(77, 219, 77, 0.88);
-                                width: 100px;
                                 font-size: 11px;
                                 text-overflow: ellipsis;
                                 overflow: hidden;
                                 width: 30px;
                                 height: 30px;
                                 position: relative;
+                                flex: 0 0 50px;
+                                visibility: hidden;
 
                                 .circle {
                                     position: absolute;
@@ -223,45 +167,96 @@
                                     .first-letter {
                                         font-size: 13px;
                                         line-height: 30px;
+                                        text-align: center;
+                                        display: block;
                                     }
-                                }
-                            }
-
-                            &:nth-child(2n) {
-                                .user {
-                                    // color: yellow;
                                 }
                             }
 
                             .message {
                                 color: lightgray;
-                                background-color: rgba(85, 85, 127, 0.8);
-                                border-radius: 3px;
-                                padding: 4px 9px;
                                 margin: 0 30px 0 0;
                                 position: relative;
                                 max-width: 220px;
                                 word-wrap: break-word;
-                                display: grid;
+                                display: flex;
                                 align-items: center;
+                                flex: 0 0 220px;
+                                justify-content: flex-start;
 
                                 .message-text {
                                     white-space: pre-line;
+                                    word-break: break-word;
+                                    background-color: rgba(85, 85, 127, 0.8);
+                                    border-radius: 3px;
+                                    padding: 4px 7px;
+                                }
+                            }
+
+                            &.avatar {
+                                margin-top: 10px;
+                                
+                                .user {
+                                    visibility: visible;
                                 }
 
-                                &:before {
-                                    content: '';
-                                    width: 0;
-                                    height: 0;
-                                    border-top: 4px solid transparent;
-                                    border-bottom: 4px solid transparent;
-                                    border-right: 4px solid rgba(85, 85, 127, 0.8);
-                                    position: absolute;
-                                    top: 4px;
-                                    left: -4px;
+                                .message {
+                                    .message-text {
+                                        &:before {
+                                            content: '';
+                                            width: 0;
+                                            height: 0;
+                                            border-top: 4px solid transparent;
+                                            border-bottom: 4px solid transparent;
+                                            border-right: 4px solid rgba(85, 85, 127, 0.8);
+                                            position: absolute;
+                                            top: 4px;
+                                            left: -4px;
+                                        }
+                                        &:after {
+                                            content: none;
+                                        }
+                                    }
                                 }
-                                &:after {
-                                    content: none;
+                            }
+
+                            &.me {
+                                .user {
+                                    visibility: hidden;
+                                }
+                                .message {
+                                    margin: 0 0 0 30px;
+                                    justify-content: flex-end;
+
+                                    .message-text {
+                                        background-color: rgba(89, 146, 146, 0.82);
+                                        border-radius: 3px;
+                                    }
+                                }
+
+                                &.avatar {
+                                    .user {
+                                        visibility: hidden;
+                                    }
+
+                                    .message {
+                                        .message-text {
+                                            &:after {
+                                                content: '';
+                                                width: 0;
+                                                height: 0;
+                                                border-top: 4px solid transparent;
+                                                border-bottom: 4px solid transparent;
+                                                border-left: 4px solid rgba(89, 146, 146, 0.82);
+                                                position: absolute;
+                                                top: 4px;
+                                                right: -4px;
+                                            }
+                                            &:before {
+                                                content: none;
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -450,6 +445,7 @@
                         font-size: 14px;
                         font-weight: 300;
                         word-wrap: break-word;
+                        text-align: left;
                         display: block;
                     }
 

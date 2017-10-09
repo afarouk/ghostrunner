@@ -16,15 +16,6 @@ define([
 		tagName: 'li',
 		className: '',
 		template: template,
-		ui: {
-			
-		},
-		events: {
-			
-		},
-		triggers: {
-			
-		},
 		modelEvents: {
 			'check:unread': 'onCheckUnread'
 		},

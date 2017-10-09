@@ -14,9 +14,6 @@ define([
 		ui: {
 			close: 'button.close'
 		},
-		events: {
-			
-		},
 		triggers: {
 			'click @ui.close': 'chat:close'
 		},

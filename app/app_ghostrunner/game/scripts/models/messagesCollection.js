@@ -51,10 +51,16 @@ define([
         },
         model: function(attrs, options) {
             var model = new ChatMesssageModel(attrs, options);
+            //For display messages in Skype style
             if (!previousModel || previousModel.get('date') !== model.get('date')) {
                 model.set('withDate', true, {silent: true});
             } else {
                 model.set('withDate', false, {silent: true});
+            }
+            if (!previousModel || previousModel.get('authorId') !== model.get('authorId')) {
+                model.set('withAvatar', true, {silent: true});
+            } else {
+                model.set('withAvatar', false, {silent: true});
             }
             previousModel = model;
             return model;

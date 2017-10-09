@@ -46,6 +46,7 @@ define([
                 if (response.count > 0) {
                     this.createChatUsersModal(response);
                 } else {
+                	//TODO ask Alamgir if this case is possible
                     // this.showEmptyList('leftList', 'No users are present.');
                 }
             }.bind(this), function(xhr){
@@ -64,7 +65,6 @@ define([
 			this.updateUnreadTotal(users);
 		},
 		updateUnreadTotal: function(users, minus) {
-			//Test if updates properly
 			var total = users.reduce(function(sum, user){
 				return sum + user.get('unReadMessageCount');
 			}, 0);

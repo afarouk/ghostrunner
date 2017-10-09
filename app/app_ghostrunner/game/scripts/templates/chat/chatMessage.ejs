@@ -4,7 +4,7 @@
 		<span><%= date %></span>
 	</div>
 <% } %>
-<div class="message-container <% if (me) {%>me<% } %>">
+<div class="message-container <% if (me) {%>me<% } %> <% if(withAvatar || withDate) { %>avatar<% } %>">
 	<div class="user">
 		<div class="circle">
 			<span class="first-letter"><%= shortAuthorName %></span>

@@ -31,13 +31,13 @@
 			$('body').waypoint(function() {
 				$('#navigation').removeClass('affix');
 			}, {
-				offset: -49
+				offset: -28
 			});
 			
 			$('body').waypoint(function() {
 				$('#navigation').addClass('affix');
 			}, {
-				offset: -50
+				offset: -29
 			});
 		},
 		

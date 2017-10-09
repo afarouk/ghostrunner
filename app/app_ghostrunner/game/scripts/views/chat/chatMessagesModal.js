@@ -65,9 +65,10 @@ define([
 			}.bind(this), 1000);
 		},
 
+		//expand input hight until 5 rows
 		//prepare behavior from it
 		onKeyPressed: function() {
-			setTimeout(function(){
+			setTimeout(function() {
 				var val = this.ui.input.val();
 				this.ui.text.html(val.replace(/\n/g, '<br/>'));
 				var lht = parseInt(this.ui.text.css('lineHeight'), 10);

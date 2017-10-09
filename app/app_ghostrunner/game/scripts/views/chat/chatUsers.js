@@ -9,12 +9,6 @@ define([
 		tagName: 'li',
 		className: '',
 		template: template,
-		ui: {
-			
-		},
-		events: {
-			
-		},
 		modelEvents: {
 			'change': 'render'
 		},
