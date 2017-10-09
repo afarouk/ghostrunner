@@ -6,9 +6,11 @@
 // - Patrick Brunner (patrickb1991@gmail.com)
 // - Michael Herf: ssc_pulse Algorithm
 
+_ssc_root = (document.scrollingElement ? document.scrollingElement : document.body);
+
 function ssc_init() {
-    if (!document.body) return;
-    var e = document.body;
+    if (!_ssc_root) return;
+    var e = _ssc_root;
     var t = document.documentElement;
     var n = window.innerHeight;
     var r = e.scrollHeight;
@@ -134,7 +136,7 @@ function ssc_keydown(e) {
         s = 0;
     var o = ssc_overflowingAncestor(ssc_activeElement);
     var u = o.clientHeight;
-    if (o == document.body) {
+    if (o == _ssc_root) {
         u = window.innerHeight
     }
     switch (e.keyCode) {
@@ -194,7 +196,7 @@ function ssc_overflowingAncestor(e) {
         t.push(e);
         if (n === e.scrollHeight) {
             if (!ssc_frame || ssc_root.clientHeight + 10 < n) {
-                return ssc_setCache(t, document.body)
+                return ssc_setCache(t, _ssc_root)
             }
         } else if (e.clientHeight + 10 < e.scrollHeight) {
             overflow = getComputedStyle(e, "").getPropertyValue("overflow");
@@ -295,9 +297,19 @@ var ssc_uniqueID = function () {
     }
 }();
 
+//temporary tweak
+function isChrome61OrMore(){
+    var ua = navigator.userAgent, tem, M = ua.match(/(chrome(?=\/))\/?\s*(\d+)/i) || []; 
+    if(M[1] === 'Chrome' && ua.match(/\bOPR|Edge\/(\d+)/) != null) return false; // Opera
+    M = M[2]? [M[1], M[2]]: [navigator.appName, navigator.appVersion, '-?'];
+    if((tem = ua.match(/version\/(\d+)/i))!= null) M.splice(1,1,tem[1]);
+    return (M[0] == "Chrome" && M[1] >= 61) ? true : false;
+ }
+
 var ischrome = /chrome/.test(navigator.userAgent.toLowerCase());
 
-if (ischrome) {
+//TODO find way how to fix it
+if (ischrome && !isChrome61OrMore()) {
     ssc_addEvent("mousedown", ssc_mousedown);
     ssc_addEvent("mousewheel", ssc_wheel);
     ssc_addEvent("load", ssc_init)
