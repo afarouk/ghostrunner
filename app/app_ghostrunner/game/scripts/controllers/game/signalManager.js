@@ -22,7 +22,7 @@ define([
                     break;
 
                 case 'YOUR_MOVE':
-                    this.publicController.getStateController().refreshStatus(message.gameUUID);
+                    this.publicController.getStateController().refreshIfRunning(message.gameUUID);
                     break;
 
                 case 'OPPONENT_OFFLINE':

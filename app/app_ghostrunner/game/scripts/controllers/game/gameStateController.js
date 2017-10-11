@@ -118,6 +118,16 @@ define([
             return appCache.get('urlGameUUID');
         },
 
+        refreshIfRunning: function(gameUUID) {
+            //on move refresh only if game is running
+            var gameModel = this.getGameModel();
+            if (gameModel && gameModel.get('state') === 'RUNNING') {
+                this.refreshStatus(gameUUID);
+                return true;
+            }
+            return false;
+        },
+
         refreshStatus: function(gameUUID) {
             this.getGameStatus(gameUUID)
                 .then(function(game){

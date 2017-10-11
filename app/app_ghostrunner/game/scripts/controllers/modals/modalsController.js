@@ -393,14 +393,16 @@ define([
         },
 
         onInningOver: function(gameUUID) {
-            this.publicController.getStateController().refreshStatus(gameUUID);
-            this.publicController.getChoiceController().showConfirmation({
-                message: 'Inning over.',
-                confirm: 'ok'
-            }).then(function() {
-                //now nothing
-            }.bind(this));
-            console.log('inning over');
+            //refresh and show inning over popup only if game is running
+            if (this.publicController.getStateController().refreshIfRunning(gameUUID)) {
+                this.publicController.getChoiceController().showConfirmation({
+                    message: 'Inning over.',
+                    confirm: 'ok'
+                }).then(function() {
+                    //now nothing
+                }.bind(this));
+                console.log('inning over');
+            }
         },
 
         onGameOver: function() {
