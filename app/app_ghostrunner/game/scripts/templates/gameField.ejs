@@ -72,16 +72,6 @@
 							<span><%= FIELD_SS.name %></span>
 						</div>
 					<% } %>
-					<% if (BATTER_SS) { %>
-						<div class="player" data-enum="BATTER_SS">
-							<% if (BATTER_SS.fieldSide === 'HOME') { %>
-								<img src="./images/caps/defenseCap-135-dg.png" alt="">
-							<% } else { %>
-								<img src="./images/caps/offenseCap-135-dg.png" alt="">
-							<% } %>
-							<span><%= BATTER_SS.name %></span>
-						</div>
-					<% } %>
 				</div>
 		</div>
 		<div class="base-part center-base-part">
@@ -103,7 +93,16 @@
 
 			<div class="middle-central-part">
 				<div class="base">
-					<!-- empty -->
+					<% if (BATTER_2R) { %>
+						<div class="player" data-enum="BATTER_2R">
+							<% if (BATTER_2R.fieldSide === 'HOME') { %>
+								<img src="./images/caps/defenseCap-180-dg.png" alt="">
+							<% } else { %>
+								<img src="./images/caps/offenseCap-180-dg.png" alt="">
+							<% } %>
+							<span><%= BATTER_2R.name %></span>
+						</div>
+					<% } %>
 				</div>
 				<div class="base pitcher">
 					<% if (FIELD_P) { %>
@@ -159,28 +158,8 @@
 						<span><%= FIELD_2B.name %></span>
 					</div>
 				<% } %>
-				<% if (BATTER_2R) { %>
-					<div class="player" data-enum="BATTER_2R">
-						<% if (BATTER_2R.fieldSide === 'HOME') { %>
-							<img src="./images/caps/defenseCap-180-dg.png" alt="">
-						<% } else { %>
-							<img src="./images/caps/offenseCap-180-dg.png" alt="">
-						<% } %>
-						<span><%= BATTER_2R.name %></span>
-					</div>
-				<% } %>
 			</div>
 			<div class="base first-base">
-				<% if (FIELD_1B) { %>
-					<div class="player" data-enum="FIELD_1B">
-						<% if (FIELD_1B.fieldSide === 'HOME') { %>
-							<img src="./images/caps/defenseCap-225-dg.png" alt="">
-						<% } else { %>
-							<img src="./images/caps/offenseCap-225-dg.png" alt="">
-						<% } %>
-						<span><%= FIELD_1B.name %></span>
-					</div>
-				<% } %>
 				<% if (BATTER_1R) { %>
 					<div class="player" data-enum="BATTER_1R">
 						<% if (BATTER_1R.fieldSide === 'HOME') { %>
@@ -189,6 +168,16 @@
 							<img src="./images/caps/offenseCap-225-dg.png" alt="">
 						<% } %>
 						<span><%= BATTER_1R.name %></span>
+					</div>
+				<% } %>
+				<% if (FIELD_1B) { %>
+					<div class="player" data-enum="FIELD_1B">
+						<% if (FIELD_1B.fieldSide === 'HOME') { %>
+							<img src="./images/caps/defenseCap-225-dg.png" alt="">
+						<% } else { %>
+							<img src="./images/caps/offenseCap-225-dg.png" alt="">
+						<% } %>
+						<span><%= FIELD_1B.name %></span>
 					</div>
 				<% } %>
 			</div>

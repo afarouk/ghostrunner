@@ -98,6 +98,11 @@
                                 }
                                 &.first-base {
                                     right: 0;
+                                    justify-content: flex-end;
+                                }
+
+                                &.third-base {
+                                    justify-content: flex-start;
                                 }
 
                                 &.on-left-catcher {
@@ -176,14 +181,24 @@
 
                         span {
                             position: absolute;
-                            color: #ffe55d;
+                            color: white;
                             font-weight: 800;
-                            font-size: 7px;
+                            font-size: 8px;
                             line-height: 12px;
-                            top: 30px;
-                            max-width: 40px;
+                            top: -15px;
+                            left: -10px;
+                            width: 80px;
+                            max-width: 80px;
                             word-wrap: break-word;
+                            white-space: pre-line;
+                            text-align: center;
                             visibility: hidden;
+                        }
+
+                        &:hover {
+                            span {
+                                visibility: visible;
+                            }
                         }
 
                         img {
