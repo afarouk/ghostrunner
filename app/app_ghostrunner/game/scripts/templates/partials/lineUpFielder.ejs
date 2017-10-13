@@ -12,13 +12,13 @@
 	</select>
 </td>
 <td class="with-select">
-	<select name="batting-order" class="batting">
+	<select name="batting-order" class="batting" disabled>
 		<option selected value>---</option>
 		<% for (var index = 1; index <=8; index++) { %>
 			<option value="<%= index %>">BO:<%= index %></option>
 		<% } %>
 	</select>
 </td>
-<td class="with-checkbox">
+<td class="with-checkbox hidden">
 	<input type="checkbox" name="select-player" disabled></input>
 </td>
