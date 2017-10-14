@@ -13,7 +13,7 @@ define([
 			player: '.player'
 		},
 		events: {
-			'contextmenu @ui.player': 'onContextMenu',
+			'click @ui.player': 'onContextMenu',
 			'contextmenu': 'onPreventContextMenu'
 		},
 		modelEvents: {
