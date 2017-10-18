@@ -47,16 +47,17 @@
 
                 .creation-header {
                     width: 100%;
+                    padding: 2px;
                     display: flex;
                     justify-content: space-between;
                     align-items: center;
                     background-color: rgba(255, 255, 255, 0.3);
 
                     button.cancel-btn {
-                        background-color: $gray;
+                        background-color: $cancel;
                         &:hover {
                             color: #333;
-                            background-color: $lightgray;
+                            background-color: $cancel_h;
                             border-color: #adadad;
                         }
                     }
@@ -87,12 +88,17 @@
 
                                 &[name="team-name"] {
                                     background-color: rgba(84, 177, 89, 0.5);
+                                    text-overflow: ellipsis;
+                                    overflow: hidden;
+                                    display: block;
+                                    max-width: 150px;
+                                    white-space: nowrap;
                                 }
                             }
                             input {
                                 height: 30px;
                                 padding: 0 5px;
-                                min-width: 150px;
+                                min-width: 180px;
 
                                 &:focus {
                                     border: 1px solid #45c234;
@@ -105,6 +111,12 @@
                                 font-size: 15px;
                                 color: #71ff61;
                                 font-weight: $broker-fw-txt;
+                            }
+
+                            .lineUp-name {
+                                background-color: rgba(0, 0, 0, 0.55);
+                                outline: none;
+                                border: 1px solid rgba(84, 177, 89, 0.5);
                             }
                         }
                     }
@@ -896,11 +908,11 @@
 
                 button.cancel-btn {
                     display: none;
-                    background-color: $gray;
+                    background-color: $cancel;
                     margin-left: 0;
                     &:hover {
                         color: #333;
-                        background-color: $lightgray;
+                        background-color: $cancel_h;
                         border-color: #adadad;
                     }
                 }
@@ -962,6 +974,10 @@
                     }
                 }
             }
+        }
+
+        button:disabled {
+            cursor: not-allowed;
         }
     }
 }

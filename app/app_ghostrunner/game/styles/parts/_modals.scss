@@ -45,10 +45,10 @@
 
                         &.no-btn,
                         &.cancel-btn {
-                            background-color: $gray;
+                            background-color: $cancel;
                             &:hover {
                                 color: #333;
-                                background-color: $lightgray;
+                                background-color: $cancel_h;
                                 border-color: #adadad;
                             }
                         }

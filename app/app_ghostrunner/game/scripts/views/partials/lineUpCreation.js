@@ -20,12 +20,12 @@ define([
 			cancel: '[name="cancel"]'
 		},
 		events: {
-			'click @ui.save': 'onSave'
+			'click @ui.save': 'onSave',
+			'change @ui.name': 'onNameChanged'
 		},
 		triggers: {
 			'click @ui.cancel': 'cancel'
 		},
-		lineUpName: '',
 		minPlayers: 8, //change min players count here
 		maxPlayers: 8,
 		initialize: function(options) {
@@ -49,6 +49,15 @@ define([
 			});
 			this.showChildView('players', this.lineUpPlayersList);
 			this.listenTo(this.lineUpPlayersList, 'lineUp:changed', this.onLineUpChanged.bind(this));
+			setTimeout(function(){
+				this.ui.name.focus();
+				this.ui.name[0].selectionStart = name.length;
+			}.bind(this) , 1);
+		},
+		onNameChanged: function() {
+			var name = this.ui.name.val();
+			this.lineUpName = name;
+			this.checkIfSaveAllowed();
 		},
 		onLineUpChanged: function(checked, model) {
 			var playerId = model.get('playerId'),
@@ -88,7 +97,7 @@ define([
 		},
 		checkIfSaveAllowed: function() {
 			console.log(this.lineUp.toJSON());
-			if (this.checkCount() && this.lineUp.length > 0 && this.lineUpName) {
+			if (this.checkCount() && this.lineUp.length > 0 && this.lineUpName.length > 1) {
 				this.ui.save.attr('disabled', false);
 				return true;
 			} else {

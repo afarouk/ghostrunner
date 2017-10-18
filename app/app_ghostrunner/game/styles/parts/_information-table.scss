@@ -43,7 +43,7 @@
 					    font-weight: $game-fw-btn;
                     }
 				    .menu-btn.pause_btn {
-					    visibility: hidden;
+					    // visibility: hidden;
 				    }
 	    		}
 
@@ -457,6 +457,9 @@
 				    }
 				    &.dark {
 				    	background-color: black;
+				    }
+				    &:disabled {
+				    	cursor: not-allowed;
 				    }
 		        }
 		    }

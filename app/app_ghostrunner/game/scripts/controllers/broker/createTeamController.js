@@ -125,7 +125,7 @@ define([
                 createData = {
                     players: (new PlayersCollection()).getLineUps(players.players),
                     lineUp: lineUp,
-                    teamName: starterLineUp.get('displayText'),
+                    teamName: starterLineUp.get('teamName') || 'Washington,2016',
                     lineUpName: starterLineUp.get('displayText'),
                     headings: players.lineUpHeadings,
                 },
@@ -137,7 +137,7 @@ define([
             this.listenTo(lineUpCreation, 'cancel', this.onReturnToLineupSelection.bind(this, accept));
         },
 
-        onLineUpSave: function(lineUp, accept) {
+        onLineUpSave: function(lineUp, accept, lineUpName) {
             var game = appCache.get('game'),
                 players = lineUp.map(function(model) {
                     return {
@@ -154,7 +154,8 @@ define([
                 }),
                 lineUpData = {
                     gameUUID: game.get('gameUUID'),
-                    players: players
+                    players: players,
+                    displayText: lineUpName
                 };
 
             if (accept) {

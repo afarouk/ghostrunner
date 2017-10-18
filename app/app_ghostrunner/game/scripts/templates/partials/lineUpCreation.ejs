@@ -2,15 +2,14 @@
 	<button class="cancel-btn" type="button" name="cancel">cancel</button>
     <div class="team-info">
 		<div class="block">
-			<!-- <label>LineUp name:</label> -->
-			<input type="hidden" name="lineUp-name"  value="lineup">
+			<label name="team-name"><%= teamName %></label>
 		</div>
 		<div class="block">
 			<label>Count:</label>
 			<span class="count" name="count">0</span>
 		</div>
 		<div class="block">
-			<label name="team-name"><%= teamName %></label>
+			<input placeholder="lineUp name" class="lineUp-name" name="lineUp-name"  value="<%= lineUpName %>" maxlength="40">
 		</div>
 	</div>
 	<button type="button" name="save" disabled>send</button>
