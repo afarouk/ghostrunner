@@ -78,16 +78,15 @@
 									<img src="./images/baseball_ball.png" alt="">
 								</div>
 							</th>
-							<th>1</th>
-							<th>2</th>
-							<th>3</th>
-							<th>4</th>
-							<th>5</th>
-							<th>6</th>
-							<th>7</th>
-							<th>8</th>
-							<th>9</th>
-							<th>10</th>
+							<th><%= scoresTable.innings[0] %></th>
+							<th><%= scoresTable.innings[1] %></th>
+							<th><%= scoresTable.innings[2] %></th>
+							<th><%= scoresTable.innings[3] %></th>
+							<th><%= scoresTable.innings[4] %></th>
+							<th><%= scoresTable.innings[5] %></th>
+							<th><%= scoresTable.innings[6] %></th>
+							<th><%= scoresTable.innings[7] %></th>
+							<th><%= scoresTable.innings[8] %></th>
 							<th></th>
 							<th>R</th>
 							<th>H</th>
@@ -97,9 +96,9 @@
 					<tbody class="game-stats-body">
 						<tr>
 							<td><%= scoresTable.thisTeam.city %></td>
-							<% for(var round = 0; round < 10; round++){ %>
-								<% if (scoresTable.thisTeam.scores[round]){ %>
-									<td><%= scoresTable.thisTeam.scores[round].scores %></td>
+							<% for(var inning = 0; inning < 9; inning++){ %>
+								<% if (scoresTable.thisTeam.scores[inning]){ %>
+									<td><%= scoresTable.thisTeam.scores[inning].runs %></td>
 								<% } else { %>
 									<td>.</td>
 								<% } %>
@@ -111,9 +110,9 @@
 						</tr>
 						<tr>
 							<td><%= scoresTable.otherTeam.city %></td>
-							<% for(var round = 0; round < 10; round++){ %>
-								<% if (scoresTable.otherTeam.scores[round]){ %>
-									<td><%= scoresTable.otherTeam.scores[round].scores %></td>
+							<% for(var inning = 0; inning < 9; inning++){ %>
+								<% if (scoresTable.otherTeam.scores[inning]){ %>
+									<td><%= scoresTable.otherTeam.scores[inning].runs %></td>
 								<% } else { %>
 									<td>.</td>
 								<% } %>
