@@ -21,7 +21,7 @@ define([
             var params = h().parseQueryString(window.location.search),UID;
     		this.listenLogin();
     		this.listenRegister();
-                this.listenContact();
+            this.listenContact();
 
             if (params && params.UID){
                 this.autoLoginByUID(params.UID);
@@ -372,7 +372,13 @@ define([
             var Name = $('input[name="name"]').val();
             var Email = $('input[name="email"]').val();
             var Subject = $('input[name="subject"]').val();
-            var Message = $('#textarea').val();
+            //var Message = $('#body').val();
+			//console.log(Message);
+			//debugger;
+			var Message = CKEDITOR.instances.body.getData();
+			//console.log(Message);
+			//debugger;
+			console.log("Message :"+Message);
             var Code = $('input[name="promocode"]').val();
            this.sendRequest(this.SendContactUsEmail,{
                payload:{

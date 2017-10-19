@@ -27,7 +27,7 @@
           <div class="form-group">
             <label class="control-label col-sm-2" for="Body">*Body</label>
             <div class="col-sm-10" >
-              <textarea class="form-control" id="body" rows="5"></textarea>
+              <textarea class="form-control" id="body" name="body" rows="5"></textarea>
             </div>
           </div>
 
@@ -108,7 +108,9 @@
   <!-- .container end -->
 </div>
 <!-- #about end -->
-
+<script>
+	CKEDITOR.replace('body');
+</script>
 <?php
     require_once("footer.php");
 ?>

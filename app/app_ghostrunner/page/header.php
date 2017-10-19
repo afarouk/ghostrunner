@@ -72,6 +72,7 @@
           });
         }
     </script>
+	<script src="http://cdn.ckeditor.com/4.5.5/standard/ckeditor.js"></script>
 </head>
 <body>
    
