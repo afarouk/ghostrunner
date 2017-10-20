@@ -87,9 +87,14 @@ define([
         getPlayerReplacementController: function() {
             return playerReplacementController;
         },
-        isMobile: function() {
-            // ??? iPad
-            return /Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        getDevice: function() {
+            var device = 'desktop';
+            if (/Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                device = 'mobile';
+            } else if (/iPad/i.test(navigator.userAgent)) {
+                device = 'tablet';
+            }
+            return device;
         },
         destroyGame: function() {
             //destroy all controllers

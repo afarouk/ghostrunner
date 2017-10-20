@@ -5,14 +5,15 @@ define([
 	], function(publicController){
 	var App = new Mn.Application({
 		onStart: function() {
+			var device = this.publicController.getDevice();
 			Backbone.history.start({pushState: true});
 
-			if (this.publicController.isMobile()) {
-				$('.header-content-wrapper').addClass('mobile');
+			if (device === 'mobile') {
 				this.publicController.getGameController().isMobile();
 			} else {
 	    		publicController.getPageController().listenPage();
 	    	}
+	    	$('.header-content-wrapper').addClass(device);
 		}
 	});
 

@@ -23,6 +23,7 @@ require('file?name=[name].[ext]!./navbar.php');
 require('./js/jquery-1.11.3.min');
 require('./js/jquery-migrate-1.2.1.min');
 require('./js/jquery-ui-custom.min');
+// require('./js/jquery.ui.touch-punch.min'); //for click on tap for a tablet
 require('./js/bootstrap.min');
 require('./js/jquery.easing.min');
 require('./js/smoothscroll');
