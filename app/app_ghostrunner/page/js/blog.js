@@ -88,7 +88,7 @@ define([
                     this.showError('Title should not be empty.');
                     title.focus().addClass('error');
                     return false;
-                } else if(body.val() === '') {
+                } else if(CKEDITOR.instances.body.getData() === '') {
                     this.showError('Body should not be empty.');
                     body.focus().addClass('error');
                     return false;
@@ -114,7 +114,7 @@ define([
                             activationDate: fulldate,
                             expirationDate: fulldate,
                             contestName: title.val(),
-                            displayText: body.val(),
+                            displayText: CKEDITOR.instances.body.getData(),
                             isAnonymous: false,
                             subType: 2,
                             categories: null,

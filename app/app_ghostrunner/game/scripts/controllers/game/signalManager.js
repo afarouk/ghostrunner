@@ -77,8 +77,8 @@ define([
                     this.publicController.getStateController().onCheckRestart(message.gameUUID);
                     break;
 
-                case 'GAME_INNING_OVER':
-                    this.publicController.getModalsController().onInningOver(message.gameUUID);
+                case 'GAME_SWITCH_ROLES':
+                    this.publicController.getModalsController().onSwitchRoles(message.gameUUID);
                     break;
 
                 case 'GAME_OVER':
@@ -127,7 +127,7 @@ define([
                     break;
             }
             this.publicController.getChatController().onChatSignal(message);
-        }       
+        }
     });
 
     return new SignalsManager();

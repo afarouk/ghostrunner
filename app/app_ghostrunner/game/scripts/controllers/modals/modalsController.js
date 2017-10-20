@@ -392,16 +392,16 @@ define([
             }.bind(this));
         },
 
-        onInningOver: function(gameUUID) {
-            //refresh and show inning over popup only if game is running
+        onSwitchRoles: function(gameUUID) {
+            //refresh and show half inning popup only if game is running
             if (this.publicController.getStateController().refreshIfRunning(gameUUID)) {
                 this.publicController.getChoiceController().showConfirmation({
-                    message: 'Inning over.',
+                    message: 'Switch roles.',
                     confirm: 'ok'
                 }).then(function() {
                     //now nothing
                 }.bind(this));
-                console.log('inning over');
+                console.log('Switch roles');
             }
         },
 
