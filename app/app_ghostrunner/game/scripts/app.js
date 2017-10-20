@@ -7,7 +7,12 @@ define([
 		onStart: function() {
 			Backbone.history.start({pushState: true});
 
-	    	publicController.getPageController().listenPage();
+			if (this.publicController.isMobile()) {
+				$('.header-content-wrapper').addClass('mobile');
+				this.publicController.getGameController().isMobile();
+			} else {
+	    		publicController.getPageController().listenPage();
+	    	}
 		}
 	});
 

@@ -87,6 +87,10 @@ define([
         getPlayerReplacementController: function() {
             return playerReplacementController;
         },
+        isMobile: function() {
+            // ??? iPad
+            return /Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        },
         destroyGame: function() {
             //destroy all controllers
             //with listenTo etc...

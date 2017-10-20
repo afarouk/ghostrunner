@@ -6,9 +6,15 @@ define([
     '../models/user',
     '../appCache',
     '../APIGateway/gameService',
-    '../views/appLayout'
-    ], function(userModel, appCache, service, AppLayout){
+    '../views/appLayout',
+    '../views/isMobile'
+    ], function(userModel, appCache, service, AppLayout, IsMobile){
     var GameController = Mn.Object.extend({
+        isMobile: function() {
+            console.log('is mobile');
+            var isMobile = new IsMobile();
+            isMobile.render();
+        },
         start: function(user){
             console.log('game start');
 
