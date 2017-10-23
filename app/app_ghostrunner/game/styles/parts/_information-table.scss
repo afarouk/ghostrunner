@@ -225,15 +225,28 @@
 								    line-height: 17px;
 								    max-width: 110px;
 								    display: table-cell;
-								    overflow: hidden;
-								    text-overflow: ellipsis;
-								    white-space: nowrap;
 								    position: relative;
+
+								    span {
+								    	display: block;
+								    	float: left;
+								    	overflow: hidden;
+									    text-overflow: ellipsis;
+									    white-space: nowrap;
+									    max-width: 110px;
+								    }
 
 								    img {
 								    	width: 14px;
 									    position: absolute;
 									    right: 0;
+									    display: none;
+								    }
+
+								    &.annotation {
+								    	img {
+								    		display: block;
+								    	}
 								    }
     							}
     							td:last-child {

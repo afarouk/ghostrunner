@@ -55,7 +55,10 @@
 			<tbody class="team-info-body">
 				<% _.each(leftTeam.players, function(player) { %>
 					<tr>
-						<td><%= player.name %><% if (player.showAnnotation) { %><img src="./images/baseball_ball.png" alt=""><% } %></td>
+						<td class="<% if (player.showAnnotation) { %>annotation<% } %>" >
+							<span><%= player.name %></span>
+							<img src="./images/baseball_ball.png" alt="">
+						</td>
 						<td><%= player.position.displayText %></td>
 					</tr>
 				<% }) %>
@@ -227,7 +230,10 @@
 			<tbody class="team-info-body">
 				<% _.each(rightTeam.players, function(player) { %>
 					<tr>
-						<td><%= player.name %><% if (player.showAnnotation) { %><img src="./images/baseball_ball.png" alt=""><% } %></td>
+						<td class="<% if (player.showAnnotation) { %>annotation<% } %>" >
+							<span><%= player.name %></span>
+							<img src="./images/baseball_ball.png" alt="">
+						</td>
 						<td><%= player.position.displayText %></td>
 					</tr>
 				<% }) %>
