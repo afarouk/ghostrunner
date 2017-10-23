@@ -30,7 +30,7 @@ define([
         },
         
         listenBlog: function(){
-            this.retriveBlog(null,null);  
+            this.retriveBlog(null,null, true);  
             var that = this;
             $('.dropzone').html5imageupload({
                 ghost: false,
@@ -178,7 +178,7 @@ define([
             }
         },
         
-        retriveBlog: function(preId,nxtId) {
+        retriveBlog: function(preId,nxtId, firstLoading) {
             preId = preId !=null ? preId : 0 ;
             nxtId = nxtId !=null ? nxtId : 0 ;
             $('#blog_btn_next').attr('navId','');
@@ -215,6 +215,14 @@ define([
                         $('#main_blog_view').html(response.entries[0].body);
                     } else {
                         $('#delete_blog').attr('disabled', true);  
+                    }
+
+                    //on bomile scroll to blog top after next/prev
+                    if (!firstLoading && 
+                        $('.header-content-wrapper').hasClass('mobile')) {
+                        var body = $("html, body"),
+                            position = $('#game_right_layout').offset();
+                        body.stop().animate({scrollTop: position.top}, 300);
                     }
                 }.bind(this), function onRequestError (error) {
                    console.log(error);
