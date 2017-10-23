@@ -106,10 +106,14 @@
     }
 
     &.mobile {
-        height: calc(100vw + 30px);
-        min-height: 768px;
         display: flex;
         flex-direction: column;
+        height: auto;
+        min-height: unset;
+        overflow: hidden;
+        max-height: unset;
+        margin-bottom: 0;
+        padding-bottom: 0;
 
         .game_canvas_wrap {
             min-height: unset;
@@ -137,9 +141,7 @@
             transition: none;
             background-color: #f0f0f0;
             position: relative;
-            min-height: 480px;
             width: calc(100vw - 10px);
-            height: 100%;
             opacity: 1;
             margin: 5px 5px;
         }
