@@ -356,7 +356,6 @@ define([
                     this.publicController.getStateController().refreshStatus();
                 }
                 .bind(this), function(xhr){
-                    this.publicController.getGameController().hideLoader();
                     this.publicController.getModalsController().apiErrorPopup(xhr);
                 }.bind(this));
             }.bind(this), function() {
@@ -431,7 +430,6 @@ define([
                     this.publicController.getStateController().refreshStatus();
                 }
                 .bind(this), function(xhr){
-                    this.publicController.getGameController().hideLoader();
                     this.publicController.getModalsController().apiErrorPopup(xhr);
                 }.bind(this));
             }.bind(this), function() {
@@ -523,6 +521,7 @@ define([
             }).then(function() {
                 this.publicController.getBrokerController().onCancel(); //check if works in all cases
             }.bind(this));
+            this.publicController.getGameController().hideLoader();
         },
 
         buttonPopup: function(){
