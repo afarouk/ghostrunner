@@ -125,7 +125,7 @@ define([
                 createData = {
                     players: (new PlayersCollection()).getLineUps(players.players),
                     lineUp: lineUp,
-                    teamName: starterLineUp.get('teamName') || 'Washington,2016',
+                    teamName: starterLineUp.get('teamName') || '[TeamName]',
                     lineUpName: starterLineUp.get('displayText'),
                     headings: players.lineUpHeadings,
                 },
