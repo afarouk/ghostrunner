@@ -7,10 +7,10 @@ define([
     ], function(appCache){
     var PlayersCardModel = Backbone.Model.extend({
     	defaults: {
-            fullName: 'Michael Blomeyer',
-            year: 2014,
-            teamName: 'Giants',
-            imageURL: 'https://communitylive.co/apptsvc/static/images/placeholder_200x200.png',
+            playerName: '[playerName]',
+            season: '[season]',
+            teamName: '[teamName]',
+            imageURL: '[imageURL]',
             playerInfo: {
                 'born': 'August 10, 1970',
                 'height': '6\'4 ft',
@@ -107,13 +107,7 @@ define([
                 displayText: 'Outfield',
                 enumText: 'OUTFIELDER',
                 id: 1
-            },
-            playerId: 1,
-            seasonId: 1,
-            leagueId: 1,
-            playerRoleId:1,
-            cost: 23,
-            quarter: 3,
+            }
         },
 
         initialize: function() {
