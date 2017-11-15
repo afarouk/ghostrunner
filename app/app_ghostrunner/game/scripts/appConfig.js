@@ -13,7 +13,7 @@ module.exports = {
     },
 
     getAPIRoot: function() {
-    	if(baseRoot === 'localhost:8080' || '54.191.91.125') {
+    	if(baseRoot === 'localhost:8080' || baseRoot === '54.191.91.125') {
 	        return 'http://' + baseRoot + apiSufix;
 		} else {
 			return 'https://' + baseRoot + apiSufix;
@@ -21,7 +21,7 @@ module.exports = {
     },
 
     getWebSocketRoot: function() {
-        if ( baseRoot === 'localhost:8080' || '54.191.91.125') {
+        if ( baseRoot === 'localhost:8080' || baseRoot === '54.191.91.125') {
 			return 'ws://' + baseRoot + wsSufix;
 		} else {
 			return 'wss://' + baseRoot + wsSufix;
