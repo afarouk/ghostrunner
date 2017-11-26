@@ -5,7 +5,7 @@
 // var baseRoot = 'simfel.com';
 var baseRoot = '54.191.91.125',
 	apiSufix = '/apptsvc/rest',
-	wsSufix = '/apptsvc/ws/gaming/gamingsecret';
+	wsSufix = '/apptsvc/ws/user/gamingsecret';
 
 module.exports = {
 	setBaseRoot: function(server) {
