@@ -22,7 +22,7 @@ define([
                     break;
 
                 case 'YOUR_MOVE':
-                    this.publicController.getStateController().refreshIfRunning(message.gameUUID);
+                    this.publicController.getStateController().refreshIfRunning(message.payload.gameUUID);
                     break;
 
                 case 'OPPONENT_OFFLINE':
@@ -46,11 +46,11 @@ define([
                     break;
 
                 case 'LINEUP_EDITED':
-                    this.publicController.getModalsController().onLineUpEditConfirmation(message.gameUUID);
+                    this.publicController.getModalsController().onLineUpEditConfirmation(message.payload.gameUUID);
                     break;
 
                 case 'INVITATION_ACCEPTED':
-                    this.publicController.getStateController().refreshStatus(message.gameUUID);
+                    this.publicController.getStateController().refreshStatus(message.payload.gameUUID);
                     break;
 
                 case 'INVITATION_REJECTED':
@@ -58,7 +58,7 @@ define([
                     break;
 
                 case 'GAME_STARTED':
-                    this.publicController.getModalsController().onStartGameConfirmation(message.gameUUID);
+                    this.publicController.getModalsController().onStartGameConfirmation(message.payload.gameUUID);
                     break;
 
                 case 'GAME_ABANDONED':
@@ -70,15 +70,15 @@ define([
                     break;
 
                 case 'GAME_UNPAUSED':
-                    this.publicController.getModalsController().onStartGameConfirmation(message.gameUUID);
+                    this.publicController.getModalsController().onStartGameConfirmation(message.payload.gameUUID);
                     break;
 
                 case 'GAME_RESTARTED':
-                    this.publicController.getStateController().onCheckRestart(message.gameUUID);
+                    this.publicController.getStateController().onCheckRestart(message.payload.gameUUID);
                     break;
 
                 case 'GAME_SWITCH_ROLES':
-                    this.publicController.getModalsController().onSwitchRoles(message.gameUUID);
+                    this.publicController.getModalsController().onSwitchRoles(message.payload.gameUUID);
                     break;
 
                 case 'GAME_OVER':
@@ -109,7 +109,7 @@ define([
                     break;
 
                 case 'REFRESH_STATE':
-                    this.publicController.getStateController().refreshStatus(message.gameUUID);
+                    this.publicController.getStateController().refreshStatus(message.payload.gameUUID);
                     this.publicController.getModalsController().refreshGamePopup(); // Earlier it worked different way:
                                                                                     //we had asked player confirmation to refresh
                     break;

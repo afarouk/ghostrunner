@@ -147,7 +147,7 @@ define([
         },
 
         beforeRefreshStatus: function(message) {
-            var gameUUID = message.gameUUID,
+            var gameUUID = message.payload.gameUUID,
                 gameModel = this.getGameModel();
             if (gameModel && gameModel.get('gameUUID') !== gameUUID) {
                 if (gameModel.get('state') === 'RUNNING') {
@@ -182,7 +182,7 @@ define([
         },
 
         onPayloadMsgBeforeRefresh: function(message) {
-            this.refreshStatus(message.gameUUID);
+            this.refreshStatus(message.payload.gameUUID);
         },
 
         onSendInvitation: function(credentials) {

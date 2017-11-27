@@ -107,7 +107,7 @@ define([
 
         onPayloadMessage: function(message) {
             var $def = $.Deferred(),
-                text = message.payload + '<br>Please, select yours';
+                text = message.payload.displayText + '<br>Please, select yours';
             this.publicController.getChoiceController().showConfirmation({
                 message: text,
                 cancel: 'cancel',
@@ -376,15 +376,15 @@ define([
 
         onRejectedByOponnent: function(message) {
             var game = appCache.get('game');
-            if (game && game.get('gameUUID') !== message.gameUUID) {
+            if (game && game.get('gameUUID') !== message.payload.gameUUID) {
                 //case when game is running and we received reject signal
-                console.log(message.payload);
+                console.log(message.payload.displayText);
                 return; //temporary solution
             }
             this.publicController.getStateController().killGame();
             this.publicController.getBrokerController().reRender();
             this.publicController.getChoiceController().showConfirmation({
-                message: message.payload,
+                message: message.payload.displayText,
                 confirm: 'ok'
             }).then(function() {
                 //now nothing
