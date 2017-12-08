@@ -126,7 +126,7 @@ define([
                 default:
                     break;
             }
-            this.publicController.getChatController().onChatSignal(message);
+            // this.publicController.getChatController().onChatSignal(message);
         }
     });
 

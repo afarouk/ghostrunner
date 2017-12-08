@@ -41,7 +41,7 @@ define([
 			$('.header-content-wrapper').toggleClass('full_screen_game');
 			$('#navigation .container').slideToggle();
 			$('.fa-expand').toggleClass('fa-compress');
-			 this.publicController.getChatController().resetPosition();       
+			// this.publicController.getChatController().resetPosition();       
 		},
 	});
 	return AppLayoutView;

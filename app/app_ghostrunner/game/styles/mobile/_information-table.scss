@@ -1,0 +1,535 @@
+.information-table {
+    height: 440px;
+    color: $text;
+    padding: 0;
+
+    .information-table-container {
+    	display: flex;
+    	flex-direction: row;
+    	justify-content: space-between;
+    	height: 100%;
+
+    	.table-column {
+    		display: flex;
+    		flex-direction: column;
+    		pointer-events: all;
+
+    		&.left-table,
+	    	&.right-table {
+	    		width: 200px;
+	    		height: 420px;
+	    	}
+
+	    	&.left-table,
+	    	&.right-table {
+
+	    		.game-interruption-buttons {
+	    			display: flex;
+				    width: 100%;
+				    height: 30px;
+				    padding: 4px;
+				    margin-bottom: 2px;
+				    background: $tables-back;
+				    justify-content: space-between;
+				    z-index: 2;
+
+				    .menu-btn.pause_btn,
+                    .menu-btn.abandon_btn {
+                        font-size: 12px;
+					    padding: 5px 14px;
+					    height: 20px;
+					    background-color: #576996 !important;
+					    border-radius: 2px;
+					    font-weight: $game-fw-btn;
+                    }
+				    .menu-btn.pause_btn {
+					    // visibility: hidden;
+				    }
+	    		}
+
+	    		.opponent-status {
+			        padding-right: 8px;
+				    padding-top: 3px;
+				    margin-bottom: 2px;
+				    background: $tables-back;
+				    line-height: 24px;
+
+			        .opponent-in-game {
+			            width: 18px;
+			            height: 18px;
+			            border-radius: 50%;
+			            border: 1px solid #888;
+			            background-color: #aaa;
+			            float: left;
+			            margin: 5px 5px;
+
+			            &.online {
+			                border-color: $online-border;
+			                background-color: $online-back;
+			            }
+			            &.offline {
+			                border-color: $offline-border;
+			                background-color: $offline-back;
+			            }
+			        }
+
+			        .status-text {
+			            font-weight: $game-fw-txt;
+			            color: $text;
+			            font-size: 10px;
+			        }
+			    }
+
+	    		.left-player-info,
+	    		.right-player-info {
+	    			background: $tables-back;
+				    height: 145px;
+				    margin-bottom: 2px;
+				    display: flex;
+				    flex-direction: column;
+				    align-items: center;
+				    padding: 0 0 8px 0;
+
+				    .player-role,
+				    .player-year {
+					    font-size: 12px;
+					    font-weight: $game-fw-txt;
+					    line-height: 20px;
+					}
+					.player-name {
+					    font-size: 14px;
+					    font-weight: $game-fw-txt;
+					}
+
+				    .player-skills-container {
+				    	display: flex;
+				    	flex-direction: column;
+				    	font-size: 11px;
+    					font-weight: $game-fw-txt;
+    					line-height: 20px;
+    					width: 85%;
+
+				    	.player-skills {
+				    		display: flex;
+				    		flex-direction: row;
+				    		justify-content: space-between;
+				    		line-height: 18px;
+
+				    		.skill-level {
+				    			&.level-4 {
+				    				color: yellow;
+				    			}
+				    			&.level-5 {
+				    				color: #8af78a;
+				    			}
+				    		}
+
+				    		&.stamina-status {
+				    			display: flex;
+				    			flex-direction: column;
+				    			justify-content: space-between;
+					    		.stamina-line {
+								    width: 100%;
+								    padding: 3px;
+								    background-color: green;
+								    &.yellow {
+								    	background-color: yellow;
+								    }
+								    &.red {
+								    	background-color: red;
+								    }
+								}
+								.stamina-text {
+									font-size: 10px;
+									font-weight: $game-fw-txt;
+								}
+							}
+				    	}
+				    }
+	    		}
+
+	    		.left-team-info,
+	    		.right-team-info {
+    				height: calc(100% - 160px);
+    				display: flex;
+				    flex-direction: column;
+				    background: $tables-back;
+				    text-align: center;
+				    max-height: 210px;
+    				overflow-y: auto;
+    				overflow-x: hidden;
+
+    				&::-webkit-scrollbar {
+                        width: 10px;
+                        background-color: rgba(255, 160, 90, 0.6);
+                    }
+                    &::-webkit-scrollbar-thumb {
+                        background-color: rgba(0, 0, 0, 0.7);
+                        border: 2px solid rgba(255, 120, 60, 0.8);
+                    }
+
+				    .team-info {
+			    		display: flex;
+			    		flex-direction: row;
+			    		justify-content: space-between;
+			    		min-height: 40px;
+			    		.user-field {
+			    			display: flex;
+			    			flex-direction: column;
+			    			padding-left: 10px;
+    						text-align: left;
+    						font-size: 13px;
+    						font-weight: $game-fw-txt;
+
+			    			.user-name {
+			    				color: white;
+			    				line-height: 20px;
+			    			}
+			    			.team-city {
+			    				color: gray;
+			    				font-size: 12px;
+    							line-height: 18px;
+			    			}
+			    		}
+			    		.team-status {
+			    			background-color: gray;
+						    border-radius: 50%;
+						    margin: 5px;
+						    padding: 3px;
+    						img {
+    							width: 24px;
+    						}
+			    		}
+			    	}
+
+				    table {
+				    	width: 100%;
+				    	.team-info-head {
+				    		background-color: gray;
+				    		font-size: 11px;
+				    		tr {
+    							th:first-child {
+    								padding-left: 5px;
+    								padding-right: 5px;
+    							}
+				    		}
+				    	}
+				    	.team-info-body {
+				    		font-size: 11px;
+    						font-weight: $game-fw-tab;
+				    		tr {
+    							td:first-child {
+    								padding-left: 5px;
+								    padding-right: 5px;
+								    text-align: left;
+								    line-height: 17px;
+								    max-width: 110px;
+								    display: table-cell;
+								    position: relative;
+
+								    span {
+								    	display: block;
+								    	float: left;
+								    	overflow: hidden;
+									    text-overflow: ellipsis;
+									    white-space: nowrap;
+									    max-width: 110px;
+								    }
+
+								    img {
+								    	width: 14px;
+									    position: absolute;
+									    right: 0;
+									    display: none;
+								    }
+
+								    &.annotation {
+								    	img {
+								    		display: block;
+								    	}
+								    }
+    							}
+    							td:last-child {
+    								text-align: center;
+								    line-height: 17px;
+								    white-space: pre;
+								    font-weight: 900;
+								    color: #e1d77e;
+    							}
+				    		}
+				    	}
+				    }
+	    		}
+	    	}
+
+	    	&.center-table {
+	    		max-height: 180px;
+	    		margin: 0 2px;
+
+	    		.game-table {
+	    			display: flex;
+	    			flex-direction: row;
+	    			justify-content: space-between;
+
+	    			.game-table-left,
+	    			.game-table-right {
+	    				background: $tables-back;
+	    				display: flex;
+	    				flex-direction: column;
+	    			}
+
+	    			.game-table-left {
+	    				.game-statistic {
+	    					table {
+	    						font-weight: $game-fw-tab;
+	    						font-size: 12px;
+
+	    						.game-name {
+	    							text-align: center;
+	    							padding: 5px;
+	    							span {
+	    								font-size: 16px;
+    									color: white;
+	    							}
+	    						}
+	    						.game-stats-head {
+	    							tr {
+	    								background-color: black;
+	    								th {
+	    									&:first-child {
+											    width: 100px;
+											    max-width: 100px;
+											    text-overflow: ellipsis;
+											    overflow: hidden;
+											    padding-left: 5px;
+											}
+											&:last-child {
+											    padding-right: 5px;
+											}
+											&:not(:first-child) {
+												padding-left: 8px;
+												min-width: 18px;
+
+												&:empty {
+													min-width: unset;
+												}
+											}
+    										.ball {
+    											img {
+    												width: 20px;
+    											}
+    										}
+	    								}
+	    							}
+	    						}
+
+	    						.game-stats-body {
+	    							font-size: 11px;
+	    							tr {
+	    								td {
+	    									&:first-child {
+											    width: 100px;
+											    max-width: 100px;
+											    text-overflow: ellipsis;
+											    overflow: hidden;
+											    padding-left: 5px;
+											    padding-right: 2px;
+											}
+											&:last-child {
+											    padding-right: 5px;
+											}
+    										&:not(:first-child ) {
+												padding-left: 4px;
+											    font-size: 10px;
+											    text-align: center;
+											}
+	    								}
+	    							}
+	    						}
+	    					}
+	    				}
+	    			}
+
+	    			.game-table-right {
+	    				margin-left: 2px;
+	    				.game-status {
+	    					display: flex;
+	    					flex-direction: column;
+	    					font-size: 13px;
+	    					padding-top: 2px;
+
+	    					.status-row {
+	    						justify-content: space-around;
+							    display: flex;
+							    flex-direction: row;
+							    padding: 4px 1px 3px 3px;
+
+	    						.status-circle {
+	    							width: 15px;
+								    height: 15px;
+								    border-radius: 50%;
+								    border: 1px solid gray;
+								    background-color: $darkgray_t;
+								    margin: 2px 3px;
+
+								    &.error {
+								    	// background-color: $error_b;
+								    	background-color: $success_b;
+								    }
+								    &.success {
+								    	background-color: $success_b;
+								    }
+	    						}
+	    					}
+	    				}
+	    			}
+	    		}
+
+	    		.game-state-block {
+	    			margin: 5px 50px;
+				    display: flex;
+				    flex-direction: column;
+				    background-color: rgba(0,0,0,0.7);
+				    padding: 5px;
+				    text-align: center;
+
+	    			.state-line {
+	    				line-height: 20px;
+	    				font-weight: 400;
+	    				color: $gray;
+
+	    				&.first {
+	    					font-weight: $game-fw-txt;
+    						font-size: 16px;
+    						color: $text;
+	    				}
+	    			}
+	    		}
+	    	}
+    	}
+    }
+}
+.player-actions {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    justify-content: center;
+    pointer-events: all;
+
+
+    .player-actions-container {
+	    background: rgba(10, 30, 60, 0.85);
+	    position: relative;
+	    max-width: 640px;
+
+	    .actions-available {
+			padding: 5px;
+		    display: flex;
+		    height: 85px;
+		    min-width: 480px;
+		    flex-direction: column;
+		    justify-content: space-between;
+		    transition: .8s;
+		    opacity: 1;
+
+			.team-role {
+		    	color: $text;
+		        font-weight: 500;
+		    }
+
+		    .actions-buttons {
+		    	display: flex;
+    			flex-direction: row;
+    			justify-content: space-between;
+
+    			.player-actions-block {
+    				padding-top: 30px;
+				    display: flex;
+				    justify-content: space-between;
+    			}
+
+    			.lineUp-actions-block {
+    				margin-left: 15px;
+				    min-width: 140px;
+				    height: 70px;
+    				margin-top: -13px;
+				    display: flex;
+				    flex-direction: column;
+				    justify-content: space-between;
+
+				    .edit-buttons {
+				    	display: flex;
+    					justify-content: space-between;
+    					height: 30px;
+				    }
+    			}
+
+		        button {
+		            font-size: 9px;
+				    font-weight: $game-fw-btn;
+				    padding: 6px 5px;
+				    margin: 0 0 0 5px;
+
+				    &.edit {
+				    	border-radius: 0;
+				    }
+				    &.dark {
+				    	background-color: black;
+				    }
+				    &:disabled {
+				    	cursor: not-allowed;
+				    }
+		        }
+		    }
+		}
+
+	    .waiting-msg {
+		    position: absolute;
+		    top: 0;
+		    left: 0;
+		    right: 0;
+		    bottom: 0;
+		    margin: auto;
+		    opacity: 1;
+		    display: none;
+	    	transition: .8s;
+		    .waiting-for-turn {
+		        position: absolute;
+		        bottom: 0;
+		        top: 0;
+		        left: 0;
+		        right: 0;
+		        margin: auto;
+		        opacity: 0.15;
+		        transform: translateZ(0);
+		        animation: 4s waiting-animation infinite;
+		        background: url('images/waitForTurnDefense.png') no-repeat center;
+    			background-size: 160px;
+		    }
+		}
+	}
+
+	&.waiting {
+    	.player-actions-container {
+
+    		.actions-available {
+    			opacity: 0;
+    		}
+
+    		.waiting-msg {
+    			display: block;
+	    		opacity: 1;
+	    	}
+    	}
+    	&.offense {
+    		.waiting-for-turn {
+    			background: url('images/waitForTurnOffense.png') no-repeat center;
+    			background-size: 160px;
+    		}
+    	}
+    }
+}

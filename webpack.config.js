@@ -7,7 +7,9 @@ var path = require('path'),
 
 module.exports = {
 	entry: {
-		'bundle': './app/app_ghostrunner/main.js'
+		'bundle': './app/app_ghostrunner/main.js',
+		'desktop': './app/app_ghostrunner/game/styles/desktop.scss',
+		'mobile': './app/app_ghostrunner/game/styles/mobile.scss'
 	},
 	output: {
 		path: './app/app_ghostrunner/build/',
@@ -68,7 +70,7 @@ module.exports = {
 		]
 	},
 	plugins: [
-		new ExtractTextPlugin('styles.css'),
+		new ExtractTextPlugin('[name].css'),
 		new webpack.ProvidePlugin({
 			$: 'jquery',
 			jQuery: 'jquery',

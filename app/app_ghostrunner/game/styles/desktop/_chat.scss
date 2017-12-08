@@ -8,6 +8,8 @@
     color: $text;
     pointer-events: all;
 
+    display: none; /*temporary hidden*/
+
     .fa-commenting {
         font-size: 30px;
         cursor: pointer;

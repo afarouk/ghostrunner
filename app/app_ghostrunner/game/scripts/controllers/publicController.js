@@ -12,6 +12,7 @@ define([
     './modals/choiceController', //user choice
 
     './broker/brokerController', //broker part with user/game selection
+    './broker/brokerMobileController', //broker part with user/game selection
     './broker/createTeamController', // select players in team/lineUp
 
     './game/gameStateController', //make changes/calls related on game model state
@@ -24,7 +25,7 @@ define([
     './game/playerActionsController', //show buttons related on role
     './broker/playerReplacementController'
     ], function( pageController, gameController, urlController, chatController, 
-        modalsController, choiceController, brokerController, createTeamController,
+        modalsController, choiceController, brokerController, brokerMobileController, createTeamController,
         stateController , stateManager, signalManager, socketController, 
         fieldController,interfaceController, informationTableController, 
         playerActionsController, playerReplacementController) {
@@ -50,7 +51,7 @@ define([
 
         //broker
         getBrokerController: function() {
-            return brokerController;
+            return window.ghostrunner.isDesktop ? brokerController : brokerMobileController;
         },
         getCreateTeamController: function() {
             return createTeamController;
@@ -88,13 +89,13 @@ define([
             return playerReplacementController;
         },
         getDevice: function() {
-            var device = 'desktop';
-            if (/Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-                device = 'mobile';
-            } else if (/iPad/i.test(navigator.userAgent)) {
-                device = 'tablet';
-            }
-            return device;
+            return window.ghostrunner.isDesktop ? 'desktop' : 'mobile';
+            // var device = 'desktop';
+            // if (/Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+            //     device = 'mobile';
+            // } else if (/iPad/i.test(navigator.userAgent)) {
+            //     device = 'tablet';
+            // }
         },
         destroyGame: function() {
             //destroy all controllers

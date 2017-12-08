@@ -8,11 +8,12 @@ define([
 			var device = this.publicController.getDevice();
 			Backbone.history.start({pushState: true});
 
-			if (device === 'mobile') {
-				this.publicController.getGameController().isMobile();
-			} else {
-	    		publicController.getPageController().listenPage();
-	    	}
+			// if (device === 'mobile') {
+			// 	this.publicController.getGameController().isMobile();
+			// } else {
+	  //   		publicController.getPageController().listenPage();
+	  //   	}
+	    	publicController.getPageController().listenPage();
 	    	$('.header-content-wrapper').addClass(device);
 		}
 	});

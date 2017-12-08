@@ -1,5 +1,6 @@
 <?php
-   require_once("header.php");
+    require_once("preprocessing.php");
+    require_once("header.php");
 ?>
 <script src='https://www.google.com/recaptcha/api.js'></script>
 <script type="application/javascript">
@@ -18,12 +19,6 @@ window.pageName = 'INDEX';
     <!-- .header-content -->
         <div class="header-content">
             <div class="header-content-wrapper">
-               <!--
-                <div class="header-content-tab-wrap">
-                    <a href="#" class="header-content-tabs">Game Stats</a>
-                    <a href="#" class="header-content-tabs">Partner Status</a>
-                </div>
-                -->
             	<div id="game-layout" class="game_canvas_wrap" ></div>
                 <div id="game_right_layout" class="game_right_wrap" >
                     <div id="right_content" class="blog_right_content">

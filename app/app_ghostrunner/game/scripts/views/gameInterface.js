@@ -22,7 +22,7 @@ define([
 		renderInterfaceParts: function() {
 			this.publicController.getInformationTableController().create(this, 'informationTable');
 			this.publicController.getPlayerActionsController().create(this, 'playerActions');
-			this.publicController.getChatController().create(this, 'chat');
+			// this.publicController.getChatController().create(this, 'chat');
 		},
 		onShowLoader: function(type) {
 			var gameModel = appCache.get('game'),

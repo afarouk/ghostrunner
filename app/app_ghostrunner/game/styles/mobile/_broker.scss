@@ -1,0 +1,1003 @@
+#broker {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    animation: inactive-animation .8s forwards;
+    z-index: 0;
+
+    &.active {
+        animation: active-animation .8s forwards;
+        z-index: 3;
+    }
+
+    .main-broker {
+        display: flex;
+        column-count: 2;
+        justify-content: flex-start;
+        flex-direction: column;
+        padding: 0;
+        background-color: $broker-back;
+        height: 100%;
+
+        .creation-region {
+            display: none;
+        }
+
+        &.creation-state {
+            .broker-part {
+                display: none;
+            }
+            .creation-region {
+                display: flex;
+                width: 100%;
+                height: 100%;
+            }
+        }
+
+        .creation-region {
+            .create-team,
+            .create-lineUp {
+                width: 100%;
+                height: 100%;
+                h3 {
+                    color: $text;
+                }
+
+                .creation-header {
+                    width: 100%;
+                    padding: 2px;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    background-color: rgba(255, 255, 255, 0.3);
+
+                    button.cancel-btn {
+                        background-color: $cancel;
+                        &:hover {
+                            color: #333;
+                            background-color: $cancel_h;
+                            border-color: #adadad;
+                        }
+                    }
+
+                    .team-info {
+                        display: flex;
+                        color: white;
+                        padding: 0 5px;
+                        justify-content: space-around;
+                        align-items: baseline;
+                        font-size: 14px;
+
+                        .replace-msg {
+                            font-size: 16px;
+                            color: $text-black;
+                            padding: 15px;
+                            text-align: center;
+                            line-height: 50px;
+                        }
+
+                        .block {
+                            padding: 0 10px;
+
+                            label {
+                                background-color: rgba(0,0,0,0.4);
+                                padding: 3px 5px;
+                                font-weight: $broker-fw-tab;
+
+                                &[name="team-name"] {
+                                    background-color: rgba(84, 177, 89, 0.5);
+                                    text-overflow: ellipsis;
+                                    overflow: hidden;
+                                    display: block;
+                                    max-width: 150px;
+                                    white-space: nowrap;
+                                }
+                            }
+                            input {
+                                height: 30px;
+                                padding: 0 5px;
+                                min-width: 180px;
+
+                                &:focus {
+                                    border: 1px solid #45c234;
+                                    caret-color: red;
+                                }
+                            }
+
+                            .balance, 
+                            .count {
+                                font-size: 15px;
+                                color: #71ff61;
+                                font-weight: $broker-fw-txt;
+                            }
+
+                            .lineUp-name {
+                                background-color: rgba(0, 0, 0, 0.55);
+                                outline: none;
+                                border: 1px solid rgba(84, 177, 89, 0.5);
+                            }
+                        }
+                    }
+                }
+
+                .players-list-container {
+                    margin-top: 20px;
+                    overflow-y: auto;
+                    border: 1px solid white;
+                    max-height: calc(100% - 100px);
+                    border-collapse: collapse;
+
+                    &.masked {
+                        opacity: 0.6;
+                        cursor: not-allowed;
+                        user-select: none;
+
+                        input {
+                            pointer-events: none;
+                        }
+                    }
+
+                    table.team-creation {
+                        width: 100%;
+                        display: flex;
+                        flex-direction: column;
+                        border-collapse: collapse;
+
+                        thead {
+                            color: white;
+                        }
+
+                        tbody {
+                            width: 100%;
+                            display: flex;
+                            flex-direction: column;
+                            color: white;
+                            font-size: 14px;
+                            font-weight: $broker-fw-tab;
+
+                            tr {
+                                width: 100%;
+                                height: 35px;
+                                display: flex;
+                                justify-content: space-between;
+
+                                td {
+                                    padding: 5px 10px;
+                                    height: 40px;
+
+                                    &.with-name {
+                                        width: 320px;
+                                        font-size: 15px;
+                                    }
+
+                                    &.with-cost {
+                                        width: 80px;
+                                    }
+
+                                    &.with-text {
+                                        width: 70px;
+                                        &[data-rating="Poor"] {
+                                            color: red;
+                                        }
+                                        &[data-rating="Fair"] {
+                                            color: gray;
+                                        }
+                                        &[data-rating="Good"] {
+                                            color: gold;
+                                        }
+                                        &[data-rating="Elite"] {
+                                            color: green;
+                                        }
+                                    }
+
+                                    &.with-rating {
+                                        width: 80px;
+                                        text-align: center;
+                                        span {
+                                            border-radius: 2px;
+                                            background-color: rgba(0, 0, 0, 0.35);
+                                            padding: 0 5px;
+
+                                            &[data-rating="Poor"] {
+                                            color: red;
+                                            }
+                                            &[data-rating="Fair"] {
+                                                color: gray;
+                                            }
+                                            &[data-rating="Good"] {
+                                                color: gold;
+                                            }
+                                            &[data-rating="Elite"] {
+                                                color: green;
+                                            }
+                                        }
+                                    }
+
+                                    &.with-checkbox {
+                                        margin-right: 10px;
+                                        &.starter {
+                                            margin-right: 20px;
+                                        }
+                                    }
+
+                                    &.with-select {
+                                        width: 120px;
+                                        text-align: center;
+                                        .player-role,
+                                        .player-position {
+                                            border-radius: 2px;
+                                            background-color: rgba(255,255,255,0.3);
+                                            padding: 0 5px;
+
+                                            &[data-role="FIELDER"] {
+                                                background-color: rgba(164, 200, 230, 0.85);
+                                            }
+                                            &[data-role="PITCHER"] {
+                                                background-color: rgba(164, 220, 195, 0.85);
+                                            }
+                                        }
+
+                                        select {
+                                            background-color: rgba(144, 144, 251, 0.85);
+                                            width: 80px;
+                                            height: 25px;
+                                            color: white;
+                                            font-weight: $broker-fw-sel;
+
+                                            &[name="bo"] {
+                                                background-color: rgba(239, 215, 132, 0.86);
+                                            }
+                                        }
+                                    }
+
+                                    select {
+                                        border: 0;
+                                        width: 100%;
+                                    }
+
+                                    .starter-star {
+                                        display: none;
+                                    }
+                                }
+
+                                &.starter-player {
+                                    pointer-events: none;
+                                    background-color: rgba(255, 255, 255, 0.25)!important;
+                                    .starter-star {
+                                        display: inline;
+                                        color: gold;
+                                        margin-left: 7px;
+                                    }
+                                }
+                            }
+
+                            tr.pitcher {
+                                background-color: rgba(27, 169, 169, 0.2);
+                            }
+
+                            tr:not(.pitcher) + tr.pitcher {
+                                border-top: 2px dashed gray;
+                                margin-top: 5px;
+                                padding-top: 5px;
+                            }
+                        }
+                    }
+
+                    .lineUp-players {
+                        padding: 0 5px;
+
+                        &.without-checkbox {
+                            table thead tr .choise {
+                                display: none;
+                            }
+                        }
+                        table {
+                            width: 100%;
+                            font-size: 12px;
+                            font-weight: $broker-fw-tab;
+                            text-align: center;
+                            border-collapse: separate;
+                            border-spacing: 0px 2px;
+                            thead {
+                                color: $players-black;
+                                tr {
+                                    td {
+                                        background-color: white;
+                                        border-left: 1px solid $players-black;
+                                        &.choise {
+                                            width: 40px;
+                                        }
+                                        &.select {
+                                            width: 70px;
+
+                                            &.position {
+                                                background-color: #00b0f0;
+                                            }
+                                            &.batting {
+                                                background-color: #ffe699;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+                            tbody {
+                                color: white;
+
+                                tr {
+                                    td {
+                                        &.with-bg {
+                                            background-color: #98b898;
+                                            border-left: 1px solid white;
+                                            border-right: 1px solid white;
+                                            border-top: 1px solid white;
+                                            border-bottom: 1px solid white;
+                                            color: $players-black;
+                                            & ~ td.with-bg {
+                                                border-left: none;
+                                            }
+                                        }
+                                        &.with-select {
+                                            select {
+                                                height: 25px;
+                                                width: 60px;
+                                                font-size: 12px;
+                                                font-weight: $broker-fw-sel;
+                                                color: $players-black;
+                                                border-radius: 0;
+                                                -webkit-border-radius: 0px;
+                                                cursor: pointer;
+                                                &.position {
+                                                    background-color: #00b0f0;
+                                                    &:disabled {
+                                                        opacity: 0.7;
+                                                        cursor: not-allowed;
+                                                    }
+                                                }
+                                                &.batting {
+                                                    background-color: #ffe699;
+                                                    &:disabled {
+                                                        opacity: 0.7;
+                                                        cursor: not-allowed;
+                                                    }
+                                                }
+                                            }
+                                        }
+
+                                        &.with-checkbox {
+                                            input {
+                                                cursor: pointer;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                .players-list-availablePlayers {
+                    margin-top: 20px;
+                    overflow-y: auto;
+                    border: 1px solid white;
+                    max-height: calc(100% - 100px);
+                    border-collapse: collapse;
+
+                    &.masked {
+                        opacity: 0.6;
+                        cursor: not-allowed;
+                        user-select: none;
+
+                        input {
+                            pointer-events: none;
+                        }
+                    }
+
+                    table.team-creation {
+                        width: 100%;
+                        display: flex;
+                        flex-direction: column;
+                        border-collapse: collapse;
+
+                        thead {
+                            color: white;
+                        }
+
+                        tbody {
+                            width: 100%;
+                            display: flex;
+                            flex-direction: column;
+                            color: white;
+                            font-size: 14px;
+                            font-weight: $broker-fw-tab;
+
+                            tr {
+                                width: 100%;
+                                height: 35px;
+                                display: flex;
+                                justify-content: space-between;
+
+                                td {
+                                    padding: 5px 10px;
+                                    height: 40px;
+
+                                    &.with-name {
+                                        width: 320px;
+                                        font-size: 15px;
+                                    }
+
+                                    &.with-cost {
+                                        width: 80px;
+                                    }
+
+                                    &.with-text {
+                                        width: 70px;
+                                        &[data-rating="Poor"] {
+                                            color: red;
+                                        }
+                                        &[data-rating="Fair"] {
+                                            color: gray;
+                                        }
+                                        &[data-rating="Good"] {
+                                            color: gold;
+                                        }
+                                        &[data-rating="Elite"] {
+                                            color: green;
+                                        }
+                                    }
+
+                                    &.with-rating {
+                                        width: 80px;
+                                        text-align: center;
+                                        span {
+                                            border-radius: 2px;
+                                            background-color: rgba(0, 0, 0, 0.35);
+                                            padding: 0 5px;
+
+                                            &[data-rating="Poor"] {
+                                            color: red;
+                                            }
+                                            &[data-rating="Fair"] {
+                                                color: gray;
+                                            }
+                                            &[data-rating="Good"] {
+                                                color: gold;
+                                            }
+                                            &[data-rating="Elite"] {
+                                                color: green;
+                                            }
+                                        }
+                                    }
+
+                                    &.with-checkbox {
+                                        margin-right: 10px;
+                                        &.starter {
+                                            margin-right: 20px;
+                                        }
+                                    }
+
+                                    &.with-select {
+                                        width: 120px;
+                                        text-align: center;
+                                        .player-role,
+                                        .player-position {
+                                            border-radius: 2px;
+                                            background-color: rgba(255,255,255,0.3);
+                                            padding: 0 5px;
+
+                                            &[data-role="FIELDER"] {
+                                                background-color: rgba(164, 200, 230, 0.85);
+                                            }
+                                            &[data-role="PITCHER"] {
+                                                background-color: rgba(164, 220, 195, 0.85);
+                                            }
+                                        }
+
+                                        select {
+                                            background-color: rgba(144, 144, 251, 0.85);
+                                            width: 80px;
+                                            height: 25px;
+                                            color: white;
+                                            font-weight: $broker-fw-sel;
+
+                                            &[name="bo"] {
+                                                background-color: rgba(239, 215, 132, 0.86);
+                                            }
+                                        }
+                                    }
+
+                                    select {
+                                        border: 0;
+                                        width: 100%;
+                                    }
+
+                                    .starter-star {
+                                        display: none;
+                                    }
+                                }
+
+                                &.starter-player {
+                                    pointer-events: none;
+                                    background-color: rgba(255, 255, 255, 0.25)!important;
+                                    .starter-star {
+                                        display: inline;
+                                        color: gold;
+                                        margin-left: 7px;
+                                    }
+                                }
+                            }
+
+                            tr.pitcher {
+                                background-color: rgba(27, 169, 169, 0.2);
+                            }
+
+                            tr:not(.pitcher) + tr.pitcher {
+                                border-top: 2px dashed gray;
+                                margin-top: 5px;
+                                padding-top: 5px;
+                            }
+                        }
+                    }
+
+                    .lineUp-players {
+                        padding: 0 5px;
+                        table {
+                            width: 100%;
+                            font-size: 12px;
+                            font-weight: $broker-fw-tab;
+                            text-align: center;
+                            border-collapse: separate;
+                            border-spacing: 0px 2px;
+                            thead {
+                                color: $players-black;
+                                tr {
+                                    td {
+                                        background-color: white;
+                                        border-left: 1px solid $players-black;
+                                        &.choise {
+                                            width: 40px;
+                                        }
+                                        &.select {
+                                            width: 70px;
+
+                                            &.position {
+                                                background-color: #00b0f0;
+                                            }
+                                            &.batting {
+                                                background-color: #ffe699;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+                            tbody {
+                                color: white;
+
+                                tr {
+                                    td {
+                                        &.with-bg {
+                                            background-color: #98b898;
+                                            border-left: 1px solid white;
+                                            border-right: 1px solid white;
+                                            border-top: 1px solid white;
+                                            border-bottom: 1px solid white;
+                                            color: $players-black;
+                                            & ~ td.with-bg {
+                                                border-left: none;
+                                            }
+                                        }
+                                        &.with-select {
+                                            select {
+                                                height: 25px;
+                                                width: 60px;
+                                                font-size: 12px;
+                                                font-weight: $broker-fw-sel;
+                                                color: $players-black;
+                                                border-radius: 0;
+                                                -webkit-border-radius: 0px;
+                                                cursor: pointer;
+                                                &.position {
+                                                    background-color: #00b0f0;
+                                                    &:disabled {
+                                                        opacity: 0.7;
+                                                        cursor: not-allowed;
+                                                    }
+                                                }
+                                                &.batting {
+                                                    background-color: #ffe699;
+                                                    &:disabled {
+                                                        opacity: 0.7;
+                                                        cursor: not-allowed;
+                                                    }
+                                                }
+                                            }
+                                        }
+
+                                        &.with-checkbox {
+                                            input {
+                                                cursor: pointer;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                } 
+            }
+        }
+
+        .broker-part {
+            flex-direction: column;
+
+            .team-choose-head {
+                display: none;
+            }
+
+            .lineup-choose {
+                display: none;
+            }
+
+            &.right-broker.team-state {
+                .broker-buttons {
+                    display: none;
+                }
+                .broker-list {
+                    display: none;
+                }
+                .team-choose-head {
+                    display: flex;
+
+                    .tip {
+                        display: flex;
+                        color: $text;
+                        padding: 6px 12px;
+                        background-color: rgba(255, 255, 255, 0.3);
+                        i {
+                            font-size: 24px;
+                            margin: 8px 8px 0 0;
+                        }
+                        span {
+                            font-size: 18px;
+                            margin-top: 8px;
+                            font-weight: $broker-fw-txt;
+                        }
+                    }
+                }
+            }
+
+            &.right-broker.lineup-state {
+                .broker-buttons {
+                    display: none;
+                }
+                .broker-list {
+                    display: none;
+                }
+                .lineup-choose {
+                    display: block;
+                }
+            }
+
+            .broker-buttons {
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
+
+                button {
+                    font-weight: $broker-fw-btn;
+                    font-size: 13px;
+                    padding: 15px 20px;
+                }
+
+                button.inactive {
+                    pointer-events: none;
+                }
+
+                button.my-invites-btn {
+                    position: relative;
+                    .invites-number {
+                        position: absolute;
+                        top: 0;
+                        right: 0;
+                        margin-top: -4px;
+                        margin-right: -6px;
+                        border-radius: 50%;
+                        background-color: red;
+                        padding: 0 3px;
+                        border: 1px solid white;
+                        font-size: 12px;
+                        font-weight: $broker-fw-count;
+                        // -webkit-font-smoothing: antialiased;
+                        // -moz-osx-font-smoothing: auto;
+                        visibility: hidden;
+
+                        &.shown {
+                            visibility: visible;
+                        }
+                    }
+                }
+            }
+
+            .broker-list {
+                margin: 0;
+                display: flex;
+                flex-direction: column;
+                
+                .list-container {
+                    max-height: 300px;
+                    max-width: 360px;
+                    overflow-y: auto;
+
+                    &::-webkit-scrollbar {
+                        width: 10px;
+                        background-color: rgba(255, 160, 90, 0.6);
+                    }
+                    &::-webkit-scrollbar-thumb {
+                        background-color: rgba(0, 0, 0, 0.7);
+                        border: 2px solid rgba(255, 120, 60, 0.8);
+                    }
+
+                    ul {
+                        list-style: none;
+                        color: $text;
+                        font-weight: normal;
+                        font-size: 14px;
+                        padding: 0;
+
+                        li:nth-child(even) {
+                            background: rgba(255, 80, 40, 0.4);
+                        }
+                        li:nth-child(odd) {
+                            background: rgba(255, 160, 90, 0.6);
+                        }
+
+                        li {
+                            padding: 5px 10px;
+                            cursor: pointer;
+
+                            &:hover {
+                                background-color: rgba(255,0,255,0.4);
+                            }
+
+                            i.initiator {
+                                color: #75e475;
+                            }
+
+                            .lineups-container {
+                                display: none;
+                                flex-direction: column;
+                                margin-left: 240px;
+                                margin-top: -30px;
+                                padding: 3px;
+                                position: absolute;
+                                background: rgba(102,42,42,0.8);
+                                width: 200px;
+
+                                .lineup:nth-child(even) {
+                                    background: rgba(0, 0, 0, 0.1);
+                                }
+                                .lineup:nth-child(odd) {
+                                    background: rgba(0, 0, 0, 0.3);
+                                }
+
+                                .lineup:hover {
+                                    background-color: rgba(80, 80, 240, 0.4);
+                                }
+
+                                .lineup {
+                                    color: $text;
+                                    margin-bottom: 5px;
+                                    padding: 0 5px;
+
+                                    &.selected {
+                                        background-color: green;
+                                    }
+                                }
+
+                                .new-lineup {
+                                    text-align: center;
+                                }
+                            }
+
+                            &.my-game {
+                                padding: 0;
+                                div {
+                                    cursor: not-allowed;
+                                    padding: 5px 10px;
+                                    &.actionable {
+                                        cursor: pointer;
+                                    }
+                                }
+                            }
+
+                            &.team.selected,
+                            &.available-user.selected,
+                            &.invitation-by-email.selected,
+                            &.my-game.selected {
+                                background-color: green;
+                            }
+
+                            &.team.selected {
+                               .lineups-container {
+                                    display: flex;
+                                } 
+                            }
+
+                            .icon-actions {
+                                float: right;
+                                font-size: 20px;
+                                padding-top: 2px;
+
+                                i {
+                                    padding-left: 6px;
+                                    &:hover::before {
+                                        padding: 2px;
+                                        border-radius: 2px;
+                                        background-color: rgba(0, 255, 0, 0.5);
+                                    }
+                                }
+                                .to-lineup {
+                                    
+                                }
+                                .edit-icon {
+                                    font-size: 18px;
+                                }
+                                .remove-icon {
+
+                                }
+                            }
+
+                            &.new-team {
+                                text-align: center;
+                                display: none;
+                            }
+                        }
+
+                        .invitation-by-email {
+                            padding: 10px 20px;
+                            background-color: rgba(250, 96, 50, 0.5);
+
+                            .invitation-inputs-box {
+                                display: flex;
+                                flex-direction: column;
+
+                                .form-group {
+                                    margin: 0;
+
+                                    .form-control {
+                                        margin: 0;
+                                        height: 30px;
+                                        background-color: rgba(255, 255, 255, 0.8);
+
+                                        &[type=number]::-webkit-inner-spin-button, 
+                                        &[type=number]::-webkit-outer-spin-button { 
+                                            -webkit-appearance: none;
+                                            -moz-appearance: none;
+                                            appearance: none;
+                                            margin: 0; 
+                                        }
+                                    }
+
+                                    .invitation-error-message {
+                                        color: yellow;
+                                        font-size: 12px;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                }
+
+                .broker-left-buttons {
+                    display: flex;
+                    flex-direction: row;
+                }
+
+                button {
+                    top: 10px;
+                    left: 0;
+                    right: 0;
+                    position: relative;
+                    margin: auto;
+                    padding: 15px 20px;
+                    font-size: 13px;
+                    display: none;
+                }
+
+                button.cancel-btn {
+                    display: none;
+                    background-color: $cancel;
+                    margin-left: 0;
+                    &:hover {
+                        color: #333;
+                        background-color: $cancel_h;
+                        border-color: #adadad;
+                    }
+                }
+
+                &.shown.presented {
+
+                    .left-buttons {
+                        display: flex;
+                    }
+                    button.confirm-btn {
+                        display: block;
+                        max-width: 100px;
+                    }
+
+                    &.without-buttons {
+                        button {
+                            visibility: hidden;
+                        }
+                    }
+
+                    &.my-lineups,
+                    &.my-teams {
+                        button.confirm-btn {
+                            display: block;
+                        }
+                        button.cancel-btn {
+                            display: block;
+                        }
+                    }
+                }
+
+                &.shown .list-container:before {
+                    content: "";
+                    border-style: solid;
+                    border-width: 20px 20px 20px 20px;
+                    border-color: $tab-arrow-border;
+                    position: absolute;
+                    top: 38px;
+                }
+
+                &.shown.invites-active .list-container:before {
+                    margin-left: 190px;
+                }
+                &.shown.my-teams .list-container:before {
+                    margin-left: 125px;
+                }
+                &.shown.my-lineups .list-container:before {
+                    margin-left: 280px;
+                }
+
+                &.cancel {
+                    .left-buttons {
+                        display: flex;
+                        margin-right: auto;
+
+                        button.cancel-btn {
+                            display: block;
+                        }
+                    }
+                }
+            }
+        }
+
+        button:disabled {
+            cursor: not-allowed;
+        }
+    }
+}
+.broker-loader {
+    background: rgba(0,0,0,0.3);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    display: none;
+    .loader-svg {
+        position: absolute;
+        bottom: 0;
+        top: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+        background: url('images/loader.svg') no-repeat center;
+    }
+}

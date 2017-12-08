@@ -53,7 +53,9 @@ module.exports = function (grunt) {
     cssmin: {
       target: {
         files: {
-          '<%= yeoman.dist %>/styles.css': '<%= yeoman.dist %>/styles.css'
+          '<%= yeoman.dist %>/bundle.css': '<%= yeoman.dist %>/bundle.css',
+          '<%= yeoman.dist %>/desktop.css': '<%= yeoman.dist %>/desktop.css',
+          '<%= yeoman.dist %>/mobile.css': '<%= yeoman.dist %>/mobile.css'
         }
       },
       options: {

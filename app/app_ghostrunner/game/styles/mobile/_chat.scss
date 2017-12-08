@@ -1,0 +1,497 @@
+.chat {
+    background: transparent;
+    position: absolute;
+    bottom: 5px;
+    right: 10px;
+    font-weight: $game-fw-msg;
+    padding: 2px;
+    color: $text;
+    pointer-events: all;
+
+    display: none; /*temporary hidden*/
+
+    .fa-commenting {
+        font-size: 30px;
+        cursor: pointer;
+    }
+
+    .new_messages-number {
+        position: absolute;
+        top: 1px;
+        right: 1px;
+        margin-top: 0px;
+        margin-right: -0px;
+        border-radius: 50%;
+        background-color: $warning;
+        padding: 0 3px;
+        border: 1px solid white;
+        font-size: 10px;
+        font-weight: 400;
+        // -webkit-font-smoothing: antialiased;
+        // -moz-osx-font-smoothing: auto;
+        visibility: hidden;
+
+        &.shown {
+            visibility: visible;
+        }
+    }
+}
+.chat-content {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    z-index: 9;
+    pointer-events: all;
+
+    .modal-content {
+        display: none;
+        background-color: rgba(0, 0, 0, 0.4);
+        border: 1px solid rgba(21, 196, 225, 0.75);
+        border-radius: 3px;
+        overflow: hidden;
+        width: 380px;
+
+        .modal-header {
+            padding: 2px 5px 0!important;
+            background-color: rgba(71, 151, 139, 0.7);
+            border-bottom: 1px solid rgba(21, 196, 225, 0.75);
+            button {
+                color: $text!important;
+                opacity: 0.7;
+                font-family: Arial, Helvetica, sans-serif;
+                font-size: 20px;
+                margin: 0px;
+                border-radius: 0px;
+                box-shadow: none;
+                padding: 0;
+                cursor: pointer;
+                background: transparent;
+                border: 0;
+                -webkit-appearance: none;
+            }
+            .otherUser {
+                padding-left: 10px;
+            }
+        }
+
+        .modal-body {
+            padding: 0!important;
+            color: white;
+            font-size: 12px;
+            background-color: rgba(0, 0, 0, 0.75);
+            display: flex;
+            flex-direction: column;
+            max-height: 267px;
+            overflow: hidden;
+
+            .messages-region {
+                padding: 0 5px;
+                max-height: 240px;
+                overflow-x: hidden;
+                overflow-y: auto;
+                &::-webkit-scrollbar {
+                    background-color: rgba(114, 114, 175, 0.75);
+                    width: 10px;
+                    height: 10px;
+                }
+                &::-webkit-scrollbar-thumb {
+                    background-color: rgba(83, 150, 126, 0.77);
+                }
+
+                .chat-messages {
+                    list-style: none;
+                    padding: 5px 0 0 0;
+
+                    li {
+                        max-width: 360px;
+                        margin-bottom: 2px;
+
+                        &.no-messages {
+                            .empty {
+                                font-size: 18px;
+                            }
+                        }
+
+                        .date {
+                            text-align: center;
+                            width: 100%;
+                            margin: 5px 0;
+                            position: relative;
+                            .line {
+                                height: 2px;
+                                position: absolute;
+                                top: 6px;
+                                left: 0;
+                                right: 0;
+                                background-color: rgba(255, 255, 255, 0.25);
+                            }
+                            span {
+                                color: $text;
+                                position: relative;
+                                padding: 2px 10px;
+                                background-color: $text-black;
+                            }
+                        }
+
+                        .message-container {
+                            display: flex;
+                            width: 100%;
+
+                            .time {
+                                color: rgb(138, 121, 155);
+                                width: 50px;
+                                font-size: 11px;
+                                text-align: right;
+                                flex: 0 0 60px;
+                            }
+
+                            .user {
+                                color: rgba(77, 219, 77, 0.88);
+                                font-size: 11px;
+                                text-overflow: ellipsis;
+                                overflow: hidden;
+                                width: 30px;
+                                height: 30px;
+                                position: relative;
+                                flex: 0 0 50px;
+                                visibility: hidden;
+
+                                .circle {
+                                    position: absolute;
+                                    display: grid;
+                                    margin: auto;
+                                    justify-content: center;
+                                    width: 30px;
+                                    height: 30px;
+                                    background-color: rgba(85, 85, 127, 0.8);
+                                    border-radius: 50%;
+
+                                    .first-letter {
+                                        font-size: 13px;
+                                        line-height: 30px;
+                                        text-align: center;
+                                        display: block;
+                                    }
+                                }
+                            }
+
+                            .message {
+                                color: lightgray;
+                                margin: 0 30px 0 0;
+                                position: relative;
+                                max-width: 220px;
+                                word-wrap: break-word;
+                                display: flex;
+                                align-items: center;
+                                flex: 0 0 220px;
+                                justify-content: flex-start;
+
+                                .message-text {
+                                    white-space: pre-line;
+                                    word-break: break-word;
+                                    background-color: rgba(85, 85, 127, 0.8);
+                                    border-radius: 3px;
+                                    padding: 4px 7px;
+                                }
+                            }
+
+                            &.avatar {
+                                margin-top: 10px;
+                                
+                                .user {
+                                    visibility: visible;
+                                }
+
+                                .message {
+                                    .message-text {
+                                        &:before {
+                                            content: '';
+                                            width: 0;
+                                            height: 0;
+                                            border-top: 4px solid transparent;
+                                            border-bottom: 4px solid transparent;
+                                            border-right: 4px solid rgba(85, 85, 127, 0.8);
+                                            position: absolute;
+                                            top: 4px;
+                                            left: -4px;
+                                        }
+                                        &:after {
+                                            content: none;
+                                        }
+                                    }
+                                }
+                            }
+
+                            &.me {
+                                .user {
+                                    visibility: hidden;
+                                }
+                                .message {
+                                    margin: 0 0 0 30px;
+                                    justify-content: flex-end;
+
+                                    .message-text {
+                                        background-color: rgba(89, 146, 146, 0.82);
+                                        border-radius: 3px;
+                                    }
+                                }
+
+                                &.avatar {
+                                    .user {
+                                        visibility: hidden;
+                                    }
+
+                                    .message {
+                                        .message-text {
+                                            &:after {
+                                                content: '';
+                                                width: 0;
+                                                height: 0;
+                                                border-top: 4px solid transparent;
+                                                border-bottom: 4px solid transparent;
+                                                border-left: 4px solid rgba(89, 146, 146, 0.82);
+                                                position: absolute;
+                                                top: 4px;
+                                                right: -4px;
+                                            }
+                                            &:before {
+                                                content: none;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            .chat-users {
+                list-style: none;
+                padding: 5px 0 0 0;
+                margin: 0px;
+                overflow-y: auto;
+                &::-webkit-scrollbar {
+                    background-color: rgba(114, 114, 175, 0.75);
+                    width: 10px;
+                    height: 10px;
+                }
+                &::-webkit-scrollbar-thumb {
+                    background-color: rgba(83, 150, 126, 0.77);
+                }
+
+                li {
+                    max-width: 360px;
+                    display: grid;
+                    grid-gap: 8px;
+                    background-color: rgba(128, 128, 128, 0.38);
+                    margin-bottom: 3px;
+                    padding: 3px 5px;
+
+                    &:hover {
+                        background-color: rgba(93, 164, 200, 0.49);
+                        cursor: pointer;
+                    }
+
+                    .top {
+                        display: flex;
+                        justify-content: space-between;
+
+                        .user {
+                            color: rgba(77, 219, 77, 0.88);
+                            font-size: 11px;
+
+                            .user-name {
+                                background-color: white;
+                                border-radius: 3px;
+                                padding: 1px 6px;
+                                font-size: 12px;
+                                color: black;
+                                font-weight: 600;
+                                position: relative;
+                                display: block;
+
+                                .unread-count {
+                                    margin: 2px 0 0 6px;
+                                    height: 12px;
+                                    padding: 0 3px;
+                                    color: white;
+                                    font-size: 9px;
+                                    border-radius: 50%;
+                                    background-color: $warning;
+                                    position: absolute;
+                                    top: -6px;
+                                    right: -7px;
+                                    line-height: 12px;
+                                }
+                            }
+                        }
+
+                        .time {
+                            color: rgb(138, 121, 155);
+                            font-size: 11px;
+                        }
+                    }
+
+                    .bottom {
+                        display: flex;
+                        .message {
+                            color: lightgray;
+                            background-color: rgba(85, 85, 127, 0.8);
+                            border-radius: 3px;
+                            padding: 0 3px;
+                            position: relative;
+                            overflow: hidden;
+                            display: block;
+                            height: 18px;
+                            line-height: 18px;
+                            text-overflow: ellipsis;
+                            max-width: 340px;
+                            white-space: nowrap;
+
+                            .unread-sign {
+                                font-size: 10px;
+                                color: orange;
+                                margin: 0 2px 0 0;
+                                display: none;
+
+                                &.visible {
+                                    display: inline;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            .type-message {
+                padding: 2px 5px!important;
+                border-top: 1px solid rgba(21, 196, 225, 0.75);
+                max-height: 104px;
+                display: grid;
+                grid-gap: 10px;
+                grid-template-columns: 330px 20px;
+                overflow: unset;
+                &:before,
+                &:after {
+                    content: none;
+                }
+
+                div.message {
+                    height: 20px;
+                    max-height: 100px;
+                    width: calc(100% - 30px);
+                    font-size: 12px;
+                    min-width: 330px;
+                    padding: 0 5px;
+                    background-color: rgba(123, 152, 153, 0.73);
+                    border: 1px solid rgba(21, 196, 225, 0.75);
+                    border-radius: 2px;
+                    color: white;
+                    text-align: left;
+                    display: inline-block;
+                    position: relative;
+
+                    &.long {
+                        overflow-y: auto;
+                        &::-webkit-scrollbar {
+                            background-color: rgba(114, 114, 175, 0.75);
+                            width: 10px;
+                            height: 10px;
+                        }
+                        &::-webkit-scrollbar-thumb {
+                            background-color: rgba(83, 150, 126, 0.77);
+                        }
+                    }
+
+                    .message-input {
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        padding: 0 5px 0 5px;
+                        margin: 0;
+                        opacity: 1;
+                        background-color: transparent;
+                        height: inherit;
+                        color: $text;
+                        width: 100%;
+                        line-height: 20px;
+                        resize: none;
+                        overflow: hidden;
+                        color: transparent;
+                        caret-color: $text;
+                        // color: transparent;
+                        &:focus {
+                            background-color: transparent;
+                            box-shadow: none;
+                        }
+                    }
+
+                    .placeholder {
+                        color: darkgray;
+                        line-height: 20px;
+                    }
+
+                    .message-text {
+                        pointer-events: none;
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        z-index: 99999;
+                        color: white;
+                        line-height: 20px;
+                        opacity: 1;
+                        visibility: visible;
+                        padding: 0 5px 0 5px;
+                        font-size: 14px;
+                        font-weight: 300;
+                        word-wrap: break-word;
+                        text-align: left;
+                        display: block;
+                    }
+
+                    .message-input:valid + .placeholder {
+                        visibility: hidden;
+                    }
+
+                    .message-input:valid + .message-text {
+                        visibility: visible;
+                    }
+                }
+
+                button {
+                    height: 22px;
+                    width: 25px;
+                    padding: 0 5px 5px;
+                    background-color: rgba(21, 196, 225, 0.75);
+                }
+            }
+        }
+    }
+
+    .chat-loader {
+        display: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto;
+        background-color: rgba(255, 255, 255, 0.3);
+
+        .loader-svg {
+            position: absolute;
+            bottom: 0;
+            top: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+            background: url('images/loader.svg') no-repeat center;
+        }
+
+        &.show {
+            display: block;
+        }
+    }
+}

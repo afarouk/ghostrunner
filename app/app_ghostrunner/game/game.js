@@ -1,7 +1,8 @@
 'use strict';
 
 //require game app styles
-require('./styles/main.scss');
+// require('./styles/desktop.scss');
+// require('./styles/mobile.scss');
 
 define([
 	'./scripts/app',
