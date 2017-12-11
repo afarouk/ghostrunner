@@ -9,8 +9,6 @@ define([
 		className: 'main-broker',
 		template: template,
 		regions: {
-			leftList: '#left-list',
-			rightList: '#right-list',
 			creation: '#creation-region'
 		},
 		ui: {
@@ -18,7 +16,7 @@ define([
 			rightBroker: '.right-broker',
 			teams: '[name="teams"]',
 			lineups: '[name="lineups"]',
-			cancel: '[name="cancel"]',
+			// cancel: '[name="cancel"]',
 			invite: '[name="invite"]',
 			byemail: '[name="byemail"]',
 			my_invites: '[name="my_invites"]',
@@ -28,7 +26,8 @@ define([
 			createLineup: '[name="create_lineup"]',
 			teamConfirm: '[name="team-confirm"]',
 			confirm: '[name="confirm"]',
-			loader: '#broker-loader'
+			loader: '#broker-loader',
+			cancel: '[name="cancel"]',
 		},
 		events: {
 			'click': 'onBrokerClicked'

@@ -117,24 +117,6 @@
 
         .game_canvas_wrap {
             min-height: unset;
-
-            .is-mobile {
-                width: calc(100vw - 10px);
-                height: 100%;
-                margin: 0 5px;
-                background-color: #d9d9d9;
-                position: relative;
-                display: flex;
-                justify-content: center;
-                .placeholder {
-                    background-image:url("./images/placeHolder.png");
-                    background-repeat: no-repeat;
-                    width: 100%;
-                    height: 100%;
-                    background-size: contain;
-                    background-position: center; 
-                }
-            }
         }
 
         .game_right_wrap {

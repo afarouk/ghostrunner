@@ -13,6 +13,9 @@ define([
             this.listenTo(this.connector, 'onMessage', this.onMessage, this);
         },
         onBeforeDestroy: function(){
+            this.onStopSocket();
+        },
+        onStopSocket: function() {
             this.stopListening();
             this.connector.destroy();
         },

@@ -7,7 +7,13 @@ define([
 	], function(template){
 	var IsMobileView = Mn.View.extend({
 		template: template,
-		el: '#game-layout',
+		el: '#play-the-game',
+		ui: {
+			play: '.placeholder'
+		},
+		triggers: {
+			'click @ui.play': 'open:game'
+		},
 		onRender: function() {
 			// debugger;
 		}

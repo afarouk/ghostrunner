@@ -10,10 +10,18 @@ define([
     '../views/isMobile'
     ], function(userModel, appCache, service, AppLayout, IsMobile){
     var GameController = Mn.Object.extend({
-        isMobile: function() {
+        isMobile: function(user) {
             console.log('is mobile');
             var isMobile = new IsMobile();
+            this.listenTo(isMobile, 'open:game', this.openMobileGame.bind(this, user));
             isMobile.render();
+        },
+        openMobileGame: function(user) {
+            this.start(user);
+        },
+        backToPage: function() { //temporary
+            $('#game-layout').removeClass('logged');
+            this.publicController.getSocketController().onStopSocket();
         },
         start: function(user){
             console.log('game start');

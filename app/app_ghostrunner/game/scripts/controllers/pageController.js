@@ -20,12 +20,21 @@ define([
         listenPage: function(){
             $(window).on('ghostrunner.signin', this.onSignin.bind(this));
             $(window).on('ghostrunner.signout', this.onSignout.bind(this));
+            $('#back-to-page').click(this.backToPage.bind(this));
+        },
+        backToPage: function() { //temporary
+            this.publicController.getGameController().backToPage();
         },
         onSignin: function(e, user) {
+            this.device = this.publicController.getDevice();
             this.logged = true;
             this.publicController.getUrlController().checkOptions();
-            if(window.pageName != 'BLOG') {              
-                this.publicController.getGameController().start(user);
+            if(window.pageName != 'BLOG') {
+                if (this.device === 'mobile') {
+                    this.publicController.getGameController().isMobile(user);
+                } else {
+                    this.publicController.getGameController().start(user);
+                }       
             }
         },
         onSignout: function(e, UID) {

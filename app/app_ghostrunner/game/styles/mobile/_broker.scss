@@ -6,6 +6,8 @@
     height: 100%;
     animation: inactive-animation .8s forwards;
     z-index: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
 
     &.active {
         animation: active-animation .8s forwards;
@@ -685,36 +687,61 @@
                 flex-direction: column;
                 justify-content: flex-start;
 
-                button {
-                    font-weight: $broker-fw-btn;
-                    font-size: 13px;
-                    padding: 15px 20px;
-                }
+                .broker-button-wrapper {
+                    &:not(:first-child) {
+                        border-top: 1px solid #363636;
+                    }
+                    button {
+                        font-weight: $broker-fw-btn;
+                        font-size: 15px;
+                        padding: 20px;
+                        border-radius: 0;
+                        width: 100%;
+                        text-align: center;
 
-                button.inactive {
-                    pointer-events: none;
-                }
+                        i.cancel {
+                            position: absolute;
+                            left: 0px;
+                            margin-top: -15px;
+                            padding: 10px 20px 10px 10px;
+                            font-size: 24px;
+                            display: none;
+                            z-index: 9999;
+                            color: #636363;
+                            pointer-events: all;
+                        }
+                        &.scripted {
+                            i {
+                                display: block;
+                            }
+                        }
+                    }
 
-                button.my-invites-btn {
-                    position: relative;
-                    .invites-number {
-                        position: absolute;
-                        top: 0;
-                        right: 0;
-                        margin-top: -4px;
-                        margin-right: -6px;
-                        border-radius: 50%;
-                        background-color: red;
-                        padding: 0 3px;
-                        border: 1px solid white;
-                        font-size: 12px;
-                        font-weight: $broker-fw-count;
-                        // -webkit-font-smoothing: antialiased;
-                        // -moz-osx-font-smoothing: auto;
-                        visibility: hidden;
+                    button.inactive {
+                        pointer-events: none;
+                    }
 
-                        &.shown {
-                            visibility: visible;
+                    button.my-invites-btn {
+                        position: relative;
+                        .invites-number {
+                            position: absolute;
+                            top: 0;
+                            right: 0;
+                            margin-top: -4px;
+                            margin-right: -6px;
+                            border-radius: 50%;
+                            background-color: red;
+                            padding: 0 3px;
+                            border: 1px solid white;
+                            font-size: 12px;
+                            font-weight: $broker-fw-count;
+                            // -webkit-font-smoothing: antialiased;
+                            // -moz-osx-font-smoothing: auto;
+                            visibility: hidden;
+
+                            &.shown {
+                                visibility: visible;
+                            }
                         }
                     }
                 }
@@ -726,8 +753,6 @@
                 flex-direction: column;
                 
                 .list-container {
-                    max-height: 300px;
-                    max-width: 360px;
                     overflow-y: auto;
 
                     &::-webkit-scrollbar {
@@ -754,11 +779,18 @@
                         }
 
                         li {
-                            padding: 5px 10px;
+                            padding: 15px 10px;
+                            font-size: 16px;
                             cursor: pointer;
 
+                            .mobile-proceed {
+                                position: absolute;
+                                right: 10px;
+                                font-size: 24px;
+                            }
+
                             &:hover {
-                                background-color: rgba(255,0,255,0.4);
+                                background-color: rgba(255, 0, 255, 0.4);
                             }
 
                             i.initiator {
@@ -891,7 +923,7 @@
 
                 }
 
-                .broker-left-buttons {
+                .list-buttons {
                     display: flex;
                     flex-direction: row;
                 }
@@ -920,7 +952,7 @@
 
                 &.shown.presented {
 
-                    .left-buttons {
+                    .list-buttons {
                         display: flex;
                     }
                     button.confirm-btn {
@@ -965,7 +997,7 @@
                 }
 
                 &.cancel {
-                    .left-buttons {
+                    .list-buttons {
                         display: flex;
                         margin-right: auto;
 

@@ -8,41 +8,55 @@
 window.pageName = 'INDEX';
 
 </script>
-     <!-- #header -->
+    <!-- #header -->
+    <?php if(!$isDesktop) : ?>
+        <div id="game-layout" class="game_canvas_wrap" ></div>
+        <div id="back-to-page" class="back_to_page" >
+            <i class="fa fa-arrow-left" aria-hidden="true"></i>
+            <span>Back to page</span>
+        </div>
+    <?php endif; ?>
     <header  id="header" class="game-page-header">
 
         <!-- #navigation -->
-       <?php
+        <?php
             include_once("navbar.php");
         ?>
         <!-- #navigation end -->
-    <!-- .header-content -->
+
+        <!-- .header-content -->
         <div class="header-content">
             <div class="header-content-wrapper">
-            	<div id="game-layout" class="game_canvas_wrap" ></div>
-                <div id="game_right_layout" class="game_right_wrap" >
-                    <div id="right_content" class="blog_right_content">
-                        
-                        <div id="blog_view_container" class="blog_view_container">
-
-                            <div class="image_bg">
-                                <h4 align="right" >Talkin' Baseball</br> with JimmyG</h4>
-                            </div>
+                <?php if($isDesktop) : ?>
+                    <!-- if desktop -> with blog , etc -->
+                    <div id="game-layout" class="game_canvas_wrap" ></div>
+                    <div id="game_right_layout" class="game_right_wrap" >
+                        <div id="right_content" class="blog_right_content">
                             
-                            <h4 id="header_blog_view"></h4>
+                            <div id="blog_view_container" class="blog_view_container">
 
-                            <div id="nav_picture">
-                                <img id="blog_picture" src="">
-                            </div>
+                                <div class="image_bg">
+                                    <h4 align="right" >Talkin' Baseball</br> with JimmyG</h4>
+                                </div>
+                                
+                                <h4 id="header_blog_view"></h4>
 
-                            <p id="main_blog_view" ></p>
+                                <div id="nav_picture">
+                                    <img id="blog_picture" src="">
+                                </div>
+
+                                <p id="main_blog_view" ></p>
+                                </div>
+                                <div id="bottom_button_grp" class="bottom_button_grp">
+                                <button type="button" class="btn btn-info next_prev_btn" id="blog_btn_prev" >&lt;Prev</button>
+                                <button type="button" class="btn btn-info pull-right next_prev_btn" id="blog_btn_next">Next&gt;</button>
                             </div>
-                            <div id="bottom_button_grp" class="bottom_button_grp">
-                            <button type="button" class="btn btn-info next_prev_btn" id="blog_btn_prev" >&lt;Prev</button>
-                            <button type="button" class="btn btn-info pull-right next_prev_btn" id="blog_btn_next">Next&gt;</button>
                         </div>
                     </div>
-                </div>
+                <?php else : ?>
+                    <!-- if mobile -> with play button -->
+                    <div id="play-the-game" class="play_the_game" ></div>
+                <?php endif; ?>
             </div>
 
         </div>

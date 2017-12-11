@@ -9,9 +9,20 @@ define([
     var socketConnect = Mn.Object.extend({
         initialize: function(UID) {
             var URL = config.getWebSocketRoot() + '?UID=' + UID;
+
             this.connect(URL);
 
             this.setDisconnectTimeout();
+            window.onbeforeunload = function() {
+                this.destroy();
+            }.bind(this);
+        },
+
+        destroy: function() {
+            if (this.websocket && this.websocket.readyState === this.websocket.OPEN) {
+                this.websocket.onclose = function () {};
+                this.websocket.close();
+            }
         },
 
         connect: function(URL) {
@@ -108,10 +119,6 @@ define([
 
             console.log('websocket disconnected: ', event.code + ":" + reason);
             this.updateStatus('Disconnected');
-        },
-
-        destroy: function() {
-            this.websocket.close();
         },
 
         updateStatus: function(status) {

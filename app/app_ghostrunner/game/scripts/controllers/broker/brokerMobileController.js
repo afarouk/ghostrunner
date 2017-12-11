@@ -4,7 +4,7 @@
 
 define([
     '../../appCache',
-    './brokerStateMixin',
+    './brokerStateMobileMixin',
     '../../views/mainBrokerMobile',
     '../../views/partials/teamsList',
     '../../views/partials/lineupsList',
@@ -64,8 +64,7 @@ define([
         },
 
         destroyCurrentView: function() {
-            var currentView = this.view.getRegion('leftList').currentView ||
-                this.view.getRegion('leftList').currentView;
+            var currentView = this.view.getRegion('listRegion').currentView ;
             if (currentView) {
                 currentView.destroy();
             }
@@ -76,7 +75,7 @@ define([
             var emptyList = new EmptyListView({
                 model: new Backbone.Model({message: message})
             });
-            this.view.showChildView(where, emptyList);
+            this.showViewInRegion(emptyList, where);
         },
 
         // Left part !!!
@@ -94,7 +93,7 @@ define([
                         if (response.count > 0) {
                             this.showUsersList(response);
                         } else {
-                            this.showEmptyList('leftList', 'No users are present.');
+                            this.showEmptyList('invite-wrapper', 'No users are present.');
                         }
                     }.bind(this), function(xhr){
                         this.hideLoader();
@@ -119,7 +118,7 @@ define([
             usersList = new UsersList({
                     collection: collection
                 });
-            this.view.showChildView('leftList', usersList);
+            this.showViewInRegion(usersList, 'invite-wrapper');
             this.listenTo(usersList, 'user:selected', this.onSelectUser.bind(this));
         },
 
@@ -129,14 +128,17 @@ define([
                     this.credentials = _.extend(creds, {
                         callback: this.onInvitationByEmailSent.bind(this, view)
                     });
-                    this.view.ui.confirm.attr('disabled', false);
+                    this.selectedUser = user;
+                    this.confirmUser();
                 } else {
-                    this.view.ui.confirm.attr('disabled', true);
+                    // this.view.ui.confirm.attr('disabled', true);
                 }
             } else {
-                this.view.ui.confirm.attr('disabled', false);
+                // this.view.ui.confirm.attr('disabled', false);
+                this.selectedUser = user;
+                this.confirmUser();
             }
-            this.selectedUser = user;
+            // this.selectedUser = user;
         },
 
         afterInvitationSent: function(success, result) {
@@ -195,7 +197,7 @@ define([
                 collection: collection,
                 state: switchToState
             });
-            this.view.showChildView('leftList', teamsList);
+            this.showViewInRegion(teamsList, 'teams-wrapper');
             //team
             this.listenTo(teamsList, 'team:selected', this.onSelectTeam.bind(this));
             this.listenTo(teamsList, 'team:remove', this.onRemoveTeam.bind(this));
@@ -227,7 +229,7 @@ define([
             teamsList = new TeamsList({
                 collection: collection
             });
-            this.view.showChildView('leftList', teamsList);
+            this.showViewInRegion(teamsList, 'teams-wrapper');
             //team
             this.listenTo(teamsList, 'team:selected', this.onSelectTeam.bind(this));
             this.listenTo(teamsList, 'team:remove', this.onRemoveTeam.bind(this));
@@ -383,7 +385,7 @@ define([
                             this.showMyLineupsList(switchToState, response);
                         } else {
                             if (switchToState === 'my_lineups') {
-                                this.showEmptyList('leftList', 'No lineups created.');
+                                this.showEmptyList('lineups-wrapper', 'No lineups created.');
                             } else {
                                 this.disableLineUps();
                             }
@@ -404,7 +406,7 @@ define([
                 collection: collection,
                 state: switchToState
             });
-            this.view.showChildView('leftList', lineupsList);
+            this.showViewInRegion(lineupsList, 'lineups-wrapper');
             //lineups
             this.listenTo(lineupsList, 'lineup:selected', this.onSelectLineup.bind(this));
         },
@@ -456,7 +458,7 @@ define([
                         if( response.games.length > 0 ){
                             this.showInvitesList(response);
                         } else {
-                            this.showEmptyList('leftList', 'No invitations outstanding.');
+                            this.showEmptyList('invitations-wrapper', 'No invitations outstanding.');
                         }
                     }.bind(this), function(xhr){
                         this.hideLoader();
@@ -469,7 +471,7 @@ define([
             var invitesList = new InvitesList({
                 collection: new Backbone.Collection(response.games)
             });
-            this.view.showChildView('leftList', invitesList);
+            this.showViewInRegion(invitesList, 'invitations-wrapper');
             this.listenTo(invitesList, 'invitation:selected', this.onSelectInvitation.bind(this));
         },
         onSelectInvitation: function(invitation) {
@@ -490,7 +492,7 @@ define([
                         if( response.games.length > 0 ){
                             this.showGamesList(response);
                         } else {
-                            this.showEmptyList('leftList', 'No active or paused games.');
+                            this.showEmptyList('games-wrapper', 'No active or paused games.');
                         }
                     }.bind(this), function(xhr){
                         this.hideLoader();
@@ -513,7 +515,7 @@ define([
             var gamesList = new GamesList({
                 collection: new Backbone.Collection(response.games)
             });
-            this.view.showChildView('leftList', gamesList);
+            this.showViewInRegion(gamesList, 'games-wrapper');
             this.listenTo(gamesList, 'game:selected', this.onSelectGame.bind(this));
         },
         onSelectGame: function(game) {
