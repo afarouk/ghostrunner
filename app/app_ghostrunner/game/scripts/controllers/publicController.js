@@ -14,6 +14,7 @@ define([
     './broker/brokerController', //broker part with user/game selection
     './broker/brokerMobileController', //broker part with user/game selection
     './broker/createTeamController', // select players in team/lineUp
+    './broker/createTeamMobileController', // select players in team/lineUp
 
     './game/gameStateController', //make changes/calls related on game model state
     './game/stateManager', //manage states for game model
@@ -25,7 +26,7 @@ define([
     './game/playerActionsController', //show buttons related on role
     './broker/playerReplacementController'
     ], function( pageController, gameController, urlController, chatController, 
-        modalsController, choiceController, brokerController, brokerMobileController, createTeamController,
+        modalsController, choiceController, brokerController, brokerMobileController, createTeamController, createTeamMobileController,
         stateController , stateManager, signalManager, socketController, 
         fieldController,interfaceController, informationTableController, 
         playerActionsController, playerReplacementController) {
@@ -54,7 +55,7 @@ define([
             return window.ghostrunner.isDesktop ? brokerController : brokerMobileController;
         },
         getCreateTeamController: function() {
-            return createTeamController;
+            return window.ghostrunner.isDesktop ? createTeamController : createTeamMobileController;
         },
 
         //game

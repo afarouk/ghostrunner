@@ -24,7 +24,12 @@
         height: 100%;
 
         .creation-region {
-            display: none;
+            display: flex;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            left: 100%;
+            transition: 0.6s;
         }
 
         &.creation-state {
@@ -32,13 +37,12 @@
                 display: none;
             }
             .creation-region {
-                display: flex;
-                width: 100%;
-                height: 100%;
+                left: 0;
             }
         }
 
         .creation-region {
+            overflow: hidden;
             .create-team,
             .create-lineUp {
                 width: 100%;
@@ -48,6 +52,7 @@
                 }
 
                 .creation-header {
+                    position: fixed;
                     width: 100%;
                     padding: 2px;
                     display: flex;
@@ -55,15 +60,34 @@
                     align-items: center;
                     background-color: rgba(255, 255, 255, 0.3);
 
-                    button.cancel-btn {
-                        background-color: $cancel;
-                        &:hover {
-                            color: #333;
-                            background-color: $cancel_h;
-                            border-color: #adadad;
+                    &.lineup-ch {
+                        flex-direction: column;
+                        justify-content: unset;
+                        align-items: unset;
+
+                        .first-row,
+                        .second-row {
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: center;
                         }
                     }
 
+                    .cancel {
+                        font-size: 40px;
+                        margin-left: 5px;
+                    }
+
+                    .send {
+                        font-size: 40px;
+                        margin-right: 5px;
+                        color: lightgreen;
+                        &.disabled {
+                            color: lightgray;
+                        }
+                    }
+
+                    .second-row,
                     .team-info {
                         display: flex;
                         color: white;
@@ -78,6 +102,13 @@
                             padding: 15px;
                             text-align: center;
                             line-height: 50px;
+                        }
+
+                        label {
+                            background-color: rgba(0,0,0,0.4);
+                            padding: 3px 5px;
+                            font-weight: $broker-fw-tab;
+                            margin: 0;
                         }
 
                         .block {
@@ -125,11 +156,16 @@
                 }
 
                 .players-list-container {
-                    margin-top: 20px;
+                    margin-top: 50px;
                     overflow-y: auto;
-                    border: 1px solid white;
-                    max-height: calc(100% - 100px);
+                    max-height: 100%;
+                    // border: 1px solid white;
+                    // max-height: calc(100% - 100px);
                     border-collapse: collapse;
+
+                    &.lineup-ch {
+                        margin-top: 80px;
+                    }
 
                     &.masked {
                         opacity: 0.6;
@@ -288,11 +324,129 @@
                     }
 
                     .lineUp-players {
-                        padding: 0 5px;
+                        padding: 0;
+
+                        .lineUp-player {
+                            display: flex;
+                            flex-direction: column;
+                            margin-bottom: 5px;
+
+                            .select-player {
+                                width: 100%;
+                                justify-content: flex-end;
+                                align-items: center;
+                                font-size: 15px;
+                                padding: 5px 1px;
+                                display: flex;
+                                color: white;
+                                background-color: #a0cff4a8;
+
+                                .player-expand {
+                                    width: 30px;
+                                    height: 30px;
+                                    display: flex;
+                                    align-items: center;
+                                    justify-content: center;
+                                    margin-right: 5px;
+                                    .expand {
+                                        text-align: center;
+                                        font-size: 26px;
+                                    }
+                                    .down {
+                                        display: inline;
+                                    }
+                                    .up {
+                                        display: none;
+                                    }
+                                }
+
+                                .player-name {
+                                    width: calc(100% - 100px);
+                                    line-height: 30px;
+                                    height: 30px;
+                                }
+                                .player-quality {
+                                    width: 40px;
+                                }
+                                .with-checkbox {
+                                    width: 18px;
+                                    margin-left: 5px;
+                                    margin-right: 5px;
+
+                                    input {
+                                        width: 18px;
+                                        height: 18px;
+                                    }
+                                }
+
+                                .with-select {
+                                    padding: 5px;
+                                    select {
+                                        height: 25px;
+                                        width: 60px;
+                                        font-size: 12px;
+                                        font-weight: $broker-fw-sel;
+                                        color: $players-black;
+                                        border-radius: 0;
+                                        -webkit-border-radius: 0px;
+                                        cursor: pointer;
+                                        &.position {
+                                            background-color: #00b0f0;
+                                            &:disabled {
+                                                opacity: 0.7;
+                                                cursor: not-allowed;
+                                            }
+                                        }
+                                        &.batting {
+                                            background-color: #ffe699;
+                                            &:disabled {
+                                                opacity: 0.7;
+                                                cursor: not-allowed;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+                            &.expanded {
+                                .select-player {
+                                    .player-expand {
+                                        .down {
+                                            display: none;
+                                        }
+                                        .up {
+                                            display: inline;
+                                        }
+                                    }
+                                }
+                            }
+
+                            .player-info {
+                                transition: 0.6s;
+                                color: white;
+                                display: none;
+                            }
+
+                            &.expanded {
+                                .player-info {
+                                    display: flex;
+                                }
+                            }
+                        }
 
                         &.without-checkbox {
                             table thead tr .choise {
                                 display: none;
+                            }
+                        }
+                        .select {
+                            width: 70px;
+
+                            &.position {
+                                background-color: #00b0f0;
+                            }
+                            &.batting {
+                                background-color: #ffe699;
                             }
                         }
                         table {
@@ -714,6 +868,16 @@
                             i {
                                 display: block;
                             }
+
+                            & + .broker-list {
+                                .mobile-proceed {
+                                    display: inline;
+                                }
+
+                                .create_lineup {
+                                    display: block;
+                                }
+                            }
                         }
                     }
 
@@ -725,8 +889,6 @@
                         position: relative;
                         .invites-number {
                             position: absolute;
-                            top: 0;
-                            right: 0;
                             margin-top: -4px;
                             margin-right: -6px;
                             border-radius: 50%;
@@ -751,6 +913,16 @@
                 margin: 0;
                 display: flex;
                 flex-direction: column;
+
+                .create_lineup {
+                    display: none;
+                    padding: 5px 60px;
+
+                    button {
+                        top: 0;
+                        display: block;
+                    }
+                }
                 
                 .list-container {
                     overflow-y: auto;
@@ -787,6 +959,7 @@
                                 position: absolute;
                                 right: 10px;
                                 font-size: 24px;
+                                display: none;
                             }
 
                             &:hover {
@@ -834,7 +1007,10 @@
                             }
 
                             &.my-game {
-                                padding: 0;
+                                padding: 15px 10px;
+                                font-size: 16px;
+                                display: flex;
+                                align-items: center;
                                 div {
                                     cursor: not-allowed;
                                     padding: 5px 10px;
@@ -984,16 +1160,6 @@
                     border-color: $tab-arrow-border;
                     position: absolute;
                     top: 38px;
-                }
-
-                &.shown.invites-active .list-container:before {
-                    margin-left: 190px;
-                }
-                &.shown.my-teams .list-container:before {
-                    margin-left: 125px;
-                }
-                &.shown.my-lineups .list-container:before {
-                    margin-left: 280px;
                 }
 
                 &.cancel {

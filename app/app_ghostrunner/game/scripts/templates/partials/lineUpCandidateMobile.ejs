@@ -1,0 +1,31 @@
+<div class="select-player">
+	<div class="player-expand toggle-expand">
+		<i class="fa fa-chevron-circle-down expand down" aria-hidden="true"></i>
+		<i class="fa fa-chevron-circle-down expand up" aria-hidden="true"></i>
+	</div>
+	<div class="player-name toggle-expand"><%= playerName %></div>
+	<div class="player-quality"><%= quality %></div>
+	<div class="with-checkbox starter">
+		<input type="radio" name="select-player"></input>
+	</div>
+</div>
+<div class="player-info">
+	<table>
+		<thead>
+			<tr>
+				<% _.each(headings, function(heading){ %>
+					<td><%= heading.displayText %></td>
+				<% }) %>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<% _.each(properties, function(prop){ %>
+					<% if (prop) { %>
+						<td class="<%= prop.className %>"><%= prop.displayValue %></td>
+					<% } %>
+				<% }) %>
+			</tr>
+		</tbody>
+	</table>
+</div>

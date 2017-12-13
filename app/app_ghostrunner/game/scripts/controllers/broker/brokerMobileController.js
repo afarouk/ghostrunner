@@ -241,8 +241,9 @@ define([
             } else {
                 this.selectedTeam = team;
                 this.selectedTeam.unset('lineUpId', {silent: true});
-                this.view.ui.teamConfirm.attr('disabled', true);
-                this.view.ui.confirm.attr('disabled', false);
+                // this.view.ui.teamConfirm.attr('disabled', true);
+                // this.view.ui.confirm.attr('disabled', false);
+                this.selectCandidate();
             }
         },
 
@@ -413,7 +414,7 @@ define([
 
         onSelectLineup: function(lineup) {
             this.selectedLineup = lineup;
-            this.view.ui.confirm.attr('disabled', false);
+            this.onLineupSelected();
         },
 
         //user lineup selection scenario
@@ -476,7 +477,7 @@ define([
         },
         onSelectInvitation: function(invitation) {
             this.selectedGame = invitation;
-            this.view.ui.confirm.attr('disabled', false);
+            this.confirmGame();
         },
 
         //games
@@ -520,7 +521,8 @@ define([
         },
         onSelectGame: function(game) {
             this.selectedGame = game;
-            this.view.ui.confirm.attr('disabled', false);
+            this.confirmGame();
+            // this.view.ui.confirm.attr('disabled', false);
         },
 
         //end of right part !!!

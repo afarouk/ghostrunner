@@ -385,6 +385,7 @@ define([
                             if (switchToState === 'my_lineups') {
                                 this.showEmptyList('leftList', 'No lineups created.');
                             } else {
+                                this.showEmptyList('leftList', 'Please, create your lineup.');
                                 this.disableLineUps();
                             }
                         }
