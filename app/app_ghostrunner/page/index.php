@@ -2,7 +2,7 @@
     require_once("preprocessing.php");
     require_once("header.php");
 ?>
-<script src='https://www.google.com/recaptcha/api.js'></script>
+<!-- <script src='https://www.google.com/recaptcha/api.js'></script> -->
 <script type="application/javascript">
 
 window.pageName = 'INDEX';
@@ -132,7 +132,7 @@ window.pageName = 'INDEX';
                             </div>
                             <input type="text" name="subject" placeholder="Subject">
                             <textarea name="message" placeholder="Message *" id="textarea"></textarea>
-                           <div class="g-recaptcha" data-theme ="dark" data-sitekey="6Lc6wi0UAAAAAGyTUKFUHwKhKf6iZfczTSERID5S"></div>
+                           <!-- <div class="g-recaptcha" data-theme ="dark" data-sitekey="6Lc6wi0UAAAAAGyTUKFUHwKhKf6iZfczTSERID5S"></div> -->
                             <br>
                             <input type="submit" name="submit" value="Send Message">
                         </form>

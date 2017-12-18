@@ -43,7 +43,8 @@ body {
     -webkit-transition: .6s;
     background-image:url("./images/camden_yards_bw.png");
     background-repeat: repeat-x;
-    background-size: 100% 100%;
+    background-size: 200% 100%;
+    background-position: center;
     width: 100vw;
     height: calc(100vh - 125px);
     position: relative;
@@ -55,9 +56,18 @@ body {
     left: 100%;
     z-index: 9;
 
+    .information-table .information-table-container .table-column.left-table {
+        display: none;
+    }
+
+
     &.logged {
         // display: flex;
         left: 0;
+
+        .information-table .information-table-container .table-column.left-table {
+            display: flex;
+        }
 
         & ~ nav,
         // & ~ header,

@@ -14,10 +14,22 @@
     		flex-direction: column;
     		pointer-events: all;
 
+    		&.left-table {
+    			left: -200px;
+    		}
+
+    		&.right-table {
+	    		right: -200px;
+	    	}
+
     		&.left-table,
 	    	&.right-table {
 	    		width: 200px;
 	    		height: 420px;
+	    		background-color: rgba(0,0,0,0.5);
+    			z-index: 9;
+    			position: absolute;
+    			transition: 0.6s;
 	    	}
 
 	    	&.left-table,
@@ -308,7 +320,8 @@
 											}
 											&:not(:first-child) {
 												padding-left: 8px;
-												min-width: 18px;
+												min-width: 15px;
+    											font-size: 10px;
 
 												&:empty {
 													min-width: unset;
@@ -407,6 +420,46 @@
 	    		}
 	    	}
     	}
+
+    	&.home-panel-show {
+    		.table-column.left-table {
+    			left: 0;
+    		}
+    	}
+
+    	&.away-panel-show {
+    		.table-column.right-table {
+    			right: 0;
+    		}
+    	}
+
+    	.show-panels-buttons {
+		    position: absolute;
+		    bottom: 85px;
+		    width: 100%;
+		    display: flex;
+		    justify-content: space-between;
+
+		    .team-panel-button {
+			    display: flex;
+			    flex-direction: column;
+			    background-color: white;
+			    color: black;
+			    padding: 5px;
+			    z-index: 99999;
+    			pointer-events: all;
+
+			    &.home {
+			    	border-bottom-right-radius: 5px;
+			    	border-top-right-radius: 5px;
+			    }
+
+			    &.away {
+			    	border-bottom-left-radius: 5px;
+			    	border-top-left-radius: 5px;
+			    }
+			}
+		}
     }
 }
 .player-actions {
@@ -424,7 +477,7 @@
     .player-actions-container {
 	    background: rgba(10, 30, 60, 0.85);
 	    position: relative;
-	    max-width: 640px;
+	    max-width: 100%;
 
 	    .actions-available {
 			padding: 5px;
