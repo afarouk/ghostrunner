@@ -337,14 +337,14 @@
 }
 .modals-layout {
     .players-card {
-        box-shadow: 6px 7px 16px 3px rgba(0,0,0,0.75);
-        margin: -20px;
+        margin: 0;
         padding: 0;
-        width: 480px;
-        height: 500px;
-        border: 2px solid #a0afcb;
-        border-radius: 3px;
-        position: relative;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        position: absolute;
 
         .card-player {
             background-color: $players-card-back;
@@ -353,12 +353,12 @@
             position: relative;
 
             .player-photo {
-                padding: 5px;
-                height: 170px;
+                padding: 1px 2px;
+                height: 140px;
 
                 img {
-                    width: 170px;
-                    height: 160px;
+                    width: 150px;
+                    height: 140px;
                     border: 1px solid black;
                     background-color: white;
                 }
@@ -374,37 +374,37 @@
 
                     h3.name {
                         color: white;
-                        font-size: 20px;
+                        font-size: 16px;
                         font-weight: 500;
-                        text-align: center;
+                        text-align: left;
                         margin: 0;
-                        line-height: 20px;
+                        line-height: 16px;
                     }
                     h4.position {
                         color: white;
-                        font-size: 16px;
+                        font-size: 13px;
                         font-weight: 500;
-                        text-align: center;
+                        text-align: left;
                         margin: 0;
-                        line-height: 20px;
+                        line-height: 16px;
                     }
                 }
 
                 .player-additional {
-                    font-size: 12px;
+                    font-size: 11px;
                     font-weight: 500;
-                    color: $players-card-black;
+                    color: #121041;
                     display: flex;
                     flex-direction: column;
                     padding: 2px 5px;
                     background-size: 0.4em 0.4em;
-                    line-height: 15px;
+                    line-height: 14px;
                     width: 280px;
-                    height: 120px;
+                    height: 110px;
 
                     span {
-                        font-size: 18px;
-                        line-height: 24px;
+                        font-size: 14px;
+                        line-height: 20px;
                     }
                 }
             }
@@ -413,7 +413,7 @@
                 position: absolute;
                 right: -2px;
                 top: -3px;
-                font-size: 14px;
+                font-size: 34px;
                 color: black;
                 background-color: $players-card-back;
                 opacity: 1;
@@ -424,7 +424,7 @@
 
         .card-stats {
             .record {
-                padding: 5px 2px 0;
+                padding: 1px 2px 0;
                 .records-title {
                     h4 {
                         width: 200px;
@@ -435,7 +435,7 @@
                     }
                 }
                 .records-table {
-                    font-size: 11px;
+                    font-size: 10px;
                     font-weight: $game-fw-tab;
                     color: $players-card-black;
                     text-align: center;
@@ -445,7 +445,7 @@
                         background: rgba(255, 255, 255, 0.65);
                         width: 100%;
                         i.divider {
-                            padding: 0 2px;
+                            padding: 0;
                         }
 
                         tr {
@@ -469,7 +469,7 @@
                                 }
                                 td {
                                     font-weight: 900;
-                                    font-size: 11px;
+                                    font-size: 10px;
                                 }
                             }
                         }
