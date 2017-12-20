@@ -1,0 +1,21 @@
+<div class="actions-available">
+	<div class="actions-buttons">
+		<div class="player-actions-block">
+			<% _.each(playerActions, function(button) { %>
+				<div class="action-button stroke" data-type="interface-btn" data-move="<%= button.gameMove %>" <% if (!button.enabled || editStarted) { %>disabled<% } %> >
+					<span><%= button.displayText%></span>
+				</div>
+			<% }); %>
+		</div>
+		<div class="lineUp-actions-block">
+			<div data-type="interface-btn" data-move="LINEUP_EDIT" class="action-button edit <% if (editStarted) { %>disabled<% } %>" >
+				<span>START</span>
+			</div>
+			<div data-type="interface-btn" data-move="LINEUP_DONE" class="action-button edit <% if (!editStarted) { %>disabled<% } %>" >
+				<span>DONE</span></div>
+			</div>
+	</div>
+</div>
+<div class="waiting-msg">
+	<div class="waiting-for-turn"></div>
+</div>

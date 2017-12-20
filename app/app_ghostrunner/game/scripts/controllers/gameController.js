@@ -22,6 +22,7 @@ define([
         backToPage: function() { //temporary
             $('#game-layout').removeClass('logged');
             this.publicController.getSocketController().onStopSocket();
+            this.appState = false;
         },
         start: function(user){
             console.log('game start');

@@ -476,65 +476,64 @@
 
     .player-actions-container {
 	    background: rgba(10, 30, 60, 0.85);
-	    position: relative;
-	    max-width: 100%;
+    	width: 100%;
 
 	    .actions-available {
-			padding: 5px;
-		    display: flex;
+			display: flex;
+			padding: 0;
 		    height: 85px;
-		    min-width: 480px;
-		    flex-direction: column;
+		    width: 100%;
+		    flex-direction: row;
 		    justify-content: space-between;
 		    transition: .8s;
 		    opacity: 1;
-
-			.team-role {
-		    	color: $text;
-		        font-weight: 500;
-		    }
 
 		    .actions-buttons {
 		    	display: flex;
     			flex-direction: row;
     			justify-content: space-between;
+    			padding: 10px;
+    			width: 100%;
 
     			.player-actions-block {
-    				padding-top: 30px;
+    				padding: 0;
 				    display: flex;
 				    justify-content: space-between;
+				    width: 50%;
+				    margin-right: 10px;
     			}
 
     			.lineUp-actions-block {
-    				margin-left: 15px;
-				    min-width: 140px;
-				    height: 70px;
-    				margin-top: -13px;
-				    display: flex;
-				    flex-direction: column;
+    				display: flex;
+				    flex-direction: row;
 				    justify-content: space-between;
-
-				    .edit-buttons {
-				    	display: flex;
-    					justify-content: space-between;
-    					height: 30px;
-				    }
+				    padding: 0;
+				    width: 50%;
     			}
 
-		        button {
-		            font-size: 9px;
-				    font-weight: $game-fw-btn;
-				    padding: 6px 5px;
+		        .action-button {
+		            font-size: 14px;
+				    text-align: center;
+				    font-weight: 600;
+				    width: 80px;
+				    border-radius: 5px;
 				    margin: 0 0 0 5px;
+				    color: white;
+				    word-spacing: 100vw;
+				    display: flex;
+				    align-items: center;
+				    justify-content: center;
 
 				    &.edit {
-				    	border-radius: 0;
+				    	background-color: #00b3ff;
 				    }
-				    &.dark {
-				    	background-color: black;
+				    &.stroke {
+				    	background-color: #09df09;
 				    }
-				    &:disabled {
+				    &.disabled {
 				    	cursor: not-allowed;
+				    	pointer-events: none;
+				    	background-color: #aaaaaa;
 				    }
 		        }
 		    }
