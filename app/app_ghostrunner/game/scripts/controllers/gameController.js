@@ -13,6 +13,7 @@ define([
         isMobile: function(user) {
             console.log('is mobile');
             var isMobile = new IsMobile();
+            this.stopListening();
             this.listenTo(isMobile, 'open:game', this.openMobileGame.bind(this, user));
             isMobile.render();
         },
@@ -101,8 +102,10 @@ define([
         stop: function(uid) {
             console.log('game stop');
             var user = appCache.get('user');
-            user.kill();
-            this.publicController.getStateController().onPlayerLogout();
+            if (user) {
+                user.kill();
+                this.publicController.getStateController().onPlayerLogout();
+            }
         },
         destroy: function() {
             this.appState = undefined;

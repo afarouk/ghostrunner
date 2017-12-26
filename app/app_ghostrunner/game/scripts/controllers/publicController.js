@@ -25,12 +25,13 @@ define([
     './game/informationTableController', //shows table with game scores, current players info, etc
     './game/playerActionsController', //show buttons related on role
     './game/playerActionsMobileController',
-    './broker/playerReplacementController'
+    './broker/playerReplacementController',
+    './broker/playerReplacementMobileController'
     ], function( pageController, gameController, urlController, chatController, 
         modalsController, choiceController, brokerController, brokerMobileController, createTeamController, createTeamMobileController,
         stateController , stateManager, signalManager, socketController, 
         fieldController,interfaceController, informationTableController, 
-        playerActionsController, playerActionsMobileController, playerReplacementController) {
+        playerActionsController, playerActionsMobileController, playerReplacementController, playerReplacementMobileController) {
     var PublicController = Mn.Object.extend({
         //base
         getPageController: function() {
@@ -88,7 +89,7 @@ define([
             return window.ghostrunner.isDesktop ? playerActionsController : playerActionsMobileController;
         },
         getPlayerReplacementController: function() {
-            return playerReplacementController;
+            return window.ghostrunner.isDesktop ? playerReplacementController : playerReplacementMobileController;
         },
         getDevice: function() {
             return window.ghostrunner.isDesktop ? 'desktop' : 'mobile';

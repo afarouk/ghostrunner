@@ -12,11 +12,27 @@ define([
 		modelEvents: {
             'change': 'render'
         },
+        ui: {
+        	actionsButtons: '.actions-buttons'
+        },
 		events: {
 			'click .action-button': 'onAction'
 		},
 		onRender: function() {
 			console.log(this.model.toJSON());
+		},
+		isEditStarted: function(game) {
+			var editStarted = game.get('thisUser').state === 'MAKE_YOUR_MOVE' && 
+							  game.get('thisUser').substate === 'SECONDARY_STATE' ? true : false;
+
+			setTimeout(function() {
+				if (editStarted) {
+					this.ui.actionsButtons.addClass('edit-started');
+				} else {
+
+				}
+			}.bind(this), 50);
+			return editStarted;
 		},
 		serializeData: function() {
 			var game = appCache.get('game'),
@@ -25,8 +41,7 @@ define([
 					displayText: this.model.get('displayText'),
 					playerActions: _.where(buttons, {buttonType: 'PLAY_ACTION'}),
 					lineUpActions: _.where(buttons, {buttonType: 'LINEUP_ACTION'}),
-					editStarted: game.get('thisUser').state === 'MAKE_YOUR_MOVE' && 
-						game.get('thisUser').substate === 'SECONDARY_STATE' ? true : false
+					editStarted: this.isEditStarted(game)
 				};
 			return templateData;
 		},

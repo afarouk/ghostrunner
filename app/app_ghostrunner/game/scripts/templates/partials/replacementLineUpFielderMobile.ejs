@@ -1,0 +1,95 @@
+<% if(flag) { %>
+	<div class="select-player">
+		<div class="player-expand toggle-expand">
+			<i class="fa fa-chevron-circle-down expand down" aria-hidden="true"></i>
+			<i class="fa fa-chevron-circle-down expand up" aria-hidden="true"></i>
+		</div>
+		<div class="player-name toggle-expand"><%= playerName %></div>
+		<div class="with-select">
+			<select name="player-position" class="position" disabled>
+				<option selected value>---</option>
+				<% _.each(positions, function(position){ %>
+					<option value="<%= position.enumText %>"><%= position.displayText %></option>
+				<% }) %>
+			</select>
+		</div>
+		<div class="with-select">
+			<select name="batting-order" class="batting" disabled>
+				<option selected value>---</option>
+				<% for (var index = 1; index <=8; index++) { %>
+					<option value="<%= index %>">BO:<%= index %></option>
+				<% } %>
+			</select>
+		</div>
+		<div class="with-checkbox hidden">
+			<input type="checkbox" name="select-player" disabled></input>
+		</div>
+	</div>
+	<div class="player-info">
+		<table>
+			<thead>
+				<tr>
+					<% _.each(headings, function(heading){ %>
+						<td><%= heading.displayText %></td>
+					<% }) %>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<% _.each(properties, function(prop){ %>
+						<% if (prop) { %>
+							<td class="<%= prop.className %>"><%= prop.displayValue %></td>
+						<% } %>
+					<% }) %>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+<% } else { %>
+	<div class="select-player">
+		<div class="player-expand toggle-expand">
+			<i class="fa fa-chevron-circle-down expand down" aria-hidden="true"></i>
+			<i class="fa fa-chevron-circle-down expand up" aria-hidden="true"></i>
+		</div>
+		<div class="player-name toggle-expand"><%= playerName %></div>
+		<div class="with-select">
+			<select name="player-position" class="position">
+				<option selected value>---</option>
+				<% _.each(positions, function(position){ %>
+					<option value="<%= position.enumText %>"><%= position.displayText %></option>
+				<% }) %>
+			</select>
+		</div>
+		<div class="with-select">
+			<select name="batting-order" class="batting" disabled>
+				<option selected value>---</option>
+				<% for (var index = 1; index <=8; index++) { %>
+					<option value="<%= index %>">BO:<%= index %></option>
+				<% } %>
+			</select>
+		</div>
+		<div class="with-checkbox hidden">
+			<input type="checkbox" name="select-player" disabled></input>
+		</div>
+	</div>
+	<div class="player-info">
+		<table>
+			<thead>
+				<tr>
+					<% _.each(headings, function(heading){ %>
+						<td><%= heading.displayText %></td>
+					<% }) %>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<% _.each(properties, function(prop){ %>
+						<% if (prop) { %>
+							<td class="<%= prop.className %>"><%= prop.displayValue %></td>
+						<% } %>
+					<% }) %>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+<% } %>

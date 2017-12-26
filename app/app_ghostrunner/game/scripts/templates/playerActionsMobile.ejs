@@ -9,11 +9,19 @@
 		</div>
 		<div class="lineUp-actions-block">
 			<div data-type="interface-btn" data-move="LINEUP_EDIT" class="action-button edit <% if (editStarted) { %>disabled<% } %>" >
-				<span>START</span>
+				<span>Edit Lineup</span>
 			</div>
 			<div data-type="interface-btn" data-move="LINEUP_DONE" class="action-button edit <% if (!editStarted) { %>disabled<% } %>" >
-				<span>DONE</span></div>
+				<span>End Edit</span>
 			</div>
+		</div>
+		<div class="lineUp-edit-buttons">
+			<% _.each(lineUpActions, function(button) { %>
+				<div class="action-button stroke" data-type="interface-btn" data-move="<%= button.gameMove %>" <% if (!button.enabled || editStarted) { %>disabled<% } %> >
+					<span><%= button.displayText%></span>
+				</div>
+			<% }); %>
+		</div>
 	</div>
 </div>
 <div class="waiting-msg">

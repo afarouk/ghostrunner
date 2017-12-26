@@ -493,7 +493,14 @@
     			flex-direction: row;
     			justify-content: space-between;
     			padding: 10px;
+    			margin-left: 0;
     			width: 100%;
+    			transition: 0.6s;
+    			transition-delay: 0.01s;
+
+    			&.edit-started {
+    				margin-left: -50%;
+    			}
 
     			.player-actions-block {
     				padding: 0;
@@ -536,6 +543,18 @@
 				    	background-color: #aaaaaa;
 				    }
 		        }
+
+		        .lineUp-edit-buttons {
+    				padding: 0;
+				    display: flex;
+				    justify-content: space-between;
+				    width: 50%;
+				    margin-left: 10px;
+
+				    .action-button {
+				    	font-size: 12px;
+				    }
+    			}
 		    }
 		}
 

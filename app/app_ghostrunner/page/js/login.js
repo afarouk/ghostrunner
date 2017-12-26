@@ -336,6 +336,10 @@ define([
     		} else {
     			$('.login-btn').text('LOGIN');
     		}
+            // close login panel after action
+            if ($('.nav-menu-links').is(':visible')) {
+                $('.nav-menu-toggle').click();
+            }
     	},
     	//...................
         
