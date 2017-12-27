@@ -97,8 +97,10 @@
                         font-size: 14px;
 
                         .replace-msg {
-                            font-size: 16px;
-                            color: $text-black;
+                            // font-size: 16px;
+                            // color: $text-black;
+                            font-size: 13px;
+                            color: #d4ffd4;
                             padding: 15px;
                             text-align: center;
                             line-height: 50px;
@@ -155,6 +157,14 @@
                     }
                 }
 
+                .players-list-scroll {
+                    margin-top: 55px;
+                    overflow-y: auto;
+                    max-height: 100%;
+                    border-collapse: collapse;
+                }
+
+                .players-list-availablePlayers,
                 .players-list-container {
                     margin-top: 50px;
                     overflow-y: auto;
@@ -162,6 +172,11 @@
                     // border: 1px solid white;
                     // max-height: calc(100% - 100px);
                     border-collapse: collapse;
+
+                    &.replacement {
+                        margin-top: 0;
+                        overflow-y: hidden;
+                    }
 
                     &.lineup-ch {
                         margin-top: 80px;
@@ -393,14 +408,14 @@
                                         &.position {
                                             background-color: #00b0f0;
                                             &:disabled {
-                                                opacity: 0.7;
+                                                opacity: 0.5;
                                                 cursor: not-allowed;
                                             }
                                         }
                                         &.batting {
                                             background-color: #ffe699;
                                             &:disabled {
-                                                opacity: 0.7;
+                                                opacity: 0.5;
                                                 cursor: not-allowed;
                                             }
                                         }
@@ -534,11 +549,10 @@
                     }
                 }
                 .players-list-availablePlayers {
-                    margin-top: 20px;
-                    overflow-y: auto;
-                    border: 1px solid white;
-                    max-height: calc(100% - 100px);
-                    border-collapse: collapse;
+                    border: none;
+                    margin-bottom: 50px;
+                    border-top: 1px solid white;
+                    padding-top: 10px;
 
                     &.masked {
                         opacity: 0.6;
@@ -547,6 +561,15 @@
 
                         input {
                             pointer-events: none;
+                        }
+                    }
+
+                    .lineUp-players {
+                        padding: 0;
+                        .lineUp-player {
+                            .select-player {
+                                background-color: rgba(40, 145, 133, 0.66);
+                            }
                         }
                     }
 
@@ -697,7 +720,7 @@
                     }
 
                     .lineUp-players {
-                        padding: 0 5px;
+                        padding: 0;
                         table {
                             width: 100%;
                             font-size: 12px;

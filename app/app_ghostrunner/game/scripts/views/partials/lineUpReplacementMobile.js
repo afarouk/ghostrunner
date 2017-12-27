@@ -56,9 +56,9 @@ define([
 				this.newPlayer = model;
 			}
 			if (this.oldPlayer && this.newPlayer) {
-				this.ui.save.attr('disabled', false);
+				this.ui.save.removeClass('disabled');
 			} else {
-				this.ui.save.attr('disabled', true);
+				this.ui.save.addClass('disabled');
 			}
 		},
 		onSave: function() {
