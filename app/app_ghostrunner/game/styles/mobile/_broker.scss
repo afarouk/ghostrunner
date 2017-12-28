@@ -71,19 +71,32 @@
                             justify-content: space-between;
                             align-items: center;
                         }
+                        .second-row {
+                            margin-top: 2px;
+                        }
                     }
 
-                    .cancel {
-                        font-size: 40px;
-                        margin-left: 5px;
-                    }
+                    .creation-header-button {
+                        border-radius: 3px;
+                        color: white;
+                        padding: 10px;
+                        font-size: 14px;
+                        font-weight: 600;
+                        border: 1px solid lightgray;
 
-                    .send {
-                        font-size: 40px;
-                        margin-right: 5px;
-                        color: lightgreen;
+                        &.cancel-btn {
+                            background-color: #5a5a5a;
+                        }
+
+                        &.send-btn {
+                            background-color: #4ac84a;
+                            color: white;
+                        }
+
                         &.disabled {
-                            color: lightgray;
+                            opacity: 0.85;
+                            background-color: #c9c9c9;
+                            pointer-events: none;
                         }
                     }
 
@@ -97,13 +110,13 @@
                         font-size: 14px;
 
                         .replace-msg {
-                            // font-size: 16px;
-                            // color: $text-black;
                             font-size: 13px;
                             color: #d4ffd4;
-                            padding: 15px;
                             text-align: center;
-                            line-height: 50px;
+                            display: block;
+                            max-width: 200px;
+                            text-overflow: ellipsis;
+                            padding: 5px;
                         }
 
                         label {
@@ -292,6 +305,7 @@
                                             }
                                         }
 
+                                        .fake-select,
                                         select {
                                             background-color: rgba(144, 144, 251, 0.85);
                                             width: 80px;
@@ -305,6 +319,7 @@
                                         }
                                     }
 
+                                    .fake-select,
                                     select {
                                         border: 0;
                                         width: 100%;
@@ -396,6 +411,7 @@
 
                                 .with-select {
                                     padding: 5px;
+                                    .fake-select,
                                     select {
                                         height: 25px;
                                         width: 60px;
@@ -454,6 +470,7 @@
                                 display: none;
                             }
                         }
+                        .fake-select,
                         .select {
                             width: 70px;
 
@@ -463,6 +480,13 @@
                             &.batting {
                                 background-color: #ffe699;
                             }
+                        }
+                        .fake-select {
+                            display: flex;
+                            align-items: center;
+                            justify-content: start;
+                            padding-left: 10px;
+                            opacity: 0.65;
                         }
                         table {
                             width: 100%;
@@ -511,6 +535,7 @@
                                             }
                                         }
                                         &.with-select {
+                                            .fake-select,
                                             select {
                                                 height: 25px;
                                                 width: 60px;
@@ -673,6 +698,7 @@
                                             }
                                         }
 
+                                        .fake-select,
                                         select {
                                             background-color: rgba(144, 144, 251, 0.85);
                                             width: 80px;
@@ -686,6 +712,7 @@
                                         }
                                     }
 
+                                    .fake-select,
                                     select {
                                         border: 0;
                                         width: 100%;
@@ -768,6 +795,7 @@
                                             }
                                         }
                                         &.with-select {
+                                            .fake-select,
                                             select {
                                                 height: 25px;
                                                 width: 60px;

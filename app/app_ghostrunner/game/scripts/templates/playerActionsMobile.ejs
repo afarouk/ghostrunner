@@ -1,23 +1,51 @@
 <div class="actions-available">
-	<div class="actions-buttons">
+	<div class="actions-buttons <% if (editStarted) { %>edit-state<% } %>">
 		<div class="player-actions-block">
-			<% _.each(playerActions, function(button) { %>
-				<div class="action-button stroke" data-type="interface-btn" data-move="<%= button.gameMove %>" <% if (!button.enabled || editStarted) { %>disabled<% } %> >
-					<span><%= button.displayText%></span>
-				</div>
+			<% _.each(actionsPages, function(page, index) { %>
+				<% if (index > 0) { %>
+					<div class="move-to-left left" data-page="<%= index %>">
+						<i class="fa fa-chevron-left" aria-hidden="true"></i>
+					</div>
+				<% } else { %>
+				<% } %>
+					<% _.each(page, function(button) { %>
+						<div class="action-button stroke" data-type="interface-btn" data-move="<%= button.gameMove %>" <% if (!button.enabled || editStarted) { %>disabled<% } %> >
+							<div class="stroke-rect"></div>
+							<span><%= button.displayText%></span>
+						</div>
+					<% }); %>
+					<div class="move-to-right right" data-page="<%= index %>">
+						<i class="fa fa-chevron-right" aria-hidden="true"></i>
+					</div>
 			<% }); %>
 		</div>
-		<div class="lineUp-actions-block">
-			<div data-type="interface-btn" data-move="LINEUP_EDIT" class="action-button edit <% if (editStarted) { %>disabled<% } %>" >
-				<span>Edit Lineup</span>
+		<div class="player-centre-block">
+			<div data-type="interface-btn" data-choise="PLAYER_ACTIONS" class="choise-button choise action" >
+				<i class="fa fa-chevron-left" aria-hidden="true"></i>
+				<span>Make move</span>
 			</div>
-			<div data-type="interface-btn" data-move="LINEUP_DONE" class="action-button edit <% if (!editStarted) { %>disabled<% } %>" >
-				<span>End Edit</span>
+			<div data-type="interface-btn" data-choise="LINEUP_EDIT" class="choise-button choise edit" >
+				<span>Edit lineup</span>
+				<i class="fa fa-chevron-right" aria-hidden="true"></i>
 			</div>
 		</div>
 		<div class="lineUp-edit-buttons">
+			<div class="move-to-center left <% if (editStarted) { %>disabled<% } %>">
+				<i class="fa fa-chevron-left" aria-hidden="true"></i>
+			</div>
+			<% if (!editStarted) { %> 
+				<div data-type="interface-btn" data-move="LINEUP_EDIT" class="action-button edit <% if (editStarted) { %>disabled<% } %>" >
+					<span>Edit Lineup</span>
+				</div>
+			<% } else { %>
+				<div data-type="interface-btn" data-move="LINEUP_DONE" class="action-button stroke <% if (!editStarted) { %>disabled<% } %>" >
+					<div class="edit-rect"></div>
+					<span>End Edit</span>
+				</div>
+			<% } %>
 			<% _.each(lineUpActions, function(button) { %>
-				<div class="action-button stroke" data-type="interface-btn" data-move="<%= button.gameMove %>" <% if (!button.enabled || editStarted) { %>disabled<% } %> >
+				<div class="action-button stroke <% if (!button.enabled || !editStarted) { %>disabled<% } %>" data-type="interface-btn" data-move="<%= button.gameMove %>" >
+					<div class="edit-rect"></div>
 					<span><%= button.displayText%></span>
 				</div>
 			<% }); %>

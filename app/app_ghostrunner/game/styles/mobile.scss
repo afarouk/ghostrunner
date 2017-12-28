@@ -60,12 +60,19 @@ body {
         display: none;
     }
 
+    .player-actions {
+        display: none;
+    }
 
     &.logged {
         // display: flex;
         left: 0;
 
         .information-table .information-table-container .table-column.left-table {
+            display: flex;
+        }
+
+        .player-actions {
             display: flex;
         }
 

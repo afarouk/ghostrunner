@@ -6,18 +6,14 @@
 		</div>
 		<div class="player-name toggle-expand"><%= playerName %></div>
 		<div class="with-select">
-			<select name="player-position" class="position" disabled>
-				<% _.each(positions, function(position){ %>
-					<option value="<%= position.enumText %>" <% if (position.enumText === currentPosition.enumText) { %>selected<% } %> ><%= position.displayText %></option>
-				<% }) %>
-			</select>
+			<div class="fake-select position disabled">
+				<span><%= currentPosition.displayText %></span>
+			</div>
 		</div>
 		<div class="with-select">
-			<select name="batting-order" class="batting" disabled>
-				<% for (var index = 1; index <=8; index++) { %>
-					<option value="<%= index %>" <% if (index == battingOrder) { %>selected<% } %> >BO:<%= index %></option>
-				<% } %>
-			</select>
+			<div class="fake-select batting disabled">
+				<span>BO:<%= battingOrder %></span>
+			</div>
 		</div>
 		<div class="with-checkbox">
 			<input type="radio" name="select-player"></input>
@@ -58,11 +54,9 @@
 			</select>
 		</div>
 		<div class="with-select">
-			<select name="batting-order" class="batting" disabled>
-				<% for (var index = 1; index <=8; index++) { %>
-					<option value="<%= index %>" <% if (index == battingOrder) { %>selected<% } %> >BO:<%= index %></option>
-				<% } %>
-			</select>
+			<div class="fake-select batting disabled">
+				<span>BO:<%= battingOrder %></span>
+			</div>
 		</div>
 		<div class="with-checkbox">
 			<input type="radio" name="select-available-player"></input>

@@ -497,18 +497,71 @@
     			width: 100%;
     			transition: 0.6s;
     			transition-delay: 0.01s;
+    			position: absolute;
+    			left: 0;
 
-    			&.edit-started {
-    				margin-left: -50%;
+    			&.move-state {
+    				left: 100%;
+
+    				&.page-n-0 {
+    					left: 200%;
+    				}
+    			}
+    			&.edit-state {
+    				left: -100%;
     			}
 
     			.player-actions-block {
     				padding: 0;
 				    display: flex;
 				    justify-content: space-between;
-				    width: 50%;
+				    /*width: 50%;*/
 				    margin-right: 10px;
+				    right: 100%;
+    				position: absolute;
     			}
+
+    			.player-centre-block {
+				    display: flex;
+				    width: 100%;
+
+				    .choise-button {
+				    	font-size: 14px;
+					    text-align: center;
+					    font-weight: 600;
+					    width: 80px;
+					    height: 60px;
+					    border-radius: 5px;
+					    margin: 0 0 0 5px;
+					    color: white;
+					    word-spacing: 100vw;
+					    display: flex;
+					    align-items: center;
+					    justify-content: center;
+				    	&.choise {
+				    		width: 50%;
+
+				    		&.action {
+						    	background-color: #09df09;
+
+						    	i {
+						    		font-size: 20px;
+								    position: absolute;
+								    left: 20px;
+						    	}
+						    }
+				    		&.edit {
+						    	background-color: #00b3ff;
+
+						    	i {
+						    		font-size: 20px;
+								    position: absolute;
+								    right: 20px;
+						    	}
+						    }
+				    	}
+				    }
+				}
 
     			.lineUp-actions-block {
     				display: flex;
@@ -519,10 +572,11 @@
     			}
 
 		        .action-button {
-		            font-size: 14px;
+		            font-size: 12px;
 				    text-align: center;
 				    font-weight: 600;
-				    width: 80px;
+				    width: calc((100vw - 140px) / 3);
+				    height: 60px;
 				    border-radius: 5px;
 				    margin: 0 0 0 5px;
 				    color: white;
@@ -535,12 +589,28 @@
 				    	background-color: #00b3ff;
 				    }
 				    &.stroke {
-				    	background-color: #09df09;
+				    	background-color: white;
+    					color: black;
 				    }
 				    &.disabled {
 				    	cursor: not-allowed;
 				    	pointer-events: none;
 				    	background-color: #aaaaaa;
+				    }
+
+				    .edit-rect {
+				    	position: absolute;
+				    	width: 50px;
+				    	height: 6px;
+    					top: 0;
+				    	background-color: #00b3ff;
+				    }
+				    .stroke-rect {
+				    	position: absolute;
+				    	width: 50px;
+				    	height: 6px;
+    					top: 0;
+				    	background-color: #09df09;
 				    }
 		        }
 
@@ -548,13 +618,37 @@
     				padding: 0;
 				    display: flex;
 				    justify-content: space-between;
-				    width: 50%;
+				    // width: 50%;
 				    margin-left: 10px;
+				    left: 100%;
+    				position: absolute;
 
 				    .action-button {
 				    	font-size: 12px;
 				    }
     			}
+
+    			.move-to-left,
+    			.move-to-right,
+    			.move-to-center {
+				    width: 45px;
+				    height: 60px;
+				    color: white;
+				    font-size: 20px;
+				    display: flex;
+				    align-items: center;
+				    justify-content: center;
+				    &.right {
+				    	margin-left: 10px;
+				    }
+				    &.left {
+				    	margin-right: 10px;
+				    }
+				    &.disabled {
+				    	color: gray;
+				    	pointer-events: none;
+				    }
+				}
 		    }
 		}
 
