@@ -317,6 +317,7 @@ define([
                 this.publicController.getStateController().onSendInvitationByEmail({
                     callback: this.credentials.callback,
                     email: this.credentials.email,
+                    mobile: this.credentials.mobile,
                     teamUUID: teamUUID,
                     inviteeUID: null,
                     teamId: null,
@@ -329,6 +330,7 @@ define([
                     callback: this.afterInvitationSent.bind(this),
                     inviteeUID: inviteeUID,
                     email: null,
+                    mobile: null,
                     teamUUID: null,
                     teamId: teamId,
                     teamType: teamType,

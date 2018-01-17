@@ -195,6 +195,11 @@ var helpers = function() {
         validateEmail: function (email) {
             var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
             return re.test(email);
+        },
+        validateMobile: function(number) {
+            var re = /^[\d]{6,11}$/;
+            number = number.replace(/\s/g, '');
+            return re.test(number);
         }
 
     };

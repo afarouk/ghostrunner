@@ -28,6 +28,7 @@ define([
 		},
 		onEmailClicked: function() {
 			this.ui.email.focus();
+			if (this.ui.email.val() !== '') this.validateCredentials();
 		},
 		onCheckEnter: function(e) {
 			if (e.keyCode === 13) {
@@ -38,12 +39,10 @@ define([
 		},
 		validateCredentials: function() {
 			setTimeout(function(){
-				var email = this.ui.email.val(),
-				credentials = {
-					email: this.validateEmail(email)
-				};
+				var value = this.ui.email.val(),
+				credentials = this.validateField(value);
 
-				if (credentials.email) {
+				if (credentials.email || credentials.mobile) {
 					this.trigger('credentials:filled', this, credentials);
 				} else {
 					this.trigger('credentials:filled', this, null);
@@ -51,13 +50,25 @@ define([
 			}.bind(this), 1);
 		},
 
-		validateEmail: function(email) {
-			if (h().validateEmail(email)) {
+		validateField: function(value) {
+			if (h().validateMobile(value)) {
 				this.ui.error.html('');
-				return email;
+				return {
+					email: null,
+					mobile: value // 1 650 304 6414
+				};
+			} else if (h().validateEmail(value)) {
+				this.ui.error.html('');
+				return {
+					email: value,
+					mobile: null
+				};
 			} else {
 				this.ui.error.html('&#9888; please, type correct email.');
-				return '';
+				return {
+					email: null,
+					mobile: null
+				};
 			}
 		}
 	});
