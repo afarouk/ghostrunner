@@ -5,7 +5,7 @@ include_once('./detecturl.php');
 
 $detect        = new Mobile_Detect;
 
-if ((!$detect->isMobile() && !$detect->isTablet()) && !$desktopIFrame) {
+if ((!$detect->isMobile() && !$detect->isTablet()) && !isset($desktopIFrame)) {
     $isDesktop=true;
 } else {
     $isDesktop=false;
