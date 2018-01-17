@@ -534,7 +534,8 @@ define([
             }.bind(this));
         },
 
-        onLineUpEditConfirmation: function() {
+        onLineUpEditConfirmation: function(gameUUID) {
+            if (gameUUID) this.publicController.getStateController().refreshStatus(gameUUID);
             this.publicController.getChoiceController().showConfirmation({
                 message: 'Edit your lineup?',
                 cancel: 'cancel',
