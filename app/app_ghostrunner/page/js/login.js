@@ -110,6 +110,14 @@ define([
                         $(this).find('[name="userName"]').focus();
                     });
         	}.bind(this));
+
+            $('#signin [type="password"] .login').on('keypress', function(e){
+                var username = $('#signin [name="user"]').val(),
+                    password = $('#signin [name="pass"]').val();
+                    if (e.which === 13) {
+                        this.onSignin(username, password);
+                    }
+            }.bind(this));
             
         	$('#signin .login').on('click', function(){
         		var username = $('#signin [name="user"]').val(),
