@@ -85,7 +85,7 @@ define([
                     //Temporary solution for game over popup.
                     //Make move done popup logic smarter
                     setTimeout(function() {
-                        this.publicController.getModalsController().onGameOver();
+                        this.publicController.getModalsController().onGameOver(message.payload.displayText);
                     }.bind(this), 200);
                     break;
 

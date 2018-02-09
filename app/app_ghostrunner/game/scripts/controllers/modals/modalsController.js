@@ -404,16 +404,16 @@ define([
             }
         },
 
-        onGameOver: function() {
+        onGameOver: function(messageForUser) {
             this.publicController.getStateController().killGame();
             this.publicController.getGameController().switchToBroker();
             this.publicController.getChoiceController().showConfirmation({
-                message: 'Game over.',
+                message: messageForUser,//'Game over.',
                 confirm: 'ok'
             }).then(function() {
                 //now nothing
             }.bind(this));
-            console.log('game over');
+            console.log(messageForUser);
         },
 
         onAbandoneGame: function() {
