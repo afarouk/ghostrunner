@@ -17,7 +17,7 @@ window.pageName = 'INDEX';
         </div>
     <?php endif; ?>
     <header  id="header" class="game-page-header">
-
+    <body>
         <!-- #navigation -->
         <?php
             include_once("navbar.php");
@@ -32,13 +32,13 @@ window.pageName = 'INDEX';
                     <div id="game-layout" class="game_canvas_wrap" ></div>
                     <div id="game_right_layout" class="game_right_wrap" >
                         <div id="right_content" class="blog_right_content">
-                            
+
                             <div id="blog_view_container" class="blog_view_container">
 
                                 <div class="image_bg">
                                     <h4 align="right" >Talkin' Baseball</br> with JimmyG</h4>
                                 </div>
-                                
+
                                 <h4 id="header_blog_view"></h4>
 
                                 <div id="nav_picture">
@@ -87,7 +87,7 @@ window.pageName = 'INDEX';
                 <div class="col-md-6 col-lg-offset-1">
                 	<div class="margin-bottom20">
                         <p>GhostRunner, LLC is a sports simulation company.  Our first offering, MatchUp Baseball,  is THE BEST baseball game that you can play (short of an actual baseball game).  Managing your favorite team (or a collection of all-stars), you decide when you want your slugger to go for the fences against the opponent's hurler, when you want your contact hitter to go to the opposite field, and when you want your speedster to run wild.  Because MatchUp is played in real time on virtually any mobile device, you can smack talk your opponent when your players come through with a big hit, or when they turn a rally-killing double play.  Best of all, once you start playing MatchUp, you'll want to invite all of your friends to "match up" against you.
-                        
+
                     </div>
                 </div>
 
