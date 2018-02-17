@@ -374,10 +374,12 @@
 
 								    &.error {
 								    	// background-color: $error_b;
-								    	background-color: $success_b;
+								    	//background-color: $success_b;
+                      background-color:#7CFC00;
 								    }
 								    &.success {
-								    	background-color: $success_b;
+								    	//background-color: $success_b;
+                      background-color:#7CFC00;
 								    }
 	    						}
 	    					}
